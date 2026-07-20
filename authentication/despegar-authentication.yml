@@ -1,0 +1,50 @@
+generated: '2026-07-18'
+method: searched
+source: openapi/despegar-booking-openapi.json (+ hotels/flights/aftersales/activities/geo)
+docs: https://api-docs.despegar.com/docs/security-scheme
+notes: >-
+  The B2B Despegar REST API is authenticated with a single API key sent in the
+  x-apikey header. Keys are provisioned per client during onboarding with
+  permissions tailored to the products contracted, and separate keys exist for
+  the test and production environments. A JWT bearer scheme (BearerAuth) is also
+  declared in the OpenAPI. The separately documented MCP B2B servers use OAuth
+  2.0 client_credentials (see mcp/despegar-mcp.yml).
+summary:
+  types:
+  - apiKey
+  - http
+  - oauth2
+  api_key_in:
+  - header
+  oauth2_flows:
+  - clientCredentials
+schemes:
+- name: ApiKeyAuth
+  type: apiKey
+  in: header
+  parameter: x-apikey
+  description: Primary B2B credential; provisioned per client at onboarding, distinct test vs production keys.
+  sources:
+  - openapi/despegar-booking-openapi.json
+  - openapi/despegar-hotels-openapi.json
+  - openapi/despegar-flights-openapi.json
+  - openapi/despegar-aftersales-openapi.json
+  - openapi/despegar-activities-openapi.json
+  - openapi/despegar-geo-openapi.json
+- name: BearerAuth
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  sources:
+  - openapi/despegar-booking-openapi.json
+  - openapi/despegar-hotels-openapi.json
+  - openapi/despegar-flights-openapi.json
+  - openapi/despegar-aftersales-openapi.json
+  - openapi/despegar-activities-openapi.json
+  - openapi/despegar-geo-openapi.json
+- name: MCP OAuth2
+  type: oauth2
+  flow: clientCredentials
+  description: OAuth 2.0 client_credentials used by the Despegar MCP B2B flights/hotels servers; credentials handled server-side.
+  sources:
+  - https://api-docs.despegar.com/docs/mcp-support

@@ -1,0 +1,435 @@
+openapi: 3.0.3
+info:
+  title: Activities Availability Pre-booking API
+  version: 1.0.0
+  description: 'API for activities: tickets, modalities, availability, prebook, payments, and booking. Authentication via API Key.'
+servers:
+- url: https://api-dev.despegar.com/v3/activities-api
+  description: Sandbox
+- url: https://apis-uat.despegar.com/v3/activities-api
+  description: UAT
+- url: https://api.despegar.com/v3/activities-api
+  description: Production
+security:
+- ApiKeyAuth: []
+tags:
+- name: Pre-booking
+paths:
+  /prebook:
+    post:
+      tags:
+      - Pre-booking
+      summary: Prebook
+      operationId: createPrebook
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                choice_id:
+                  type: string
+                  description: This information is encrypted and must be obtained in the response from the availability service.
+                lang:
+                  type: string
+                  enum:
+                  - pt
+                  - en
+                  - es
+                  description: This field must be filled in with the language in which you wish to receive the information returned in 'extended_info'.
+                include:
+                  type: array
+                  items:
+                    type: string
+                    enum:
+                    - EXCHANGE_POLICIES
+                    - IMPORTANT_DATA
+                    - HINTS
+                  description: 'This field must be submitted with at least one option. The allowed values are:   - EXCHANGE_POLICIES: This option is sent to return information about exchange policies.  - IMPORTANT_DATA: This option is sent to return information about requirements (vaccinations, documentation, etc.) based on the routes and destinations.  - HINTS: This option is sent to return specifications for required fields and formats for billing data.'
+              required:
+              - choice_id
+            example:
+              choice_id: choice_token_value
+              lang: pt
+              include:
+              - EXCHANGE_POLICIES
+              - IMPORTANT_DATA
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  prebook_id:
+                    type: string
+                    description: ID automatically generated to identify the flight data and the valid fare to make the booking.
+                  expiration:
+                    type: string
+                    format: date-time
+                    description: expiration date for the chosen fare.
+                  status:
+                    type: string
+                    description: fare status.
+                  flow:
+                    type: string
+                    description: identifies the flow/process being performed.
+                  total:
+                    type: number
+                    description: total price of the flight.
+                  currency:
+                    type: string
+                    description: currency corresponding to the returned total amount.
+                  commission:
+                    type: object
+                    properties:
+                      amount:
+                        type: number
+                      max_amount:
+                        type: number
+                      min_amount:
+                        type: number
+                  extended_info:
+                    type: object
+                    properties:
+                      exchange_policies:
+                        type: object
+                        properties:
+                          F0:
+                            type: object
+                            properties:
+                              product_type:
+                                type: string
+                              product_title:
+                                type: string
+                              range:
+                                type: array
+                                items: {}
+                              conditions:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    title:
+                                      type: string
+                                    question_and_answer:
+                                      type: array
+                                      items:
+                                        type: object
+                                        properties:
+                                          question:
+                                            type: string
+                                          answer:
+                                            type: string
+                              disclaimers:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    title:
+                                      type: string
+                                    description:
+                                      type: string
+                              summary:
+                                type: object
+                                properties:
+                                  operations_summaries:
+                                    type: array
+                                    items:
+                                      type: object
+                                      properties:
+                                        title:
+                                          type: string
+                                        description:
+                                          type: string
+                                        permit:
+                                          type: string
+                                  disclaimers:
+                                    type: array
+                                    items:
+                                      type: object
+                                      properties:
+                                        description:
+                                          type: string
+                      important_data:
+                        type: object
+                        properties:
+                          routes:
+                            type: array
+                            items: {}
+                          travelers:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                location:
+                                  type: string
+                                location_type:
+                                  type: string
+                                country_code:
+                                  type: string
+                                requirements:
+                                  type: array
+                                  items:
+                                    type: object
+                                    properties:
+                                      id:
+                                        type: string
+                                      req_type:
+                                        type: string
+                                      description:
+                                        type: string
+                      hints:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            modality:
+                              type: string
+                            payment_option:
+                              type: string
+                            hint:
+                              type: object
+                              properties:
+                                from:
+                                  type: object
+                                  properties:
+                                    travelers:
+                                      type: object
+                                      properties:
+                                        hint_type:
+                                          type: string
+                                        validations:
+                                          type: array
+                                          items:
+                                            type: object
+                                            properties:
+                                              type:
+                                                type: string
+                                              field:
+                                                type: string
+                                    payment:
+                                      type: object
+                                      properties:
+                                        option_type:
+                                          type: object
+                                          properties:
+                                            hint_type:
+                                              type: string
+                                            validations:
+                                              type: object
+                                              properties:
+                                                type:
+                                                  type: string
+                                                options:
+                                                  type: array
+                                                  items: {}
+                                        payment_units:
+                                          type: object
+                                          properties:
+                                            hint_type:
+                                              type: string
+                                            validations:
+                                              type: array
+                                              items:
+                                                type: object
+                                                properties:
+                                                  type:
+                                                    type: string
+                                                  min:
+                                                    type: integer
+                                                  max:
+                                                    type: integer
+                                            item:
+                                              type: object
+                                              properties:
+                                                type:
+                                                  type: object
+                                                  properties:
+                                                    hint_type:
+                                                      type: string
+                                                    validations:
+                                                      type: array
+                                                      items:
+                                                        type: object
+                                                        properties:
+                                                          type:
+                                                            type: string
+                                                          options:
+                                                            type: array
+                                                            items: {}
+                                                invoice_reference:
+                                                  type: object
+                                                  properties:
+                                                    hint_type:
+                                                      type: string
+                                                    validations:
+                                                      type: array
+                                                      items: {}
+                                                plan_id:
+                                                  type: object
+                                                  properties:
+                                                    hint_type:
+                                                      type: string
+                                                    validations:
+                                                      type: array
+                                                      items: {}
+                                                secure_token:
+                                                  type: object
+                                                  properties:
+                                                    hint_type:
+                                                      type: string
+                                                    validations:
+                                                      type: array
+                                                      items: {}
+                                                card_holder_identification:
+                                                  type: object
+                                                  properties:
+                                                    type:
+                                                      type: object
+                                                      properties:
+                                                        hint_type:
+                                                          type: string
+                                                        validations:
+                                                          type: array
+                                                          items:
+                                                            type: object
+                                                            properties:
+                                                              type:
+                                                                type: string
+                                                              options:
+                                                                type: array
+                                                                items: {}
+                                                    number:
+                                                      type: object
+                                                      properties:
+                                                        hint_type:
+                                                          type: string
+                                                        validations:
+                                                          type: array
+                                                          items:
+                                                            type: object
+                                                            properties:
+                                                              type:
+                                                                type: string
+                                                              conditions:
+                                                                type: array
+                                                                items:
+                                                                  type: object
+                                                                  properties:
+                                                                    field:
+                                                                      type: string
+                                                                    operation:
+                                                                      type: string
+                                                                    value:
+                                                                      type: string
+                                                              regex:
+                                                                type: string
+                                                    hint_type:
+                                                      type: string
+                                                    validations:
+                                                      type: array
+                                                      items: {}
+                                                hint_type:
+                                                  type: string
+                                                validations:
+                                                  type: array
+                                                  items:
+                                                    type: object
+                                                    properties:
+                                                      type:
+                                                        type: string
+                                        invoices:
+                                          type: object
+              example:
+                prebook_id: prebook-id-value
+                expiration: '2024-09-19T22:08:18Z'
+                total: 3917
+                currency: BRL
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: BAD_REQUEST
+                  description: 'Possible cause: Prebook service executed without sending the ''Authorization'' header'
+                  type: object
+                  properties:
+                    code:
+                      type: string
+                    message:
+                      type: string
+                      description: Authorization header is missing.
+                - title: INVALID_EXTENDED_INFO_REQUEST
+                  description: 'Possible cause: Prebook executed with ''lang'' blank, invalid (including numeric), or not provided in the ''extended_info'' structure.'
+                  type: object
+                  properties:
+                    code:
+                      type: string
+                    message:
+                      type: string
+                      description: Invalid or missing 'lang' for extended info
+                - title: INVALID_ITINERARY_ID_OR_COUNTRY
+                  description: 'Possible cause: Failure connecting to providers when executing the ''Prebook'' service or prebook executed with invalid ''choice_id'''
+                  type: object
+                  properties:
+                    code:
+                      type: string
+                    message:
+                      type: string
+                      description: Invalid itinerary id, country or both
+                - title: MESSAGE_NOT_READABLE
+                  description: 'Possible cause: Prebook executed with incorrect body / ''extended_info'''
+                  type: object
+                  properties:
+                    option1:
+                      properties:
+                        code:
+                          type: string
+                        message:
+                          type: string
+                          description: 'JSON parse error: Unexpected character ((code 34)): was expecting comma to separate Object entries'
+                    option2:
+                      properties:
+                        code:
+                          type: string
+                        message:
+                          type: string
+                          description: 'JSON parse error: Cannot deserialize value of type com.despegar.ganymede.dto.request.extended.info.ExtendedInfoIncludeEnum from String ''value provided'': not one of the values accepted for Enum class; [EXCHANGE_POLICIES, IMPORTANT_DATA, HINTS]'
+                - title: MISSING_REQUEST_BODY_REQUIRED_FIELD
+                  description: 'possible cause: Prebook executed with blank choice_id'
+                  type: object
+                  properties:
+                    code:
+                      type: string
+                    message:
+                      type: string
+                      description: choiceId should be not null or blank
+        '410':
+          description: Gone
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: PRODUCT_GONE
+                  description: Prebook executed with 'choice_id' not found or with expired one
+                  type: object
+                  properties:
+                    code:
+                      type: string
+                    message:
+                      type: string
+                      description: Product not available.
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-apikey
+    BearerAuth:
+      type: http
+      scheme: bearer
+x-readme: {}

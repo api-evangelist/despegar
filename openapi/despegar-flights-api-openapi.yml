@@ -1,0 +1,641 @@
+openapi: 3.0.3
+info:
+  title: Activities Availability Flights API
+  version: 1.0.0
+  description: 'API for activities: tickets, modalities, availability, prebook, payments, and booking. Authentication via API Key.'
+servers:
+- url: https://api-dev.despegar.com/v3/activities-api
+  description: Sandbox
+- url: https://apis-uat.despegar.com/v3/activities-api
+  description: UAT
+- url: https://api.despegar.com/v3/activities-api
+  description: Production
+security:
+- ApiKeyAuth: []
+tags:
+- name: Flights
+paths:
+  /flights-api/availability:
+    get:
+      tags:
+      - Flights
+      summary: Search
+      operationId: searchFlightsAvailability
+      parameters:
+      - name: site
+        in: query
+        required: true
+        schema:
+          type: string
+          minLength: 2
+          maxLength: 2
+        description: Refers to the country code and must be filled in with two alphabetical characters. The value must correspond to the POS associated with the API credentials.
+        example: br
+      - name: from
+        in: query
+        required: true
+        schema:
+          type: string
+          minLength: 3
+          maxLength: 3
+        description: Refers to the origin of the flight and must be filled in with the IATA code of the airport or city, containing three alphabetical digits.
+        example: BUE
+      - name: to
+        in: query
+        required: true
+        schema:
+          type: string
+          minLength: 3
+          maxLength: 3
+        description: Refers to the flight destination and must be filled in with the IATA code of the airport or city, containing three alphabetical digits.
+        example: SAO
+      - name: departure_date
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date
+        description: Refers to the flight departure date and must be filled in the format YYYY-MM-DD.
+        example: '2026-11-14'
+      - name: return_date
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date
+        description: Refers to the flight's return date and must be filled in the format YYYY-MM-DD. This parameter is only valid for round-trip flights.
+        example: '2026-11-16'
+      - name: adults
+        in: query
+        required: true
+        schema:
+          type: integer
+          minimum: 1
+        description: Refers to the number of adults on the flight and must be filled with a maximum of 9 adults, provided there are no other passengers. If there are children and infants on the flight, the total number of passengers must be 9, including adults, children, and infants.
+        example: 2
+      - name: children
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+          example: 0
+        description: Refers to the number of children on the flight, aged between 2 and 11 years old, and must be filled in with a total of 9 passengers including adults, children and infants.
+        example: 0
+      - name: infants
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+          example: 0
+        description: This field refers to the number of infants on the flight, aged between 0 and 23 months, and must be filled in with a number equal to or less than the number of adults, totaling 9 passengers including adults, children and infants.
+        example: 0
+      - name: currency
+        in: query
+        required: false
+        schema:
+          type: string
+          minLength: 3
+          maxLength: 3
+        description: This field determines in which currency the flight fare values ​​will be returned in the response.
+        example: BRL
+      - name: cabin_type
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - Business
+          - Firstclass
+          - Premium_business
+          - Premium_firstclass
+          - Premium_economy
+          - Economy
+        description: Allows filtering results by flight cabin type.
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+          example: 0
+        description: This field refers to the number of records that are ignored before starting to return results, that is, if a certain result displays 200 flights and I want to access from the 10th result, I send this parameter with 10 and thus the 11th record becomes the first of the displayed result, that is, it can be used for pagination of the result.
+        example: 0
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+        description: Limits the number of flights returned, when not sent, 20 results are returned by default.
+      - in: query
+        name: group_by
+        schema:
+          type: string
+        description: 'Refers to grouping the received result. Can be filled with: No sending or ''none'': no ​​grouping. ''flexible_penalty'': groups by final price, validating carrier, and baggage conditions.'
+      - in: query
+        name: order_by
+        schema:
+          type: string
+        description: 'This field determines the criteria used to sort the search results. When left blank by default, the ordering is from lowest to highest. The following are the possible values; all can be followed by ''_ascending'' or ''_descending'', with a few exceptions:  - suitable (''_ascending'' only, recommended order) - total_price - stopscount - price (base price) - duration - airline - departure - arrival - fare_minus_discount - cross_selling_price - cross_selling_total_price - cabin_purity (''_descending'' only).'
+      - in: query
+        name: price
+        schema:
+          type: string
+        description: When sending this field with the value 'raw', the returned values ​​will not be rounded.
+      - in: query
+        name: total_price_range
+        schema:
+          type: string
+        description: 'Delimits the total price returned in the response, example: 1000-2500.'
+      - in: query
+        name: stops
+        schema:
+          type: string
+        description: 'Refers to the number of stops on the flight. You can submit more than one option by separating them with commas. The allowed values ​​are:  - ''NONE'' (direct flights) - ''ONE'' (flights with one stop) - ''MORE_THAN_ONE'' (flights with more than one stop).'
+      - in: query
+        name: airlines
+        schema:
+          type: string
+        description: Delimits the airlines that will be returned in the search results, must be filled in with the airline's IATA code.
+      - in: query
+        name: alliances
+        schema:
+          type: string
+        description: 'This field allows you to search by airline alliance. An airline alliance is when two or more airlines cooperate so that travelers can make codeshare connections within their countries. Multiple options are allowed, separated by commas. The allowed values ​​are:  - ''OW'': One World - ''SA'': Star Alliance - ''ST'': Sky Team.'
+      - in: query
+        name: outbound_time_range
+        schema:
+          type: string
+        description: 'Defines the times of outbound flights within a given range. Example: 7:00-8:00.'
+      - in: query
+        name: inbound_time_range
+        schema:
+          type: string
+        description: Defines the return flight times within a specific range. Parameter valid only for roundtrip flights.
+        example: 15:00-16:00
+      - in: query
+        name: unique_airline
+        schema:
+          type: string
+        description: Specifies that the roundtrip flight will be the same airline when set to 'true'. When set to 'false' or not set, different airlines may be used. This parameter is only valid for roundtrip flights.
+      - in: query
+        name: unique_outbound_airport
+        schema:
+          type: string
+        description: When set to 'true', both the first departure and last arrival must be at the same airport. This parameter is valid only for roundtrip flights.
+      - in: query
+        name: outbound_duration_range
+        schema:
+          type: string
+        description: 'Refers to the duration interval in minutes of the outbound flight, the format is %d-%d. Ex.: 0-540.'
+      - in: query
+        name: inbound_duration_range
+        schema:
+          type: string
+        description: 'Refers to the duration interval in minutes of the return flight, the format is %d-%d. Ex.: 0-540. Parameter valid only for round-trip flights.'
+      - in: query
+        name: outbound_airports
+        schema:
+          type: string
+        description: This field delimits the search result to a specific airport on the way.
+      - in: query
+        name: inbound_airports
+        schema:
+          type: string
+        description: This field limits the search results to a specific airport on the return journey. This parameter is valid only for roundtrip flights.
+      - in: query
+        name: outbound_arrival_time_range
+        schema:
+          type: string
+        description: 'This field delimits the search results by filtering by the arrival time of flights on the outbound leg. Ex.: 16:00-16:30.'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          description: ID automatically generated to identify the data sent in the search request.
+                        outbound_choices:
+                          type: array
+                          description: This structure is a list and may return one or several outbound flight options.
+                          items:
+                            type: object
+                            properties:
+                              choice:
+                                type: integer
+                              duration:
+                                type: string
+                                format: time
+                              segments:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    from:
+                                      type: string
+                                    to:
+                                      type: string
+                                    departure_datetime:
+                                      type: string
+                                      format: date-time
+                                    arrival_datetime:
+                                      type: string
+                                      format: date-time
+                                    duration:
+                                      type: string
+                                      format: time
+                                    airline:
+                                      type: string
+                                      description: IATA code of the marketing carrier (the airline selling the flight). This value always corresponds to a standard 2-letter IATA airline code and represents the airline under which the ticket is issued, regardless of which airline operates the flight.
+                                    operated_by:
+                                      type: string
+                                      description: IATA code of the operating carrier, i.e. the airline that physically operates the flight segment. This field is typically present in codeshare scenarios or airline groups with multiple operating certificates. When provided, it indicates the actual operator of the flight, not a list of airline affiliations.
+                                    flight_id:
+                                      type: string
+                                      description: Flight number
+                                    cabin_type:
+                                      type: string
+                                      description: Indicates the cabin class in which the flight segment is booked.
+                                    stopovers:
+                                      type: array
+                                    seats_remaining:
+                                      type: integer
+                                    equipment_code:
+                                      type: integer
+                                    ancillary:
+                                      type: object
+                                      properties:
+                                        baggages_info:
+                                          type: object
+                                          properties:
+                                            baggages:
+                                              type: array
+                                              items:
+                                                type: object
+                                                properties:
+                                                  passenger_type:
+                                                    type: string
+                                                  quantity:
+                                                    type: integer
+                                        meals:
+                                          type: array
+                                        entertainments:
+                                          type: array
+                                    booking_class:
+                                      type: string
+                              baggage:
+                                type: object
+                                properties:
+                                  adult:
+                                    type: object
+                                    properties:
+                                      quantity:
+                                        type: integer
+                                      carry_on:
+                                        type: boolean
+                                      personal_item:
+                                        type: boolean
+                        price_detail:
+                          type: object
+                          properties:
+                            currency:
+                              type: string
+                            total:
+                              type: integer
+                            base:
+                              type: integer
+                              description: total base amount, summing the base fares for adult, child, and infant.
+                            adult_base:
+                              type: integer
+                              description: base amount for an adult.
+                            adult_total:
+                              type: integer
+                              description: ' total amount per adult.'
+                            adults_subtotal:
+                              type: integer
+                              description: total sum for adults.
+                            charges:
+                              type: integer
+                              description: total amount of taxes and fees.
+                            net_fare:
+                              type: object
+                              description: this item returns the fields 'applied' (indicates whether the fare is available) and 'reference_price' (the fare amount when available).
+                              properties:
+                                applied:
+                                  type: boolean
+                                reference_price:
+                                  type: number
+                        validating_carrier:
+                          type: string
+                          description: identifies the airline that will issue the ticket.
+                        booking_info:
+                          type: array
+                          description: this structure is a list and may return one or several booking options; the number of items returned varies with the number of flight options returned.
+                          items:
+                            type: object
+                            properties:
+                              outbound_choice:
+                                type: integer
+                              itinerary_id:
+                                type: string
+                              choice_id:
+                                type: string
+                              fare_basis_codes:
+                                type: array
+                              upselling_available:
+                                type: boolean
+                                description: Indicates whether the selected option supports upselling. A value of true does not guarantee the availability of upsell products, as availability is validated in real time by the Upselling service.
+                              fare_family:
+                                type: string
+                              search_reason:
+                                type: string
+                              country:
+                                type: string
+                              fare_restricted_to:
+                                type: string
+                              flexible_policies:
+                                type: array
+                              booking_reservation:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    available:
+                                      type: boolean
+                              alternatives_key:
+                                type: string
+                              public_parity_applied:
+                                type: boolean
+                        passenger_distribution:
+                          type: object
+                          properties:
+                            adults:
+                              type: integer
+                            children:
+                              type: integer
+                            infants:
+                              type: integer
+                        last_minute:
+                          type: boolean
+                        tags:
+                          type: array
+                        route_type:
+                          type: string
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: BAD_REQUEST
+                  description: 'Possible cause: The flight search was sent with incomplete or out-of-policy inputs (one-way/round-trip with blank departure date, return beyond airline availability, origin equals destination, adults/total passengers > 9) or without the required Authorization header.'
+                  type: object
+                  properties:
+                    code:
+                      type: string
+                    message:
+                      type: string
+                      description: Availability request validation/authentication error — missing or invalid fields (e.g., null departure date, dates beyond the airline sale window, same origin and destination, passenger count exceeding the maximum of 9) or missing Authorization header.
+                - title: INVALID_FIELD
+                  description: 'Possible cause: The search was sent with blank or malformed values, unsupported codes, invalid ranges, or inconsistent constraints (e.g., blank/invalid site or currency; malformed/past departure/return dates or invalid intervals; invalid IATA codes for from/to/outbound/inbound airports; infants count > adults; disallowed group_by/order_by/price/with values; incorrect time/duration/price ranges; invalid airlines/alliances/stops).'
+                  type: object
+                  properties:
+                    code:
+                      type: string
+                    message:
+                      type: string
+                      description: ' Availability request validation error — one or more fields are missing, invalid, out of range, or not in the allowed set (e.g., country/site, dates/intervals, origin/destination IATA, currency/price, filters/sorters, time/duration ranges, airlines/alliances/stops).'
+                - title: MISSING_REQUIRED_PARAMETER
+                  description: 'Possible cause:The search was sent without the required adults parameter or with a passenger mix containing only children/infants (no adults). '
+                  type: object
+                  properties:
+                    code:
+                      type: string
+                    message:
+                      type: string
+                      description: Missing required field 'adults' of type 'Integer'
+                - title: PARAMETER_TYPE_MISMATCH
+                  description: 'Possible cause: The search was sent with incorrect data types: non-integer values for offset/limit and non-boolean values for unique_airline/unique_outbound_airport.'
+                  type: object
+                  properties:
+                    code:
+                      type: string
+                    message:
+                      type: string
+                      description: Parameter type mismatch — expected integer/boolean values for pagination and flags.
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: UNAUTHORIZED
+                  description: 'Possible cause:Service executed with an expired ''Authorization'' token '
+                  type: object
+                  properties:
+                    code:
+                      type: string
+                    message:
+                      type: string
+                      description: Authorization token is expired.
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: FORBIDDEN
+                  description: 'Possible cuase: The request was sent without the x-apikey header, with an invalid API key, or with an API key that doesn''t have permissions for the target service/method.'
+                  type: object
+                  properties:
+                    code:
+                      type: string
+                    message:
+                      type: string
+                      description: API key access error — missing, invalid, or not authorized for the requested method.
+        '429':
+          description: RATE_LIMIT_EXCEEDED
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: RATE_LIMIT_EXCEEDED
+                  description: 'Possible cause:The request limit was exceeded '
+                  type: object
+                  properties:
+                    code:
+                      type: string
+                    message:
+                      type: string
+                      description: The api client you have provided has exceeded its allowed quota
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                    example: INVALID_FILTER
+                  message:
+                    type: string
+                    example: Invalid parameter
+        '503':
+          description: FLIGHT_PROVIDER_ERROR
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: FLIGHT_PROVIDER_ERROR
+                  description: 'Possible cause:Could not connect to flight providers '
+                  type: object
+                  properties:
+                    code:
+                      type: string
+                    message:
+                      type: string
+                      description: Errors during connection with flight providers
+  /flights-api/upselling/{choice_id}:
+    get:
+      tags:
+      - Flights
+      summary: Upselling
+      operationId: Upselling
+      parameters:
+      - in: query
+        name: site
+        schema:
+          type: string
+          default: BR
+        description: site
+        required: true
+      - in: query
+        name: language
+        schema:
+          type: string
+          enum:
+          - PT
+          - ES
+          - EN
+        description: If omitted, the message is sent in English (EN) by default. If a value other than the supported ones listed below is provided, the message will not be sent.
+        required: false
+      - in: path
+        name: choice_id
+        schema:
+          type: string
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: With availability
+                  type: object
+                  properties:
+                    items:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          choice_id:
+                            type: string
+                          title:
+                            type: string
+                          fare_items:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                type:
+                                  type: string
+                                  enum:
+                                  - PERSONAL_ITEMS
+                                  - CARRY_ON
+                                  - BAGGAGE
+                                  - EXCHANGE
+                                  - REFUND
+                                  - SEAT_SELECTION
+                                  - SEAT_UPGRADE
+                                  - SEAT_UPGRADE_PREMIUM_ECONOMY
+                                include:
+                                  type: boolean
+                                inclusion_status:
+                                  type: string
+                                  enum:
+                                  - INCLUDED
+                                  - NOT_INCLUDED
+                          price_detail:
+                            type: object
+                            properties:
+                              total:
+                                type: number
+                              currency:
+                                type: number
+                - title: No availability
+                  type: object
+                  properties:
+                    items:
+                      type: array
+        '400':
+          description: BAD_REQUEST
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: BAD_REQUEST
+                  type: object
+                  properties:
+                    code:
+                      type: string
+                    message:
+                      type: string
+                      description: Invalid or malformed choiceId
+                - title: MISSING_REQUIRED_PARAMETER
+                  type: object
+                  properties:
+                    code:
+                      type: string
+                    message:
+                      type: string
+                      description: 'Missing required field ''site'' of type ''String'' '
+        '410':
+          description: UPSELLING_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: UPSELLING_UNAVAILABLE
+                  type: object
+                  properties:
+                    code:
+                      type: string
+                    message:
+                      type: string
+                      description: No upselling available for this flight
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-apikey
+    BearerAuth:
+      type: http
+      scheme: bearer
+x-readme: {}

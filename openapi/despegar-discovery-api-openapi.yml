@@ -1,0 +1,107 @@
+openapi: 3.0.3
+info:
+  title: Activities Availability Discovery API
+  version: 1.0.0
+  description: 'API for activities: tickets, modalities, availability, prebook, payments, and booking. Authentication via API Key.'
+servers:
+- url: https://api-dev.despegar.com/v3/activities-api
+  description: Sandbox
+- url: https://apis-uat.despegar.com/v3/activities-api
+  description: UAT
+- url: https://api.despegar.com/v3/activities-api
+  description: Production
+security:
+- ApiKeyAuth: []
+tags:
+- name: Discovery
+paths:
+  /discovery:
+    get:
+      tags:
+      - Discovery
+      summary: Discovery
+      parameters:
+      - name: site
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Refers to the country code
+        example: br
+      - name: destination
+        in: query
+        required: true
+        schema:
+          type: string
+        description: This field must be populated with the IATA code corresponding to each destination.
+        example: SAO
+      - name: language
+        in: query
+        required: true
+        schema:
+          type: string
+        example: pt
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    items:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          tracking_id:
+                            type: string
+                          type:
+                            type: string
+                            enum:
+                            - TOUR
+                            - TICKET
+                          name:
+                            type: string
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                type: object
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                type: object
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-apikey
+    BearerAuth:
+      type: http
+      scheme: bearer
+x-readme: {}

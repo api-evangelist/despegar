@@ -1,0 +1,79 @@
+openapi: 3.0.3
+info:
+  title: Activities Availability Hotels inventory API
+  version: 1.0.0
+  description: 'API for activities: tickets, modalities, availability, prebook, payments, and booking. Authentication via API Key.'
+servers:
+- url: https://api-dev.despegar.com/v3/activities-api
+  description: Sandbox
+- url: https://apis-uat.despegar.com/v3/activities-api
+  description: UAT
+- url: https://api.despegar.com/v3/activities-api
+  description: Production
+security:
+- ApiKeyAuth: []
+tags:
+- name: Hotels inventory
+paths:
+  /content-api/hotels-inventory:
+    get:
+      tags:
+      - Hotels inventory
+      summary: Hotels-inventory
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    property_type:
+                      type: string
+                    product:
+                      type: string
+                    published:
+                      type: boolean
+                    hotel_name:
+                      type: string
+                    hotel_type:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                    stars:
+                      type: number
+                    location:
+                      type: object
+                      properties:
+                        city:
+                          type: object
+                          properties:
+                            id:
+                              type: number
+                        address:
+                          type: string
+                        zipcode:
+                          type: string
+                        latitude:
+                          type: number
+                        longitude:
+                          type: number
+                        neighborhoods:
+                          type: array
+                    merged_ids:
+                      type: array
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-apikey
+    BearerAuth:
+      type: http
+      scheme: bearer
+x-readme: {}

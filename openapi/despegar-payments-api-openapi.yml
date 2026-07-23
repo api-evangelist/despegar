@@ -1,0 +1,234 @@
+openapi: 3.0.3
+info:
+  title: Activities Availability Payments API
+  version: 1.0.0
+  description: 'API for activities: tickets, modalities, availability, prebook, payments, and booking. Authentication via API Key.'
+servers:
+- url: https://api-dev.despegar.com/v3/activities-api
+  description: Sandbox
+- url: https://apis-uat.despegar.com/v3/activities-api
+  description: UAT
+- url: https://api.despegar.com/v3/activities-api
+  description: Production
+security:
+- ApiKeyAuth: []
+tags:
+- name: Payments
+paths:
+  /payments:
+    get:
+      tags:
+      - Payments
+      summary: Payment
+      operationId: getPaymentOptions
+      parameters:
+      - name: prebook_id
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Prebook identifier obtained from Prebook.
+        example: pre_book
+      - name: input_points
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 0
+        description: Loyalty points to apply.
+      - name: include_hints
+        in: query
+        required: false
+        schema:
+          type: boolean
+        description: Whether to include UI hints.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  modalities:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        modality:
+                          type: string
+                          description: Code that identifies the modality to be used. The only value available at the moment is PAYINADVANCE.
+                        price_information:
+                          type: object
+                          description: This structure provides price information; it is typically used to display the price in the user interface.
+                          properties:
+                            total:
+                              type: object
+                              properties:
+                                base:
+                                  type: number
+                                  description: base price.
+                                taxes:
+                                  type: number
+                                  description: taxes
+                                fees:
+                                  type: number
+                                  description: fees
+                                discount:
+                                  type: number
+                                  description: discount
+                                processing_cost:
+                                  type: number
+                                  description: ' payment processing cost; in this total summary it will generally be blank because the cost depends on the number of installments selected.'
+                                fees_and_taxes:
+                                  type: number
+                                  description: fees_and_taxes
+                                total:
+                                  type: number
+                                  description: Total = Base + Taxes + Fees + Processing Cost - Discount
+                                tax_breakdown:
+                                  type: array
+                                  description: Tax breakdown.
+                                  items:
+                                    type: object
+                                    properties:
+                                      code:
+                                        type: string
+                                      amount:
+                                        type: string
+                            currency:
+                              type: string
+                              description: Currency used.
+                            conversion_rate:
+                              type: object
+                              properties:
+                                from:
+                                  type: string
+                                  description: source currency.
+                                to:
+                                  type: string
+                                  description: destination currency.
+                                rate:
+                                  type: string
+                                  description: conversion rate.
+                            by_payment_type:
+                              type: object
+                              description: pricing information by payment type.
+                              properties:
+                                prepaid:
+                                  type: number
+                            discounts:
+                              type: object
+                              description: Discounts applied to this quote.
+                              properties:
+                                type:
+                                  type: string
+                                total:
+                                  type: number
+                                points:
+                                  type: integer
+                        payment_options:
+                          type: object
+                          properties:
+                            option_type:
+                              type: string
+                              description: type of payment option (e.g., ONE_CARD, MULTIPLE_CARD). Currently, the only available option is ONE_CARD.
+                            group_plans:
+                              type: string
+                              description: payment groups within the payment option.
+              example:
+                modalities:
+                - modality: PAYINADVANCE
+                  price_information:
+                    total: 6996
+                    currency: BRL
+                  payment_options:
+                  - option_type: ONE_CARD
+                    group_plans: []
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: ALREADY_BOOKED
+                  description: 'Possible cause: Payments service executed with a previously used ''prebook_id'' '
+                  type: object
+                  properties:
+                    code:
+                      type: string
+                    message:
+                      type: string
+                      description: The product was already booked.
+                - title: INVALID_FIELD
+                  description: 'Possible cause: Payments service executed with an expired ''prebook_id'''
+                  type: object
+                  properties:
+                    code:
+                      type: string
+                    message:
+                      type: string
+                      description: Invalid value for field 'prebookId'. Expired token
+                - title: INVALID_PREBOOK_ID
+                  description: 'Possible cause: Payments service executed with blank or invalid ''prebook_id'''
+                  type: object
+                  properties:
+                    code:
+                      type: string
+                    message:
+                      type: string
+                      description: Invalid identifier format
+                - title: MISSING_REQUIRED_PARAMETER
+                  description: 'Possible cause: Payments service executed without parameters or with a ''prebook_id'' containing special characters.'
+                  type: object
+                  properties:
+                    code:
+                      type: string
+                    message:
+                      type: string
+                      description: Missing required field 'prebook_id' of type 'String'
+                - title: PARAMETER_TYPE_MISMATCH
+                  description: 'Possible cause:Payments service executed with invalid ''include_hints'' (type mismatch) '
+                  type: object
+                  properties:
+                    code:
+                      type: string
+                    message:
+                      type: string
+                      description: Invalid value 'value provided' for 'include_hints'. boolean value is required.
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                    example: INVALID_FILTER
+                  message:
+                    type: string
+                    example: Invalid parameter
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                    example: INVALID_FILTER
+                  message:
+                    type: string
+                    example: Invalid parameter
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-apikey
+    BearerAuth:
+      type: http
+      scheme: bearer
+x-readme: {}

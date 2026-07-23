@@ -1,0 +1,374 @@
+openapi: 3.0.3
+info:
+  title: Activities Availability Reservations API
+  version: 1.0.0
+  description: 'API for activities: tickets, modalities, availability, prebook, payments, and booking. Authentication via API Key.'
+servers:
+- url: https://api-dev.despegar.com/v3/activities-api
+  description: Sandbox
+- url: https://apis-uat.despegar.com/v3/activities-api
+  description: UAT
+- url: https://api.despegar.com/v3/activities-api
+  description: Production
+security:
+- ApiKeyAuth: []
+tags:
+- name: Reservations
+  description: Reservation query and management.
+paths:
+  /reservations:
+    get:
+      tags:
+      - Reservations
+      summary: Status
+      parameters:
+      - in: query
+        name: product_id
+        schema:
+          type: integer
+        required: false
+        description: This field represents the product identifier within the reservation. In v2, it matches the booking_code field. It must be used in combination with the corresponding product_type value.
+      - in: query
+        name: product_type
+        schema:
+          type: string
+          enum:
+          - HOTEL
+          - FLIGHT
+          - TICKET
+          - TOUR
+        required: false
+        description: Indicates the type of product associated with the reservation. Only to be used with the corresponding product_id to identify the product.
+      - in: query
+        name: reservation_id
+        schema:
+          type: integer
+        required: false
+        description: Refers to the reservation ID
+      - in: query
+        name: flow_id
+        schema:
+          type: string
+        required: false
+        description: Refers to the ID of a flow within a reservation, used to check the status of a specific management action
+      - in: query
+        name: partner_id
+        schema:
+          type: string
+        required: false
+        description: Refers to the partner ID; when provided, it returns all products associated with it
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          default: 50
+        required: false
+        description: Limits the number of search results, especially for partner_id/api_key queries that can return thousands of products.
+      - in: query
+        name: page
+        schema:
+          type: integer
+        required: false
+        description: Pagination for responses that exceed the limit. Add the parameter page= starting at 0 up to the last available page at the end of the request
+      - in: query
+        name: by_api_key
+        schema:
+          type: boolean
+        required: false
+        description: Refers to apikey, when sent it searches for all products associated with apikey
+      - in: query
+        name: external_transaction_id
+        schema:
+          type: integer
+        required: false
+        description: Obtained via external_reservation_id
+      - in: query
+        name: from_purchase_date
+        schema:
+          type: string
+          format: date
+        required: false
+      - in: query
+        name: to_purchase_date
+        schema:
+          type: string
+          format: date
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        product:
+                          type: object
+                          properties:
+                            product_id:
+                              type: number
+                            product_type:
+                              type: string
+                              description: Reserved product type
+                            transaction_id:
+                              type: number
+                            status:
+                              type: string
+                              description: Indicates the current status of the reservation
+                              enum:
+                              - IN_PROCESS
+                              - ISSUED
+                              - CANCELLED
+                            purchase_date_time:
+                              type: string
+                              format: date
+                            partner_id:
+                              type: string
+                            pnr:
+                              type: string
+                            sale_price:
+                              type: object
+                              properties:
+                                currency:
+                                  type: string
+                                price:
+                                  type: number
+                                conversion_rate:
+                                  type: number
+                                charges:
+                                  type: object
+                                  properties:
+                                    code:
+                                      type: string
+                                    charge:
+                                      type: object
+                                      properties:
+                                        code:
+                                          type: string
+                                        individual_charges:
+                                          type: object
+                                          properties:
+                                            code:
+                                              type: string
+                                            amount:
+                                              type: number
+                            purchase_customer:
+                              type: object
+                              properties:
+                                full_name:
+                                  type: string
+                                email:
+                                  type: string
+                                phone_number:
+                                  type: number
+                                phone_type:
+                                  type: number
+                                phones:
+                                  type: object
+                                  properties:
+                                    type:
+                                      type: string
+                                    number:
+                                      type: number
+                            external_reservation_id:
+                              type: number
+                            departure_date_time:
+                              type: string
+                              format: date
+                            passengers:
+                              type: object
+                              properties:
+                                gender:
+                                  type: string
+                                type:
+                                  type: string
+                                birth_date:
+                                  type: string
+                                  format: date
+                                first_name:
+                                  type: string
+                                last_name:
+                                  type: string
+                                nationality:
+                                  type: string
+                                identification_type:
+                                  type: string
+                                identification_code:
+                                  type: number
+                                tickets:
+                                  type: object
+                                  properties:
+                                    type:
+                                      type: string
+                                    number:
+                                      type: number
+                                    active:
+                                      type: boolean
+                                passenger_index:
+                                  type: integer
+                            route:
+                              type: object
+                            flow:
+                              type: array
+                            notifications:
+                              type: array
+                            download_voucher_url:
+                              type: string
+                            invoices:
+                              type: array
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                        message:
+                          type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                        message:
+                          type: string
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                        message:
+                          type: string
+      operationId: getReservationStatus
+  /book/{reservationId}:
+    get:
+      tags:
+      - Reservations
+      summary: Status reservation
+      operationId: getReservation
+      parameters:
+      - name: reservationId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: This field must be filled in with the id of an existing reservation or with the 'external_booking_reference' sent when closing the reservation.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reservation_id:
+                    type: string
+                    description: Number of the reservation created.
+                  status:
+                    type: string
+                    enum:
+                    - SUCCESS
+                    - PROCESSING
+                    - ERROR
+                    description: 'Possible reservation statuses: ''SUCCESS'', ''ERROR'', and ''PROCESSING''.'
+                  products:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                          description: type of product associated with the reservation.
+                        platform_id:
+                          type: string
+                          description: product ID.
+                        pnr:
+                          type: string
+                          description: PNR (Passenger Name Record) code.
+              example:
+                reservation_id: '815222296950'
+                status: SUCCESS
+                products:
+                - type: FLIGHT
+                  platform_id: '24315872051'
+                  pnr: GO8GO@
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                    example: INVALID_FILTER
+                  message:
+                    type: string
+                    example: Invalid parameter
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                    example: INVALID_FILTER
+                  message:
+                    type: string
+                    example: Invalid parameter
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-apikey
+    BearerAuth:
+      type: http
+      scheme: bearer
+x-readme: {}

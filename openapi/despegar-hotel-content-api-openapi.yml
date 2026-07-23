@@ -1,0 +1,300 @@
+openapi: 3.0.3
+info:
+  title: Activities Availability Hotel content API
+  version: 1.0.0
+  description: 'API for activities: tickets, modalities, availability, prebook, payments, and booking. Authentication via API Key.'
+servers:
+- url: https://api-dev.despegar.com/v3/activities-api
+  description: Sandbox
+- url: https://apis-uat.despegar.com/v3/activities-api
+  description: UAT
+- url: https://api.despegar.com/v3/activities-api
+  description: Production
+security:
+- ApiKeyAuth: []
+tags:
+- name: Hotel content
+paths:
+  /content-api/hotels/fee-types:
+    get:
+      tags:
+      - Hotel content
+      summary: Fee-types
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      description: Fee type identifier
+                    description:
+                      type: object
+                      description: Fee type descriptions in multiple languages
+                      properties:
+                        es:
+                          type: string
+                          description: Description in Spanish
+                        en:
+                          type: string
+                          description: Description in English
+                        pt:
+                          type: string
+                          description: Description in Portuguese
+        '400':
+          description: Invalid request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+  /content-api/hotels/amenities:
+    get:
+      tags:
+      - Hotel content
+      summary: Amenities
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    description:
+                      type: object
+                      description: Descriptions in multiple languages
+                      properties:
+                        es:
+                          type: string
+                          description: Description in Spanish
+                        en:
+                          type: string
+                          description: Description in English
+                        pt:
+                          type: string
+                          description: Description in Portuguese
+                    amenity_category:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        icon:
+                          type: string
+                        descriptions:
+                          type: object
+                          properties:
+                            pt:
+                              type: string
+                            en:
+                              type: string
+                            es:
+                              type: string
+                        orders:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              type:
+                                type: string
+                              order:
+                                type: integer
+                        amenities:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                              description:
+                                type: object
+                                properties:
+                                  pt:
+                                    type: string
+                                  en:
+                                    type: string
+                                  es:
+                                    type: string
+                              amenity_order:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    type:
+                                      type: string
+                                    order:
+                                      type: integer
+        '400':
+          description: Invalid request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+  /content-api/hotels/meal-plans:
+    get:
+      tags:
+      - Hotel content
+      summary: Meal-plans
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    description:
+                      type: object
+                      description: Descriptions in multiple languages
+                      properties:
+                        es:
+                          type: string
+                          description: Description in Spanish
+                        en:
+                          type: string
+                          description: Description in English
+                        pt:
+                          type: string
+                          description: Description in Portuguese
+                    sub_categories:
+                      type: array
+                      description: Not all categories have subcategories
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: string
+                          description:
+                            type: object
+                            description: Descriptions in multiple languages
+                            properties:
+                              es:
+                                type: string
+                                description: Description in Spanish
+                              en:
+                                type: string
+                                description: Description in English
+                              pt:
+                                type: string
+                                description: Description in Portuguese
+                    driver:
+                      type: array
+                      description: This field is only returned for Disney IDs.
+                      enum:
+                      - DNY_DELUXE
+                      - DNY_FAST_FOOD
+                      - DNY_REGULAR
+                      items:
+                        type: object
+                        properties:
+                          code:
+                            type: string
+                          description:
+                            type: object
+                            properties:
+                              es:
+                                type: string
+                              pt:
+                                type: string
+                              en:
+                                type: string
+                    breakdowns:
+                      type: object
+                      description: This field is only returned for Disney IDs.
+                      enum:
+                      - DNY_DELUXE
+                      - DNY_FAST_FOOD
+                      - DNY_REGULAR
+                      properties:
+                        en:
+                          type: array
+                        es:
+                          type: array
+                        pt:
+                          type: array
+                    disclaimers:
+                      type: object
+                      description: This field is only returned for Disney IDs.
+                      enum:
+                      - DNY_DELUXE
+                      - DNY_FAST_FOOD
+                      - DNY_REGULAR
+                      properties:
+                        en:
+                          type: array
+                        es:
+                          type: array
+                        pt:
+                          type: array
+                    images:
+                      type: array
+                    highlights:
+                      type: array
+                      description: This field is only returned for Disney IDs.
+                      enum:
+                      - DNY_DELUXE
+                      - DNY_FAST_FOOD
+                      - DNY_REGULAR
+                      items:
+                        type: object
+                        properties:
+                          code:
+                            type: string
+                          description:
+                            type: object
+                            properties:
+                              en:
+                                type: string
+                              es:
+                                type: string
+                              pt:
+                                type: string
+                    deals:
+                      type: array
+                      description: This field is only returned for Disney IDs.
+                      enum:
+                      - DNY_DELUXE
+                      - DNY_FAST_FOOD
+                      - DNY_REGULAR
+                      items:
+                        type: object
+                        properties:
+                          code:
+                            type: string
+                          description:
+                            type: object
+                            properties:
+                              en:
+                                type: string
+                              es:
+                                type: string
+                              pt:
+                                type: string
+        '400':
+          description: Invalid request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-apikey
+    BearerAuth:
+      type: http
+      scheme: bearer
+x-readme: {}

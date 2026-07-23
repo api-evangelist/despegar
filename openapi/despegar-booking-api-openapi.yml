@@ -1,0 +1,874 @@
+openapi: 3.0.3
+info:
+  title: Activities Availability Booking API
+  version: 1.0.0
+  description: 'API for activities: tickets, modalities, availability, prebook, payments, and booking. Authentication via API Key.'
+servers:
+- url: https://api-dev.despegar.com/v3/activities-api
+  description: Sandbox
+- url: https://apis-uat.despegar.com/v3/activities-api
+  description: UAT
+- url: https://api.despegar.com/v3/activities-api
+  description: Production
+security:
+- ApiKeyAuth: []
+tags:
+- name: Booking
+paths:
+  /book:
+    post:
+      tags:
+      - Booking
+      summary: Book
+      operationId: createBooking
+      parameters:
+      - in: query
+        name: test_case
+        schema:
+          type: string
+          enum:
+          - pricejump
+        description: Optional parameter for testing purposes. Use 'pricejump' to simulate a price jump scenario.
+        required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - prebook_id
+              - external_booking_reference
+              - modality
+              - contact_data
+              - travelers
+              - payment
+              properties:
+                prebook_id:
+                  type: string
+                  description: ID obtained from the prebook response.
+                external_booking_reference:
+                  type: string
+                  description: External booking reference.
+                modality:
+                  type: string
+                  enum:
+                  - PAYINADVANCE
+                  description: Payment modality.
+                contact_data:
+                  type: object
+                  description: Buyer contact information.
+                  required:
+                  - email
+                  - phones
+                  properties:
+                    email:
+                      type: string
+                      description: Buyer's email address.
+                    phones:
+                      type: array
+                      description: List of contact phone numbers.
+                      items:
+                        required:
+                        - country_code
+                        - area_code
+                        - number
+                        - type
+                        properties:
+                          country_code:
+                            type: string
+                            description: 'Phone country code. E.g.: ''55''.'
+                          area_code:
+                            type: string
+                            description: 'Phone area code. E.g.: ''11''.'
+                          number:
+                            type: string
+                            description: Phone number.
+                          type:
+                            type: string
+                            enum:
+                            - HOME
+                            - MOBILE
+                            description: Phone type.
+                travelers:
+                  type: array
+                  description: List of travelers.
+                  items:
+                    required:
+                    - first_name
+                    - last_name
+                    properties:
+                      first_name:
+                        type: string
+                        description: 'Traveler''s first name. Required for: FLIGHT, HOTEL, TICKET.'
+                      last_name:
+                        type: string
+                        description: 'Traveler''s last name. Required for: FLIGHT, HOTEL, TICKET.'
+                      gender:
+                        type: string
+                        enum:
+                        - MALE
+                        - FEMALE
+                        description: Traveler's gender.
+                      nationality:
+                        type: string
+                        description: 'Traveler''s nationality as ISO country code. E.g.: ''br'', ''mx''.'
+                      birth_date:
+                        type: string
+                        description: 'Traveler''s date of birth. Format: YYYY-MM-DD.'
+                      identification:
+                        type: object
+                        description: 'Traveler''s identification document. Required for: FLIGHT, TICKET.'
+                        properties:
+                          type:
+                            type: string
+                            enum:
+                            - LOCAL
+                            - PASSPORT
+                            description: 'Traveler''s document type. Required for: FLIGHT, TICKET.'
+                          number:
+                            type: string
+                            description: 'Traveler''s document number. Required for: FLIGHT, TICKET.'
+                payment:
+                  type: object
+                  description: 'Payment information. The ''option_type'' field determines which sub-fields are required: CURRENT_ACCOUNT and FULL_POINTS do not include ''payment_units''; ONE_CARD and DEFERRED do.'
+                  required:
+                  - option_type
+                  properties:
+                    option_type:
+                      type: string
+                      enum:
+                      - CURRENT_ACCOUNT
+                      - ONE_CARD
+                      - DEFERRED
+                      description: Payment method type.
+                    payment_units:
+                      type: array
+                      description: Only sent with option_type ONE_CARD or DEFERRED.
+                      items:
+                        properties:
+                          type:
+                            type: string
+                            enum:
+                            - ONE_CARD
+                            - CURRENT_ACCOUNT
+                            - DEFERRED
+                            description: Payment unit type. Use CARD for ONE_CARD, DEFERRED for DEFERRED.
+                          invoice_reference:
+                            type: number
+                            description: 'Reference to the corresponding invoice. E.g.: 0.'
+                          plan_id:
+                            type: string
+                            description: Payment plan ID. Only sent with option_type ONE_CARD.
+                          secure_token:
+                            type: string
+                            description: Card secure token. Only sent with option_type ONE_CARD.
+                          card_holder_identification:
+                            type: object
+                            description: Card holder identification. Only sent with option_type ONE_CARD.
+                            properties:
+                              type:
+                                type: string
+                                enum:
+                                - LOCAL
+                                - PASSPORT
+                                description: Card holder document type.
+                              number:
+                                type: string
+                                description: Card holder document number.
+                    invoices:
+                      type: array
+                      description: Buyer fiscal data. Present in all option_type values.
+                      items:
+                        required:
+                        - fiscal_status
+                        - fiscal_identification
+                        properties:
+                          reference:
+                            type: number
+                            description: 'Invoice reference. E.g.: 0. Only sent with option_type ONE_CARD'
+                          fiscal_name:
+                            type: string
+                            description: Full fiscal name.
+                          first_name:
+                            type: string
+                            description: First name. Only sent with option_type CURRENT_ACCOUNT
+                          last_name:
+                            type: string
+                            description: Last name. Only sent with option_type CURRENT_ACCOUNT
+                          fiscal_status:
+                            type: string
+                            enum:
+                            - PERSONA_FISICA
+                            description: Fiscal status of the holder.
+                          fiscal_identification:
+                            type: object
+                            required:
+                            - type
+                            - number
+                            properties:
+                              type:
+                                type: string
+                                enum:
+                                - CPF
+                                - PASSPORT
+                                description: 'Fiscal document type. Required for: CURRENT_ACCOUNT (all products).'
+                              number:
+                                type: string
+                                description: 'Fiscal document number. Required for: CURRENT_ACCOUNT (all products).'
+                              issue_country:
+                                type: string
+                                description: Document issuing country. Only sent if fiscal_identification.type is PASSPORT.
+                          fiscal_address:
+                            type: object
+                            properties:
+                              city_id:
+                                type: string
+                                description: City ID.
+                              zip_code:
+                                type: string
+                                description: Postal code.
+                              street:
+                                type: string
+                                description: 'Street name. Required for: CURRENT_ACCOUNT (all products).'
+                              number:
+                                type: string
+                                description: Street number.
+                              neighbourhood:
+                                type: string
+                                description: Neighbourhood. Only sent with option_type ONE_CARD AND DEFERRED.
+                              apartment:
+                                type: string
+                                description: Apartment.
+                              floor:
+                                type: string
+                                description: Floor.
+                loyalty_data:
+                  type: object
+                  description: Loyalty program data. Only sent with option_type ONE_CARD.
+                  properties:
+                    redemption_points:
+                      type: number
+                      description: Points to redeem. Send 0 when option_type is ONE_CARD.
+            examples:
+              ONE_CARD:
+                summary: Payment with credit/debit card
+                value:
+                  prebook_id: prebook-id-value
+                  external_booking_reference: REF-001
+                  modality: PAYINADVANCE
+                  contact_data:
+                    email: maria.silva@example.com
+                    phones:
+                    - country_code: '55'
+                      area_code: '11'
+                      number: '912345678'
+                      type: MOBILE
+                  travelers:
+                  - traveler_reference_id: '0'
+                    first_name: Maria
+                    last_name: Silva
+                    gender: FEMALE
+                    nationality: BR
+                    birth_date: '1990-03-05'
+                    identification:
+                      type: PASSPORT
+                      number: AB1234567
+                      issue_country: BR
+                  payment:
+                    option_type: ONE_CARD
+                    payment_units:
+                    - type: ONE_CARD
+                      plan_id: plan-id-value
+                      secure_token: secure-token-value
+                      invoice_reference: 1
+                      card_holder_identification:
+                        type: LOCAL
+                        number: 123.456.789-09
+                    invoices:
+                    - reference: 1
+                      fiscal_name: Maria Silva
+                      first_name: Maria
+                      last_name: Silva
+                      fiscal_status: PERSONA_FISICA
+                      fiscal_identification:
+                        type: CPF
+                        number: '12345678909'
+                      fiscal_address:
+                        street: Rua das Flores
+                        number: '42'
+                        city_id: '7274'
+                        zip_code: 01310-100
+              CURRENT_ACCOUNT:
+                summary: Payment with current account
+                value:
+                  prebook_id: prebook-id-value
+                  external_booking_reference: REF-002
+                  modality: PAYINADVANCE
+                  contact_data:
+                    email: carlos.souza@example.com
+                    phones:
+                    - country_code: '55'
+                      area_code: '21'
+                      number: '987654321'
+                      type: HOME
+                  travelers:
+                  - traveler_reference_id: '0'
+                    first_name: Carlos
+                    last_name: Souza
+                    identification:
+                      type: LOCAL
+                      number: '12345678909'
+                  payment:
+                    option_type: CURRENT_ACCOUNT
+                    payment_units:
+                    - type: CURRENT_ACCOUNT
+                    invoices:
+                    - fiscal_name: Carlos Souza
+                      first_name: Carlos
+                      last_name: Souza
+                      fiscal_status: PERSONA_FISICA
+                      fiscal_identification:
+                        type: CPF
+                        number: '98765432100'
+                      fiscal_address:
+                        street: Av Paulista
+                        number: '1000'
+                        city_id: '7274'
+                        zip_code: 01310-200
+              DEFERRED:
+                summary: Payment with deferred method
+                value:
+                  prebook_id: prebook-id-value
+                  external_booking_reference: REF-003
+                  modality: PAYINADVANCE
+                  contact_data:
+                    email: ana.lima@example.com
+                    phones:
+                    - country_code: '55'
+                      area_code: '31'
+                      number: '912398765'
+                      type: MOBILE
+                  travelers:
+                  - traveler_reference_id: '0'
+                    first_name: Ana
+                    last_name: Lima
+                    gender: FEMALE
+                    nationality: BR
+                    birth_date: '1992-11-20'
+                    identification:
+                      type: LOCAL
+                      number: '98765432100'
+                  payment:
+                    option_type: DEFERRED
+                    payment_units:
+                    - type: DEFERRED
+                      plan_id: plan-id-value
+                      secure_token: secure-token-value
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: CONFIRMED_BOOKING
+                  type: object
+                  properties:
+                    reservationId:
+                      type: string
+                    status:
+                      type: string
+                      description: SUCCESS
+                    products:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          type:
+                            type: string
+                            description: Product
+                          plataform_id:
+                            type: number
+                          pnr:
+                            type: number
+                - title: PROCESSING
+                  type: object
+                  properties:
+                    reservationId:
+                      type: string
+                    status:
+                      type: string
+                      description: PROCESSING
+                    products:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          type:
+                            type: string
+                            description: Product
+                          plataform_id:
+                            type: number
+                          pnr:
+                            type: number
+                - title: UNAVAILABLE_FLIGHT
+                  type: object
+                  properties:
+                    reservationId:
+                      type: string
+                    status:
+                      type: string
+                      description: ERROR
+                    products:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          type:
+                            type: string
+                            description: Product
+                          plataform_id:
+                            type: number
+                    sub_status:
+                      type: string
+                      description: UNAVAILABLE_FLIGHT
+                    message:
+                      type: string
+                      description: 'Booking failed with error: UNAVAILABLE_FLIGHT'
+                - title: INTERNAL_ERROR
+                  type: object
+                  properties:
+                    reservationId:
+                      type: string
+                    status:
+                      type: string
+                      description: ERROR
+                    products:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          type:
+                            type: string
+                            description: Product
+                          plataform_id:
+                            type: number
+                    sub_status:
+                      type: string
+                      description: INTERNAL_ERROR
+                    message:
+                      type: array
+                      description: List of allowed/possible values for message.
+                      items:
+                        type: object
+                        properties:
+                          message1:
+                            type: string
+                            description: RETRIEVE_ITINERARY_FAILED. Retrieve error.
+                          message2:
+                            type: string
+                            description: 'norris call error - status: 500 Internal Server Error'
+                - title: PROVIDER_ERROR
+                  type: object
+                  properties:
+                    reservationId:
+                      type: string
+                    status:
+                      type: string
+                      description: ERROR
+                    products:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          type:
+                            type: string
+                            description: Product
+                          plataform_id:
+                            type: number
+                    sub_status:
+                      type: string
+                      description: PROVIDER_ERROR
+                    message:
+                      type: array
+                      description: List of allowed/possible values for message.
+                      items:
+                        type: object
+                        properties:
+                          message1:
+                            type: string
+                            description: PROVIDER_ERROR. ProviderError.
+                          message2:
+                            type: string
+                            description: 'Booking failed with error: PROVIDER_ERROR'
+                          message3:
+                            type: string
+                            description: PROVIDER_ERROR. The server encountered an unexpected condition which prevented it from fulfilling the request
+                - title: PRICE_JUMP
+                  type: object
+                  properties:
+                    reservationId:
+                      type: string
+                    status:
+                      type: string
+                      description: ERROR
+                    products:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          type:
+                            type: string
+                            description: Product
+                          plataform_id:
+                            type: number
+                          pnr:
+                            type: string
+                    sub_status:
+                      type: string
+                      description: PRICE_JUMP
+                    message:
+                      type: array
+                      description: List of allowed/possible values for message.
+                      items:
+                        type: object
+                        properties:
+                          message1:
+                            type: string
+                            description: NOT_TOLERABLE
+                          message2:
+                            type: string
+                            description: INTERACTIVE - Not supported
+                - title: DUPLICATED_RESERVATION
+                  type: object
+                  properties:
+                    reservationId:
+                      type: string
+                    status:
+                      type: string
+                      description: ERROR
+                    products:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          type:
+                            type: string
+                            description: FLIGHT
+                    sub_status:
+                      type: string
+                      description: DUPLICATED_RESERVATION
+                    message:
+                      type: array
+                      description: List of allowed/possible values for message.
+                      items:
+                        type: object
+                        properties:
+                          message1:
+                            type: string
+                            description: Duplicated transaction
+                - title: CHANNEL_REJECTED
+                  type: object
+                  properties:
+                    reservationId:
+                      type: string
+                    status:
+                      type: string
+                      description: ERROR
+                    products:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          type:
+                            type: string
+                            description: FLIGHT
+                    sub_status:
+                      type: string
+                      description: ChannelRejected
+                    message:
+                      type: string
+                      description: ''
+                - title: INSUFFICIENT_FUNDS
+                  type: object
+                  properties:
+                    reservationId:
+                      type: string
+                    status:
+                      type: string
+                      description: ERROR
+                    products:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          type:
+                            type: string
+                            description: Product
+                    sub_status:
+                      type: string
+                      description: IndsufficientFunds
+                    message:
+                      type: string
+                      description: Indsufficient funds
+                - title: REFERRED
+                  type: object
+                  properties:
+                    reservationId:
+                      type: string
+                    status:
+                      type: string
+                      description: ERROR
+                    products:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          type:
+                            type: string
+                            description: Product
+                    sub_status:
+                      type: string
+                      description: Referred
+                    message:
+                      type: string
+                      description: A process with the card issuer is required.
+                - title: UNSUPPORTED_OPERATION
+                  type: object
+                  properties:
+                    reservationId:
+                      type: string
+                    status:
+                      type: string
+                      description: ERROR
+                    products:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          type:
+                            type: string
+                            description: Product
+                    sub_status:
+                      type: string
+                      description: UnsupportedOperation
+                    message:
+                      type: string
+                      description: Error with the payment provider
+                - title: RISK_REJECTED
+                  type: object
+                  properties:
+                    reservationId:
+                      type: string
+                    status:
+                      type: string
+                      description: ERROR
+                    products:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          type:
+                            type: string
+                            description: Product
+                    sub_status:
+                      type: string
+                      description: RiseRejected
+                    message:
+                      type: string
+                      description: Rejected by Risk
+                - title: INVALID_CARD
+                  type: object
+                  properties:
+                    reservationId:
+                      type: string
+                    status:
+                      type: string
+                      description: ERROR
+                    products:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          type:
+                            type: string
+                            description: Product
+                    sub_status:
+                      type: string
+                      description: InvalidCard
+                - title: PUNTOS
+                  type: object
+                  properties:
+                    reservationId:
+                      type: string
+                    status:
+                      type: string
+                      description: ERROR
+                    products:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          type:
+                            type: string
+                            description: Product
+                    sub_status:
+                      type: array
+                      description: Two diferentes status
+                      items:
+                        type: object
+                        properties:
+                          status1:
+                            type: string
+                            description: CONFIRM DISCOUNT
+                          status2:
+                            type: string
+                            description: REDEMPTION CANCELLATION
+                    message:
+                      type: array
+                      description: ' '
+                      items:
+                        type: object
+                        properties:
+                          message:
+                            type: string
+                            description: ''
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: INVALID_FIELD
+                  description: 'Possible cause: The booking request contains invalid or incomplete data in one or more required fields.'
+                  type: object
+                  properties:
+                    option1:
+                      properties:
+                        code:
+                          type: string
+                        message:
+                          type: string
+                          description: A field has an invalid value.
+                    option2:
+                      properties:
+                        code:
+                          type: string
+                        message:
+                          type: string
+                          description: the Book request contains missing, blank, or invalid required fields.
+                - title: BAD_REQUEST
+                  description: 'Possible cause: Book service (including reservation query) executed without sending the ''Authorization'' header'
+                  type: object
+                  properties:
+                    code:
+                      type: string
+                    message:
+                      type: string
+                      description: Authorization header is missing.
+                - title: INVALID_PREBOOK_ID
+                  description: Book executed with invalid 'prebook_id'
+                  type: object
+                  properties:
+                    code:
+                      type: string
+                    message:
+                      type: string
+                      description: Invalid identifier format
+                - title: MESSAGE_NOT_READABLE
+                  description: 'Possible cause: The Book request was sent with blank or malformed fields across multiple sections (contact_data.phones.type, travelers.gender/birth_date/identification.type, payment.payment_units.invoice_reference, payment.invoices.reference/fiscal_status, loyalty_data.redemption_points, payment.invoices.fiscal_identification.expiration_date), causing type mismatches, unsupported enum values, and invalid date/number formats.'
+                  type: object
+                  properties:
+                    code:
+                      type: string
+                    message:
+                      type: string
+                      description: ' JSON parse/validation error - empty, invalid, or unsupported value; wrong type; or malformed date/number (e.g., unsupported enum, alphabetic/numeric where not allowed, incorrect date format).'
+                - title: PAYMENT_ERROR
+                  description: 'Possible cause: Current account without available balance'
+                  type: object
+                  properties:
+                    code:
+                      type: string
+                    message:
+                      type: string
+                      description: Cannot pay due to current account status.
+                - title: PAYMENT_OPTION_NOT_FOUND
+                  description: 'Possible cause: Book executed without sending ''modality'' or ''payment -> option_type'''
+                  type: object
+                  properties:
+                    code:
+                      type: string
+                    message:
+                      type: string
+                      description: 'No payment option found matching criteria: cartId ''cartId'', paymentOptionType CURRENT_ACCOUNT'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                    example: INVALID_FILTER
+                  message:
+                    type: string
+                    example: Invalid parameter
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                    example: INVALID_FILTER
+                  message:
+                    type: string
+                    example: Invalid parameter
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: BAD_REQUEST
+                  description: 'Possible cause:Attempt to book a duplicate product '
+                  type: object
+                  properties:
+                    code:
+                      type: string
+                    message:
+                      type: string
+                      description: Bad request - Any param or body request is invalid.
+                - title: INTERNAL_SERVER_ERROR
+                  description: 'Possible cause: The booking request contains invalid or inconsistent data, including mismatched passenger counts and incomplete required information.'
+                  type: object
+                  properties:
+                    option1:
+                      properties:
+                        code:
+                          type: string
+                        message:
+                          type: string
+                          description: Server error - Could not start checkout. An internal server error ocurred.
+                    option2:
+                      properties:
+                        code:
+                          type: string
+                        message:
+                          type: string
+                          description: Server error - Could not start checkout.
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-apikey
+    BearerAuth:
+      type: http
+      scheme: bearer
+x-readme: {}

@@ -1,0 +1,631 @@
+openapi: 3.0.3
+info:
+  title: Activities Availability API
+  version: 1.0.0
+  description: 'API for activities: tickets, modalities, availability, prebook, payments, and booking. Authentication via API Key.'
+servers:
+- url: https://api-dev.despegar.com/v3/activities-api
+  description: Sandbox
+- url: https://apis-uat.despegar.com/v3/activities-api
+  description: UAT
+- url: https://api.despegar.com/v3/activities-api
+  description: Production
+security:
+- ApiKeyAuth: []
+tags:
+- name: Availability
+paths:
+  /availability:
+    get:
+      tags:
+      - Availability
+      summary: Availability
+      parameters:
+      - in: query
+        name: id
+        schema:
+          type: string
+        required: true
+        description: This information must be obtained from the response of the 'Modalities' service,
+      - in: query
+        name: modality
+        schema:
+          type: string
+        required: true
+        description: 'Modality chosen by the user; this information must be obtained from the detail service response, in the structure: ''modalities'' -> ''id''.'
+      - in: query
+        name: date
+        schema:
+          type: string
+          format: date
+        required: true
+        description: Date on which the activity will take place; the format to send is YYYY-MM-DD.
+        example: '2026-04-04'
+      - in: query
+        name: site
+        schema:
+          type: string
+          example: br
+        required: true
+        description: Refers to the country code; it must contain two alphabetic characters
+      - in: query
+        name: language
+        schema:
+          type: string
+          enum:
+          - es
+          - pt
+          - en
+        required: true
+        description: This field must be filled with the language in which you want to receive the response
+      - in: query
+        name: additionals
+        schema:
+          type: string
+        required: false
+        description: Refers to the ID of the additional attraction; this information must be obtained from the response of the 'Modalities' service, field 'id' within the 'additionals' structure.
+      - in: query
+        name: distribution
+        schema:
+          type: string
+          example: 2-8-8-4-4
+          default: '1'
+        required: false
+        description: ' In this field, send the distribution of people in the activity. The first position always refers to the number of adults; the remaining positions should be the ages of the minors (children or infants).Example: for an activity with 2 adults, two 8-year-olds, and two 4-year-olds '
+      - in: query
+        name: schedule
+        schema:
+          type: number
+          example: 09:30
+        required: false
+        description: ' In this field, send the distribution of people in the activity. The first position always refers to the number of adults; the remaining positions should be the ages of the minors (children or infants).Example: for an activity with 2 adults, two 8-year-olds, and two 4-year-olds '
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  choice_id:
+                    type: string
+                    description: ID generated to identify the ticket data and the valid fare to make the reservation.
+                  name:
+                    type: string
+                    description: Attraction name.
+                  modality_choice_name:
+                    type: string
+                    description: Name of the chosen modality.
+                  type:
+                    type: string
+                    description: Refers to the type of activity.
+                  language:
+                    type: string
+                    description: Identifies the language.
+                  site:
+                    type: array
+                    description: ' identifies the country code.'
+                  destination:
+                    type: array
+                    description: IATA code identifying the destination.
+                  from:
+                    type: string
+                    format: date
+                    description: Date on which the search was performed.
+                  to:
+                    type: string
+                    format: date
+                    description: Date on which the search was performed.
+                  distribution:
+                    type: object
+                    properties:
+                      adults:
+                        type: integer
+                      adults_ages:
+                        type: array
+                      children_ages:
+                        type: array
+                      infants_ages:
+                        type: array
+                      adult_max_age:
+                        type: number
+                      child_max_age:
+                        type: number
+                      infant_max_age:
+                        type: number
+                  additions_chosen:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                        description:
+                          type: string
+                        prices:
+                          type: object
+                          description: This array contains the reservation prices by currency. USD is always included by default, and an additional local currency may be returned depending on the site.
+                  price_details:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        total:
+                          type: number
+                        currency:
+                          type: string
+                        currency_to_usd_change_rate:
+                          type: number
+                        usd_to_currency_change_rate:
+                          type: number
+                        net:
+                          type: number
+                        tax:
+                          type: number
+                        gross:
+                          type: number
+                        price_disaggregation:
+                          type: object
+                          properties:
+                            agency_commission:
+                              type: object
+                              properties:
+                                gross:
+                                  type: number
+                                net:
+                                  type: number
+                                tax:
+                                  type: number
+                  cancellation_policy:
+                    type: object
+                    properties:
+                      title:
+                        type: string
+                      cancellable:
+                        type: boolean
+                      ranges:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            from:
+                              type: string
+                              format: date
+                            to:
+                              type: string
+                              format: date
+                            penalty:
+                              type: object
+                              properties:
+                                USD:
+                                  type: number
+                                BRL:
+                                  type: number
+                            percentage:
+                              type: string
+                            label:
+                              type: string
+                      conditions:
+                        type: array
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: ACTIVITY_PROVIDER_ERROR
+                  type: object
+                  properties:
+                    Message:
+                      type: string
+                      description: Bad request on activity provider due to invalid field value.
+                    Possible_cause:
+                      type: string
+                      description: '''distribution'' parameter sent with invalid value'
+                - title: INVALID_FIELD
+                  type: object
+                  properties:
+                    Message:
+                      type: string
+                      description: Request validation error — missing, blank, invalid, or out-of-policy values in Availability parameters (ticket_id, modality, date, site, language).
+                    Possible_cause:
+                      type: string
+                      description: 'The Availability call was sent with incorrect inputs: ticket_id not provided/blank or not in the allowed set, modality missing/blank, date earlier than today, site blank/invalid, or language blank/invalid.'
+                - title: MISSING_REQUIRED_PARAMETER
+                  type: object
+                  properties:
+                    Message:
+                      type: string
+                      description: Missing required parameters in Availability request
+                    Possible_cause:
+                      type: string
+                      description: 'The request was sent without one or more required fields: ticket_id, modality, date, site, or language.'
+        '503':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: ACTIVITY_PROVIDER_ERROR
+                  type: object
+                  properties:
+                    Message:
+                      type: string
+                      description: Error with activity provider
+  /hotels-api/availability/{hotel_id}:
+    get:
+      summary: Detail
+      description: Returns live availability for a specific hotel.
+      parameters:
+      - in: path
+        name: hotel_id
+        schema:
+          type: string
+        required: true
+        description: ' Refers to the id of the hotel.'
+      - in: query
+        name: country_code
+        schema:
+          type: string
+        description: ' Refers to the country code, which must be filled with two alphabetical digits.'
+        example: br
+      - in: query
+        name: checkin_date
+        schema:
+          type: string
+          format: date
+        required: true
+        description: Refers to the hotel check-in date and must be in the format YYYY-MM-DD.
+        example: '2026-11-14'
+      - in: query
+        name: checkout_date
+        schema:
+          type: string
+          format: date
+        required: true
+        description: Refers to the hotel check-out date and must be in the format YYYY-MM-DD.
+        example: '2026-11-16'
+      - in: query
+        name: currency
+        schema:
+          type: string
+        required: true
+        description: Refers to the currency, which must be filled with three alphabetical digits. (E.g. "USD", "ARS")
+        example: BRL
+      - in: query
+        name: distribution
+        schema:
+          type: string
+        required: true
+        description: 'Passenger distribution. Each room’s passengers should be written as number_of_adults-children_ages. Children-age goes up to 17 years old. Rooms should be separated by “!”. E.g.: Means room 1 with 2 adults and room 2 with 2 adults and a 10-year-old child.'
+        example: 2!2-10
+      - in: query
+        name: roompack_id
+        schema:
+          type: string
+        description: specific roompack_id (obtained in previous step).
+      - in: query
+        name: language
+        schema:
+          type: string
+          enum:
+          - EN
+          - ES
+          - PT
+        description: Refers to the language, which must be filled with two alphabetical digits.
+        example: PT
+      - in: query
+        name: ttl
+        schema:
+          type: integer
+        description: Maximum time allowed for the connection. Minimum = 3000 ms, Maximum = 6200 ms.
+      - in: query
+        name: refundable_only
+        schema:
+          type: boolean
+        description: If set to ‘true’, only refundable hotel rates will be quoted.
+      responses:
+        '200':
+          description: Detailed availability for the hotel
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  hotel_info:
+                    type: object
+                    description: This structure is of type dictionary and returns hotel information.
+                    properties:
+                      type:
+                        type: string
+                  roompacks:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          description: roompack id
+                        meal_plan:
+                          type: object
+                          description: Meal plan corresponding to the roompack (e.g., room only, breakfast included, all-inclusive, etc.).
+                          properties:
+                            id:
+                              type: string
+                        price_detail:
+                          type: object
+                          properties:
+                            currency:
+                              type: string
+                              description: currency in which values will be expressed
+                            total:
+                              type: number
+                              description: total value of the roompack (subtotal + taxes). It does not include charges to be paid at destination
+                            taxes:
+                              type: number
+                              description: taxes corresponding to the roompack price
+                            taxes_detail:
+                              type: array
+                              description: list with code and amount pairs
+                              items:
+                                type: object
+                                properties:
+                                  code:
+                                    type: string
+                                  amount:
+                                    type: string
+                            binding_public_rate_enabled:
+                              type: boolean
+                              description: if set to true, “amount” value is the mínimum price that the partner should sell the item
+                            binding_public_rate_value:
+                              type: integer
+                            agency_commission:
+                              type: object
+                              description: Applicable only to commissionable models.
+                              properties:
+                                amount:
+                                  type: number
+                                percentage:
+                                  type: number
+                            charge_at_destination:
+                              type: number
+                            charge_at_destination_detail:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  code:
+                                    type: string
+                                  amount:
+                                    type: number
+                        cancellation_policy:
+                          type: object
+                          description: This structure is of type list and can return one or several rules regarding cancellation policies of the roompack
+                          properties:
+                            status:
+                              type: string
+                              description: Represents the cancellation policy status at the moment the request is made
+                              enum:
+                              - non_refundable
+                              - partially_refundable
+                              - fully_refundable
+                            hours_before_penalty:
+                              type: integer
+                              description: hours prior to check in which status applies in case of cancelling in those conditions
+                            vendor_notes:
+                              type: string
+                              description: string field with information regarding cancellation policies.
+                            cancellation_policy_rules:
+                              type: array
+                              description: This structure is of type list and can return one or several rules regarding cancellation policies of the roompack. The penalty may be applied per night or as a percentage. Based on the information provided by the partner, the refund amount is determined. If no penalty is specified for that range, it is considered that no penalty applies.
+                              items:
+                                type: object
+                                properties:
+                                  type:
+                                    type: string
+                                    description: rule type
+                                  penalty:
+                                    type: object
+                                    description: contains the percentage of the total amount of the reservation that should be considered as charge in case of cancelling in theses conditions
+                                    properties:
+                                      percentage:
+                                        type: number
+                                      night_count:
+                                        type: number
+                                  anticipation:
+                                    type: object
+                                    description: timeframe where the rules apply. it is a dictionary with “from” and “to” values measured in hours to check in.
+                                    properties:
+                                      from:
+                                        type: integer
+                                      to:
+                                        type: integer
+                        rooms:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              name:
+                                type: string
+                                description: room name
+                              reference:
+                                type: integer
+                                description: index of room elements contained in the roompack choice (first index == 1)
+                              room_type_id:
+                                type: string
+                                description: room id.These id should be used to map static content about the room
+                              bed_options:
+                                type: array
+                                description: list with all bedding options for the room
+                                items:
+                                  type: object
+                                  properties:
+                                    id:
+                                      type: integer
+                                    description:
+                                      type: string
+                              max_capacity:
+                                type: integer
+                                description: maximum pax capacity of the room
+                              choice_id:
+                                type: string
+                                description: id to be used for prebook stage
+                        promo:
+                          type: object
+                          properties:
+                            type:
+                              type: string
+                            saving:
+                              type: object
+                              description: Details of the promotional savings associated with the product.
+                              properties:
+                                type:
+                                  type: string
+                                percentage:
+                                  type: number
+                        tags:
+                          type: array
+                          description: Used to identify products associated with a promotion.
+                  categorized_notices:
+                    type: object
+                    description: Main container for categorized hotel notices, organized by importance level
+                    properties:
+                      primary:
+                        type: object
+                        description: PRIMARY notices category - Critical and priority information that guests must know obligatorily
+                        properties:
+                          title:
+                            type: object
+                            properties:
+                              en:
+                                type: string
+                                description: This field is dynamically returned according to the language specified in the request
+                          notices:
+                            type: array
+                            description: Array of individual notices within the primary category
+                            items:
+                              type: object
+                              properties:
+                                title:
+                                  type: object
+                                  properties:
+                                    en:
+                                      type: string
+                                      description: This field is dynamically returned according to the language specified in the request
+                                messages:
+                                  type: array
+                                  description: This field is dynamically returned according to the language specified in the request
+                                  items:
+                                    type: object
+                                    properties:
+                                      en:
+                                        type: string
+                      secondary:
+                        type: object
+                        description: SECONDARY notices category - Important but lower priority information, policies and operational details
+                        properties:
+                          title:
+                            type: object
+                            properties:
+                              en:
+                                type: string
+                          notices:
+                            type: array
+                            description: Array of individual notices within the primary category
+                            items:
+                              type: object
+                              properties:
+                                title:
+                                  type: object
+                                  properties:
+                                    en:
+                                      type: string
+                                messages:
+                                  type: array
+                                  description: This field is dynamically returned according to the language specified in the request
+                                  items:
+                                    type: object
+                                    properties:
+                                      en:
+                                        type: string
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+      tags:
+      - Availability
+      operationId: getHotelAvailability
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-apikey
+    BearerAuth:
+      type: http
+      scheme: bearer
+x-readme: {}

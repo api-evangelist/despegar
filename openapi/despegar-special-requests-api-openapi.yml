@@ -1,0 +1,225 @@
+openapi: 3.0.3
+info:
+  title: Activities Availability Special Requests API
+  version: 1.0.0
+  description: 'API for activities: tickets, modalities, availability, prebook, payments, and booking. Authentication via API Key.'
+servers:
+- url: https://api-dev.despegar.com/v3/activities-api
+  description: Sandbox
+- url: https://apis-uat.despegar.com/v3/activities-api
+  description: UAT
+- url: https://api.despegar.com/v3/activities-api
+  description: Production
+security:
+- ApiKeyAuth: []
+tags:
+- name: Special Requests
+  description: Special requests associated with a reservation.
+paths:
+  /reservations/{id}/specials-requests:
+    post:
+      tags:
+      - Special Requests
+      summary: Special Requests
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        description: Product ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                reason:
+                  type: string
+                  enum:
+                  - SPECIAL_MEALS_DBML
+                  - SPECIAL_MEALS_BBML
+                  - SPECIAL_MEALS_KSML
+                  - SPECIAL_MEALS_LSML
+                  - SPECIAL_MEALS_NLML
+                  - SPECIAL_MEALS_CHML
+                  - SPECIAL_MEALS_VLML
+                  - SPECIAL_MEALS_VGML
+                  - SPECIAL_MEALS_GFML
+                  - AIRPORT_ASSISTANCE_UNACCOMPANIED_CHILD
+                  - WHEELCHAIR_ABSOLUTE_IMMOBILITY
+                  - BABY_COT
+                  - WHEELCHAIR_CAN_SIT_ALONE
+                passengers:
+                  type: array
+                  items:
+                    type: integer
+            examples:
+              default:
+                value:
+                  reason: SPECIAL_MEALS_KSML
+                  passengers:
+                  - 0
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  flow_id:
+                    type: string
+                  product_id:
+                    type: number
+                  product_type:
+                    type: string
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                        message:
+                          type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                        message:
+                          type: string
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                        message:
+                          type: string
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                        message:
+                          type: string
+      operationId: createSpecialRequest
+  /special-requests/catalog:
+    get:
+      tags:
+      - Special Requests
+      summary: Get special requests catalog
+      operationId: getSpecialRequestsCatalog
+      parameters:
+      - in: query
+        name: product_type
+        schema:
+          type: string
+          enum:
+          - HOTEL
+        required: true
+        description: Type of product for which the special requests catalog is being queried. Currently only 'HOTEL' is supported.
+      - in: query
+        name: product_id
+        schema:
+          type: string
+        required: true
+        description: Identifier of the product for which the special requests catalog is being queried.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  product_type:
+                    type: string
+                    description: Type of product associated with the catalog.
+                    example: HOTEL
+                  items:
+                    type: array
+                    description: List of available special requests for the product.
+                    items:
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Unique code identifying the special request.
+                          example: CRADLE
+                        description:
+                          type: string
+                          description: Human-readable description of the special request.
+                          example: Cuna
+                        requires_value:
+                          type: boolean
+                          description: Indicates whether a value must be provided when submitting the special request (POST). For example, LATE_CHECK_IN requires a value specifying the desired check-in time.
+                          example: false
+              example:
+                product_type: HOTEL
+                items:
+                - requires_value: false
+                  code: CRADLE
+                  description: Cuna
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-apikey
+    BearerAuth:
+      type: http
+      scheme: bearer
+x-readme: {}

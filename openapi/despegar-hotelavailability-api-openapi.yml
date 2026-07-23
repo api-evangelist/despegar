@@ -1,0 +1,377 @@
+openapi: 3.0.3
+info:
+  title: Activities Availability HotelAvailability API
+  version: 1.0.0
+  description: 'API for activities: tickets, modalities, availability, prebook, payments, and booking. Authentication via API Key.'
+servers:
+- url: https://api-dev.despegar.com/v3/activities-api
+  description: Sandbox
+- url: https://apis-uat.despegar.com/v3/activities-api
+  description: UAT
+- url: https://api.despegar.com/v3/activities-api
+  description: Production
+security:
+- ApiKeyAuth: []
+tags:
+- name: HotelAvailability
+paths:
+  /hotels-api/availability:
+    get:
+      summary: Search
+      description: Search for available hotels based on input criteria.
+      parameters:
+      - in: query
+        name: country_code
+        schema:
+          type: string
+        required: false
+        description: The country code of the traveler's point of sale, in ISO 3166-1 alpha-2 format. This should represent the country where the shopping transaction is taking place.
+        example: br
+      - in: query
+        name: checkin_date
+        schema:
+          type: string
+          format: date
+        required: true
+        description: Refers to the hotel check-in date and must be in the format YYYY-MM-DD.
+        example: '2026-11-14'
+      - in: query
+        name: checkout_date
+        schema:
+          type: string
+          format: date
+        required: true
+        description: Refers to the hotel check-out date and must be in the format YYYY-MM-DD.
+        example: '2026-11-16'
+      - in: query
+        name: currency
+        schema:
+          type: string
+        required: true
+        description: Refers to the currency, which must be filled with three alphabetical digits. (E.g. "USD", "ARS")
+        example: BRL
+      - in: query
+        name: hotels
+        schema:
+          type: string
+        required: true
+        description: List of hotel IDs, separated by commas (max. 100).
+      - in: query
+        name: distribution
+        schema:
+          type: string
+        required: true
+        description: 'Passenger distribution. Each room’s passengers should be written as number_of_adults-children_ages. Children-age goes up to 17 years old. Rooms should be separated by “!”. E.g.: Means room 1 with 2 adults and room 2 with 2 adults and a 10-year-old child.'
+        examples:
+          example1:
+            value: 2!2-10
+          example2:
+            value: 2!2-8-5
+      - in: query
+        name: language
+        schema:
+          type: string
+          enum:
+          - EN
+          - ES
+          - PT
+        description: Refers to the language, which must be filled with two alphabetical digits.
+        example: PT
+      - in: query
+        name: ttl
+        schema:
+          type: integer
+        description: Maximum time allowed for the connection. Minimum = 3000 ms, Maximum = 6200 ms.
+      - in: query
+        name: refundable_only
+        schema:
+          type: boolean
+        description: If set to ‘true’, only refundable hotel rates will be quoted.
+      responses:
+        '200':
+          description: Availability response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          description: hotel id
+                        hotel_info:
+                          type: object
+                          description: This structure is of type dictionary and returns hotel information.
+                          properties:
+                            name:
+                              type: string
+                              description: hotel name
+                            type:
+                              type: string
+                            stars:
+                              type: integer
+                              description: star rating
+                            location:
+                              type: object
+                              description: an object that contains latitude and longitude values for the hotel location
+                              properties:
+                                latitude:
+                                  type: number
+                                longitude:
+                                  type: number
+                        roompacks:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                              meal_plan:
+                                type: object
+                                description: Meal plan corresponding to the roompack (e.g., room only, breakfast included, all-inclusive, etc.).
+                                properties:
+                                  id:
+                                    type: string
+                              rooms:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    name:
+                                      type: string
+                                      description: room name
+                                    reference:
+                                      type: integer
+                                      description: index of room elements contained in the roompack choice (first index == 1)
+                                    bed_options:
+                                      type: array
+                                      items:
+                                        type: string
+                                      description: ' list with all bedding options for the room'
+                                    room_type_id:
+                                      type: string
+                                      description: room id. These id should be used to map static content about the room
+                                    max_capacity:
+                                      type: integer
+                                      description: maximum pax capacity of the room
+                              cancellation_policy:
+                                type: object
+                                description: This structure is of type list and can return one or several rules regarding cancellation policies of the roompack
+                                properties:
+                                  status:
+                                    type: string
+                                    description: Represents the cancellation policy status at the moment the request is made
+                                    enum:
+                                    - non_refundable
+                                    - partially_refundable
+                                    - fully_refundable
+                                  hours_before_penalty:
+                                    type: integer
+                                    description: hours prior to check in which status applies in case of cancelling in those conditions
+                                  cancellation_policy_rules:
+                                    type: array
+                                    description: This structure is of type list and can return one or several rules regarding cancellation policies of the roompack. The penalty may be applied per night or as a percentage. Based on the information provided by the partner, the refund amount is determined. If no penalty is specified for that range, it is considered that no penalty applies.
+                                    items:
+                                      type: object
+                                      properties:
+                                        type:
+                                          type: string
+                                          description: rule type
+                                        penalty:
+                                          type: object
+                                          description: contains the percentage of the total amount of the reservation that should be considered as charge in case of cancelling in theses conditions
+                                          properties:
+                                            percentage:
+                                              type: number
+                                            night_count:
+                                              type: integer
+                                        anticipation:
+                                          type: object
+                                          description: timeframe where the rules apply. it is a dictionary with “from” and “to” values measured in hours to check in.
+                                          properties:
+                                            from:
+                                              type: integer
+                                            to:
+                                              type: integer
+                              price_detail:
+                                type: object
+                                properties:
+                                  currency:
+                                    type: string
+                                    description: currency in which values will be expressed
+                                  total:
+                                    type: number
+                                    description: total value of the roompack (subtotal + taxes). It does not include charges to be paid at destination
+                                  taxes:
+                                    type: number
+                                    description: taxes corresponding to the roompack price
+                                  taxes_detail:
+                                    type: array
+                                    items:
+                                      type: object
+                                      properties:
+                                        code:
+                                          type: string
+                                        amount:
+                                          type: number
+                                    description: list with code and amount pairs
+                                  charge_at_destination:
+                                    type: number
+                                  charge_at_destination_detail:
+                                    type: array
+                                    items:
+                                      type: object
+                                      properties:
+                                        code:
+                                          type: string
+                                          description: 'This field can have different possible values, which are:'
+                                          enum:
+                                          - 'TT: Turism fee'
+                                          - 'TA: Additional fee'
+                                          - 'RF: Resort fee'
+                                          - 'TM: Bellboy fee'
+                                          - 'EF: Environmental fee'
+                                          - 'DO: Damage deposit (refundable)'
+                                          - 'TL: Cleaning fee'
+                                          - 'DS: Security deposit'
+                                          - 'ISS: Tax over service'
+                                          - 'TS: Service charge'
+                                          - 'TE: Energy fee'
+                                          - 'CT: City Tax'
+                                          - 'SH: Hotel insurance'
+                                        amount:
+                                          type: string
+                                  agency_commission:
+                                    type: object
+                                    description: Applicable only to commissionable models.
+                                    properties:
+                                      amount:
+                                        type: number
+                                      percentage:
+                                        type: number
+                                  binding_public_rate_enabled:
+                                    type: boolean
+                                    description: if set to true, “amount” value is the mínimum price that the partner should sell the item
+                                  binding_public_rate_value:
+                                    type: number
+                              promo:
+                                type: object
+                                properties:
+                                  type:
+                                    type: string
+                                  saving:
+                                    type: object
+                                    description: Details of the promotional savings associated with the product.
+                                    properties:
+                                      type:
+                                        type: string
+                                      percentage:
+                                        type: number
+                              tags:
+                                type: array
+                                description: Used to identify products associated with a promotion.
+              example:
+                items:
+                - id: 259462
+                  hotel_info:
+                    name: Bogotá Plaza Hotel
+                    stars: 5
+                  roompacks:
+                  - id: '35809'
+                    meal_plan:
+                      id: BRB
+                    rooms:
+                    - name: Standard Room
+                      max_capacity: 3
+                      bed_options:
+                      - id: '1'
+                        description: 1 King Bed
+                    cancellation_policy:
+                      status: fully_refundable
+                    price_detail:
+                      currency: USD
+                      total: 300
+                      taxes: 50
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+      tags:
+      - HotelAvailability
+      operationId: searchAvailability
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-apikey
+    BearerAuth:
+      type: http
+      scheme: bearer
+x-readme: {}

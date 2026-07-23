@@ -1,0 +1,1007 @@
+openapi: 3.0.3
+info:
+  title: Activities Availability Geography API
+  version: 1.0.0
+  description: 'API for activities: tickets, modalities, availability, prebook, payments, and booking. Authentication via API Key.'
+servers:
+- url: https://api-dev.despegar.com/v3/activities-api
+  description: Sandbox
+- url: https://apis-uat.despegar.com/v3/activities-api
+  description: UAT
+- url: https://api.despegar.com/v3/activities-api
+  description: Production
+security:
+- ApiKeyAuth: []
+tags:
+- name: Geography
+paths:
+  /countries/{id}:
+    get:
+      tags:
+      - Geography
+      summary: countries_id
+      description: Returns detailed information for a specific country.
+      parameters:
+      - in: path
+        name: id
+        required: true
+        description: Unique identifier for this item
+        schema:
+          type: string
+        example: HOTELS
+      - in: query
+        name: country
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: product
+        required: false
+        schema:
+          type: string
+        example: HOTELS
+      - in: query
+        name: language
+        required: false
+        schema:
+          type: string
+        example: ES%2CPT%2CEN
+      - in: query
+        name: tags
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+      - in: query
+        name: ratio
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: options
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+        description: Optional fields for the response
+      - in: query
+        name: include
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+        description: Option to include filtered entities, additional country information, or author and copyright information when requesting pictures
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  item:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                      gid:
+                        type: string
+                      description:
+                        type: object
+                  configurations:
+                    type: array
+                  last_update_date:
+                    type: string
+                    format: date
+                  code:
+                    type: string
+                  picture:
+                    type: array
+        '400':
+          description: Invalid request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+  /countries:
+    get:
+      tags:
+      - Geography
+      summary: countries
+      description: Returns the list of available countries matching the provided search criteria.
+      parameters:
+      - in: query
+        name: country
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: product
+        required: false
+        schema:
+          type: string
+        example: HOTELS
+      - in: query
+        name: language
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - ES
+            - PT
+            - EN
+        description: A list of ISO codes representing the requested languages
+        example: ES%2CPT%2CEN
+      - in: query
+        name: continent_id
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+        description: Offset to start returning countries
+      - in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        description: Maximum quantity of entities. If setted to 0 it returns everything
+      - in: query
+        name: snapshot
+        required: false
+        schema:
+          type: string
+        description: Whether to return a snapshot or paginated results
+      - in: query
+        name: codes
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+        description: A list of codes to return the cities that has the same ones
+      - in: query
+        name: options
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+        description: Optional fields for the response
+      - in: query
+        name: include
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+        description: Option to include filtered entities, additional country information or author and copyright information when requesting pictures
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                      gid:
+                        type: string
+                      descriptions:
+                        type: object
+                        properties:
+                          pt:
+                            type: string
+                      configurations:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            any_ds_any:
+                              type: string
+                            any_cruises_any:
+                              type: string
+                            any_transfers_any:
+                              type: string
+                            default:
+                              type: string
+                            any_vr_any:
+                              type: string
+                            any_cars_any:
+                              type: string
+                            any_flights_any:
+                              type: string
+                            any_hotels_any:
+                              type: string
+                            viajeros.com:
+                              type: string
+                            any_packages_any:
+                              type: string
+                      last_update_date:
+                        type: string
+                        format: date
+                      code:
+                        type: string
+                      capital_id:
+                        type: string
+                      capital_gid:
+                        type: string
+                      capital:
+                        type: object
+                        properties:
+                          id:
+                            type: number
+                          offset:
+                            type: number
+                      pictures:
+                        type: array
+                      alternative_code:
+                        type: string
+                      continent_id:
+                        type: number
+                      continent_gid:
+                        type: string
+                      phone_code:
+                        type: number
+                      intl_access_code:
+                        type: number
+        '400':
+          description: Invalid request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+  /continents:
+    get:
+      tags:
+      - Geography
+      summary: continents
+      description: Returns the list of available continents.
+      parameters:
+      - in: query
+        name: product
+        required: false
+        schema:
+          type: string
+        example: HOTELS
+      - in: query
+        name: language
+        required: false
+        schema:
+          type: string
+        example: ES%2CPT%2CEN
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                      gid:
+                        type: string
+                      descriptions:
+                        type: object
+                        properties:
+                          pt:
+                            type: string
+                      configurations:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            any_ds_any:
+                              type: string
+                            any_cruises_any:
+                              type: string
+                            any_transfers_any:
+                              type: string
+                            default:
+                              type: string
+                            any_vr_any:
+                              type: string
+                            any_cars_any:
+                              type: string
+                            any_flights_any:
+                              type: string
+                            any_hotels_any:
+                              type: string
+                            viajeros.com:
+                              type: string
+                            any_packages_any:
+                              type: string
+                            any_buses_any:
+                              type: string
+                      last_update_date:
+                        type: string
+                        format: date
+                      code:
+                        type: string
+                      pictures:
+                        type: array
+        '400':
+          description: Invalid request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+  /continents/{id}:
+    get:
+      tags:
+      - Geography
+      summary: continents_id
+      description: Returns detailed information for a specific continent.
+      parameters:
+      - in: query
+        name: product
+        required: false
+        schema:
+          type: string
+        example: HOTELS
+      - in: query
+        name: language
+        required: false
+        schema:
+          type: string
+        example: ES%2CPT%2CEN
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                      gid:
+                        type: string
+                      descriptions:
+                        type: object
+                        properties:
+                          pt:
+                            type: string
+                      configurations:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            any_ds_any:
+                              type: string
+                            any_cruises_any:
+                              type: string
+                            any_transfers_any:
+                              type: string
+                            default:
+                              type: string
+                            any_vr_any:
+                              type: string
+                            any_cars_any:
+                              type: string
+                            any_flights_any:
+                              type: string
+                            any_hotels_any:
+                              type: string
+                            viajeros.com:
+                              type: string
+                            any_packages_any:
+                              type: string
+                            any_buses_any:
+                              type: string
+                      last_update_date:
+                        type: string
+                        format: date
+                      code:
+                        type: string
+                      pictures:
+                        type: array
+        '400':
+          description: Invalid request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+  /regions:
+    get:
+      tags:
+      - Geography
+      summary: regions
+      description: Returns the list of available regions matching the provided search criteria.
+      parameters:
+      - in: query
+        name: product
+        required: false
+        schema:
+          type: string
+        example: HOTELS
+      - in: query
+        name: language
+        required: false
+        schema:
+          type: string
+        example: ES%2CPT%2CEN
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        gid:
+                          type: string
+                        descriptions:
+                          type: string
+                        last_update_date:
+                          type: string
+                          format: date
+                        forced_city_ids:
+                          type: array
+                        excluded_points:
+                          type: object
+                        included_points:
+                          type: object
+                        zones:
+                          type: array
+                        related_political_divisions:
+                          type: object
+                        correlated_political_divisions:
+                          type: object
+                        boundary:
+                          type: object
+                        pictures:
+                          type: array
+        '400':
+          description: Invalid request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+  /administrative-divisions:
+    get:
+      tags:
+      - Geography
+      summary: administrative-divisions
+      description: Returns the list of available administrative divisions matching the provided search criteria.
+      parameters:
+      - in: query
+        name: country_id
+        required: false
+        schema:
+          type: string
+        example: '20010'
+      - in: query
+        name: product
+        required: false
+        schema:
+          type: string
+        example: HOTELS
+      - in: query
+        name: language
+        required: false
+        schema:
+          type: string
+        example: ES%2CPT%2CEN
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Invalid request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+  /administrative-divisions/{id}:
+    get:
+      tags:
+      - Geography
+      summary: administrative-divisions_id
+      description: Returns detailed information for a specific administrative division.
+      parameters:
+      - in: query
+        name: product
+        required: false
+        schema:
+          type: string
+        example: HOTELS
+      - in: query
+        name: language
+        required: false
+        schema:
+          type: string
+        example: ES%2CPT%2CEN
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  item:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                      gid:
+                        type: string
+                      description:
+                        type: object
+                  configurations:
+                    type: array
+                  last_update_date:
+                    type: string
+                    format: date
+                  code:
+                    type: string
+                  capital_id:
+                    type: number
+                  capital_gid:
+                    type: string
+                  capital:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                      offset:
+                        type: number
+                  picture:
+                    type: array
+                  country_id:
+                    type: number
+                  country_gid:
+                    type: string
+        '400':
+          description: Invalid request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+  /zones:
+    get:
+      tags:
+      - Geography
+      summary: zones
+      description: Returns the list of available zones matching the provided search criteria.
+      parameters:
+      - in: query
+        name: country_id
+        required: false
+        schema:
+          type: string
+        example: '20010'
+      - in: query
+        name: product
+        required: false
+        schema:
+          type: string
+        example: HOTELS
+      - in: query
+        name: language
+        required: false
+        schema:
+          type: string
+        example: ES%2CPT%2CEN
+      - in: query
+        name: min_distance
+        required: false
+        schema:
+          type: string
+        example: '1'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Invalid request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+  /zones/{id}:
+    get:
+      tags:
+      - Geography
+      summary: zones_id
+      description: Returns detailed information for a specific zone.
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        example: '183179'
+      - in: query
+        name: product
+        required: false
+        schema:
+          type: string
+        example: HOTELS
+      - in: query
+        name: ratio
+        required: false
+        schema:
+          type: string
+        example: 4%3A3
+      - in: query
+        name: language
+        required: false
+        schema:
+          type: string
+        example: ES%2CPT%2CEN
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Invalid request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+  /cities:
+    get:
+      tags:
+      - Geography
+      summary: cities
+      description: Returns detailed information for a specific city.
+      parameters:
+      - in: query
+        name: country_id
+        required: false
+        schema:
+          type: string
+        example: '20010'
+      - in: query
+        name: product
+        required: false
+        schema:
+          type: string
+        example: HOTELS
+      - in: query
+        name: language
+        required: false
+        schema:
+          type: string
+        example: ES%2CPT%2CEN
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        gid:
+                          type: string
+                        descriptions:
+                          type: object
+                          properties:
+                            en:
+                              type: string
+                            es:
+                              type: string
+                            pt:
+                              type: string
+                        configurations:
+                          type: array
+                        last_update_date:
+                          type: string
+                          format: date
+                        code:
+                          type: string
+                        location:
+                          type: object
+                          properties:
+                            type:
+                              type: string
+                            latitude:
+                              type: number
+                            longitude:
+                              type: number
+                        pictures:
+                          type: array
+                        timezone:
+                          type: string
+                        timezone_offset:
+                          type: number
+                        administrative_division_id:
+                          type: number
+                        administrative_division_gid:
+                          type: string
+                        country_id:
+                          type: number
+                        country_gid:
+                          type: string
+        '400':
+          description: Invalid request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+  /cities/{id}:
+    get:
+      tags:
+      - Geography
+      summary: cities_id
+      description: Returns detailed information for a specific city.
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        example: '982'
+      - in: query
+        name: product
+        required: false
+        schema:
+          type: string
+        example: HOTELS
+      - in: query
+        name: ratio
+        required: false
+        schema:
+          type: string
+        example: 4%3A3
+      - in: query
+        name: language
+        required: false
+        schema:
+          type: string
+          enum:
+          - ES
+          - PT
+          - EN
+        example: ES
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                      gid:
+                        type: string
+                      descriptions:
+                        type: object
+                        properties:
+                          pt:
+                            type: string
+                      configurations:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            any_ds_any:
+                              type: string
+                            any_cruises_any:
+                              type: string
+                            any_transfers_any:
+                              type: string
+                            default:
+                              type: string
+                            any_vr_any:
+                              type: string
+                            any_cars_any:
+                              type: string
+                            any_flights_any:
+                              type: string
+                            any_hotels_any:
+                              type: string
+                            viajeros.com:
+                              type: string
+                            any_buses_ar:
+                              type: string
+                            any_packages_any:
+                              type: string
+                      last_update_date:
+                        type: string
+                        format: date
+                      aliases:
+                        type: object
+                        properties:
+                          caba:
+                            type: string
+                          baires:
+                            type: number
+                      code:
+                        type: string
+                      location:
+                        type: object
+                        properties:
+                          type:
+                            type: string
+                          latitude:
+                            type: string
+                          longitude:
+                            type: string
+                          coordinates:
+                            type: array
+                      pictures:
+                        type: array
+                      timezone:
+                        type: string
+                      timezone_offset:
+                        type: number
+                      administrative_division_id:
+                        type: number
+                      administrative_division_gid:
+                        type: string
+                      country_id:
+                        type: number
+                      country_gid:
+                        type: string
+        '400':
+          description: Invalid request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+  /geo-points/{id}:
+    get:
+      tags:
+      - Geography
+      summary: geo_points_id
+      description: Returns detailed information for a specific geographic point.
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: number
+        example: '192635'
+      - in: query
+        name: product
+        required: false
+        schema:
+          type: string
+        example: HOTELS
+      - in: query
+        name: ratio
+        required: false
+        schema:
+          type: string
+        example: 4%3A3
+      - in: query
+        name: language
+        required: false
+        schema:
+          type: string
+        example: ES%2CPT%2CEN
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                      gid:
+                        type: string
+                      descriptions:
+                        type: object
+                        properties:
+                          en:
+                            type: string
+                          es:
+                            type: string
+                          pt:
+                            type: string
+                      last_update_date:
+                        type: string
+                        format: date
+                      location:
+                        type: object
+                        properties:
+                          type:
+                            type: string
+                          latitude:
+                            type: number
+                          longitude:
+                            type: number
+                      type:
+                        type: string
+                      city_id:
+                        type: number
+                      city_gid:
+                        type: string
+                      code:
+                        type: string
+                      commercial:
+                        type: boolean
+                      manual_order:
+                        type: number
+                      pictures:
+                        type: array
+                  properties:
+                    paging:
+                      type: object
+                      properties:
+                        offset:
+                          type: integer
+                        limit:
+                          type: integer
+                        total:
+                          type: integer
+        '400':
+          description: Invalid request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-apikey
+    BearerAuth:
+      type: http
+      scheme: bearer
+x-readme: {}

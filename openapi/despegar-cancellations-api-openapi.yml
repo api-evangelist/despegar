@@ -1,0 +1,902 @@
+openapi: 3.0.3
+info:
+  title: Activities Availability Cancellations API
+  version: 1.0.0
+  description: 'API for activities: tickets, modalities, availability, prebook, payments, and booking. Authentication via API Key.'
+servers:
+- url: https://api-dev.despegar.com/v3/activities-api
+  description: Sandbox
+- url: https://apis-uat.despegar.com/v3/activities-api
+  description: UAT
+- url: https://api.despegar.com/v3/activities-api
+  description: Production
+security:
+- ApiKeyAuth: []
+tags:
+- name: Cancellations
+  description: Validation, quotation, and confirmation of cancellations.
+paths:
+  /reservations/{productId}/cancels/allowance:
+    get:
+      tags:
+      - Cancellations
+      summary: Allowance
+      parameters:
+      - in: path
+        name: productId
+        required: true
+        schema:
+          type: string
+        description: Product ID associated with the reservation
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  product_allowance:
+                    type: object
+                    properties:
+                      product_type:
+                        type: string
+                      product_id:
+                        type: integer
+                      allowance:
+                        type: string
+                        description: 'This field supports the following values:'
+                        enum:
+                        - ALLOWED
+                        - DISALLOWED
+                        - UNKNOWN
+                      disallowed_reason:
+                        type: string
+                        description: 'It will indicate the explanation for the reason of rejection.The possible values are:'
+                        enum:
+                        - ALREADY_CANCELLED
+                        - NOT_ALLOWED_BOOKING_IN_PROCESS
+                        - CANCEL_IN_PROCESS
+                        - EXTERNAL_BLOCKED
+                        - RETRACTION_IN_PROCESS
+                        - CANCEL_NOT_IN_PROCESS
+                        - TICKET_STATUS_EXCHANGED
+                        - TICKET_STATUS_REFUNDED
+                        - TICKET_STATUS_USED
+                        - TICKET_STATUS_USED_EXCHANGED
+                        - TICKET_STATUS_PARTIALLY_USED_EXCHANGED
+                        - TICKET_STATUS_VOIDED
+                        - TICKET_STATUS_HOLD
+                        - TICKET_STATUS_HOLD_CANCELED
+                        - TICKET_STATUS_CHECKED_IN
+                        - INVALID_TICKETS
+                        - EXONERATION_FLOW_NOT_SUPPORTED
+                        - NOT_ALLOWED_VOID_OR_NOT_ISSUED_RESCUE
+                        - NOT_ALLOWED_TOTAL_REFUND_RESCUE
+                        - CFAR
+                        - PROVIDER_NOT_SUPPORTED
+                        - AFTERSALE_NOT_ALLOWED
+                        - BLOCKED_CARRIER
+                        - INVALID_MINIMUM_HOURS
+                        - LEGAL_CLAIM
+                        - CHANGE_IN_PROGRESS
+                      refund_policy:
+                        type: string
+                        description: 'This field contains a code indicating whether the customer will receive a refund. The possible values are:'
+                        enum:
+                        - TOTAL_REFUND
+                        - WITH_PENALTY
+                        - TAX_ONLY
+                        - NO_REFUND
+                      policy:
+                        type: string
+                        description: It indicates which policy is applied.
+                        enum:
+                        - 'VOID: Only flights'
+                        - RETRACTION_LAW
+                        - 'ANAC: Only flights BR'
+                        - EXONERATION
+                        - 'SCHEDULE_CHANGE: Only flights'
+                        - 'CONTINGENCY: Only flights'
+                        - BY_POLICIES
+                        - UNKNOWN
+                      expiration_date_time:
+                        type: string
+                        format: date-time
+                        description: It is the expiration date of this policy.
+                      expiration_date_time_zone:
+                        type: string
+                        description: Time zone associated with expiration_date_time.
+                  related_products_allowances:
+                    type: array
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                        message:
+                          type: string
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                        message:
+                          type: string
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                        message:
+                          type: string
+      operationId: getCancelAllowance
+  /reservations/cancels/quote:
+    post:
+      tags:
+      - Cancellations
+      summary: Quote
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                transaction_id:
+                  type: string
+                cancellation_items:
+                  type: array
+                  items:
+                    type: integer
+                  description: 'This field is mandatory only for flights. All passengers of the product must be included in the cancellation request. Passenger indexes start at 0 (e.g. 1 passenger = [0]). IMPORTANT: Partial cancellations are currently not supported.'
+                quote_type:
+                  type: string
+                  description: 'Allowed: BY_POLICIES'
+              required:
+              - transaction_id
+            examples:
+              default:
+                value:
+                  cancellation_items:
+                  - 0
+                  - 1
+                  - 2
+                  quote_type: BY_POLICIES
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  allowance_info:
+                    type: object
+                    properties:
+                      product_allowance:
+                        type: object
+                        properties:
+                          product_type:
+                            type: string
+                            description: Hotels, fligths o activities
+                          product_id:
+                            type: number
+                            description: Reservation identification number
+                          allowance:
+                            type: string
+                          refund_policy:
+                            type: string
+                            description: 'This field contains a code indicating whether the customer will receive a refund. The possible values are:'
+                            enum:
+                            - TOTAL_REFUND
+                            - WITH_PENALTY
+                            - TAX_ONLY
+                            - NO_REFUND
+                          policy:
+                            type: string
+                            description: It indicates which policy is applied.
+                            enum:
+                            - 'VOID: Only flights'
+                            - RETRACTION_LAW
+                            - 'ANAC: Only flights BR'
+                            - EXONERATION
+                            - 'SCHEDULE_CHANGE: Only flights'
+                            - 'CONTINGENCY: Only flights'
+                            - BY_POLICIES
+                            - UNKNOWN
+                          expiration_date_time:
+                            type: string
+                            format: date-time
+                            description: It is the expiration date of this policy.
+                          expiration_date_time_zone:
+                            type: string
+                            description: Time zone associated with expiration_date_time.
+                      related_products_allowances:
+                        type: array
+                      quote:
+                        type: object
+                        properties:
+                          product_quote:
+                            type: object
+                            properties:
+                              quote_id:
+                                type: string
+                              creation_date:
+                                type: string
+                              product_data:
+                                type: object
+                                properties:
+                                  product_type:
+                                    type: string
+                                  product_id:
+                                    type: number
+                                  transaction_id:
+                                    type: number
+                                  reservation_id:
+                                    type: number
+                                  currency:
+                                    type: string
+                                  currency_rate:
+                                    type: number
+                                  cancellation_items:
+                                    type: array
+                              refund_policy:
+                                type: string
+                              policy:
+                                type: string
+                              resolution:
+                                type: string
+                                description: MANUAL O AUTOMATIC
+                              guaranteed:
+                                type: boolean
+                              status:
+                                type: string
+                                description: QUOTING O QUOTED
+                              price_box:
+                                type: object
+                                properties:
+                                  payment_methods:
+                                    type: array
+                                    items:
+                                      type: object
+                                      properties:
+                                        original_payment_method:
+                                          type: string
+                                        original_payment_amount:
+                                          type: number
+                                        original_currency:
+                                          type: string
+                                        original_conversion_rate:
+                                          type: number
+                                  refunds:
+                                    type: array
+                                    items:
+                                      type: object
+                                      properties:
+                                        original_payment_method:
+                                          type: string
+                                        refund_method_price_box:
+                                          type: object
+                                          properties:
+                                            currency:
+                                              type: string
+                                            payment_amount:
+                                              type: number
+                                              description: Original amount paid for the reservation
+                                            applied_penalty:
+                                              type: number
+                                              description: Penalty amount applied when cancelling the reservation
+                                            refund_amount:
+                                              type: number
+                                              description: Amount to be refunded after applying the cancellation penalty
+                  related_products_quotes:
+                    type: string
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                        message:
+                          type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                        message:
+                          type: string
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                        message:
+                          type: string
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                        message:
+                          type: string
+      operationId: createCancelQuote
+  /reservations/{productId}/cancels/{FlowId}/quote:
+    patch:
+      tags:
+      - Cancellations
+      summary: Manual prueba
+      parameters:
+      - in: path
+        name: productId
+        required: true
+        schema:
+          type: integer
+        description: Product ID associated with the reservation
+      - in: path
+        name: FlowId
+        required: true
+        schema:
+          type: string
+        description: Refers to the ID of a flow within a booking, used to check the status of a specific process (e.g., Can-1234)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                action:
+                  type: string
+                  enum:
+                  - ACCEPT
+                  - REJECT
+                reason:
+                  type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  cancel_id:
+                    type: string
+                  request_code:
+                    type: string
+                  status:
+                    type: string
+                  product_id:
+                    type: number
+                  transaction_id:
+                    type: number
+                  reservation_id:
+                    type: number
+                  cancellation_items:
+                    type: integer
+                  product_type:
+                    type: string
+                  reason:
+                    type: string
+                  creation_date:
+                    type: string
+                    format: date
+                  related_products:
+                    type: array
+                  quote:
+                    type: object
+                    properties:
+                      product_quote:
+                        type: object
+                        properties:
+                          quote_id:
+                            type: string
+                          creation_date:
+                            type: number
+                          product_data:
+                            type: object
+                            properties:
+                              product_type:
+                                type: string
+                              product_id:
+                                type: number
+                              transaction_id:
+                                type: number
+                              reservation_id:
+                                type: number
+                              cancellation_items:
+                                type: array
+                          refund_policy:
+                            type: string
+                          policy:
+                            type: string
+                          resolution:
+                            type: string
+                          guaranteed:
+                            type: boolean
+                          status:
+                            type: string
+                      related_products_quotes:
+                        type: array
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                        message:
+                          type: string
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                        message:
+                          type: string
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                        message:
+                          type: string
+      operationId: updateCancelQuote
+    get:
+      operationId: getFlowInfo
+      tags:
+      - Cancellations
+      summary: FlowInfo
+      parameters:
+      - in: path
+        name: productId
+        required: true
+        schema:
+          type: string
+        description: Refers to the ID of a product within a reservation
+      - in: path
+        name: FlowId
+        required: true
+        schema:
+          type: string
+        description: Refers to the ID of a flow within a booking, used to check the status of a specific process (e.g., Can-1234)
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  cancel_id:
+                    type: string
+                  request_code:
+                    type: string
+                  status:
+                    type: string
+                  product_id:
+                    type: number
+                  transaction_id:
+                    type: number
+                  reservation_id:
+                    type: number
+                  cancellation_items:
+                    type: integer
+                  product_type:
+                    type: string
+                  reason:
+                    type: string
+                  creation_date:
+                    type: string
+                    format: date
+                  finished_date:
+                    type: string
+                    format: date
+                  related_products:
+                    type: array
+                  quote:
+                    type: object
+                    properties:
+                      product_quote:
+                        type: object
+                        properties:
+                          quote_id:
+                            type: string
+                          creation_date:
+                            type: number
+                          product_data:
+                            type: object
+                            properties:
+                              product_type:
+                                type: string
+                              product_id:
+                                type: number
+                              transaction_id:
+                                type: number
+                              reservation_id:
+                                type: number
+                              cancellation_items:
+                                type: array
+                          refund_policy:
+                            type: string
+                          policy:
+                            type: string
+                          resolution:
+                            type: string
+                          guaranteed:
+                            type: boolean
+                          status:
+                            type: string
+                          price_box:
+                            type: object
+                            properties:
+                              payment_methods:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    original_payment_method:
+                                      type: string
+                                    original_payment_amount:
+                                      type: number
+                                    original_currency:
+                                      type: string
+                                    original_conversion_rate:
+                                      type: number
+                              charges:
+                                type: object
+                                properties:
+                                  fee_penalty:
+                                    type: object
+                                    properties:
+                                      total_penalty:
+                                        type: number
+                                      breakdown:
+                                        type: object
+                                        properties:
+                                          fee:
+                                            type: number
+                                          agency_fee:
+                                            type: number
+                                          administrative_fee:
+                                            type: number
+                                  provider_penalty:
+                                    type: object
+                                    properties:
+                                      total_penalty:
+                                        type: number
+                                      breakdown:
+                                        type: object
+                                        properties:
+                                          cost:
+                                            type: number
+                                  non_refundable_taxes:
+                                    type: object
+                                    properties:
+                                      total_penalty:
+                                        type: number
+                                      breakdown:
+                                        type: object
+                                        properties:
+                                          taxes_penalty:
+                                            type: number
+                                          taxes:
+                                            type: array
+                                          perceptions:
+                                            type: number
+                                  non_refundable_interests:
+                                    type: object
+                                    properties:
+                                      total_penalty:
+                                        type: number
+                                      breakdown:
+                                        type: object
+                                        properties:
+                                          interests:
+                                            type: number
+                              refund:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    original_payment_method:
+                                      type: string
+                                    refund_method_price_box:
+                                      type: object
+                                      properties:
+                                        currency:
+                                          type: string
+                                        payment_amount:
+                                          type: number
+                                        applied_penalty:
+                                          type: number
+                                        refund_amount:
+                                          type: number
+                      related_products_quotes:
+                        type: array
+        '401':
+          description: Authentication error
+        '404':
+          description: Not found
+        '500':
+          description: Server error
+  /reservations/{id}/cancels:
+    post:
+      tags:
+      - Cancellations
+      summary: Cancel
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        description: Reservation or product identifier
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                reason:
+                  type: string
+                  description: Cancellation reason
+                  enum:
+                  - FAMILY_OR_WORK_PROBLEM
+                  - TRAVEL_ANOTHER_DESTINATION
+                  - NATURAL_DISASTER
+                  - WRONG_PURCHASE_DATA
+                  - FOUND_BETTER_FLIGHT
+                  - ILLNESS
+                  - DEATH
+                  - DUPLICATE_RESERVATION
+                  - RESCHEDULED_FLIGHT
+                  - CHANGE_PROBLEM
+                  - CREDIT_CARD_PROBLEM
+                  - RENTLER_PROBLEM
+                  - OTHER
+                  - HOTEL_PROBLEM
+            examples:
+              default:
+                value:
+                  reason: ILLNESS
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  flow_id:
+                    type: string
+                    description: Unique identifier for this cancellation.
+                  product_id:
+                    type: string
+                    description: ID of the product for which cancellation was requested.
+                  product_type:
+                    type: string
+                    description: type of the product for which cancellation was requested.
+                  related_products_cancellations:
+                    type: string
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                        message:
+                          type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                        message:
+                          type: string
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                        message:
+                          type: string
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                        message:
+                          type: string
+      operationId: cancelReservation
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-apikey
+    BearerAuth:
+      type: http
+      scheme: bearer
+x-readme: {}

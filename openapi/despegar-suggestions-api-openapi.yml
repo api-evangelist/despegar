@@ -1,0 +1,998 @@
+openapi: 3.0.3
+info:
+  title: Activities Availability Suggestions API
+  version: 1.0.0
+  description: 'API for activities: tickets, modalities, availability, prebook, payments, and booking. Authentication via API Key.'
+servers:
+- url: https://api-dev.despegar.com/v3/activities-api
+  description: Sandbox
+- url: https://apis-uat.despegar.com/v3/activities-api
+  description: UAT
+- url: https://api.despegar.com/v3/activities-api
+  description: Production
+security:
+- ApiKeyAuth: []
+tags:
+- name: Suggestions
+paths:
+  /airlines:
+    get:
+      tags:
+      - Suggestions
+      summary: airlines
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    name:
+                      type: string
+                    alliance:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        name:
+                          type: string
+                    sellable:
+                      type: boolean
+                    accounting_code:
+                      type: number
+        '400':
+          description: Invalid request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+  /suggestions/countries:
+    get:
+      tags:
+      - Suggestions
+      summary: countries
+      parameters:
+      - in: query
+        name: locale
+        required: false
+        schema:
+          type: string
+        description: string which contains language and country, in that order and separated by dash
+        example: pt_BR
+      - in: query
+        name: hint
+        required: false
+        schema:
+          type: string
+        example: MEX
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        target:
+                          type: object
+                          properties:
+                            id:
+                              type: number
+                            gid:
+                              type: string
+                            code:
+                              type: number
+                            type:
+                              type: number
+                            parents:
+                              type: array
+                        display:
+                          type: string
+                        highlight:
+                          type: string
+        '400':
+          description: Invalid request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+  /suggestions/buses:
+    get:
+      tags:
+      - Suggestions
+      summary: buses
+      parameters:
+      - in: query
+        name: locale
+        required: false
+        schema:
+          type: string
+        description: string which contains language and country, in that order and separated by dash
+        example: pt_BR
+      - in: query
+        name: hint
+        required: false
+        schema:
+          type: string
+        example: airpor
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        target:
+                          type: object
+                          properties:
+                            id:
+                              type: number
+                            gid:
+                              type: string
+                            type:
+                              type: number
+                            parents:
+                              type: array
+                        display:
+                          type: string
+                        location:
+                          type: array
+        '400':
+          description: Invalid request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+  /suggestions:
+    get:
+      tags:
+      - Suggestions
+      summary: suggestions
+      parameters:
+      - in: query
+        name: locale
+        required: false
+        schema:
+          type: string
+        description: string which contains language and country, in that order and separated by dash
+        example: pt_BR
+      - in: query
+        name: hint
+        required: false
+        schema:
+          type: string
+        example: Joao Pessoa
+      - in: query
+        name: profile
+        required: false
+        schema:
+          type: string
+        example: sbox-flights
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        group:
+                          type: string
+                        display:
+                          type: string
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                            taregt:
+                              type: object
+                              properties:
+                                id:
+                                  type: number
+                                gid:
+                                  type: string
+                                code:
+                                  type: string
+                                type:
+                                  type: number
+                                parents:
+                                  type: object
+                                  properties:
+                                    continent:
+                                      type: string
+                                    country:
+                                      type: string
+                                    administrative_division:
+                                      type: string
+                            display:
+                              type: string
+                            highlight:
+                              type: string
+                            location:
+                              type: object
+                              properties:
+                                latitude:
+                                  type: number
+                                longitude:
+                                  type: number
+        '400':
+          description: Invalid request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+  /suggestions/cities:
+    get:
+      tags:
+      - Suggestions
+      summary: cities
+      parameters:
+      - in: query
+        name: locale
+        required: false
+        schema:
+          type: string
+        description: string which contains language and country, in that order and separated by dash
+        example: pt_BR
+      - in: query
+        name: hint
+        required: false
+        schema:
+          type: string
+        example: Telêmaco Borba
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        target:
+                          type: object
+                          properties:
+                            id:
+                              type: number
+                            gid:
+                              type: string
+                            code:
+                              type: string
+                            type:
+                              type: number
+                            parents:
+                              type: object
+                              properties:
+                                continent:
+                                  type: string
+                                country:
+                                  type: string
+                                administrative_division:
+                                  type: string
+                        display:
+                          type: string
+                        highlight:
+                          type: string
+                        location:
+                          type: object
+        '400':
+          description: Invalid request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+  /suggestions/zones:
+    get:
+      tags:
+      - Suggestions
+      summary: zones
+      parameters:
+      - in: query
+        name: locale
+        required: false
+        schema:
+          type: string
+        description: string which contains language and country, in that order and separated by dash
+        example: pt_BR
+      - in: query
+        name: hint
+        required: false
+        schema:
+          type: string
+        example: nor
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        target:
+                          type: object
+                          properties:
+                            id:
+                              type: number
+                            gid:
+                              type: string
+                            type:
+                              type: number
+                            parents:
+                              type: object
+                              properties:
+                                continent:
+                                  type: string
+                                country:
+                                  type: string
+                                administrative_division:
+                                  type: string
+                                city:
+                                  type: string
+                        display:
+                          type: string
+                        location:
+                          type: array
+        '400':
+          description: Invalid request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+  /suggestions/hotels:
+    get:
+      tags:
+      - Suggestions
+      summary: hotels
+      parameters:
+      - in: query
+        name: locale
+        required: false
+        schema:
+          type: string
+        description: string which contains language and country, in that order and separated by dash
+        example: pt_BR
+      - in: query
+        name: hint
+        required: false
+        schema:
+          type: string
+        example: airpor
+      - in: query
+        name: weak
+        required: false
+        schema:
+          type: boolean
+        example: true
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        target:
+                          type: object
+                          properties:
+                            id:
+                              type: number
+                            gid:
+                              type: string
+                            type:
+                              type: number
+                            parents:
+                              type: object
+                              properties:
+                                continent:
+                                  type: string
+                                country:
+                                  type: string
+                                administrative_division:
+                                  type: string
+                                city:
+                                  type: string
+                        display:
+                          type: string
+                        highlight:
+                          type: string
+        '400':
+          description: Invalid request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+  /suggestions/continents:
+    get:
+      tags:
+      - Suggestions
+      summary: continents
+      parameters:
+      - in: query
+        name: locale
+        required: false
+        schema:
+          type: string
+        description: string which contains language and country, in that order and separated by dash
+        example: pt_BR
+      - in: query
+        name: hint
+        required: false
+        schema:
+          type: string
+        example: ame
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        target:
+                          type: object
+                          properties:
+                            id:
+                              type: number
+                            gid:
+                              type: string
+                            code:
+                              type: string
+                            type:
+                              type: number
+                            parents:
+                              type: object
+                        display:
+                          type: string
+        '400':
+          description: Invalid request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+  /suggestions/airports:
+    get:
+      tags:
+      - Suggestions
+      summary: airports
+      parameters:
+      - in: query
+        name: locale
+        required: false
+        schema:
+          type: string
+        description: string which contains language and country, in that order and separated by dash
+        example: pt_BR
+      - in: query
+        name: hint
+        required: false
+        schema:
+          type: string
+        example: tokyo
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        target:
+                          type: object
+                          properties:
+                            id:
+                              type: number
+                            gid:
+                              type: string
+                            iata:
+                              type: string
+                            type:
+                              type: number
+                            parents:
+                              type: object
+                              properties:
+                                continent:
+                                  type: string
+                                country:
+                                  type: string
+                                administrative_division:
+                                  type: string
+                                city:
+                                  type: string
+                        display:
+                          type: string
+                        location:
+                          type: object
+                          properties:
+                            latitude:
+                              type: number
+                            longitude:
+                              type: number
+        '400':
+          description: Invalid request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+  /suggestions/regions:
+    get:
+      tags:
+      - Suggestions
+      summary: regions
+      parameters:
+      - in: query
+        name: locale
+        required: false
+        schema:
+          type: string
+        description: string which contains language and country, in that order and separated by dash
+        example: pt_BR
+      - in: query
+        name: hint
+        required: false
+        schema:
+          type: string
+        example: ara
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        target:
+                          type: object
+                          properties:
+                            id:
+                              type: number
+                            gid:
+                              type: string
+                            type:
+                              type: number
+                            parents:
+                              type: object
+                        display:
+                          type: string
+        '400':
+          description: Invalid request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+  /suggestions/activities:
+    get:
+      tags:
+      - Suggestions
+      summary: activities
+      parameters:
+      - in: query
+        name: locale
+        required: false
+        schema:
+          type: string
+        description: string which contains language and country, in that order and separated by dash
+        example: pt_BR
+      - in: query
+        name: hint
+        required: false
+        schema:
+          type: string
+        example: bra
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        target:
+                          type: object
+                          properties:
+                            id:
+                              type: number
+                            gid:
+                              type: string
+                            type:
+                              type: number
+                            parents:
+                              type: object
+                              properties:
+                                continent:
+                                  type: string
+                                country:
+                                  type: string
+                                administrative_division:
+                                  type: string
+                                city:
+                                  type: string
+                        display:
+                          type: string
+                        highlight:
+                          type: string
+        '400':
+          description: Invalid request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+  /disambiguations/{gid}:
+    get:
+      tags:
+      - Suggestions
+      summary: disambiguations
+      parameters:
+      - in: path
+        name: gid
+        required: true
+        schema:
+          type: string
+        description: It is the identifier of the destination location.
+        example: CIT_4544
+      - in: query
+        name: country
+        required: true
+        schema:
+          type: string
+        description: Country code where the search is being performed. Used for airport searches.
+        example: CO
+      - in: query
+        name: flow_type
+        required: false
+        schema:
+          type: string
+          default: FLIGHT_HOTEL
+          enum:
+          - FLIGHT_HOTEL
+          - FLIGHT_MULTIPLE_HOTEL
+          - HOTEL
+          - FLIGHT
+          - MULTIPLE_FLIGHT
+        description: Describes the type of product being searched for. It allows applying rules that are exclusive to certain trip types.
+        example: FLIGHT_HOTEL
+      - in: query
+        name: from_date
+        required: false
+        schema:
+          type: string
+          format: date
+        description: They check for temporary closures, day-of-week disambiguations, and that the rule is active on those dates, and it must be sent using to_date.
+        example: '2024-12-12'
+      - in: query
+        name: to_date
+        required: false
+        schema:
+          type: string
+          format: date
+        description: They check for temporary closures, day-of-week disambiguations, and that the rule is active on those dates, and it must be sent using from_date.
+        example: '2024-12-19'
+      - in: query
+        name: origin
+        required: false
+        schema:
+          type: string
+        description: It is the identifier (gid) of the trip’s origin location. It is used to find special rules that depend on the origin/destination combination.
+        example: CIY_854
+      - in: query
+        name: range
+        required: false
+        schema:
+          type: number
+          default: '200'
+        description: Defines a search radius in kilometers to find airports near the destination.
+        example: '100'
+      - in: query
+        name: alternative_airport
+        required: false
+        schema:
+          type: boolean
+          default: 'false'
+          enum:
+          - 'true'
+          - 'false'
+        description: It’s a flag that, if true, triggers searching for an alternative destination in a different city than the one returned by the main search.
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  selected:
+                    type: object
+                    description: The destination determined to be the best option.
+                    properties:
+                      location:
+                        type: object
+                        description: Contains the details of the recommended place.
+                        properties:
+                          oid:
+                            type: number
+                            description: Place identifiers.
+                          iata:
+                            type: string
+                            description: Place identifiers.
+                          gid:
+                            type: string
+                            description: Place identifiers.
+                          type:
+                            type: string
+                            enum:
+                            - CITY
+                            - AIRPORT
+                            - COUNTRY
+                      distance:
+                        type: integer
+                        description: The distance in kilometers from the provided destination gid to this selected destination. If the recommended destination is the same city you searched for, the distance will be 0.
+                      cause:
+                        type: string
+                        default: RESOLVED
+                        enum:
+                        - 'RESOLVED: It means there was no forced disambiguation, so the same destination that was sent is returned.'
+                        - 'FORCED / SILENTLY_FORCED:  A forced rule was applied to change the destination.'
+                        - 'CLOSED_AIRPORT: The main airport of the original destination is closed on the trip dates.'
+                        - 'DAYS_AVAILABILITY: The destination has no flights on the weekdays of the specified dates.'
+                  alternatives:
+                    type: object
+                    description: A list of airports within the distance from the destination specified by the range parameter.
+                    properties:
+                      location:
+                        type: object
+                        properties:
+                          oid:
+                            type: number
+                          iata:
+                            type: string
+                          gid:
+                            type: string
+                          type:
+                            type: string
+                      distance:
+                        type: number
+        '400':
+          description: Invalid request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+  /geo-points:
+    get:
+      tags:
+      - Suggestions
+      summary: geo-points
+      parameters:
+      - in: query
+        name: latitude
+        required: false
+        schema:
+          type: string
+        example: '-22.9064'
+      - in: query
+        name: longitude
+        required: false
+        schema:
+          type: string
+        example: '-47.0616'
+      - in: query
+        name: max_distance
+        required: false
+        schema:
+          type: string
+        example: '40'
+      - in: query
+        name: limit
+        required: false
+        schema:
+          type: string
+        example: '10'
+      - in: query
+        name: geospatial_operation
+        required: false
+        schema:
+          type: string
+        example: NEAR
+      - in: query
+        name: types
+        required: false
+        schema:
+          type: string
+        example: AIRPORT
+      - in: query
+        name: orders
+        required: false
+        schema:
+          type: string
+        example: SALES
+      - in: query
+        name: language
+        required: false
+        schema:
+          type: string
+        example: pt
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    item:
+                      type: array
+                    paging:
+                      type: object
+                      properties:
+                        offset:
+                          type: number
+                        limit:
+                          type: string
+                        total:
+                          type: number
+        '400':
+          description: Invalid request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+  /aircrafts:
+    get:
+      tags:
+      - Suggestions
+      summary: aircrafts
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                    manufacturer:
+                      type: string
+                    model:
+                      type: number
+        '400':
+          description: Invalid request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+  /airline-logo/{id}:
+    get:
+      tags:
+      - Suggestions
+      summary: airline-logo
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        description: IATA associated with the airline
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  img:
+                    type: string
+                    format: byte
+                    description: The airline logo
+        '400':
+          description: Invalid request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+  /origin/suggestions:
+    get:
+      tags:
+      - Suggestions
+      summary: origin
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Invalid request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-apikey
+    BearerAuth:
+      type: http
+      scheme: bearer
+x-readme: {}

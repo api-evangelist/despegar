@@ -1,0 +1,231 @@
+openapi: 3.0.3
+info:
+  title: Activities Availability Modalities API
+  version: 1.0.0
+  description: 'API for activities: tickets, modalities, availability, prebook, payments, and booking. Authentication via API Key.'
+servers:
+- url: https://api-dev.despegar.com/v3/activities-api
+  description: Sandbox
+- url: https://apis-uat.despegar.com/v3/activities-api
+  description: UAT
+- url: https://api.despegar.com/v3/activities-api
+  description: Production
+security:
+- ApiKeyAuth: []
+tags:
+- name: Modalities
+paths:
+  /modalities:
+    get:
+      tags:
+      - Modalities
+      summary: Modalities
+      parameters:
+      - in: query
+        name: id
+        schema:
+          type: string
+        required: true
+      - in: query
+        name: site
+        schema:
+          type: string
+          example: br
+        required: true
+        description: It refers to the country code and must be filled with two alphabetic characters.
+      - in: query
+        name: language
+        schema:
+          type: string
+          enum:
+          - ES
+          - PT
+          - EN
+        required: true
+        description: This field must be filled with the language in which you want to receive the response.
+      - in: query
+        name: from
+        schema:
+          type: string
+        description: Start date of the search range. This field must be used together with 'to'; providing only one of the two parameters is not supported.
+        required: false
+      - in: query
+        name: to
+        schema:
+          type: string
+        description: End date of the search range. This field must be used together with 'from'; providing only one of the two parameters is not supported.
+        required: false
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ticket_id:
+                    type: string
+                    description: ID of the ticket type being searched.
+                  tracking_id:
+                    type: string
+                    description: ID of the ticket type being searched.
+                  id:
+                    type: string
+                    description: ''
+                  type:
+                    type: string
+                  name:
+                    type: string
+                  description:
+                    type: string
+                    description: Description of the attraction for the ticket.
+                  duration:
+                    type: object
+                    properties:
+                      type:
+                        type: string
+                      value:
+                        type: number
+                  modalities:
+                    type: array
+                    description: Lists all available tickets for the searched attraction.
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          example: ORL_1P1D_EPIC
+                          description: Name of the specific modality. This field will be used for the availability endpoint if this modality is selected.
+                        modality_type:
+                          type: string
+                        name:
+                          type: string
+                        available_dates:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              date:
+                                type: string
+                                format: date
+                              hours:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    id:
+                                      type: number
+                                    hour:
+                                      type: number
+                        prices:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              currency:
+                                type: string
+                              unit_price:
+                                type: number
+                                description: This field is used as a reference price.
+                        max_capacity:
+                          type: number
+                        adult_age_range:
+                          type: object
+                          properties:
+                            min_age:
+                              type: number
+                            max_age:
+                              type: number
+                        child_age_range:
+                          type: object
+                          properties:
+                            min_age:
+                              type: number
+                            max_age:
+                              type: number
+                        infant_age_range:
+                          type: object
+                          properties:
+                            min_age:
+                              type: number
+                            max_age:
+                              type: number
+                        additionals:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                              title:
+                                type: string
+                              description:
+                                type: string
+                              price:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    currency:
+                                      type: string
+                                    unit_price:
+                                      type: number
+                                      description: This field is used as a reference price.
+                              inclusions:
+                                type: array
+                              exclusions:
+                                type: array
+                  images:
+                    type: array
+                    description: Images related to the searched attraction.
+                    items:
+                      type: object
+                      properties:
+                        url:
+                          type: string
+                        key:
+                          type: string
+                        width:
+                          type: number
+                        height:
+                          type: number
+                  inclusions:
+                    type: array
+                    description: This field lists the parks included in the modality.
+                  exclusions:
+                    type: array
+                    description: This field lists the parks excluded from the modality.
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - title: INVALID_FIELD
+                  type: object
+                  properties:
+                    Message:
+                      type: string
+                      description: Modalities request validation error — missing/blank/invalid fields (ticket_id, site, language); ticket_id must be one of [SW_ORL, UN_ORL, DY_ORL].
+                    Possible_cause:
+                      type: string
+                      description: 'The Modalities call was sent with incorrect inputs: ticket_id blank or not in the allowed set, site blank/invalid, or language blank/invalid.'
+                - title: MISSING_REQUIRED_PARAMETER
+                  type: object
+                  properties:
+                    Message:
+                      type: string
+                      description: Missing required parameters in Modalities request
+                    Possible_cause:
+                      type: string
+                      description: 'The request was sent without one or more required fields: ticket_id, site, or language.'
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-apikey
+    BearerAuth:
+      type: http
+      scheme: bearer
+x-readme: {}

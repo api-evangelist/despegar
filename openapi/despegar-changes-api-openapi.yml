@@ -1,0 +1,1343 @@
+openapi: 3.0.3
+info:
+  title: Activities Availability Changes API
+  version: 1.0.0
+  description: 'API for activities: tickets, modalities, availability, prebook, payments, and booking. Authentication via API Key.'
+servers:
+- url: https://api-dev.despegar.com/v3/activities-api
+  description: Sandbox
+- url: https://apis-uat.despegar.com/v3/activities-api
+  description: UAT
+- url: https://api.despegar.com/v3/activities-api
+  description: Production
+security:
+- ApiKeyAuth: []
+tags:
+- name: Changes
+  description: Date/itinerary changes and checkout processes.
+paths:
+  /reservations/changes/allowance/{transactionId}:
+    get:
+      tags:
+      - Changes
+      summary: Allowance
+      parameters:
+      - in: path
+        name: transactionId
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: operation_id
+        required: false
+        description: Type of change to be requested.
+        schema:
+          type: string
+          enum:
+          - CREATE_CHANGE_ROUTE_REQUEST
+          - CREATE_CHANGE_DATE_REQUEST
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  operation_id:
+                    type: string
+                    description: The operation you searched for:CREATE_CHANGE_ROUTE_REQUEST or CREATE_CHANGE_DATE_REQUEST
+                  allowed:
+                    type: boolean
+                required:
+                - allowed
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                        message:
+                          type: string
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                        message:
+                          type: string
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                        message:
+                          type: string
+      operationId: getChangeAllowance
+  /reservations/changes/alternatives:
+    get:
+      tags:
+      - Changes
+      summary: Alternatives Search
+      parameters:
+      - in: query
+        name: transaction_id
+        required: true
+        schema:
+          type: string
+        description: You must provide the reservation ID for which you want to request a modification.
+      - in: query
+        name: departure_date
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: return_date
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: locale
+        required: false
+        description: Response language.
+        schema:
+          type: string
+          default: es_ar
+          enum:
+          - pt_br
+          - en_us
+          - es_ar
+      - in: query
+        name: from
+        required: false
+        description: New flight origin to be requested.
+        schema:
+          type: string
+      - in: query
+        name: to
+        required: false
+        description: New flight destination to be requested.
+        schema:
+          type: string
+      - in: query
+        name: IATA
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  alternatives:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        outbound_choices:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              duration_time:
+                                type: object
+                                properties:
+                                  hours:
+                                    type: integer
+                                  minutes:
+                                    type: integer
+                              from_location:
+                                type: object
+                                properties:
+                                  airport:
+                                    type: object
+                                    properties:
+                                      code:
+                                        type: string
+                                      name:
+                                        type: string
+                                  city:
+                                    type: object
+                                    properties:
+                                      code:
+                                        type: string
+                                      name:
+                                        type: string
+                                  country:
+                                    type: object
+                                    properties:
+                                      code:
+                                        type: string
+                                      name:
+                                        type: string
+                              to_location:
+                                type: object
+                                properties:
+                                  airport:
+                                    type: object
+                                    properties:
+                                      code:
+                                        type: string
+                                      name:
+                                        type: string
+                                  city:
+                                    type: object
+                                    properties:
+                                      code:
+                                        type: string
+                                      name:
+                                        type: string
+                                  country:
+                                    type: object
+                                    properties:
+                                      code:
+                                        type: string
+                                      name:
+                                        type: string
+                              segments:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    duration_time:
+                                      type: object
+                                      properties:
+                                        hours:
+                                          type: integer
+                                        minutes:
+                                          type: integer
+                                    from_location:
+                                      type: object
+                                      properties:
+                                        airport:
+                                          type: object
+                                          properties:
+                                            code:
+                                              type: string
+                                            name:
+                                              type: string
+                                        city:
+                                          type: object
+                                          properties:
+                                            code:
+                                              type: string
+                                            name:
+                                              type: string
+                                        country:
+                                          type: object
+                                          properties:
+                                            code:
+                                              type: string
+                                            name:
+                                              type: string
+                                    to_location:
+                                      type: object
+                                      properties:
+                                        airport:
+                                          type: object
+                                          properties:
+                                            code:
+                                              type: string
+                                            name:
+                                              type: string
+                                        city:
+                                          type: object
+                                          properties:
+                                            code:
+                                              type: string
+                                            name:
+                                              type: string
+                                        country:
+                                          type: object
+                                          properties:
+                                            code:
+                                              type: string
+                                            name:
+                                              type: string
+                                    departure_moment:
+                                      type: string
+                                      format: date
+                                    arrival_moment:
+                                      type: string
+                                      format: date
+                                    flight_number:
+                                      type: integer
+                                    marketing_carrier:
+                                      type: object
+                                      properties:
+                                        code:
+                                          type: string
+                                        name:
+                                          type: string
+                                    operating_carrier:
+                                      type: object
+                                      properties:
+                                        code:
+                                          type: string
+                                        name:
+                                          type: string
+                        itinerary_type:
+                          type: string
+                        price_detail:
+                          type: object
+                          properties:
+                            currency:
+                              type: string
+                            total:
+                              type: integer
+                            base:
+                              type: integer
+                            adult_base:
+                              type: integer
+                            adult_total:
+                              type: integer
+                            adults_subtotal:
+                              type: integer
+                            taxes:
+                              type: integer
+                            taxes_detail:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  code:
+                                    type: string
+                                  amount:
+                                    type: integer
+                            fees:
+                              type: integer
+                            penalty:
+                              type: integer
+                        validating_carrier:
+                          type: object
+                          properties:
+                            code:
+                              type: string
+                            name:
+                              type: string
+                        passenger_distribution:
+                          type: object
+                          properties:
+                            adults:
+                              type: integer
+                            children:
+                              type: integer
+                            infants:
+                              type: integer
+                        booking_info:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              outbound_choice:
+                                type: integer
+                              changes_retrieve_resource_id:
+                                type: string
+                                description: Code required to identify selected alternative in the next step (Checkout Context)
+                              search_id:
+                                type: string
+                              exchange_id:
+                                type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                        message:
+                          type: string
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                        message:
+                          type: string
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                        message:
+                          type: string
+      operationId: getChangeAlternatives
+  /reservations/changes/{transactionId}/checkouts/contexts:
+    post:
+      tags:
+      - Changes
+      summary: alternative Prebook
+      parameters:
+      - in: path
+        name: transactionId
+        required: true
+        schema:
+          type: string
+        description: Transaction ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                country:
+                  type: string
+                changes_retrieve_resource_id:
+                  type: string
+                  description: Obtained from the selected alternative in the previous step.
+                passenger_indexes:
+                  type: string
+                itinerary_search_type:
+                  type: string
+                  enum:
+                  - DATE
+                  - ROUTE
+                lang:
+                  type: string
+                  description: Language
+                include:
+                  type: array
+                  items:
+                    type: string
+                    enum:
+                    - EXCHANGE_POLICIES
+                    - IMPORTANT_DATA
+                    - HINTS
+                  description: 'This field must be submitted with at least one option. The allowed values are:   - EXCHANGE_POLICIES: This option is sent to return information about exchange policies.  - IMPORTANT_DATA: This option is sent to return information about requirements (vaccinations, documentation, etc.) based on the routes and destinations.  - HINTS: This option is sent to return specifications for required fields and formats for billing data.'
+              required:
+              - country
+              - itinerary_id
+              - lang
+              - extended_info
+              - itinerary_search_type
+              - passenger_indexes
+              - changes_retrieve_resource_id
+              - include
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  checkout_context_id:
+                    type: string
+                    description: Id required to initate the modification flow (final step).
+                  checkout_context:
+                    type: object
+                    description: Summary of the modification context, including product information, passengers, prices and payment methods
+                    properties:
+                      product:
+                        type: object
+                        properties:
+                          id:
+                            type: number
+                          type:
+                            type: string
+                          transaction_id:
+                            type: number
+                          country_code:
+                            type: number
+                          customer:
+                            type: object
+                            properties:
+                              email:
+                                type: string
+                              name:
+                                type: string
+                      passengers:
+                        type: object
+                        properties:
+                          index:
+                            type: integer
+                          type:
+                            type: string
+                          display_name:
+                            type: string
+                      price_detail:
+                        type: object
+                        properties:
+                          currency:
+                            type: object
+                            properties:
+                              code:
+                                type: string
+                              symbol:
+                                type: string
+                          breakdown:
+                            type: object
+                            properties:
+                              description:
+                                type: string
+                              amount:
+                                type: number
+                      itinerary:
+                        type: object
+                        properties:
+                          type:
+                            type: string
+                          search_type:
+                            type: string
+                          source:
+                            type: string
+                          routes:
+                            type: object
+                            properties:
+                              position:
+                                type: integer
+                              title:
+                                type: string
+                              departure_date_time:
+                                type: string
+                                format: date
+                              gmt_departure_date_time:
+                                type: string
+                                format: date
+                              departure_date_time_zone_offset:
+                                type: string
+                                format: date
+                              arrival_date_time:
+                                type: string
+                                format: date
+                              gmt_arrival_date_time:
+                                type: string
+                                format: date
+                              arrival_date_time_zone_offset:
+                                type: string
+                                format: date
+                              layovers_count:
+                                type: integer
+                              duration:
+                                type: object
+                                properties:
+                                  hours:
+                                    type: number
+                                  minutes:
+                                    type: number
+                              marketing_carriers:
+                                type: object
+                                properties:
+                                  code:
+                                    type: string
+                                  name:
+                                    type: string
+                              from:
+                                type: object
+                                properties:
+                                  airport_code:
+                                    type: string
+                                  time:
+                                    type: number
+                                  offset_days:
+                                    type: integer
+                              to:
+                                type: object
+                                properties:
+                                  airport_code:
+                                    type: string
+                                  time:
+                                    type: number
+                                  offset_days:
+                                    type: integer
+                              detail:
+                                type: object
+                                properties:
+                                  timeline:
+                                    type: object
+                                    properties:
+                                      type:
+                                        type: string
+                                      position:
+                                        type: integer
+                                      flight_number:
+                                        type: number
+                                      duration:
+                                        type: object
+                                        properties:
+                                          hours:
+                                            type: number
+                                          minutes:
+                                            type: number
+                                      marketing_carrier:
+                                        type: object
+                                        properties:
+                                          code:
+                                            type: string
+                                          name:
+                                            type: string
+                                      operating_carrier:
+                                        type: object
+                                        properties:
+                                          code:
+                                            type: string
+                                          name:
+                                            type: string
+                                      from:
+                                        type: object
+                                        properties:
+                                          date:
+                                            type: string
+                                            format: date
+                                          time:
+                                            type: string
+                                            format: date
+                                          airport:
+                                            type: object
+                                            properties:
+                                              code:
+                                                type: string
+                                              description:
+                                                type: string
+                                          city:
+                                            type: object
+                                            properties:
+                                              code:
+                                                type: string
+                                              description:
+                                                type: string
+                                      to:
+                                        type: object
+                                        properties:
+                                          date:
+                                            type: string
+                                            format: date
+                                          time:
+                                            type: string
+                                            format: date
+                                          airport:
+                                            type: object
+                                            properties:
+                                              code:
+                                                type: string
+                                              description:
+                                                type: string
+                                          city:
+                                            type: object
+                                            properties:
+                                              code:
+                                                type: string
+                                              description:
+                                                type: string
+                              days_to_departure:
+                                type: number
+                      payment_methods:
+                        type: object
+                        properties:
+                          code:
+                            type: string
+                          plans:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                              card_code:
+                                type: string
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                        message:
+                          type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                        message:
+                          type: string
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                        message:
+                          type: string
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                        message:
+                          type: string
+      operationId: createCheckoutContext
+  /reservations/changes/{transactionId}/checkouts/contexts/{contextId}:
+    get:
+      tags:
+      - Changes
+      summary: Prebook Info
+      parameters:
+      - in: path
+        name: transactionId
+        required: true
+        schema:
+          type: string
+        description: Transaction ID
+      - in: path
+        name: contextId
+        required: true
+        schema:
+          type: string
+        description: Context ID
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  checkout_context_id:
+                    type: string
+                  checkout_context:
+                    type: object
+                    properties:
+                      product:
+                        type: object
+                        properties:
+                          id:
+                            type: number
+                          type:
+                            type: string
+                          transaction_id:
+                            type: number
+                          country_code:
+                            type: number
+                          customer:
+                            type: object
+                            properties:
+                              email:
+                                type: string
+                              name:
+                                type: string
+                      passengers:
+                        type: object
+                        properties:
+                          index:
+                            type: integer
+                          type:
+                            type: string
+                          display_name:
+                            type: string
+                      price_detail:
+                        type: object
+                        properties:
+                          currency:
+                            type: object
+                            properties:
+                              code:
+                                type: string
+                              symbol:
+                                type: string
+                          breakdown:
+                            type: object
+                            properties:
+                              description:
+                                type: string
+                              amount:
+                                type: number
+                      itinerary:
+                        type: object
+                        properties:
+                          type:
+                            type: string
+                          search_type:
+                            type: string
+                          source:
+                            type: string
+                          routes:
+                            type: object
+                            properties:
+                              position:
+                                type: integer
+                              title:
+                                type: string
+                              departure_date_time:
+                                type: string
+                                format: date
+                              gmt_departure_date_time:
+                                type: string
+                                format: date
+                              departure_date_time_zone_offset:
+                                type: string
+                                format: date
+                              arrival_date_time:
+                                type: string
+                                format: date
+                              gmt_arrival_date_time:
+                                type: string
+                                format: date
+                              arrival_date_time_zone_offset:
+                                type: string
+                                format: date
+                              layovers_count:
+                                type: integer
+                              duration:
+                                type: object
+                                properties:
+                                  hours:
+                                    type: number
+                                  minutes:
+                                    type: number
+                              marketing_carriers:
+                                type: object
+                                properties:
+                                  code:
+                                    type: string
+                                  name:
+                                    type: string
+                              from:
+                                type: object
+                                properties:
+                                  airport_code:
+                                    type: string
+                                  time:
+                                    type: number
+                                  offset_days:
+                                    type: integer
+                              to:
+                                type: object
+                                properties:
+                                  airport_code:
+                                    type: string
+                                  time:
+                                    type: number
+                                  offset_days:
+                                    type: integer
+                              detail:
+                                type: object
+                                properties:
+                                  timeline:
+                                    type: object
+                                    properties:
+                                      type:
+                                        type: string
+                                      position:
+                                        type: integer
+                                      flight_number:
+                                        type: number
+                                      duration:
+                                        type: object
+                                        properties:
+                                          hours:
+                                            type: number
+                                          minutes:
+                                            type: number
+                                      marketing_carrier:
+                                        type: object
+                                        properties:
+                                          code:
+                                            type: string
+                                          name:
+                                            type: string
+                                      operating_carrier:
+                                        type: object
+                                        properties:
+                                          code:
+                                            type: string
+                                          name:
+                                            type: string
+                                      from:
+                                        type: object
+                                        properties:
+                                          date:
+                                            type: string
+                                            format: date
+                                          time:
+                                            type: string
+                                            format: date
+                                          airport:
+                                            type: object
+                                            properties:
+                                              code:
+                                                type: string
+                                              description:
+                                                type: string
+                                          city:
+                                            type: object
+                                            properties:
+                                              code:
+                                                type: string
+                                              description:
+                                                type: string
+                                      to:
+                                        type: object
+                                        properties:
+                                          date:
+                                            type: string
+                                            format: date
+                                          time:
+                                            type: string
+                                            format: date
+                                          airport:
+                                            type: object
+                                            properties:
+                                              code:
+                                                type: string
+                                              description:
+                                                type: string
+                                          city:
+                                            type: object
+                                            properties:
+                                              code:
+                                                type: string
+                                              description:
+                                                type: string
+                      payment_methods:
+                        type: object
+                        properties:
+                          code:
+                            type: string
+                          plans:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                              card_code:
+                                type: string
+                  extended_info:
+                    type: object
+                    properties:
+                      invoice_hint:
+                        type: object
+                        properties:
+                          town_registration:
+                            type: object
+                            properties:
+                              hint_type:
+                                type: string
+                              validations:
+                                type: object
+                                properties:
+                                  min:
+                                    type: number
+                                  max:
+                                    type: number
+                                  type:
+                                    type: string
+                                  conditions:
+                                    type: array
+                          address:
+                            type: object
+                            properties:
+                              number:
+                                type: object
+                                properties:
+                                  hint_type:
+                                    type: string
+                                  validations:
+                                    type: object
+                                    properties:
+                                      regex:
+                                        type: string
+                                      type:
+                                        type: string
+                                      conditions:
+                                        type: array
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                        message:
+                          type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                        message:
+                          type: string
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                        message:
+                          type: string
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                        message:
+                          type: string
+      operationId: getCheckoutContext
+  /reservations/changes/{transactionId}/checkouts/contexts/{contextId}/flows:
+    post:
+      tags:
+      - Changes
+      summary: Alternative Book
+      parameters:
+      - in: path
+        name: transactionId
+        required: true
+        schema:
+          type: string
+        description: Transaction ID
+      - in: path
+        name: contextId
+        required: true
+        schema:
+          type: string
+        description: id of the created context in the Alternative Prebook step, found both in its response or in the Prebook Info service under 'checkout_context_id'.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                payment_method:
+                  type: object
+                  properties:
+                    type:
+                      type: string
+                    selected_plan_id:
+                      type: string
+                    detail:
+                      type: object
+                      properties:
+                        dvault_token:
+                          type: string
+                        cardholder_name:
+                          type: string
+                        installments:
+                          type: string
+                        interest:
+                          type: string
+                invoice:
+                  type: object
+                  properties:
+                    fiscal_name:
+                      type: string
+                    fiscal_status:
+                      type: string
+                    fiscal_identification:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                        number:
+                          type: string
+                        issue_country:
+                          type: string
+                    town_registration:
+                      type: string
+                    address:
+                      type: object
+                      properties:
+                        city_id:
+                          type: number
+                        number:
+                          type: number
+                        street:
+                          type: string
+                        zip_code:
+                          type: number
+                        apartment:
+                          type: string
+                        floor:
+                          type: number
+                        neighbourhood:
+                          type: string
+              required:
+              - city_id
+              - number
+              - street
+              - zip_code
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  flows:
+                    type: object
+                    properties:
+                      type:
+                        type: string
+                      id:
+                        type: string
+                        description: flow id to identify the operation.
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                        message:
+                          type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                        message:
+                          type: string
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                        message:
+                          type: string
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                        message:
+                          type: string
+      operationId: createCheckoutFlow
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-apikey
+    BearerAuth:
+      type: http
+      scheme: bearer
+x-readme: {}

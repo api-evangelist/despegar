@@ -1,0 +1,202 @@
+openapi: 3.0.3
+info:
+  title: Activities Availability Price Jump API
+  version: 1.0.0
+  description: 'API for activities: tickets, modalities, availability, prebook, payments, and booking. Authentication via API Key.'
+servers:
+- url: https://api-dev.despegar.com/v3/activities-api
+  description: Sandbox
+- url: https://apis-uat.despegar.com/v3/activities-api
+  description: UAT
+- url: https://api.despegar.com/v3/activities-api
+  description: Production
+security:
+- ApiKeyAuth: []
+tags:
+- name: Price Jump
+paths:
+  /book/{reservationId}/recovery:
+    get:
+      tags:
+      - Price Jump
+      summary: Price Jump
+      operationId: getPriceJump
+      description: This service detects price variations for a product, providing the differences between the original and the updated value.
+      parameters:
+      - name: reservationId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: This field must be filled in with the id of an existing reservation or with the 'external_booking_reference' sent when closing the reservation.
+      - in: query
+        name: test_case
+        schema:
+          type: string
+          enum:
+          - pricejump
+        description: Optional parameter for testing purposes. Use 'pricejump' to simulate a price jump scenario.
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reservation_id:
+                    type: string
+                    description: Number of the reservation created.
+                  status:
+                    type: string
+                    enum:
+                    - SUCCESS
+                    - PROCESSING
+                    - ERROR
+                    description: 'Possible reservation statuses: ''SUCCESS'', ''ERROR'', and ''PROCESSING''.'
+                  sub_status:
+                    type: string
+                  price_jump:
+                    type: object
+                    properties:
+                      difference:
+                        type: number
+                        description: Indicates the difference between the original and the updated price.
+                      price_before_price_jump:
+                        type: number
+                        description: Original price before the price change.
+                      price_after_price_jump:
+                        type: number
+                        description: Updated price after the price change.
+                      currency:
+                        type: string
+                        description: Currency in which the prices are expressed.
+                      timeout:
+                        type: string
+                        format: date-time
+                        description: Date and time until which the price change can be accepted or rejected.
+                      message:
+                        type: object
+                        properties:
+                          message_type:
+                            type: string
+                            description: Same value used in the PATCH request.
+                          price_jump_confirmations:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                flavor_id:
+                                  type: string
+                                  description: Indicates the product type. F0 = Flight.
+                                  example: F0
+                                confirm:
+                                  type: boolean
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                    example: INVALID_FILTER
+                  message:
+                    type: string
+                    example: Invalid parameter
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                    example: INVALID_FILTER
+                  message:
+                    type: string
+                    example: Invalid parameter
+    patch:
+      tags:
+      - Price Jump
+      summary: Price Jump
+      operationId: recoveryBooking
+      parameters:
+      - name: reservationId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: This field must be filled in with the id of an existing reservation or with the 'external_booking_reference' sent when closing the reservation.
+      - in: query
+        name: test_case
+        schema:
+          type: string
+          enum:
+          - pricejump
+        description: Optional parameter for testing purposes. Use 'pricejump' to simulate a price jump scenario.
+        required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message_type:
+                  type: string
+                  description: This field must be populated with the value returned by the GET endpoint.
+                price_jump_confirmations:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      flavor_id:
+                        type: string
+                        description: Indicates the product type. F0 = Flight.
+                        example: F0
+                      confirm:
+                        type: boolean
+      responses:
+        '204':
+          description: OK
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                    example: INVALID_FILTER
+                  message:
+                    type: string
+                    example: Invalid parameter
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                    example: INVALID_FILTER
+                  message:
+                    type: string
+                    example: Invalid parameter
+      description: This service allows accepting or rejecting detected price variations for a product, confirming whether to proceed with the updated value.
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-apikey
+    BearerAuth:
+      type: http
+      scheme: bearer
+x-readme: {}

@@ -1,0 +1,606 @@
+openapi: 3.0.3
+info:
+  title: Activities Availability hotel API
+  version: 1.0.0
+  description: 'API for activities: tickets, modalities, availability, prebook, payments, and booking. Authentication via API Key.'
+servers:
+- url: https://api-dev.despegar.com/v3/activities-api
+  description: Sandbox
+- url: https://apis-uat.despegar.com/v3/activities-api
+  description: UAT
+- url: https://api.despegar.com/v3/activities-api
+  description: Production
+security:
+- ApiKeyAuth: []
+tags:
+- name: hotel
+paths:
+  /content-api/hotels:
+    get:
+      summary: Hotels Information
+      description: Returns static information about hotels including photos, rooms, amenities, etc.
+      parameters:
+      - in: query
+        name: ids
+        schema:
+          type: string
+        required: true
+        description: Comma-separated list of hotel IDs (max 100).
+      - in: query
+        name: language
+        schema:
+          type: string
+          enum:
+          - EN
+          - ES
+          - PT
+          - EN,PT,ES
+          - EN,ES
+          - ES,PT
+          - EN,PT
+          default: EN
+        description: Language code.
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      description: hotel id
+                    property_type:
+                      type: string
+                      description: should indicate the property type (hotel for accommodations)
+                    product:
+                      type: string
+                      description: 'Possible values for this ID are:'
+                      enum:
+                      - HOTEL
+                      - VACATION_RENTAL
+                    merged_from_ids:
+                      type: array
+                      description: this structure contains a list with all the ids of the same accommodation that were merged in the past
+                    published:
+                      type: boolean
+                      description: If False, it will not be available in the booking flow.
+                    name:
+                      type: string
+                      description: hotel name
+                    hotel_type:
+                      type: object
+                      description: structure that contains id and description (in desired languages) of the accommodation type
+                      properties:
+                        id:
+                          type: string
+                          description: 'Possible values for this ID are:'
+                          enum:
+                          - YTH
+                          - HOT
+                          - EST
+                          - INN
+                          - MOT
+                          - ECO
+                          - CFL
+                          - BAB
+                          - VIL
+                          - HTA
+                          - LHO
+                          - HSR
+                          - APT
+                          - CAR
+                          - FML
+                          - GLA
+                          - CAS
+                          - BTQ
+                          - LDG
+                          - DPT
+                          - RSR
+                          - ALT
+                          - ALQ
+                          - HST
+                          - RES
+                          - POS
+                          - CAM
+                          - CAB
+                          - SUI
+                        description:
+                          type: object
+                        name:
+                          type: object
+                          properties:
+                            singular:
+                              type: object
+                            plural:
+                              type: object
+                    stars:
+                      type: integer
+                      description: star rating
+                    location:
+                      type: object
+                      description: structure with geo information about the hotel location
+                      properties:
+                        city:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                        address:
+                          type: string
+                        zipcode:
+                          type: integer
+                        latitude:
+                          type: number
+                        longitude:
+                          type: number
+                        neighborhoods:
+                          type: array
+                    checkin:
+                      type: object
+                      description: time available for checkin (from - to hours)
+                      properties:
+                        from:
+                          type: string
+                        to:
+                          type: string
+                    checkout:
+                      type: object
+                      description: time available for checkout (from - to hours)
+                      properties:
+                        to:
+                          type: string
+                    information:
+                      type: object
+                      description: structure with a language - text pairs regarding information about the hotel
+                      properties:
+                        en:
+                          type: string
+                    notices:
+                      type: object
+                      description: 'structure with a language - text pairs regarding information about particularities about the accommodation. Example: Reception working hours, possible charges to pay/deposits needed when arriving, documentation required by the hotel, among others.'
+                      properties:
+                        en:
+                          type: string
+                    creation_date:
+                      type: string
+                      format: date
+                      description: datetime field that indicates the date when the hotel listing was created
+                    last_modified_date:
+                      type: string
+                      format: date
+                      description: datetime field that indicates the max date when the hotel listing suffered any changes or updates
+                    main_picture:
+                      type: object
+                      description: structure with url and information about the main picture of the hotel
+                      properties:
+                        url:
+                          type: string
+                        id:
+                          type: string
+                        width:
+                          type: integer
+                        height:
+                          type: integer
+                        picture_category:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                            description:
+                              type: object
+                              properties:
+                                en:
+                                  type: string
+                        picture_categories:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                            description:
+                              type: object
+                              properties:
+                                en:
+                                  type: string
+                    number_of_rooms:
+                      type: integer
+                      description: number of rooms the accommodation has
+                    pictures:
+                      type: array
+                      description: list structure with url and description for each picture
+                      items:
+                        type: object
+                        properties:
+                          url:
+                            type: string
+                          id:
+                            type: string
+                          width:
+                            type: integer
+                          height:
+                            type: integer
+                          picture_category:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                              description:
+                                type: string
+                          picture_categories:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                              description:
+                                type: string
+                    extra_details:
+                      type: object
+                      description: 'structure with extra information (e.g.: phone numbers)'
+                      properties:
+                        hotel_brand:
+                          type: object
+                          properties:
+                            id:
+                              type: number
+                            name:
+                              type: string
+                            hotel_chain:
+                              type: object
+                              properties:
+                                id:
+                                  type: number
+                                name:
+                                  type: number
+                        phone_numbers:
+                          type: array
+                        completeness:
+                          type: number
+                        email:
+                          type: string
+                        breakfast_time:
+                          type: object
+                          properties:
+                            from:
+                              type: string
+                              format: time
+                            to:
+                              type: string
+                              format: time
+                    rating:
+                      type: integer
+                    room_types:
+                      type: array
+                      description: structure with room information
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                          internal_name:
+                            type: string
+                          despegar_names:
+                            type: object
+                          information:
+                            type: object
+                            properties:
+                              en:
+                                type: string
+                          room_distribution:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                              descriptions:
+                                type: object
+                          room_category:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                              descriptions:
+                                type: object
+                          amenities:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                id:
+                                  type: string
+                                descriptions:
+                                  type: object
+                                  properties:
+                                    en:
+                                      type: string
+                                amenity_category:
+                                  type: object
+                                  properties:
+                                    id:
+                                      type: string
+                                    icon:
+                                      type: string
+                                    descriptions:
+                                      type: object
+                                      properties:
+                                        en:
+                                          type: string
+                          room_view:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                              descriptions:
+                                type: object
+                          smoking_option:
+                            type: object
+                            description: A room can have three possible configurations in terms of the smoking policy.
+                            properties:
+                              id:
+                                type: string
+                                description: NSM or NDS or SMK
+                              descriptions:
+                                type: object
+                                properties:
+                                  en:
+                                    type: string
+                                    description: 'NSM: Not allowed / NDS: Unknown / SMK: Allowed'
+                          shared_bathroom:
+                            type: boolean
+                          room_size:
+                            type: integer
+                          room_size_unit:
+                            type: string
+                          max_occupancy:
+                            type: number
+                          pictures:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                url:
+                                  type: string
+                                id:
+                                  type: string
+                                width:
+                                  type: number
+                                height:
+                                  type: number
+                                picture_category:
+                                  type: object
+                                  properties:
+                                    id:
+                                      type: number
+                                    descriptions:
+                                      type: object
+                                      properties:
+                                        en:
+                                          type: string
+                          creation_date:
+                            type: string
+                            format: date
+                          last_modified_date:
+                            type: string
+                            format: date
+                    categorized_notices:
+                      type: object
+                      description: structure with notices information grouped by in different labels
+                      properties:
+                        primary:
+                          type: object
+                          properties:
+                            title:
+                              type: object
+                            notices:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  title:
+                                    type: object
+                                  messages:
+                                    type: array
+                        secondary:
+                          type: object
+                          properties:
+                            title:
+                              type: object
+                            notices:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  title:
+                                    type: object
+                                  messages:
+                                    type: array
+                    amenities:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: string
+                          description:
+                            type: object
+                          amenity_category:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                              icon:
+                                type: string
+                              description:
+                                type: object
+                    special_requests:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: string
+                          description:
+                            type: object
+                          enabled:
+                            type: boolean
+                    fees:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          currency:
+                            type: string
+                          amount:
+                            type: number
+                          fee_type:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                              descriptions:
+                                type: object
+                          fee_application_scope:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                              descriptions:
+                                type: object
+                              fee_amount_type:
+                                type: object
+                                properties:
+                                  id:
+                                    type: string
+                                  descriptions:
+                                    type: object
+                    spoken_languages:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: string
+                          description:
+                            type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error_code:
+                    type: string
+                    example: INVALID_FILTER
+                  message:
+                    type: string
+                    example: Country, changes retrieve resource id, passenger indexes and lang are required
+                  details:
+                    type: object
+                required:
+                - error_code
+                - message
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error_code:
+                    type: string
+                    example: INVALID_FILTER
+                  message:
+                    type: string
+                    example: Country, changes retrieve resource id, passenger indexes and lang are required
+                  details:
+                    type: object
+                required:
+                - error_code
+                - message
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error_code:
+                    type: string
+                    example: INVALID_FILTER
+                  message:
+                    type: string
+                    example: Country, changes retrieve resource id, passenger indexes and lang are required
+                  details:
+                    type: object
+                required:
+                - error_code
+                - message
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error_code:
+                    type: string
+                    example: INVALID_FILTER
+                  message:
+                    type: string
+                    example: Country, changes retrieve resource id, passenger indexes and lang are required
+                  details:
+                    type: object
+                required:
+                - error_code
+                - message
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error_code:
+                    type: string
+                    example: INVALID_FILTER
+                  message:
+                    type: string
+                    example: Country, changes retrieve resource id, passenger indexes and lang are required
+                  details:
+                    type: object
+                required:
+                - error_code
+                - message
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error_code:
+                    type: string
+                    example: INVALID_FILTER
+                  message:
+                    type: string
+                    example: Country, changes retrieve resource id, passenger indexes and lang are required
+                  details:
+                    type: object
+                required:
+                - error_code
+                - message
+      tags:
+      - hotel
+      operationId: getHotels
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-apikey
+    BearerAuth:
+      type: http
+      scheme: bearer
+x-readme: {}

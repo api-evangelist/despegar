@@ -1,0 +1,4417 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Geography & Suggestions API",
+    "version": "1.0.0",
+    "description": "OpenAPI generated from Postman collections, aligned to hotelapi structure."
+  },
+  "servers": [
+    {
+      "url": "https://api-dev.despegar.com/v3",
+      "description": "Sandbox"
+    },
+    {
+      "url": "https://apis-uat.despegar.com/v3",
+      "description": "UAT"
+    },
+    {
+      "url": "https://api.despegar.com/v3",
+      "description": "Production"
+    }
+  ],
+  "tags": [
+    {
+      "name": "geography",
+      "description": "Geography endpoints"
+    },
+    {
+      "name": "suggestions",
+      "description": "Suggestions endpoints"
+    },
+    {
+      "name": "hotel content",
+      "description": "Information endpoints"
+    }
+  ],
+  "security": [
+    {
+      "ApiKeyAuth": []
+    }
+  ],
+  "paths": {
+    "/airlines": {
+      "get": {
+        "tags": [
+          "Suggestions"
+        ],
+        "summary": "airlines",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "alliance": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "sellable": {
+                        "type": "boolean"
+                      },
+                      "accounting_code": {
+                        "type": "number"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/aircrafts": {
+      "get": {
+        "tags": [
+          "suggestions"
+        ],
+        "summary": "aircrafts",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "number"
+                      },
+                      "manufacturer": {
+                        "type": "string"
+                      },
+                      "model": {
+                        "type": "number"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/airline-logo/{id}": {
+      "get": {
+        "tags": [
+          "suggestions"
+        ],
+        "summary": "airline-logo",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "IATA associated with the airline"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "img": {
+                      "type": "string",
+                      "format": "byte",
+                      "description": "The airline logo"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/origin/suggestions": {
+      "get": {
+        "tags": [
+          "suggestions"
+        ],
+        "summary": "origin",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/countries/{id}": {
+      "get": {
+        "tags": [
+          "Geography"
+        ],
+        "summary": "countries_id",
+        "description": "Returns detailed information for a specific country.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "Unique identifier for this item",
+            "schema": {
+              "type": "string"
+            },
+            "example": "HOTELS"
+          },
+          {
+            "in": "query",
+            "name": "country",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "product",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "HOTELS"
+          },
+          {
+            "in": "query",
+            "name": "language",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "ES%2CPT%2CEN"
+          },
+          {
+            "in": "query",
+            "name": "tags",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "in": "query",
+            "name": "ratio",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "options",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "description": "Optional fields for the response"
+          },
+          {
+            "in": "query",
+            "name": "include",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "description": "Option to include filtered entities, additional country information, or author and copyright information when requesting pictures"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "item": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "number"
+                        },
+                        "gid": {
+                          "type": "string"
+                        },
+                        "description": {
+                          "type": "object"
+                        }
+                      }
+                    },
+                    "configurations": {
+                      "type": "array"
+                    },
+                    "last_update_date": {
+                      "type": "string",
+                      "format": "date"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "picture": {
+                      "type": "array"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/countries": {
+      "get": {
+        "tags": [
+          "Geography"
+        ],
+        "summary": "countries",
+        "description": "Returns the list of available countries matching the provided search criteria.",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "country",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "product",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "HOTELS"
+          },
+          {
+            "in": "query",
+            "name": "language",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "ES",
+                  "PT",
+                  "EN"
+                ]
+              }
+            },
+            "description": "A list of ISO codes representing the requested languages",
+            "example": "ES%2CPT%2CEN"
+          },
+          {
+            "in": "query",
+            "name": "continent_id",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Offset to start returning countries"
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Maximum quantity of entities. If setted to 0 it returns everything"
+          },
+          {
+            "in": "query",
+            "name": "snapshot",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Whether to return a snapshot or paginated results"
+          },
+          {
+            "in": "query",
+            "name": "codes",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "description": "A list of codes to return the cities that has the same ones"
+          },
+          {
+            "in": "query",
+            "name": "options",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "description": "Optional fields for the response"
+          },
+          {
+            "in": "query",
+            "name": "include",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "description": "Option to include filtered entities, additional country information or author and copyright information when requesting pictures"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "number"
+                        },
+                        "gid": {
+                          "type": "string"
+                        },
+                        "descriptions": {
+                          "type": "object",
+                          "properties": {
+                            "pt": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "configurations": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "any_ds_any": {
+                                "type": "string"
+                              },
+                              "any_cruises_any": {
+                                "type": "string"
+                              },
+                              "any_transfers_any": {
+                                "type": "string"
+                              },
+                              "default": {
+                                "type": "string"
+                              },
+                              "any_vr_any": {
+                                "type": "string"
+                              },
+                              "any_cars_any": {
+                                "type": "string"
+                              },
+                              "any_flights_any": {
+                                "type": "string"
+                              },
+                              "any_hotels_any": {
+                                "type": "string"
+                              },
+                              "viajeros.com": {
+                                "type": "string"
+                              },
+                              "any_packages_any": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        },
+                        "last_update_date": {
+                          "type": "string",
+                          "format": "date"
+                        },
+                        "code": {
+                          "type": "string"
+                        },
+                        "capital_id": {
+                          "type": "string"
+                        },
+                        "capital_gid": {
+                          "type": "string"
+                        },
+                        "capital": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "number"
+                            },
+                            "offset": {
+                              "type": "number"
+                            }
+                          }
+                        },
+                        "pictures": {
+                          "type": "array"
+                        },
+                        "alternative_code": {
+                          "type": "string"
+                        },
+                        "continent_id": {
+                          "type": "number"
+                        },
+                        "continent_gid": {
+                          "type": "string"
+                        },
+                        "phone_code": {
+                          "type": "number"
+                        },
+                        "intl_access_code": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/continents": {
+      "get": {
+        "tags": [
+          "Geography"
+        ],
+        "summary": "continents",
+        "description": "Returns the list of available continents.",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "product",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "HOTELS"
+          },
+          {
+            "in": "query",
+            "name": "language",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "ES%2CPT%2CEN"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "number"
+                        },
+                        "gid": {
+                          "type": "string"
+                        },
+                        "descriptions": {
+                          "type": "object",
+                          "properties": {
+                            "pt": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "configurations": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "any_ds_any": {
+                                "type": "string"
+                              },
+                              "any_cruises_any": {
+                                "type": "string"
+                              },
+                              "any_transfers_any": {
+                                "type": "string"
+                              },
+                              "default": {
+                                "type": "string"
+                              },
+                              "any_vr_any": {
+                                "type": "string"
+                              },
+                              "any_cars_any": {
+                                "type": "string"
+                              },
+                              "any_flights_any": {
+                                "type": "string"
+                              },
+                              "any_hotels_any": {
+                                "type": "string"
+                              },
+                              "viajeros.com": {
+                                "type": "string"
+                              },
+                              "any_packages_any": {
+                                "type": "string"
+                              },
+                              "any_buses_any": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        },
+                        "last_update_date": {
+                          "type": "string",
+                          "format": "date"
+                        },
+                        "code": {
+                          "type": "string"
+                        },
+                        "pictures": {
+                          "type": "array"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/continents/{id}": {
+      "get": {
+        "tags": [
+          "Geography"
+        ],
+        "summary": "continents_id",
+        "description": "Returns detailed information for a specific continent.",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "product",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "HOTELS"
+          },
+          {
+            "in": "query",
+            "name": "language",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "ES%2CPT%2CEN"
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "number"
+                        },
+                        "gid": {
+                          "type": "string"
+                        },
+                        "descriptions": {
+                          "type": "object",
+                          "properties": {
+                            "pt": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "configurations": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "any_ds_any": {
+                                "type": "string"
+                              },
+                              "any_cruises_any": {
+                                "type": "string"
+                              },
+                              "any_transfers_any": {
+                                "type": "string"
+                              },
+                              "default": {
+                                "type": "string"
+                              },
+                              "any_vr_any": {
+                                "type": "string"
+                              },
+                              "any_cars_any": {
+                                "type": "string"
+                              },
+                              "any_flights_any": {
+                                "type": "string"
+                              },
+                              "any_hotels_any": {
+                                "type": "string"
+                              },
+                              "viajeros.com": {
+                                "type": "string"
+                              },
+                              "any_packages_any": {
+                                "type": "string"
+                              },
+                              "any_buses_any": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        },
+                        "last_update_date": {
+                          "type": "string",
+                          "format": "date"
+                        },
+                        "code": {
+                          "type": "string"
+                        },
+                        "pictures": {
+                          "type": "array"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/regions": {
+      "get": {
+        "tags": [
+          "Geography"
+        ],
+        "summary": "regions",
+        "description": "Returns the list of available regions matching the provided search criteria.",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "product",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "HOTELS"
+          },
+          {
+            "in": "query",
+            "name": "language",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "ES%2CPT%2CEN"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "number"
+                          },
+                          "gid": {
+                            "type": "string"
+                          },
+                          "descriptions": {
+                            "type": "string"
+                          },
+                          "last_update_date": {
+                            "type": "string",
+                            "format": "date"
+                          },
+                          "forced_city_ids": {
+                            "type": "array"
+                          },
+                          "excluded_points": {
+                            "type": "object"
+                          },
+                          "included_points": {
+                            "type": "object"
+                          },
+                          "zones": {
+                            "type": "array"
+                          },
+                          "related_political_divisions": {
+                            "type": "object"
+                          },
+                          "correlated_political_divisions": {
+                            "type": "object"
+                          },
+                          "boundary": {
+                            "type": "object"
+                          },
+                          "pictures": {
+                            "type": "array"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/administrative-divisions": {
+      "get": {
+        "tags": [
+          "Geography"
+        ],
+        "summary": "administrative-divisions",
+        "description": "Returns the list of available administrative divisions matching the provided search criteria.",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "country_id",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "20010"
+          },
+          {
+            "in": "query",
+            "name": "product",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "HOTELS"
+          },
+          {
+            "in": "query",
+            "name": "language",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "ES%2CPT%2CEN"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/administrative-divisions/{id}": {
+      "get": {
+        "tags": [
+          "Geography"
+        ],
+        "summary": "administrative-divisions_id",
+        "description": "Returns detailed information for a specific administrative division.",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "product",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "HOTELS"
+          },
+          {
+            "in": "query",
+            "name": "language",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "ES%2CPT%2CEN"
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "item": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "number"
+                        },
+                        "gid": {
+                          "type": "string"
+                        },
+                        "description": {
+                          "type": "object"
+                        }
+                      }
+                    },
+                    "configurations": {
+                      "type": "array"
+                    },
+                    "last_update_date": {
+                      "type": "string",
+                      "format": "date"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "capital_id": {
+                      "type": "number"
+                    },
+                    "capital_gid": {
+                      "type": "string"
+                    },
+                    "capital": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "number"
+                        },
+                        "offset": {
+                          "type": "number"
+                        }
+                      }
+                    },
+                    "picture": {
+                      "type": "array"
+                    },
+                    "country_id": {
+                      "type": "number"
+                    },
+                    "country_gid": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/zones": {
+      "get": {
+        "tags": [
+          "Geography"
+        ],
+        "summary": "zones",
+        "description": "Returns the list of available zones matching the provided search criteria.",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "country_id",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "20010"
+          },
+          {
+            "in": "query",
+            "name": "product",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "HOTELS"
+          },
+          {
+            "in": "query",
+            "name": "language",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "ES%2CPT%2CEN"
+          },
+          {
+            "in": "query",
+            "name": "min_distance",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "1"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/zones/{id}": {
+      "get": {
+        "tags": [
+          "Geography"
+        ],
+        "summary": "zones_id",
+        "description": "Returns detailed information for a specific zone.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "183179"
+          },
+          {
+            "in": "query",
+            "name": "product",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "HOTELS"
+          },
+          {
+            "in": "query",
+            "name": "ratio",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "4%3A3"
+          },
+          {
+            "in": "query",
+            "name": "language",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "ES%2CPT%2CEN"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/cities": {
+      "get": {
+        "tags": [
+          "Geography"
+        ],
+        "summary": "cities",
+        "description": "Returns detailed information for a specific city.",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "country_id",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "20010"
+          },
+          {
+            "in": "query",
+            "name": "product",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "HOTELS"
+          },
+          {
+            "in": "query",
+            "name": "language",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "ES%2CPT%2CEN"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "number"
+                          },
+                          "gid": {
+                            "type": "string"
+                          },
+                          "descriptions": {
+                            "type": "object",
+                            "properties": {
+                              "en": {
+                                "type": "string"
+                              },
+                              "es": {
+                                "type": "string"
+                              },
+                              "pt": {
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "configurations": {
+                            "type": "array"
+                          },
+                          "last_update_date": {
+                            "type": "string",
+                            "format": "date"
+                          },
+                          "code": {
+                            "type": "string"
+                          },
+                          "location": {
+                            "type": "object",
+                            "properties": {
+                              "type": {
+                                "type": "string"
+                              },
+                              "latitude": {
+                                "type": "number"
+                              },
+                              "longitude": {
+                                "type": "number"
+                              }
+                            }
+                          },
+                          "pictures": {
+                            "type": "array"
+                          },
+                          "timezone": {
+                            "type": "string"
+                          },
+                          "timezone_offset": {
+                            "type": "number"
+                          },
+                          "administrative_division_id": {
+                            "type": "number"
+                          },
+                          "administrative_division_gid": {
+                            "type": "string"
+                          },
+                          "country_id": {
+                            "type": "number"
+                          },
+                          "country_gid": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/cities/{id}": {
+      "get": {
+        "tags": [
+          "Geography"
+        ],
+        "summary": "cities_id",
+        "description": "Returns detailed information for a specific city.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "982"
+          },
+          {
+            "in": "query",
+            "name": "product",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "HOTELS"
+          },
+          {
+            "in": "query",
+            "name": "ratio",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "4%3A3"
+          },
+          {
+            "in": "query",
+            "name": "language",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "ES",
+                "PT",
+                "EN"
+              ]
+            },
+            "example": "ES"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "number"
+                        },
+                        "gid": {
+                          "type": "string"
+                        },
+                        "descriptions": {
+                          "type": "object",
+                          "properties": {
+                            "pt": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "configurations": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "any_ds_any": {
+                                "type": "string"
+                              },
+                              "any_cruises_any": {
+                                "type": "string"
+                              },
+                              "any_transfers_any": {
+                                "type": "string"
+                              },
+                              "default": {
+                                "type": "string"
+                              },
+                              "any_vr_any": {
+                                "type": "string"
+                              },
+                              "any_cars_any": {
+                                "type": "string"
+                              },
+                              "any_flights_any": {
+                                "type": "string"
+                              },
+                              "any_hotels_any": {
+                                "type": "string"
+                              },
+                              "viajeros.com": {
+                                "type": "string"
+                              },
+                              "any_buses_ar": {
+                                "type": "string"
+                              },
+                              "any_packages_any": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        },
+                        "last_update_date": {
+                          "type": "string",
+                          "format": "date"
+                        },
+                        "aliases": {
+                          "type": "object",
+                          "properties": {
+                            "caba": {
+                              "type": "string"
+                            },
+                            "baires": {
+                              "type": "number"
+                            }
+                          }
+                        },
+                        "code": {
+                          "type": "string"
+                        },
+                        "location": {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "type": "string"
+                            },
+                            "latitude": {
+                              "type": "string"
+                            },
+                            "longitude": {
+                              "type": "string"
+                            },
+                            "coordinates": {
+                              "type": "array"
+                            }
+                          }
+                        },
+                        "pictures": {
+                          "type": "array"
+                        },
+                        "timezone": {
+                          "type": "string"
+                        },
+                        "timezone_offset": {
+                          "type": "number"
+                        },
+                        "administrative_division_id": {
+                          "type": "number"
+                        },
+                        "administrative_division_gid": {
+                          "type": "string"
+                        },
+                        "country_id": {
+                          "type": "number"
+                        },
+                        "country_gid": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/geo-points/{id}": {
+      "get": {
+        "tags": [
+          "Geography"
+        ],
+        "summary": "geo_points_id",
+        "description": "Returns detailed information for a specific geographic point.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "number"
+            },
+            "example": "192635"
+          },
+          {
+            "in": "query",
+            "name": "product",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "HOTELS"
+          },
+          {
+            "in": "query",
+            "name": "ratio",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "4%3A3"
+          },
+          {
+            "in": "query",
+            "name": "language",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "ES%2CPT%2CEN"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "number"
+                        },
+                        "gid": {
+                          "type": "string"
+                        },
+                        "descriptions": {
+                          "type": "object",
+                          "properties": {
+                            "en": {
+                              "type": "string"
+                            },
+                            "es": {
+                              "type": "string"
+                            },
+                            "pt": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "last_update_date": {
+                          "type": "string",
+                          "format": "date"
+                        },
+                        "location": {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "type": "string"
+                            },
+                            "latitude": {
+                              "type": "number"
+                            },
+                            "longitude": {
+                              "type": "number"
+                            }
+                          }
+                        },
+                        "type": {
+                          "type": "string"
+                        },
+                        "city_id": {
+                          "type": "number"
+                        },
+                        "city_gid": {
+                          "type": "string"
+                        },
+                        "code": {
+                          "type": "string"
+                        },
+                        "commercial": {
+                          "type": "boolean"
+                        },
+                        "manual_order": {
+                          "type": "number"
+                        },
+                        "pictures": {
+                          "type": "array"
+                        }
+                      }
+                    },
+                    "properties": {
+                      "paging": {
+                        "type": "object",
+                        "properties": {
+                          "offset": {
+                            "type": "integer"
+                          },
+                          "limit": {
+                            "type": "integer"
+                          },
+                          "total": {
+                            "type": "integer"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/suggestions/countries": {
+      "get": {
+        "tags": [
+          "Suggestions"
+        ],
+        "summary": "countries",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "locale",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "string which contains language and country, in that order and separated by dash",
+            "example": "pt_BR"
+          },
+          {
+            "in": "query",
+            "name": "hint",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "MEX"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "number"
+                          },
+                          "target": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "number"
+                              },
+                              "gid": {
+                                "type": "string"
+                              },
+                              "code": {
+                                "type": "number"
+                              },
+                              "type": {
+                                "type": "number"
+                              },
+                              "parents": {
+                                "type": "array"
+                              }
+                            }
+                          },
+                          "display": {
+                            "type": "string"
+                          },
+                          "highlight": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/suggestions/buses": {
+      "get": {
+        "tags": [
+          "Suggestions"
+        ],
+        "summary": "buses",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "locale",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "string which contains language and country, in that order and separated by dash",
+            "example": "pt_BR"
+          },
+          {
+            "in": "query",
+            "name": "hint",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "airpor"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "number"
+                          },
+                          "target": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "number"
+                              },
+                              "gid": {
+                                "type": "string"
+                              },
+                              "type": {
+                                "type": "number"
+                              },
+                              "parents": {
+                                "type": "array"
+                              }
+                            }
+                          },
+                          "display": {
+                            "type": "string"
+                          },
+                          "location": {
+                            "type": "array"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/suggestions": {
+      "get": {
+        "tags": [
+          "Suggestions"
+        ],
+        "summary": "suggestions",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "locale",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "string which contains language and country, in that order and separated by dash",
+            "example": "pt_BR"
+          },
+          {
+            "in": "query",
+            "name": "hint",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "Joao Pessoa"
+          },
+          {
+            "in": "query",
+            "name": "profile",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "sbox-flights"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "group": {
+                            "type": "string"
+                          },
+                          "display": {
+                            "type": "string"
+                          },
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string"
+                              },
+                              "taregt": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "number"
+                                  },
+                                  "gid": {
+                                    "type": "string"
+                                  },
+                                  "code": {
+                                    "type": "string"
+                                  },
+                                  "type": {
+                                    "type": "number"
+                                  },
+                                  "parents": {
+                                    "type": "object",
+                                    "properties": {
+                                      "continent": {
+                                        "type": "string"
+                                      },
+                                      "country": {
+                                        "type": "string"
+                                      },
+                                      "administrative_division": {
+                                        "type": "string"
+                                      }
+                                    }
+                                  }
+                                }
+                              },
+                              "display": {
+                                "type": "string"
+                              },
+                              "highlight": {
+                                "type": "string"
+                              },
+                              "location": {
+                                "type": "object",
+                                "properties": {
+                                  "latitude": {
+                                    "type": "number"
+                                  },
+                                  "longitude": {
+                                    "type": "number"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/suggestions/cities": {
+      "get": {
+        "tags": [
+          "Suggestions"
+        ],
+        "summary": "cities",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "locale",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "string which contains language and country, in that order and separated by dash",
+            "example": "pt_BR"
+          },
+          {
+            "in": "query",
+            "name": "hint",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "Telêmaco Borba"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "number"
+                          },
+                          "target": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "number"
+                              },
+                              "gid": {
+                                "type": "string"
+                              },
+                              "code": {
+                                "type": "string"
+                              },
+                              "type": {
+                                "type": "number"
+                              },
+                              "parents": {
+                                "type": "object",
+                                "properties": {
+                                  "continent": {
+                                    "type": "string"
+                                  },
+                                  "country": {
+                                    "type": "string"
+                                  },
+                                  "administrative_division": {
+                                    "type": "string"
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "display": {
+                            "type": "string"
+                          },
+                          "highlight": {
+                            "type": "string"
+                          },
+                          "location": {
+                            "type": "object"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/suggestions/zones": {
+      "get": {
+        "tags": [
+          "Suggestions"
+        ],
+        "summary": "zones",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "locale",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "string which contains language and country, in that order and separated by dash",
+            "example": "pt_BR"
+          },
+          {
+            "in": "query",
+            "name": "hint",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "nor"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "number"
+                          },
+                          "target": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "number"
+                              },
+                              "gid": {
+                                "type": "string"
+                              },
+                              "type": {
+                                "type": "number"
+                              },
+                              "parents": {
+                                "type": "object",
+                                "properties": {
+                                  "continent": {
+                                    "type": "string"
+                                  },
+                                  "country": {
+                                    "type": "string"
+                                  },
+                                  "administrative_division": {
+                                    "type": "string"
+                                  },
+                                  "city": {
+                                    "type": "string"
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "display": {
+                            "type": "string"
+                          },
+                          "location": {
+                            "type": "array"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/suggestions/hotels": {
+      "get": {
+        "tags": [
+          "Suggestions"
+        ],
+        "summary": "hotels",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "locale",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "string which contains language and country, in that order and separated by dash",
+            "example": "pt_BR"
+          },
+          {
+            "in": "query",
+            "name": "hint",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "airpor"
+          },
+          {
+            "in": "query",
+            "name": "weak",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            },
+            "example": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "number"
+                          },
+                          "target": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "number"
+                              },
+                              "gid": {
+                                "type": "string"
+                              },
+                              "type": {
+                                "type": "number"
+                              },
+                              "parents": {
+                                "type": "object",
+                                "properties": {
+                                  "continent": {
+                                    "type": "string"
+                                  },
+                                  "country": {
+                                    "type": "string"
+                                  },
+                                  "administrative_division": {
+                                    "type": "string"
+                                  },
+                                  "city": {
+                                    "type": "string"
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "display": {
+                            "type": "string"
+                          },
+                          "highlight": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/suggestions/continents": {
+      "get": {
+        "tags": [
+          "Suggestions"
+        ],
+        "summary": "continents",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "locale",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "string which contains language and country, in that order and separated by dash",
+            "example": "pt_BR"
+          },
+          {
+            "in": "query",
+            "name": "hint",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "ame"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "number"
+                          },
+                          "target": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "number"
+                              },
+                              "gid": {
+                                "type": "string"
+                              },
+                              "code": {
+                                "type": "string"
+                              },
+                              "type": {
+                                "type": "number"
+                              },
+                              "parents": {
+                                "type": "object"
+                              }
+                            }
+                          },
+                          "display": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/suggestions/airports": {
+      "get": {
+        "tags": [
+          "Suggestions"
+        ],
+        "summary": "airports",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "locale",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "string which contains language and country, in that order and separated by dash",
+            "example": "pt_BR"
+          },
+          {
+            "in": "query",
+            "name": "hint",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "tokyo"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "number"
+                          },
+                          "target": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "number"
+                              },
+                              "gid": {
+                                "type": "string"
+                              },
+                              "iata": {
+                                "type": "string"
+                              },
+                              "type": {
+                                "type": "number"
+                              },
+                              "parents": {
+                                "type": "object",
+                                "properties": {
+                                  "continent": {
+                                    "type": "string"
+                                  },
+                                  "country": {
+                                    "type": "string"
+                                  },
+                                  "administrative_division": {
+                                    "type": "string"
+                                  },
+                                  "city": {
+                                    "type": "string"
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "display": {
+                            "type": "string"
+                          },
+                          "location": {
+                            "type": "object",
+                            "properties": {
+                              "latitude": {
+                                "type": "number"
+                              },
+                              "longitude": {
+                                "type": "number"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/suggestions/regions": {
+      "get": {
+        "tags": [
+          "Suggestions"
+        ],
+        "summary": "regions",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "locale",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "string which contains language and country, in that order and separated by dash",
+            "example": "pt_BR"
+          },
+          {
+            "in": "query",
+            "name": "hint",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "ara"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "number"
+                          },
+                          "target": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "number"
+                              },
+                              "gid": {
+                                "type": "string"
+                              },
+                              "type": {
+                                "type": "number"
+                              },
+                              "parents": {
+                                "type": "object"
+                              }
+                            }
+                          },
+                          "display": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/suggestions/activities": {
+      "get": {
+        "tags": [
+          "Suggestions"
+        ],
+        "summary": "activities",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "locale",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "string which contains language and country, in that order and separated by dash",
+            "example": "pt_BR"
+          },
+          {
+            "in": "query",
+            "name": "hint",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "bra"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "number"
+                          },
+                          "target": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "number"
+                              },
+                              "gid": {
+                                "type": "string"
+                              },
+                              "type": {
+                                "type": "number"
+                              },
+                              "parents": {
+                                "type": "object",
+                                "properties": {
+                                  "continent": {
+                                    "type": "string"
+                                  },
+                                  "country": {
+                                    "type": "string"
+                                  },
+                                  "administrative_division": {
+                                    "type": "string"
+                                  },
+                                  "city": {
+                                    "type": "string"
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "display": {
+                            "type": "string"
+                          },
+                          "highlight": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/disambiguations/{gid}": {
+      "get": {
+        "tags": [
+          "Suggestions"
+        ],
+        "summary": "disambiguations",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "gid",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "It is the identifier of the destination location.",
+            "example": "CIT_4544"
+          },
+          {
+            "in": "query",
+            "name": "country",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Country code where the search is being performed. Used for airport searches.",
+            "example": "CO"
+          },
+          {
+            "in": "query",
+            "name": "flow_type",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "FLIGHT_HOTEL",
+              "enum": [
+                "FLIGHT_HOTEL",
+                "FLIGHT_MULTIPLE_HOTEL",
+                "HOTEL",
+                "FLIGHT",
+                "MULTIPLE_FLIGHT"
+              ]
+            },
+            "description": "Describes the type of product being searched for. It allows applying rules that are exclusive to certain trip types.",
+            "example": "FLIGHT_HOTEL"
+          },
+          {
+            "in": "query",
+            "name": "from_date",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            },
+            "description": "They check for temporary closures, day-of-week disambiguations, and that the rule is active on those dates, and it must be sent using to_date.",
+            "example": "2024-12-12"
+          },
+          {
+            "in": "query",
+            "name": "to_date",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            },
+            "description": "They check for temporary closures, day-of-week disambiguations, and that the rule is active on those dates, and it must be sent using from_date.",
+            "example": "2024-12-19"
+          },
+          {
+            "in": "query",
+            "name": "origin",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "It is the identifier (gid) of the trip’s origin location. It is used to find special rules that depend on the origin/destination combination.",
+            "example": "CIY_854"
+          },
+          {
+            "in": "query",
+            "name": "range",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "default": "200"
+            },
+            "description": "Defines a search radius in kilometers to find airports near the destination.",
+            "example": "100"
+          },
+          {
+            "in": "query",
+            "name": "alternative_airport",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": "false",
+              "enum": [
+                "true",
+                "false"
+              ]
+            },
+            "description": "It’s a flag that, if true, triggers searching for an alternative destination in a different city than the one returned by the main search."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "selected": {
+                      "type": "object",
+                      "description": "The destination determined to be the best option.",
+                      "properties": {
+                        "location": {
+                          "type": "object",
+                          "description": "Contains the details of the recommended place.",
+                          "properties": {
+                            "oid": {
+                              "type": "number",
+                              "description": "Place identifiers."
+                            },
+                            "iata": {
+                              "type": "string",
+                              "description": "Place identifiers."
+                            },
+                            "gid": {
+                              "type": "string",
+                              "description": "Place identifiers."
+                            },
+                            "type": {
+                              "type": "string",
+                              "enum": [
+                                "CITY",
+                                "AIRPORT",
+                                "COUNTRY"
+                              ]
+                            }
+                          }
+                        },
+                        "distance": {
+                          "type": "integer",
+                          "description": "The distance in kilometers from the provided destination gid to this selected destination. If the recommended destination is the same city you searched for, the distance will be 0."
+                        },
+                        "cause": {
+                          "type": "string",
+                          "default": "RESOLVED",
+                          "enum": [
+                            "RESOLVED: It means there was no forced disambiguation, so the same destination that was sent is returned.",
+                            "FORCED / SILENTLY_FORCED:  A forced rule was applied to change the destination.",
+                            "CLOSED_AIRPORT: The main airport of the original destination is closed on the trip dates.",
+                            "DAYS_AVAILABILITY: The destination has no flights on the weekdays of the specified dates."
+                          ]
+                        }
+                      }
+                    },
+                    "alternatives": {
+                      "type": "object",
+                      "description": "A list of airports within the distance from the destination specified by the range parameter.",
+                      "properties": {
+                        "location": {
+                          "type": "object",
+                          "properties": {
+                            "oid": {
+                              "type": "number"
+                            },
+                            "iata": {
+                              "type": "string"
+                            },
+                            "gid": {
+                              "type": "string"
+                            },
+                            "type": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "distance": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/geo-points": {
+      "get": {
+        "tags": [
+          "Suggestions"
+        ],
+        "summary": "geo-points",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "latitude",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "-22.9064"
+          },
+          {
+            "in": "query",
+            "name": "longitude",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "-47.0616"
+          },
+          {
+            "in": "query",
+            "name": "max_distance",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "40"
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "10"
+          },
+          {
+            "in": "query",
+            "name": "geospatial_operation",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "NEAR"
+          },
+          {
+            "in": "query",
+            "name": "types",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "AIRPORT"
+          },
+          {
+            "in": "query",
+            "name": "orders",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "SALES"
+          },
+          {
+            "in": "query",
+            "name": "language",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "pt"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "item": {
+                        "type": "array"
+                      },
+                      "paging": {
+                        "type": "object",
+                        "properties": {
+                          "offset": {
+                            "type": "number"
+                          },
+                          "limit": {
+                            "type": "string"
+                          },
+                          "total": {
+                            "type": "number"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/content-api/hotels/fee-types": {
+      "get": {
+        "tags": [
+          "Hotel content"
+        ],
+        "summary": "Fee-types",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "description": "Fee type identifier"
+                      },
+                      "description": {
+                        "type": "object",
+                        "description": "Fee type descriptions in multiple languages",
+                        "properties": {
+                          "es": {
+                            "type": "string",
+                            "description": "Description in Spanish"
+                          },
+                          "en": {
+                            "type": "string",
+                            "description": "Description in English"
+                          },
+                          "pt": {
+                            "type": "string",
+                            "description": "Description in Portuguese"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/content-api/hotels/amenities": {
+      "get": {
+        "tags": [
+          "Hotel content"
+        ],
+        "summary": "Amenities",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "description": {
+                        "type": "object",
+                        "description": "Descriptions in multiple languages",
+                        "properties": {
+                          "es": {
+                            "type": "string",
+                            "description": "Description in Spanish"
+                          },
+                          "en": {
+                            "type": "string",
+                            "description": "Description in English"
+                          },
+                          "pt": {
+                            "type": "string",
+                            "description": "Description in Portuguese"
+                          }
+                        }
+                      },
+                      "amenity_category": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "icon": {
+                            "type": "string"
+                          },
+                          "descriptions": {
+                            "type": "object",
+                            "properties": {
+                              "pt": {
+                                "type": "string"
+                              },
+                              "en": {
+                                "type": "string"
+                              },
+                              "es": {
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "orders": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "type": {
+                                  "type": "string"
+                                },
+                                "order": {
+                                  "type": "integer"
+                                }
+                              }
+                            }
+                          },
+                          "amenities": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                },
+                                "description": {
+                                  "type": "object",
+                                  "properties": {
+                                    "pt": {
+                                      "type": "string"
+                                    },
+                                    "en": {
+                                      "type": "string"
+                                    },
+                                    "es": {
+                                      "type": "string"
+                                    }
+                                  }
+                                },
+                                "amenity_order": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "type": {
+                                        "type": "string"
+                                      },
+                                      "order": {
+                                        "type": "integer"
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/content-api/hotels/meal-plans": {
+      "get": {
+        "tags": [
+          "Hotel content"
+        ],
+        "summary": "Meal-plans",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "description": {
+                        "type": "object",
+                        "description": "Descriptions in multiple languages",
+                        "properties": {
+                          "es": {
+                            "type": "string",
+                            "description": "Description in Spanish"
+                          },
+                          "en": {
+                            "type": "string",
+                            "description": "Description in English"
+                          },
+                          "pt": {
+                            "type": "string",
+                            "description": "Description in Portuguese"
+                          }
+                        }
+                      },
+                      "sub_categories": {
+                        "type": "array",
+                        "description": "Not all categories have subcategories",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string"
+                            },
+                            "description": {
+                              "type": "object",
+                              "description": "Descriptions in multiple languages",
+                              "properties": {
+                                "es": {
+                                  "type": "string",
+                                  "description": "Description in Spanish"
+                                },
+                                "en": {
+                                  "type": "string",
+                                  "description": "Description in English"
+                                },
+                                "pt": {
+                                  "type": "string",
+                                  "description": "Description in Portuguese"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "driver": {
+                        "type": "array",
+                        "description": "This field is only returned for Disney IDs.",
+                        "enum": [
+                          "DNY_DELUXE",
+                          "DNY_FAST_FOOD",
+                          "DNY_REGULAR"
+                        ],
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "code": {
+                              "type": "string"
+                            },
+                            "description": {
+                              "type": "object",
+                              "properties": {
+                                "es": {
+                                  "type": "string"
+                                },
+                                "pt": {
+                                  "type": "string"
+                                },
+                                "en": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "breakdowns": {
+                        "type": "object",
+                        "description": "This field is only returned for Disney IDs.",
+                        "enum": [
+                          "DNY_DELUXE",
+                          "DNY_FAST_FOOD",
+                          "DNY_REGULAR"
+                        ],
+                        "properties": {
+                          "en": {
+                            "type": "array"
+                          },
+                          "es": {
+                            "type": "array"
+                          },
+                          "pt": {
+                            "type": "array"
+                          }
+                        }
+                      },
+                      "disclaimers": {
+                        "type": "object",
+                        "description": "This field is only returned for Disney IDs.",
+                        "enum": [
+                          "DNY_DELUXE",
+                          "DNY_FAST_FOOD",
+                          "DNY_REGULAR"
+                        ],
+                        "properties": {
+                          "en": {
+                            "type": "array"
+                          },
+                          "es": {
+                            "type": "array"
+                          },
+                          "pt": {
+                            "type": "array"
+                          }
+                        }
+                      },
+                      "images": {
+                        "type": "array"
+                      },
+                      "highlights": {
+                        "type": "array",
+                        "description": "This field is only returned for Disney IDs.",
+                        "enum": [
+                          "DNY_DELUXE",
+                          "DNY_FAST_FOOD",
+                          "DNY_REGULAR"
+                        ],
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "code": {
+                              "type": "string"
+                            },
+                            "description": {
+                              "type": "object",
+                              "properties": {
+                                "en": {
+                                  "type": "string"
+                                },
+                                "es": {
+                                  "type": "string"
+                                },
+                                "pt": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "deals": {
+                        "type": "array",
+                        "description": "This field is only returned for Disney IDs.",
+                        "enum": [
+                          "DNY_DELUXE",
+                          "DNY_FAST_FOOD",
+                          "DNY_REGULAR"
+                        ],
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "code": {
+                              "type": "string"
+                            },
+                            "description": {
+                              "type": "object",
+                              "properties": {
+                                "en": {
+                                  "type": "string"
+                                },
+                                "es": {
+                                  "type": "string"
+                                },
+                                "pt": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/content-api/hotels-inventory": {
+      "get": {
+        "tags": [
+          "Hotels inventory"
+        ],
+        "summary": "Hotels-inventory",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "property_type": {
+                        "type": "string"
+                      },
+                      "product": {
+                        "type": "string"
+                      },
+                      "published": {
+                        "type": "boolean"
+                      },
+                      "hotel_name": {
+                        "type": "string"
+                      },
+                      "hotel_type": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "stars": {
+                        "type": "number"
+                      },
+                      "location": {
+                        "type": "object",
+                        "properties": {
+                          "city": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "number"
+                              }
+                            }
+                          },
+                          "address": {
+                            "type": "string"
+                          },
+                          "zipcode": {
+                            "type": "string"
+                          },
+                          "latitude": {
+                            "type": "number"
+                          },
+                          "longitude": {
+                            "type": "number"
+                          },
+                          "neighborhoods": {
+                            "type": "array"
+                          }
+                        }
+                      },
+                      "merged_ids": {
+                        "type": "array"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/content-api/hotels": {
+      "get": {
+        "summary": "Hotels Information",
+        "description": "Returns static information about hotels including photos, rooms, amenities, etc.",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "ids",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "Comma-separated list of hotel IDs (max 100)."
+          },
+          {
+            "in": "query",
+            "name": "language",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "EN",
+                "ES",
+                "PT",
+                "EN,PT,ES",
+                "EN,ES",
+                "ES,PT",
+                "EN,PT"
+              ],
+              "default": "EN"
+            },
+            "description": "Language code."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "description": "hotel id"
+                      },
+                      "property_type": {
+                        "type": "string",
+                        "description": "should indicate the property type (hotel for accommodations)"
+                      },
+                      "product": {
+                        "type": "string",
+                        "description": "Possible values for this ID are:",
+                        "enum": [
+                          "HOTEL",
+                          "VACATION_RENTAL"
+                        ]
+                      },
+                      "merged_from_ids": {
+                        "type": "array",
+                        "description": "this structure contains a list with all the ids of the same accommodation that were merged in the past"
+                      },
+                      "published": {
+                        "type": "boolean",
+                        "description": "If False, it will not be available in the booking flow."
+                      },
+                      "name": {
+                        "type": "string",
+                        "description": "hotel name"
+                      },
+                      "hotel_type": {
+                        "type": "object",
+                        "description": "structure that contains id and description (in desired languages) of the accommodation type",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "description": "Possible values for this ID are:",
+                            "enum": [
+                              "YTH",
+                              "HOT",
+                              "EST",
+                              "INN",
+                              "MOT",
+                              "ECO",
+                              "CFL",
+                              "BAB",
+                              "VIL",
+                              "HTA",
+                              "LHO",
+                              "HSR",
+                              "APT",
+                              "CAR",
+                              "FML",
+                              "GLA",
+                              "CAS",
+                              "BTQ",
+                              "LDG",
+                              "DPT",
+                              "RSR",
+                              "ALT",
+                              "ALQ",
+                              "HST",
+                              "RES",
+                              "POS",
+                              "CAM",
+                              "CAB",
+                              "SUI"
+                            ]
+                          },
+                          "description": {
+                            "type": "object"
+                          },
+                          "name": {
+                            "type": "object",
+                            "properties": {
+                              "singular": {
+                                "type": "object"
+                              },
+                              "plural": {
+                                "type": "object"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "stars": {
+                        "type": "integer",
+                        "description": "star rating"
+                      },
+                      "location": {
+                        "type": "object",
+                        "description": "structure with geo information about the hotel location",
+                        "properties": {
+                          "city": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "integer"
+                              }
+                            }
+                          },
+                          "address": {
+                            "type": "string"
+                          },
+                          "zipcode": {
+                            "type": "integer"
+                          },
+                          "latitude": {
+                            "type": "number"
+                          },
+                          "longitude": {
+                            "type": "number"
+                          },
+                          "neighborhoods": {
+                            "type": "array"
+                          }
+                        }
+                      },
+                      "checkin": {
+                        "type": "object",
+                        "description": "time available for checkin (from - to hours)",
+                        "properties": {
+                          "from": {
+                            "type": "string"
+                          },
+                          "to": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "checkout": {
+                        "type": "object",
+                        "description": "time available for checkout (from - to hours)",
+                        "properties": {
+                          "to": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "information": {
+                        "type": "object",
+                        "description": "structure with a language - text pairs regarding information about the hotel",
+                        "properties": {
+                          "en": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "notices": {
+                        "type": "object",
+                        "description": "structure with a language - text pairs regarding information about particularities about the accommodation. Example: Reception working hours, possible charges to pay/deposits needed when arriving, documentation required by the hotel, among others.",
+                        "properties": {
+                          "en": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "creation_date": {
+                        "type": "string",
+                        "format": "date",
+                        "description": "datetime field that indicates the date when the hotel listing was created"
+                      },
+                      "last_modified_date": {
+                        "type": "string",
+                        "format": "date",
+                        "description": "datetime field that indicates the max date when the hotel listing suffered any changes or updates"
+                      },
+                      "main_picture": {
+                        "type": "object",
+                        "description": "structure with url and information about the main picture of the hotel",
+                        "properties": {
+                          "url": {
+                            "type": "string"
+                          },
+                          "id": {
+                            "type": "string"
+                          },
+                          "width": {
+                            "type": "integer"
+                          },
+                          "height": {
+                            "type": "integer"
+                          },
+                          "picture_category": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "integer"
+                              },
+                              "description": {
+                                "type": "object",
+                                "properties": {
+                                  "en": {
+                                    "type": "string"
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "picture_categories": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "integer"
+                              },
+                              "description": {
+                                "type": "object",
+                                "properties": {
+                                  "en": {
+                                    "type": "string"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "number_of_rooms": {
+                        "type": "integer",
+                        "description": "number of rooms the accommodation has"
+                      },
+                      "pictures": {
+                        "type": "array",
+                        "description": "list structure with url and description for each picture",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "url": {
+                              "type": "string"
+                            },
+                            "id": {
+                              "type": "string"
+                            },
+                            "width": {
+                              "type": "integer"
+                            },
+                            "height": {
+                              "type": "integer"
+                            },
+                            "picture_category": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "integer"
+                                },
+                                "description": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "picture_categories": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "integer"
+                                },
+                                "description": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "extra_details": {
+                        "type": "object",
+                        "description": "structure with extra information (e.g.: phone numbers)",
+                        "properties": {
+                          "hotel_brand": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "number"
+                              },
+                              "name": {
+                                "type": "string"
+                              },
+                              "hotel_chain": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "number"
+                                  },
+                                  "name": {
+                                    "type": "number"
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "phone_numbers": {
+                            "type": "array"
+                          },
+                          "completeness": {
+                            "type": "number"
+                          },
+                          "email": {
+                            "type": "string"
+                          },
+                          "breakfast_time": {
+                            "type": "object",
+                            "properties": {
+                              "from": {
+                                "type": "string",
+                                "format": "time"
+                              },
+                              "to": {
+                                "type": "string",
+                                "format": "time"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "rating": {
+                        "type": "integer"
+                      },
+                      "room_types": {
+                        "type": "array",
+                        "description": "structure with room information",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "integer"
+                            },
+                            "internal_name": {
+                              "type": "string"
+                            },
+                            "despegar_names": {
+                              "type": "object"
+                            },
+                            "information": {
+                              "type": "object",
+                              "properties": {
+                                "en": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "room_distribution": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                },
+                                "descriptions": {
+                                  "type": "object"
+                                }
+                              }
+                            },
+                            "room_category": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                },
+                                "descriptions": {
+                                  "type": "object"
+                                }
+                              }
+                            },
+                            "amenities": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "string"
+                                  },
+                                  "descriptions": {
+                                    "type": "object",
+                                    "properties": {
+                                      "en": {
+                                        "type": "string"
+                                      }
+                                    }
+                                  },
+                                  "amenity_category": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "string"
+                                      },
+                                      "icon": {
+                                        "type": "string"
+                                      },
+                                      "descriptions": {
+                                        "type": "object",
+                                        "properties": {
+                                          "en": {
+                                            "type": "string"
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "room_view": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                },
+                                "descriptions": {
+                                  "type": "object"
+                                }
+                              }
+                            },
+                            "smoking_option": {
+                              "type": "object",
+                              "description": "A room can have three possible configurations in terms of the smoking policy.",
+                              "properties": {
+                                "id": {
+                                  "type": "string",
+                                  "description": "NSM or NDS or SMK"
+                                },
+                                "descriptions": {
+                                  "type": "object",
+                                  "properties": {
+                                    "en": {
+                                      "type": "string",
+                                      "description": "NSM: Not allowed / NDS: Unknown / SMK: Allowed"
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "shared_bathroom": {
+                              "type": "boolean"
+                            },
+                            "room_size": {
+                              "type": "integer"
+                            },
+                            "room_size_unit": {
+                              "type": "string"
+                            },
+                            "max_occupancy": {
+                              "type": "number"
+                            },
+                            "pictures": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "url": {
+                                    "type": "string"
+                                  },
+                                  "id": {
+                                    "type": "string"
+                                  },
+                                  "width": {
+                                    "type": "number"
+                                  },
+                                  "height": {
+                                    "type": "number"
+                                  },
+                                  "picture_category": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "number"
+                                      },
+                                      "descriptions": {
+                                        "type": "object",
+                                        "properties": {
+                                          "en": {
+                                            "type": "string"
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "creation_date": {
+                              "type": "string",
+                              "format": "date"
+                            },
+                            "last_modified_date": {
+                              "type": "string",
+                              "format": "date"
+                            }
+                          }
+                        }
+                      },
+                      "categorized_notices": {
+                        "type": "object",
+                        "description": "structure with notices information grouped by in different labels",
+                        "properties": {
+                          "primary": {
+                            "type": "object",
+                            "properties": {
+                              "title": {
+                                "type": "object"
+                              },
+                              "notices": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "title": {
+                                      "type": "object"
+                                    },
+                                    "messages": {
+                                      "type": "array"
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "secondary": {
+                            "type": "object",
+                            "properties": {
+                              "title": {
+                                "type": "object"
+                              },
+                              "notices": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "title": {
+                                      "type": "object"
+                                    },
+                                    "messages": {
+                                      "type": "array"
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "amenities": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string"
+                            },
+                            "description": {
+                              "type": "object"
+                            },
+                            "amenity_category": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                },
+                                "icon": {
+                                  "type": "string"
+                                },
+                                "description": {
+                                  "type": "object"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "special_requests": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string"
+                            },
+                            "description": {
+                              "type": "object"
+                            },
+                            "enabled": {
+                              "type": "boolean"
+                            }
+                          }
+                        }
+                      },
+                      "fees": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "currency": {
+                              "type": "string"
+                            },
+                            "amount": {
+                              "type": "number"
+                            },
+                            "fee_type": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                },
+                                "descriptions": {
+                                  "type": "object"
+                                }
+                              }
+                            },
+                            "fee_application_scope": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                },
+                                "descriptions": {
+                                  "type": "object"
+                                },
+                                "fee_amount_type": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "string"
+                                    },
+                                    "descriptions": {
+                                      "type": "object"
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "spoken_languages": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string"
+                            },
+                            "description": {
+                              "type": "object"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error_code": {
+                      "type": "string",
+                      "example": "INVALID_FILTER"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Country, changes retrieve resource id, passenger indexes and lang are required"
+                    },
+                    "details": {
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "error_code",
+                    "message"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error_code": {
+                      "type": "string",
+                      "example": "INVALID_FILTER"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Country, changes retrieve resource id, passenger indexes and lang are required"
+                    },
+                    "details": {
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "error_code",
+                    "message"
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error_code": {
+                      "type": "string",
+                      "example": "INVALID_FILTER"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Country, changes retrieve resource id, passenger indexes and lang are required"
+                    },
+                    "details": {
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "error_code",
+                    "message"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error_code": {
+                      "type": "string",
+                      "example": "INVALID_FILTER"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Country, changes retrieve resource id, passenger indexes and lang are required"
+                    },
+                    "details": {
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "error_code",
+                    "message"
+                  ]
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error_code": {
+                      "type": "string",
+                      "example": "INVALID_FILTER"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Country, changes retrieve resource id, passenger indexes and lang are required"
+                    },
+                    "details": {
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "error_code",
+                    "message"
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error_code": {
+                      "type": "string",
+                      "example": "INVALID_FILTER"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Country, changes retrieve resource id, passenger indexes and lang are required"
+                    },
+                    "details": {
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "error_code",
+                    "message"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "hotel"
+        ],
+        "operationId": "getHotels"
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "ApiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "x-apikey"
+      },
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}

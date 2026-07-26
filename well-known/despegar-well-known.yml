@@ -1,0 +1,35 @@
+generated: '2026-07-18'
+method: searched
+source: live probes of Despegar hosts
+hosts:
+- host: https://www.despegar.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    file: despegar-security.txt
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+- host: https://api.despegar.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    note: identical Bugcrowd private BBP security.txt (saved once as despegar-security.txt)
+  - path: /.well-known/openid-configuration
+    status: 301
+  - path: /.well-known/oauth-authorization-server
+    status: 301
+  - path: /.well-known/api-catalog
+    status: 301
+- host: https://api-docs.despegar.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /llms.txt
+    status: 200
+    file: ../llms/despegar-llms.txt

@@ -1,0 +1,25 @@
+generated: '2026-07-18'
+method: derived
+source: openapi/despegar-*-openapi.json + https://api-docs.despegar.com/docs/security-scheme
+standards:
+- id: oauth2-client-credentials
+  conforms: true
+  evidence: MCP B2B flights/hotels servers authenticate with OAuth 2.0 client_credentials (mcp/despegar-mcp.yml)
+- id: api-key-header
+  conforms: true
+  evidence: ApiKeyAuth securityScheme, x-apikey header, across all six OpenAPI groups
+- id: jwt-bearer
+  conforms: true
+  evidence: BearerAuth http/bearer JWT securityScheme declared in OpenAPI
+- id: mtls-b2b
+  conforms: true
+  evidence: Ecosystem docs describe mTLS (Mutual TLS) protection for B2B transactions
+- id: mcp
+  conforms: true
+  evidence: Published Model Context Protocol servers over JSON-RPC/HTTP (docs/mcp-support)
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: error responses use application/json, not application/problem+json
+- id: openapi-3
+  conforms: true
+  evidence: provider publishes OpenAPI 3.x per product group (booking/hotels/flights/aftersales/activities/geo)

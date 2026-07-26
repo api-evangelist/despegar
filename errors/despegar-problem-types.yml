@@ -1,0 +1,45 @@
+generated: '2026-07-18'
+method: derived
+source: openapi/despegar-*-openapi.json (4xx/5xx responses)
+format: json
+notes: >-
+  Error responses are returned as application/json (not RFC 9457 problem+json).
+  Titles below are the response descriptions declared in the provider OpenAPI,
+  aggregated across the six product groups.
+problems:
+- status: 400
+  title: Bad Request / Invalid request
+  meaning: The request payload or parameters are malformed or fail validation.
+  action: Fix the request per the operation schema and retry.
+- status: 401
+  title: Unauthorized / Authentication error
+  meaning: Missing or invalid x-apikey (or bearer token).
+  action: Verify the API key for the target environment.
+- status: 403
+  title: Forbidden
+  meaning: The key is valid but not permitted for this product or operation.
+  action: Confirm the product is contracted/certified for your key.
+- status: 404
+  title: Not Found
+  meaning: The referenced resource (reservation, hotel, choice) does not exist.
+- status: 409
+  title: Conflict
+  meaning: State conflict during the booking flow (e.g. prebook/booking state).
+  source_operations: [booking#createBooking, booking#createPrebook]
+- status: 410
+  title: Gone / UPSELLING_UNAVAILABLE
+  meaning: The quote/offer has expired or the upsell option is no longer available.
+  action: Re-run availability/prebook to obtain a fresh choice.
+  source_operations: [booking#createPrebook, flights#Upselling]
+- status: 429
+  title: Too Many Requests / RATE_LIMIT_EXCEEDED
+  meaning: Rate limit exceeded.
+  action: Back off and retry.
+  source_operations: [hotels#searchAvailability, flights#searchFlightsAvailability]
+- status: 500
+  title: Internal Server Error
+  meaning: Unexpected server error.
+- status: 503
+  title: Service Unavailable / FLIGHT_PROVIDER_ERROR
+  meaning: A downstream flight provider is unavailable.
+  source_operations: [flights#searchFlightsAvailability]

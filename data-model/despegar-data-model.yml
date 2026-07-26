@@ -1,0 +1,36 @@
+generated: '2026-07-18'
+method: derived
+source: openapi/despegar-*-openapi.json
+notes: >-
+  High-level entity graph derived from the Despegar B2B product OpenAPI groups.
+  The booking flow is a two-step availability -> prebook -> book pipeline where
+  server-issued tokens (choice_id, prebook/checkout context) bind a quote to a
+  reservation.
+entities:
+- name: Availability
+  produced_by: [hotels#searchAvailability, hotels#getHotelAvailability, flights#searchFlightsAvailability, activities#get_availability]
+  key: choice_id
+  notes: Encrypted choice_id returned by availability; consumed by prebook.
+- name: Prebook
+  produced_by: [booking#createPrebook]
+  belongs_to: {entity: Availability, via: choice_id}
+- name: PaymentOptions
+  produced_by: [booking#getPaymentOptions]
+  belongs_to: {entity: Prebook, via: prebook_context}
+- name: Booking
+  produced_by: [booking#createBooking]
+  belongs_to: {entity: Prebook, via: prebook_context}
+- name: Reservation
+  produced_by: [booking#getReservation, aftersales#getReservationStatus]
+  has_one: {entity: Booking, via: reservation_id}
+- name: CancelQuote
+  produced_by: [aftersales#createCancelQuote]
+  belongs_to: {entity: Reservation, via: reservation_id}
+- name: Geo
+  produced_by: [geo#get_countries, geo#get_cities, geo#getHotels]
+  notes: Reference/static content (countries, cities, zones, airports, hotels) referenced by search inputs.
+relationships:
+- {from: Prebook, to: Availability, type: belongs_to, via: choice_id}
+- {from: Booking, to: Prebook, type: belongs_to, via: prebook_context}
+- {from: Reservation, to: Booking, type: has_one, via: reservation_id}
+- {from: CancelQuote, to: Reservation, type: belongs_to, via: reservation_id}

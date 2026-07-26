@@ -1,0 +1,14 @@
+generated: '2026-07-18'
+method: searched
+source: npm, PyPI, Packagist, GitHub search
+notes: >-
+  No first-party Despegar client SDK was found on npm, PyPI, Maven Central,
+  NuGet, pkg.go.dev, RubyGems, Packagist or crates.io. The B2B API is consumed
+  directly over HTTP with the x-apikey header, or via the published MCP servers.
+  One community (third-party) client exists.
+packages:
+- language: php
+  registry: github
+  name: desarrollo-cooperativo/despegar-api-client
+  url: https://github.com/desarrollo-cooperativo/despegar-api-client
+  official: false

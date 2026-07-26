@@ -1,0 +1,24 @@
+generated: '2026-07-18'
+method: searched
+source: https://api-docs.despegar.com/docs/general-information
+test_live_separation:
+  model: separate-api-keys
+  notes: A distinct, active API key is issued for the test environment vs. production; the same x-apikey header carries whichever key.
+environments:
+- name: Sandbox
+  base_url: https://api-dev.despegar.com/v3
+- name: UAT
+  base_url: https://apis-uat.despegar.com/v3
+- name: Production
+  base_url: https://api.despegar.com/v3
+simulation:
+- parameter: test_case
+  in: query
+  notes: Some reference operations expose a test_case query parameter to drive scripted scenarios in the test environment.
+- operation: triggerReschedulingMock
+  spec: openapi/despegar-aftersales-openapi.json
+  notes: Aftersales exposes a rescheduling trigger mock to simulate rescheduling events in test.
+constraints:
+- Searches for dates earlier than the current date are not allowed.
+test_values:
+  notes: Despegar does not publish static magic test cards/tokens; test data is bound to the sandbox key and returned by the availability services (encrypted choice_id / prebook context).

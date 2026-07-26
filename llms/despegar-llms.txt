@@ -1,0 +1,90 @@
+# APIs Despegar Documentation
+
+> Documentation for APIs Despegar
+
+## Guides
+- [ECOSYSTEM](https://api-docs.despegar.com/docs/ecosystem.md): Is designed to offer a wide range of solutions, enabling partners to integrate key platform services into their own systems.
+- [SECURITY SCHEME](https://api-docs.despegar.com/docs/security-scheme.md)
+- [GENERAL INFORMATION](https://api-docs.despegar.com/docs/general-information.md): To perform the flows described in this documentation, it is important to note the following pieces of information.
+- [SUPPORT](https://api-docs.despegar.com/docs/support.md): The following pages include the contacts for support and customer care.
+- [HOTELS](https://api-docs.despegar.com/docs/hotels-1.md): In order to certify your connection to our service, you must provide evidence of how this information is displayed on your website.
+- [FLIGHTS](https://api-docs.despegar.com/docs/flights.md): In order to certify your connection to our service, you must provide evidence of how this information is displayed on your website.
+- [ACTIVITIES](https://api-docs.despegar.com/docs/activities-1.md): In order to certify your connection to our service, you must provide evidence of how this information is displayed on your website.
+- [MCP Support](https://api-docs.despegar.com/docs/mcp-support.md): Despegar B2B API
+- [HOTELS](https://api-docs.despegar.com/docs/hotels.md): The objective of this document is to describe the hotel search flow.
+- [FLIGHTS](https://api-docs.despegar.com/docs/flight.md): The objective of this document is to describe the flight search flow.
+- [ACTIVITIES](https://api-docs.despegar.com/docs/activities.md): The objective of this document is to describe the flow of searching and purchasing activities.
+- [BOOKING FLOW](https://api-docs.despegar.com/docs/booking-process.md): The objective of this document is to describe the booking flow.
+- [AFTERSALES](https://api-docs.despegar.com/docs/aftersales.md): The objective of this document is to presents all the post-sale functionalities offered by our API.
+- [COMMON ASSETS](https://api-docs.despegar.com/docs/geo.md): The objective of this document is to describe the services related to static content.
+- [COMUNICATION](https://api-docs.despegar.com/docs/comunication.md): The objective of this document is to describe the flow of event notifications.
+- [FLIGHTS](https://api-docs.despegar.com/docs/flights-1.md): In this section, you will find the most frequently asked questions and their corresponding answers.
+- [HOTELS](https://api-docs.despegar.com/docs/hotels-2.md): In this section, you will find the most frequently asked questions and their corresponding answers.
+
+## API Reference
+- [Prebook](https://api-docs.despegar.com/reference/createprebook-1.md)
+- [Payment](https://api-docs.despegar.com/reference/getpaymentoptions-1.md)
+- [Book](https://api-docs.despegar.com/reference/createbooking-1.md)
+- [Status reservation](https://api-docs.despegar.com/reference/getreservation-1.md)
+- [Commission Update](https://api-docs.despegar.com/reference/put_commissions-update.md): This service detects price variations for a product, providing the differences between the original and the updated value.
+- [Price Jump](https://api-docs.despegar.com/reference/getpricejump.md): This service detects price variations for a product, providing the differences between the original and the updated value.
+- [Price Jump](https://api-docs.despegar.com/reference/recoverybooking.md): This service allows accepting or rejecting detected price variations for a product, confirming whether to proceed with the updated value.
+- [Search](https://api-docs.despegar.com/reference/searchflightsavailability-1.md)
+- [Upselling](https://api-docs.despegar.com/reference/upselling.md)
+- [Discovery](https://api-docs.despegar.com/reference/get_discovery.md)
+- [Modalities](https://api-docs.despegar.com/reference/get_modalities.md)
+- [Availability](https://api-docs.despegar.com/reference/get_availability.md)
+- [Search](https://api-docs.despegar.com/reference/searchavailability-1.md): Search for available hotels based on input criteria.
+- [Detail](https://api-docs.despegar.com/reference/gethotelavailability-1.md): Returns live availability for a specific hotel.
+- [Status](https://api-docs.despegar.com/reference/getreservationstatus.md)
+- [Allowance](https://api-docs.despegar.com/reference/getcancelallowance.md)
+- [Quote](https://api-docs.despegar.com/reference/createcancelquote.md)
+- [Cancel](https://api-docs.despegar.com/reference/cancelreservation.md)
+- [FlowInfo](https://api-docs.despegar.com/reference/getflowinfo.md)
+- [Manual prueba](https://api-docs.despegar.com/reference/updatecancelquote.md)
+- [Special Requests](https://api-docs.despegar.com/reference/createspecialrequest.md)
+- [Get special requests catalog](https://api-docs.despegar.com/reference/getspecialrequestscatalog.md)
+- [Allowance](https://api-docs.despegar.com/reference/getchangeallowance.md)
+- [Alternatives Search](https://api-docs.despegar.com/reference/getchangealternatives.md)
+- [alternative Prebook](https://api-docs.despegar.com/reference/createcheckoutcontext.md)
+- [Prebook Info](https://api-docs.despegar.com/reference/getcheckoutcontext.md)
+- [Alternative Book](https://api-docs.despegar.com/reference/createcheckoutflow.md)
+- [Rescheduling trigger](https://api-docs.despegar.com/reference/triggerreschedulingmock.md)
+- [Rescheduling alternative](https://api-docs.despegar.com/reference/getreschedulingalternative.md)
+- [Rescheduling accepted](https://api-docs.despegar.com/reference/acceptreschedulingalternative.md)
+- [disambiguations](https://api-docs.despegar.com/reference/get_disambiguations-gid.md)
+- [airlines](https://api-docs.despegar.com/reference/get_airlines.md)
+- [aircrafts](https://api-docs.despegar.com/reference/get_aircrafts.md)
+- [airline-logo](https://api-docs.despegar.com/reference/get_airline-logo-id.md)
+- [origin](https://api-docs.despegar.com/reference/get_origin-suggestions.md)
+- [countries](https://api-docs.despegar.com/reference/get_suggestions-countries.md)
+- [buses](https://api-docs.despegar.com/reference/get_suggestions-buses.md)
+- [suggestions](https://api-docs.despegar.com/reference/get_suggestions.md)
+- [cities](https://api-docs.despegar.com/reference/get_suggestions-cities.md)
+- [zones](https://api-docs.despegar.com/reference/get_suggestions-zones.md)
+- [hotels](https://api-docs.despegar.com/reference/get_suggestions-hotels.md)
+- [continents](https://api-docs.despegar.com/reference/get_suggestions-continents.md)
+- [airports](https://api-docs.despegar.com/reference/get_suggestions-airports.md)
+- [regions](https://api-docs.despegar.com/reference/get_suggestions-regions.md)
+- [activities](https://api-docs.despegar.com/reference/get_suggestions-activities.md)
+- [geo-points](https://api-docs.despegar.com/reference/get_geo-points.md)
+- [geo_points_id](https://api-docs.despegar.com/reference/get_geo-points-id.md): Returns detailed information for a specific geographic point.
+- [cities_id](https://api-docs.despegar.com/reference/get_cities-id.md): Returns detailed information for a specific city.
+- [cities](https://api-docs.despegar.com/reference/get_cities.md): Returns detailed information for a specific city.
+- [countries_id](https://api-docs.despegar.com/reference/get_countries-id.md): Returns detailed information for a specific country.
+- [countries](https://api-docs.despegar.com/reference/get_countries.md): Returns the list of available countries matching the provided search criteria.
+- [continents](https://api-docs.despegar.com/reference/get_continents.md): Returns the list of available continents.
+- [continents_id](https://api-docs.despegar.com/reference/get_continents-id.md): Returns detailed information for a specific continent.
+- [regions](https://api-docs.despegar.com/reference/get_regions.md): Returns the list of available regions matching the provided search criteria.
+- [administrative-divisions](https://api-docs.despegar.com/reference/get_administrative-divisions.md): Returns the list of available administrative divisions matching the provided search criteria.
+- [administrative-divisions_id](https://api-docs.despegar.com/reference/get_administrative-divisions-id.md): Returns detailed information for a specific administrative division.
+- [zones](https://api-docs.despegar.com/reference/get_zones.md): Returns the list of available zones matching the provided search criteria.
+- [zones_id](https://api-docs.despegar.com/reference/get_zones-id.md): Returns detailed information for a specific zone.
+- [Hotels-inventory](https://api-docs.despegar.com/reference/get_content-api-hotels-inventory.md)
+- [Hotels Information](https://api-docs.despegar.com/reference/gethotels.md): Returns static information about hotels including photos, rooms, amenities, etc.
+- [Meal-plans](https://api-docs.despegar.com/reference/get_content-api-hotels-meal-plans.md)
+- [Fee-types](https://api-docs.despegar.com/reference/get_content-api-hotels-fee-types.md)
+- [Amenities](https://api-docs.despegar.com/reference/get_content-api-hotels-amenities.md)
+
+## Recipes
+- [Booking Hotel](https://api-docs.despegar.com/recipes/booking-hotel.md)

@@ -1,0 +1,30 @@
+generated: '2026-07-18'
+method: searched
+status: published
+source: https://api-docs.despegar.com/docs/mcp-support
+transport: JSON-RPC over HTTP
+authentication:
+  type: oauth2
+  flow: client_credentials
+  notes: Credentials are handled server-side and are never exposed to the agent; no proprietary SDK required.
+servers:
+- name: Despegar B2B Flights MCP
+  url: https://apis.despegar.com/api-b2b-flights-mcp/mcp
+  transport: http
+  tools:
+  - name: flights_availability_search
+    description: Search flight availability.
+  - name: flights_create_cart
+    description: Create a flight cart.
+- name: Despegar B2B Hotels MCP
+  url: https://apis.despegar.com/api-b2b-hotels-mcp/mcp
+  transport: http
+  tools:
+  - name: hotels_city_suggestions
+    description: Suggest cities for a destination query.
+  - name: hotels_search_by_destination
+    description: Search hotels by destination.
+  - name: hotels_availability_check
+    description: Check availability for hotels.
+  - name: hotels_create_cart
+    description: Create a hotel cart.

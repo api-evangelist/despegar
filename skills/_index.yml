@@ -1,0 +1,16 @@
+generated: '2026-07-18'
+method: generated
+source: openapi/despegar-*-openapi.json + conventions/despegar-conventions.yml
+skills:
+- file: despegar-book-hotel.md
+  name: Search and book a hotel
+  api: openapi/despegar-hotels-openapi.json
+  operations: [searchAvailability, getHotelAvailability, createPrebook, getPaymentOptions, createBooking, getReservation]
+- file: despegar-search-flights.md
+  name: Search flights and start a booking
+  api: openapi/despegar-flights-openapi.json
+  operations: [searchFlightsAvailability, createPrebook, getPaymentOptions, createBooking]
+- file: despegar-cancel-reservation.md
+  name: Cancel a reservation
+  api: openapi/despegar-aftersales-openapi.json
+  operations: [getReservationStatus, getCancelAllowance, createCancelQuote, cancelReservation]

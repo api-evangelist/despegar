@@ -1,0 +1,4651 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Aftersale",
+    "version": "0.0.5",
+    "description": "Aftersale API for managing reservations, cancellations, changes, and reschedulings. Specification generated from the reference document and aligned with the provided template style."
+  },
+  "servers": [
+    {
+      "url": "https://api-dev.despegar.com/v3",
+      "description": "Sandbox"
+    },
+    {
+      "url": "https://apis-uat.despegar.com/v3",
+      "description": "UAT"
+    },
+    {
+      "url": "https://api.despegar.com/v3",
+      "description": "Production"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Reservations",
+      "description": "Reservation query and management."
+    },
+    {
+      "name": "Cancellations",
+      "description": "Validation, quotation, and confirmation of cancellations."
+    },
+    {
+      "name": "Special Requests",
+      "description": "Special requests associated with a reservation."
+    },
+    {
+      "name": "Changes",
+      "description": "Date/itinerary changes and checkout processes."
+    },
+    {
+      "name": "Reschedulings",
+      "description": "Management of major reschedulings."
+    }
+  ],
+  "paths": {
+    "/reservations": {
+      "get": {
+        "tags": [
+          "Reservations"
+        ],
+        "summary": "Status",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "product_id",
+            "schema": {
+              "type": "integer"
+            },
+            "required": false,
+            "description": "This field represents the product identifier within the reservation. In v2, it matches the booking_code field. It must be used in combination with the corresponding product_type value."
+          },
+          {
+            "in": "query",
+            "name": "product_type",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "HOTEL",
+                "FLIGHT",
+                "TICKET",
+                "TOUR"
+              ]
+            },
+            "required": false,
+            "description": "Indicates the type of product associated with the reservation. Only to be used with the corresponding product_id to identify the product."
+          },
+          {
+            "in": "query",
+            "name": "reservation_id",
+            "schema": {
+              "type": "integer"
+            },
+            "required": false,
+            "description": "Refers to the reservation ID"
+          },
+          {
+            "in": "query",
+            "name": "flow_id",
+            "schema": {
+              "type": "string"
+            },
+            "required": false,
+            "description": "Refers to the ID of a flow within a reservation, used to check the status of a specific management action"
+          },
+          {
+            "in": "query",
+            "name": "partner_id",
+            "schema": {
+              "type": "string"
+            },
+            "required": false,
+            "description": "Refers to the partner ID; when provided, it returns all products associated with it"
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer",
+              "default": 50
+            },
+            "required": false,
+            "description": "Limits the number of search results, especially for partner_id/api_key queries that can return thousands of products."
+          },
+          {
+            "in": "query",
+            "name": "page",
+            "schema": {
+              "type": "integer"
+            },
+            "required": false,
+            "description": "Pagination for responses that exceed the limit. Add the parameter page= starting at 0 up to the last available page at the end of the request"
+          },
+          {
+            "in": "query",
+            "name": "by_api_key",
+            "schema": {
+              "type": "boolean"
+            },
+            "required": false,
+            "description": "Refers to apikey, when sent it searches for all products associated with apikey"
+          },
+          {
+            "in": "query",
+            "name": "external_transaction_id",
+            "schema": {
+              "type": "integer"
+            },
+            "required": false,
+            "description": "Obtained via external_reservation_id"
+          },
+          {
+            "in": "query",
+            "name": "from_purchase_date",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            },
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "to_purchase_date",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            },
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "number"
+                          },
+                          "product": {
+                            "type": "object",
+                            "properties": {
+                              "product_id": {
+                                "type": "number"
+                              },
+                              "product_type": {
+                                "type": "string",
+                                "description": "Reserved product type"
+                              },
+                              "transaction_id": {
+                                "type": "number"
+                              },
+                              "status": {
+                                "type": "string",
+                                "description": "Indicates the current status of the reservation",
+                                "enum": [
+                                  "IN_PROCESS",
+                                  "ISSUED",
+                                  "CANCELLED"
+                                ]
+                              },
+                              "purchase_date_time": {
+                                "type": "string",
+                                "format": "date"
+                              },
+                              "partner_id": {
+                                "type": "string"
+                              },
+                              "pnr": {
+                                "type": "string"
+                              },
+                              "sale_price": {
+                                "type": "object",
+                                "properties": {
+                                  "currency": {
+                                    "type": "string"
+                                  },
+                                  "price": {
+                                    "type": "number"
+                                  },
+                                  "conversion_rate": {
+                                    "type": "number"
+                                  },
+                                  "charges": {
+                                    "type": "object",
+                                    "properties": {
+                                      "code": {
+                                        "type": "string"
+                                      },
+                                      "charge": {
+                                        "type": "object",
+                                        "properties": {
+                                          "code": {
+                                            "type": "string"
+                                          },
+                                          "individual_charges": {
+                                            "type": "object",
+                                            "properties": {
+                                              "code": {
+                                                "type": "string"
+                                              },
+                                              "amount": {
+                                                "type": "number"
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              },
+                              "purchase_customer": {
+                                "type": "object",
+                                "properties": {
+                                  "full_name": {
+                                    "type": "string"
+                                  },
+                                  "email": {
+                                    "type": "string"
+                                  },
+                                  "phone_number": {
+                                    "type": "number"
+                                  },
+                                  "phone_type": {
+                                    "type": "number"
+                                  },
+                                  "phones": {
+                                    "type": "object",
+                                    "properties": {
+                                      "type": {
+                                        "type": "string"
+                                      },
+                                      "number": {
+                                        "type": "number"
+                                      }
+                                    }
+                                  }
+                                }
+                              },
+                              "external_reservation_id": {
+                                "type": "number"
+                              },
+                              "departure_date_time": {
+                                "type": "string",
+                                "format": "date"
+                              },
+                              "passengers": {
+                                "type": "object",
+                                "properties": {
+                                  "gender": {
+                                    "type": "string"
+                                  },
+                                  "type": {
+                                    "type": "string"
+                                  },
+                                  "birth_date": {
+                                    "type": "string",
+                                    "format": "date"
+                                  },
+                                  "first_name": {
+                                    "type": "string"
+                                  },
+                                  "last_name": {
+                                    "type": "string"
+                                  },
+                                  "nationality": {
+                                    "type": "string"
+                                  },
+                                  "identification_type": {
+                                    "type": "string"
+                                  },
+                                  "identification_code": {
+                                    "type": "number"
+                                  },
+                                  "tickets": {
+                                    "type": "object",
+                                    "properties": {
+                                      "type": {
+                                        "type": "string"
+                                      },
+                                      "number": {
+                                        "type": "number"
+                                      },
+                                      "active": {
+                                        "type": "boolean"
+                                      }
+                                    }
+                                  },
+                                  "passenger_index": {
+                                    "type": "integer"
+                                  }
+                                }
+                              },
+                              "route": {
+                                "type": "object"
+                              },
+                              "flow": {
+                                "type": "array"
+                              },
+                              "notifications": {
+                                "type": "array"
+                              },
+                              "download_voucher_url": {
+                                "type": "string"
+                              },
+                              "invoices": {
+                                "type": "array"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "message": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "message": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "message": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "getReservationStatus"
+      }
+    },
+    "/reservations/{productId}/cancels/allowance": {
+      "get": {
+        "tags": [
+          "Cancellations"
+        ],
+        "summary": "Allowance",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "productId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Product ID associated with the reservation"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "product_allowance": {
+                      "type": "object",
+                      "properties": {
+                        "product_type": {
+                          "type": "string"
+                        },
+                        "product_id": {
+                          "type": "integer"
+                        },
+                        "allowance": {
+                          "type": "string",
+                          "description": "This field supports the following values:",
+                          "enum": [
+                            "ALLOWED",
+                            "DISALLOWED",
+                            "UNKNOWN"
+                          ]
+                        },
+                        "disallowed_reason": {
+                          "type": "string",
+                          "description": "It will indicate the explanation for the reason of rejection.The possible values are:",
+                          "enum": [
+                            "ALREADY_CANCELLED",
+                            "NOT_ALLOWED_BOOKING_IN_PROCESS",
+                            "CANCEL_IN_PROCESS",
+                            "EXTERNAL_BLOCKED",
+                            "RETRACTION_IN_PROCESS",
+                            "CANCEL_NOT_IN_PROCESS",
+                            "TICKET_STATUS_EXCHANGED",
+                            "TICKET_STATUS_REFUNDED",
+                            "TICKET_STATUS_USED",
+                            "TICKET_STATUS_USED_EXCHANGED",
+                            "TICKET_STATUS_PARTIALLY_USED_EXCHANGED",
+                            "TICKET_STATUS_VOIDED",
+                            "TICKET_STATUS_HOLD",
+                            "TICKET_STATUS_HOLD_CANCELED",
+                            "TICKET_STATUS_CHECKED_IN",
+                            "INVALID_TICKETS",
+                            "EXONERATION_FLOW_NOT_SUPPORTED",
+                            "NOT_ALLOWED_VOID_OR_NOT_ISSUED_RESCUE",
+                            "NOT_ALLOWED_TOTAL_REFUND_RESCUE",
+                            "CFAR",
+                            "PROVIDER_NOT_SUPPORTED",
+                            "AFTERSALE_NOT_ALLOWED",
+                            "BLOCKED_CARRIER",
+                            "INVALID_MINIMUM_HOURS",
+                            "LEGAL_CLAIM",
+                            "CHANGE_IN_PROGRESS"
+                          ]
+                        },
+                        "refund_policy": {
+                          "type": "string",
+                          "description": "This field contains a code indicating whether the customer will receive a refund. The possible values are:",
+                          "enum": [
+                            "TOTAL_REFUND",
+                            "WITH_PENALTY",
+                            "TAX_ONLY",
+                            "NO_REFUND"
+                          ]
+                        },
+                        "policy": {
+                          "type": "string",
+                          "description": "It indicates which policy is applied.",
+                          "enum": [
+                            "VOID: Only flights",
+                            "RETRACTION_LAW",
+                            "ANAC: Only flights BR",
+                            "EXONERATION",
+                            "SCHEDULE_CHANGE: Only flights",
+                            "CONTINGENCY: Only flights",
+                            "BY_POLICIES",
+                            "UNKNOWN"
+                          ]
+                        },
+                        "expiration_date_time": {
+                          "type": "string",
+                          "format": "date-time",
+                          "description": "It is the expiration date of this policy."
+                        },
+                        "expiration_date_time_zone": {
+                          "type": "string",
+                          "description": "Time zone associated with expiration_date_time."
+                        }
+                      }
+                    },
+                    "related_products_allowances": {
+                      "type": "array"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "message": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "message": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "message": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "getCancelAllowance"
+      }
+    },
+    "/reservations/cancels/quote": {
+      "post": {
+        "tags": [
+          "Cancellations"
+        ],
+        "summary": "Quote",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "transaction_id": {
+                    "type": "string"
+                  },
+                  "cancellation_items": {
+                    "type": "array",
+                    "items": {
+                      "type": "integer"
+                    },
+                    "description": "This field is mandatory only for flights. All passengers of the product must be included in the cancellation request. Passenger indexes start at 0 (e.g. 1 passenger = [0]). IMPORTANT: Partial cancellations are currently not supported."
+                  },
+                  "quote_type": {
+                    "type": "string",
+                    "description": "Allowed: BY_POLICIES"
+                  }
+                },
+                "required": [
+                  "transaction_id"
+                ]
+              },
+              "examples": {
+                "default": {
+                  "value": {
+                    "cancellation_items": [
+                      0,
+                      1,
+                      2
+                    ],
+                    "quote_type": "BY_POLICIES"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "allowance_info": {
+                      "type": "object",
+                      "properties": {
+                        "product_allowance": {
+                          "type": "object",
+                          "properties": {
+                            "product_type": {
+                              "type": "string",
+                              "description": "Hotels, fligths o activities"
+                            },
+                            "product_id": {
+                              "type": "number",
+                              "description": "Reservation identification number"
+                            },
+                            "allowance": {
+                              "type": "string"
+                            },
+                            "refund_policy": {
+                              "type": "string",
+                              "description": "This field contains a code indicating whether the customer will receive a refund. The possible values are:",
+                              "enum": [
+                                "TOTAL_REFUND",
+                                "WITH_PENALTY",
+                                "TAX_ONLY",
+                                "NO_REFUND"
+                              ]
+                            },
+                            "policy": {
+                              "type": "string",
+                              "description": "It indicates which policy is applied.",
+                              "enum": [
+                                "VOID: Only flights",
+                                "RETRACTION_LAW",
+                                "ANAC: Only flights BR",
+                                "EXONERATION",
+                                "SCHEDULE_CHANGE: Only flights",
+                                "CONTINGENCY: Only flights",
+                                "BY_POLICIES",
+                                "UNKNOWN"
+                              ]
+                            },
+                            "expiration_date_time": {
+                              "type": "string",
+                              "format": "date-time",
+                              "description": "It is the expiration date of this policy."
+                            },
+                            "expiration_date_time_zone": {
+                              "type": "string",
+                              "description": "Time zone associated with expiration_date_time."
+                            }
+                          }
+                        },
+                        "related_products_allowances": {
+                          "type": "array"
+                        },
+                        "quote": {
+                          "type": "object",
+                          "properties": {
+                            "product_quote": {
+                              "type": "object",
+                              "properties": {
+                                "quote_id": {
+                                  "type": "string"
+                                },
+                                "creation_date": {
+                                  "type": "string"
+                                },
+                                "product_data": {
+                                  "type": "object",
+                                  "properties": {
+                                    "product_type": {
+                                      "type": "string"
+                                    },
+                                    "product_id": {
+                                      "type": "number"
+                                    },
+                                    "transaction_id": {
+                                      "type": "number"
+                                    },
+                                    "reservation_id": {
+                                      "type": "number"
+                                    },
+                                    "currency": {
+                                      "type": "string"
+                                    },
+                                    "currency_rate": {
+                                      "type": "number"
+                                    },
+                                    "cancellation_items": {
+                                      "type": "array"
+                                    }
+                                  }
+                                },
+                                "refund_policy": {
+                                  "type": "string"
+                                },
+                                "policy": {
+                                  "type": "string"
+                                },
+                                "resolution": {
+                                  "type": "string",
+                                  "description": "MANUAL O AUTOMATIC"
+                                },
+                                "guaranteed": {
+                                  "type": "boolean"
+                                },
+                                "status": {
+                                  "type": "string",
+                                  "description": "QUOTING O QUOTED"
+                                },
+                                "price_box": {
+                                  "type": "object",
+                                  "properties": {
+                                    "payment_methods": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "object",
+                                        "properties": {
+                                          "original_payment_method": {
+                                            "type": "string"
+                                          },
+                                          "original_payment_amount": {
+                                            "type": "number"
+                                          },
+                                          "original_currency": {
+                                            "type": "string"
+                                          },
+                                          "original_conversion_rate": {
+                                            "type": "number"
+                                          }
+                                        }
+                                      }
+                                    },
+                                    "refunds": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "object",
+                                        "properties": {
+                                          "original_payment_method": {
+                                            "type": "string"
+                                          },
+                                          "refund_method_price_box": {
+                                            "type": "object",
+                                            "properties": {
+                                              "currency": {
+                                                "type": "string"
+                                              },
+                                              "payment_amount": {
+                                                "type": "number",
+                                                "description": "Original amount paid for the reservation"
+                                              },
+                                              "applied_penalty": {
+                                                "type": "number",
+                                                "description": "Penalty amount applied when cancelling the reservation"
+                                              },
+                                              "refund_amount": {
+                                                "type": "number",
+                                                "description": "Amount to be refunded after applying the cancellation penalty"
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "related_products_quotes": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "message": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "message": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "message": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "message": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "createCancelQuote"
+      }
+    },
+    "/reservations/{productId}/cancels/{FlowId}/quote": {
+      "patch": {
+        "tags": [
+          "Cancellations"
+        ],
+        "summary": "Manual prueba",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "productId",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Product ID associated with the reservation"
+          },
+          {
+            "in": "path",
+            "name": "FlowId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Refers to the ID of a flow within a booking, used to check the status of a specific process (e.g., Can-1234)"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "action": {
+                    "type": "string",
+                    "enum": [
+                      "ACCEPT",
+                      "REJECT"
+                    ]
+                  },
+                  "reason": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "cancel_id": {
+                      "type": "string"
+                    },
+                    "request_code": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "string"
+                    },
+                    "product_id": {
+                      "type": "number"
+                    },
+                    "transaction_id": {
+                      "type": "number"
+                    },
+                    "reservation_id": {
+                      "type": "number"
+                    },
+                    "cancellation_items": {
+                      "type": "integer"
+                    },
+                    "product_type": {
+                      "type": "string"
+                    },
+                    "reason": {
+                      "type": "string"
+                    },
+                    "creation_date": {
+                      "type": "string",
+                      "format": "date"
+                    },
+                    "related_products": {
+                      "type": "array"
+                    },
+                    "quote": {
+                      "type": "object",
+                      "properties": {
+                        "product_quote": {
+                          "type": "object",
+                          "properties": {
+                            "quote_id": {
+                              "type": "string"
+                            },
+                            "creation_date": {
+                              "type": "number"
+                            },
+                            "product_data": {
+                              "type": "object",
+                              "properties": {
+                                "product_type": {
+                                  "type": "string"
+                                },
+                                "product_id": {
+                                  "type": "number"
+                                },
+                                "transaction_id": {
+                                  "type": "number"
+                                },
+                                "reservation_id": {
+                                  "type": "number"
+                                },
+                                "cancellation_items": {
+                                  "type": "array"
+                                }
+                              }
+                            },
+                            "refund_policy": {
+                              "type": "string"
+                            },
+                            "policy": {
+                              "type": "string"
+                            },
+                            "resolution": {
+                              "type": "string"
+                            },
+                            "guaranteed": {
+                              "type": "boolean"
+                            },
+                            "status": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "related_products_quotes": {
+                          "type": "array"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "message": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "message": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "message": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "updateCancelQuote"
+      },
+      "get": {
+        "operationId": "getFlowInfo",
+        "tags": [
+          "Cancellations"
+        ],
+        "summary": "FlowInfo",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "productId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Refers to the ID of a product within a reservation"
+          },
+          {
+            "in": "path",
+            "name": "FlowId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Refers to the ID of a flow within a booking, used to check the status of a specific process (e.g., Can-1234)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "cancel_id": {
+                      "type": "string"
+                    },
+                    "request_code": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "string"
+                    },
+                    "product_id": {
+                      "type": "number"
+                    },
+                    "transaction_id": {
+                      "type": "number"
+                    },
+                    "reservation_id": {
+                      "type": "number"
+                    },
+                    "cancellation_items": {
+                      "type": "integer"
+                    },
+                    "product_type": {
+                      "type": "string"
+                    },
+                    "reason": {
+                      "type": "string"
+                    },
+                    "creation_date": {
+                      "type": "string",
+                      "format": "date"
+                    },
+                    "finished_date": {
+                      "type": "string",
+                      "format": "date"
+                    },
+                    "related_products": {
+                      "type": "array"
+                    },
+                    "quote": {
+                      "type": "object",
+                      "properties": {
+                        "product_quote": {
+                          "type": "object",
+                          "properties": {
+                            "quote_id": {
+                              "type": "string"
+                            },
+                            "creation_date": {
+                              "type": "number"
+                            },
+                            "product_data": {
+                              "type": "object",
+                              "properties": {
+                                "product_type": {
+                                  "type": "string"
+                                },
+                                "product_id": {
+                                  "type": "number"
+                                },
+                                "transaction_id": {
+                                  "type": "number"
+                                },
+                                "reservation_id": {
+                                  "type": "number"
+                                },
+                                "cancellation_items": {
+                                  "type": "array"
+                                }
+                              }
+                            },
+                            "refund_policy": {
+                              "type": "string"
+                            },
+                            "policy": {
+                              "type": "string"
+                            },
+                            "resolution": {
+                              "type": "string"
+                            },
+                            "guaranteed": {
+                              "type": "boolean"
+                            },
+                            "status": {
+                              "type": "string"
+                            },
+                            "price_box": {
+                              "type": "object",
+                              "properties": {
+                                "payment_methods": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "original_payment_method": {
+                                        "type": "string"
+                                      },
+                                      "original_payment_amount": {
+                                        "type": "number"
+                                      },
+                                      "original_currency": {
+                                        "type": "string"
+                                      },
+                                      "original_conversion_rate": {
+                                        "type": "number"
+                                      }
+                                    }
+                                  }
+                                },
+                                "charges": {
+                                  "type": "object",
+                                  "properties": {
+                                    "fee_penalty": {
+                                      "type": "object",
+                                      "properties": {
+                                        "total_penalty": {
+                                          "type": "number"
+                                        },
+                                        "breakdown": {
+                                          "type": "object",
+                                          "properties": {
+                                            "fee": {
+                                              "type": "number"
+                                            },
+                                            "agency_fee": {
+                                              "type": "number"
+                                            },
+                                            "administrative_fee": {
+                                              "type": "number"
+                                            }
+                                          }
+                                        }
+                                      }
+                                    },
+                                    "provider_penalty": {
+                                      "type": "object",
+                                      "properties": {
+                                        "total_penalty": {
+                                          "type": "number"
+                                        },
+                                        "breakdown": {
+                                          "type": "object",
+                                          "properties": {
+                                            "cost": {
+                                              "type": "number"
+                                            }
+                                          }
+                                        }
+                                      }
+                                    },
+                                    "non_refundable_taxes": {
+                                      "type": "object",
+                                      "properties": {
+                                        "total_penalty": {
+                                          "type": "number"
+                                        },
+                                        "breakdown": {
+                                          "type": "object",
+                                          "properties": {
+                                            "taxes_penalty": {
+                                              "type": "number"
+                                            },
+                                            "taxes": {
+                                              "type": "array"
+                                            },
+                                            "perceptions": {
+                                              "type": "number"
+                                            }
+                                          }
+                                        }
+                                      }
+                                    },
+                                    "non_refundable_interests": {
+                                      "type": "object",
+                                      "properties": {
+                                        "total_penalty": {
+                                          "type": "number"
+                                        },
+                                        "breakdown": {
+                                          "type": "object",
+                                          "properties": {
+                                            "interests": {
+                                              "type": "number"
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                },
+                                "refund": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "original_payment_method": {
+                                        "type": "string"
+                                      },
+                                      "refund_method_price_box": {
+                                        "type": "object",
+                                        "properties": {
+                                          "currency": {
+                                            "type": "string"
+                                          },
+                                          "payment_amount": {
+                                            "type": "number"
+                                          },
+                                          "applied_penalty": {
+                                            "type": "number"
+                                          },
+                                          "refund_amount": {
+                                            "type": "number"
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "related_products_quotes": {
+                          "type": "array"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/reservations/{id}/cancels": {
+      "post": {
+        "tags": [
+          "Cancellations"
+        ],
+        "summary": "Cancel",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Reservation or product identifier"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "reason": {
+                    "type": "string",
+                    "description": "Cancellation reason",
+                    "enum": [
+                      "FAMILY_OR_WORK_PROBLEM",
+                      "TRAVEL_ANOTHER_DESTINATION",
+                      "NATURAL_DISASTER",
+                      "WRONG_PURCHASE_DATA",
+                      "FOUND_BETTER_FLIGHT",
+                      "ILLNESS",
+                      "DEATH",
+                      "DUPLICATE_RESERVATION",
+                      "RESCHEDULED_FLIGHT",
+                      "CHANGE_PROBLEM",
+                      "CREDIT_CARD_PROBLEM",
+                      "RENTLER_PROBLEM",
+                      "OTHER",
+                      "HOTEL_PROBLEM"
+                    ]
+                  }
+                }
+              },
+              "examples": {
+                "default": {
+                  "value": {
+                    "reason": "ILLNESS"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "flow_id": {
+                      "type": "string",
+                      "description": "Unique identifier for this cancellation."
+                    },
+                    "product_id": {
+                      "type": "string",
+                      "description": "ID of the product for which cancellation was requested."
+                    },
+                    "product_type": {
+                      "type": "string",
+                      "description": "type of the product for which cancellation was requested."
+                    },
+                    "related_products_cancellations": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "message": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "message": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "message": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "message": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "cancelReservation"
+      }
+    },
+    "/reservations/{id}/specials-requests": {
+      "post": {
+        "tags": [
+          "Special Requests"
+        ],
+        "summary": "Special Requests",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Product ID"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "reason": {
+                    "type": "string",
+                    "enum": [
+                      "SPECIAL_MEALS_DBML",
+                      "SPECIAL_MEALS_BBML",
+                      "SPECIAL_MEALS_KSML",
+                      "SPECIAL_MEALS_LSML",
+                      "SPECIAL_MEALS_NLML",
+                      "SPECIAL_MEALS_CHML",
+                      "SPECIAL_MEALS_VLML",
+                      "SPECIAL_MEALS_VGML",
+                      "SPECIAL_MEALS_GFML",
+                      "AIRPORT_ASSISTANCE_UNACCOMPANIED_CHILD",
+                      "WHEELCHAIR_ABSOLUTE_IMMOBILITY",
+                      "BABY_COT",
+                      "WHEELCHAIR_CAN_SIT_ALONE"
+                    ]
+                  },
+                  "passengers": {
+                    "type": "array",
+                    "items": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              },
+              "examples": {
+                "default": {
+                  "value": {
+                    "reason": "SPECIAL_MEALS_KSML",
+                    "passengers": [
+                      0
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "flow_id": {
+                      "type": "string"
+                    },
+                    "product_id": {
+                      "type": "number"
+                    },
+                    "product_type": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "message": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "message": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "message": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "message": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "createSpecialRequest"
+      }
+    },
+    "/special-requests/catalog": {
+      "get": {
+        "tags": [
+          "Special Requests"
+        ],
+        "summary": "Get special requests catalog",
+        "operationId": "getSpecialRequestsCatalog",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "product_type",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "HOTEL"
+              ]
+            },
+            "required": true,
+            "description": "Type of product for which the special requests catalog is being queried. Currently only 'HOTEL' is supported."
+          },
+          {
+            "in": "query",
+            "name": "product_id",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "Identifier of the product for which the special requests catalog is being queried."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "product_type": {
+                      "type": "string",
+                      "description": "Type of product associated with the catalog.",
+                      "example": "HOTEL"
+                    },
+                    "items": {
+                      "type": "array",
+                      "description": "List of available special requests for the product.",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "code": {
+                            "type": "string",
+                            "description": "Unique code identifying the special request.",
+                            "example": "CRADLE"
+                          },
+                          "description": {
+                            "type": "string",
+                            "description": "Human-readable description of the special request.",
+                            "example": "Cuna"
+                          },
+                          "requires_value": {
+                            "type": "boolean",
+                            "description": "Indicates whether a value must be provided when submitting the special request (POST). For example, LATE_CHECK_IN requires a value specifying the desired check-in time.",
+                            "example": false
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "example": {
+                  "product_type": "HOTEL",
+                  "items": [
+                    {
+                      "requires_value": false,
+                      "code": "CRADLE",
+                      "description": "Cuna"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/reservations/changes/allowance/{transactionId}": {
+      "get": {
+        "tags": [
+          "Changes"
+        ],
+        "summary": "Allowance",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "transactionId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "operation_id",
+            "required": false,
+            "description": "Type of change to be requested.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "CREATE_CHANGE_ROUTE_REQUEST",
+                "CREATE_CHANGE_DATE_REQUEST"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "operation_id": {
+                      "type": "string",
+                      "description": "The operation you searched for:CREATE_CHANGE_ROUTE_REQUEST or CREATE_CHANGE_DATE_REQUEST"
+                    },
+                    "allowed": {
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "allowed"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "message": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "message": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "message": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "getChangeAllowance"
+      }
+    },
+    "/reservations/changes/alternatives": {
+      "get": {
+        "tags": [
+          "Changes"
+        ],
+        "summary": "Alternatives Search",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "transaction_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "You must provide the reservation ID for which you want to request a modification."
+          },
+          {
+            "in": "query",
+            "name": "departure_date",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "return_date",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "locale",
+            "required": false,
+            "description": "Response language.",
+            "schema": {
+              "type": "string",
+              "default": "es_ar",
+              "enum": [
+                "pt_br",
+                "en_us",
+                "es_ar"
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "name": "from",
+            "required": false,
+            "description": "New flight origin to be requested.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "to",
+            "required": false,
+            "description": "New flight destination to be requested.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "IATA",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "alternatives": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "outbound_choices": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "duration_time": {
+                                  "type": "object",
+                                  "properties": {
+                                    "hours": {
+                                      "type": "integer"
+                                    },
+                                    "minutes": {
+                                      "type": "integer"
+                                    }
+                                  }
+                                },
+                                "from_location": {
+                                  "type": "object",
+                                  "properties": {
+                                    "airport": {
+                                      "type": "object",
+                                      "properties": {
+                                        "code": {
+                                          "type": "string"
+                                        },
+                                        "name": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    },
+                                    "city": {
+                                      "type": "object",
+                                      "properties": {
+                                        "code": {
+                                          "type": "string"
+                                        },
+                                        "name": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    },
+                                    "country": {
+                                      "type": "object",
+                                      "properties": {
+                                        "code": {
+                                          "type": "string"
+                                        },
+                                        "name": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    }
+                                  }
+                                },
+                                "to_location": {
+                                  "type": "object",
+                                  "properties": {
+                                    "airport": {
+                                      "type": "object",
+                                      "properties": {
+                                        "code": {
+                                          "type": "string"
+                                        },
+                                        "name": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    },
+                                    "city": {
+                                      "type": "object",
+                                      "properties": {
+                                        "code": {
+                                          "type": "string"
+                                        },
+                                        "name": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    },
+                                    "country": {
+                                      "type": "object",
+                                      "properties": {
+                                        "code": {
+                                          "type": "string"
+                                        },
+                                        "name": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    }
+                                  }
+                                },
+                                "segments": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "duration_time": {
+                                        "type": "object",
+                                        "properties": {
+                                          "hours": {
+                                            "type": "integer"
+                                          },
+                                          "minutes": {
+                                            "type": "integer"
+                                          }
+                                        }
+                                      },
+                                      "from_location": {
+                                        "type": "object",
+                                        "properties": {
+                                          "airport": {
+                                            "type": "object",
+                                            "properties": {
+                                              "code": {
+                                                "type": "string"
+                                              },
+                                              "name": {
+                                                "type": "string"
+                                              }
+                                            }
+                                          },
+                                          "city": {
+                                            "type": "object",
+                                            "properties": {
+                                              "code": {
+                                                "type": "string"
+                                              },
+                                              "name": {
+                                                "type": "string"
+                                              }
+                                            }
+                                          },
+                                          "country": {
+                                            "type": "object",
+                                            "properties": {
+                                              "code": {
+                                                "type": "string"
+                                              },
+                                              "name": {
+                                                "type": "string"
+                                              }
+                                            }
+                                          }
+                                        }
+                                      },
+                                      "to_location": {
+                                        "type": "object",
+                                        "properties": {
+                                          "airport": {
+                                            "type": "object",
+                                            "properties": {
+                                              "code": {
+                                                "type": "string"
+                                              },
+                                              "name": {
+                                                "type": "string"
+                                              }
+                                            }
+                                          },
+                                          "city": {
+                                            "type": "object",
+                                            "properties": {
+                                              "code": {
+                                                "type": "string"
+                                              },
+                                              "name": {
+                                                "type": "string"
+                                              }
+                                            }
+                                          },
+                                          "country": {
+                                            "type": "object",
+                                            "properties": {
+                                              "code": {
+                                                "type": "string"
+                                              },
+                                              "name": {
+                                                "type": "string"
+                                              }
+                                            }
+                                          }
+                                        }
+                                      },
+                                      "departure_moment": {
+                                        "type": "string",
+                                        "format": "date"
+                                      },
+                                      "arrival_moment": {
+                                        "type": "string",
+                                        "format": "date"
+                                      },
+                                      "flight_number": {
+                                        "type": "integer"
+                                      },
+                                      "marketing_carrier": {
+                                        "type": "object",
+                                        "properties": {
+                                          "code": {
+                                            "type": "string"
+                                          },
+                                          "name": {
+                                            "type": "string"
+                                          }
+                                        }
+                                      },
+                                      "operating_carrier": {
+                                        "type": "object",
+                                        "properties": {
+                                          "code": {
+                                            "type": "string"
+                                          },
+                                          "name": {
+                                            "type": "string"
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "itinerary_type": {
+                            "type": "string"
+                          },
+                          "price_detail": {
+                            "type": "object",
+                            "properties": {
+                              "currency": {
+                                "type": "string"
+                              },
+                              "total": {
+                                "type": "integer"
+                              },
+                              "base": {
+                                "type": "integer"
+                              },
+                              "adult_base": {
+                                "type": "integer"
+                              },
+                              "adult_total": {
+                                "type": "integer"
+                              },
+                              "adults_subtotal": {
+                                "type": "integer"
+                              },
+                              "taxes": {
+                                "type": "integer"
+                              },
+                              "taxes_detail": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "code": {
+                                      "type": "string"
+                                    },
+                                    "amount": {
+                                      "type": "integer"
+                                    }
+                                  }
+                                }
+                              },
+                              "fees": {
+                                "type": "integer"
+                              },
+                              "penalty": {
+                                "type": "integer"
+                              }
+                            }
+                          },
+                          "validating_carrier": {
+                            "type": "object",
+                            "properties": {
+                              "code": {
+                                "type": "string"
+                              },
+                              "name": {
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "passenger_distribution": {
+                            "type": "object",
+                            "properties": {
+                              "adults": {
+                                "type": "integer"
+                              },
+                              "children": {
+                                "type": "integer"
+                              },
+                              "infants": {
+                                "type": "integer"
+                              }
+                            }
+                          },
+                          "booking_info": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "outbound_choice": {
+                                  "type": "integer"
+                                },
+                                "changes_retrieve_resource_id": {
+                                  "type": "string",
+                                  "description": "Code required to identify selected alternative in the next step (Checkout Context)"
+                                },
+                                "search_id": {
+                                  "type": "string"
+                                },
+                                "exchange_id": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "message": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "message": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "message": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "getChangeAlternatives"
+      }
+    },
+    "/reservations/changes/{transactionId}/checkouts/contexts": {
+      "post": {
+        "tags": [
+          "Changes"
+        ],
+        "summary": "alternative Prebook",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "transactionId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Transaction ID"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "country": {
+                    "type": "string"
+                  },
+                  "changes_retrieve_resource_id": {
+                    "type": "string",
+                    "description": "Obtained from the selected alternative in the previous step."
+                  },
+                  "passenger_indexes": {
+                    "type": "string"
+                  },
+                  "itinerary_search_type": {
+                    "type": "string",
+                    "enum": [
+                      "DATE",
+                      "ROUTE"
+                    ]
+                  },
+                  "lang": {
+                    "type": "string",
+                    "description": "Language"
+                  },
+                  "include": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "enum": [
+                        "EXCHANGE_POLICIES",
+                        "IMPORTANT_DATA",
+                        "HINTS"
+                      ]
+                    },
+                    "description": "This field must be submitted with at least one option. The allowed values are:   - EXCHANGE_POLICIES: This option is sent to return information about exchange policies.  - IMPORTANT_DATA: This option is sent to return information about requirements (vaccinations, documentation, etc.) based on the routes and destinations.  - HINTS: This option is sent to return specifications for required fields and formats for billing data."
+                  }
+                },
+                "required": [
+                  "country",
+                  "itinerary_id",
+                  "lang",
+                  "extended_info",
+                  "itinerary_search_type",
+                  "passenger_indexes",
+                  "changes_retrieve_resource_id",
+                  "include"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "checkout_context_id": {
+                      "type": "string",
+                      "description": "Id required to initate the modification flow (final step)."
+                    },
+                    "checkout_context": {
+                      "type": "object",
+                      "description": "Summary of the modification context, including product information, passengers, prices and payment methods",
+                      "properties": {
+                        "product": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "number"
+                            },
+                            "type": {
+                              "type": "string"
+                            },
+                            "transaction_id": {
+                              "type": "number"
+                            },
+                            "country_code": {
+                              "type": "number"
+                            },
+                            "customer": {
+                              "type": "object",
+                              "properties": {
+                                "email": {
+                                  "type": "string"
+                                },
+                                "name": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "passengers": {
+                          "type": "object",
+                          "properties": {
+                            "index": {
+                              "type": "integer"
+                            },
+                            "type": {
+                              "type": "string"
+                            },
+                            "display_name": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "price_detail": {
+                          "type": "object",
+                          "properties": {
+                            "currency": {
+                              "type": "object",
+                              "properties": {
+                                "code": {
+                                  "type": "string"
+                                },
+                                "symbol": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "breakdown": {
+                              "type": "object",
+                              "properties": {
+                                "description": {
+                                  "type": "string"
+                                },
+                                "amount": {
+                                  "type": "number"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "itinerary": {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "type": "string"
+                            },
+                            "search_type": {
+                              "type": "string"
+                            },
+                            "source": {
+                              "type": "string"
+                            },
+                            "routes": {
+                              "type": "object",
+                              "properties": {
+                                "position": {
+                                  "type": "integer"
+                                },
+                                "title": {
+                                  "type": "string"
+                                },
+                                "departure_date_time": {
+                                  "type": "string",
+                                  "format": "date"
+                                },
+                                "gmt_departure_date_time": {
+                                  "type": "string",
+                                  "format": "date"
+                                },
+                                "departure_date_time_zone_offset": {
+                                  "type": "string",
+                                  "format": "date"
+                                },
+                                "arrival_date_time": {
+                                  "type": "string",
+                                  "format": "date"
+                                },
+                                "gmt_arrival_date_time": {
+                                  "type": "string",
+                                  "format": "date"
+                                },
+                                "arrival_date_time_zone_offset": {
+                                  "type": "string",
+                                  "format": "date"
+                                },
+                                "layovers_count": {
+                                  "type": "integer"
+                                },
+                                "duration": {
+                                  "type": "object",
+                                  "properties": {
+                                    "hours": {
+                                      "type": "number"
+                                    },
+                                    "minutes": {
+                                      "type": "number"
+                                    }
+                                  }
+                                },
+                                "marketing_carriers": {
+                                  "type": "object",
+                                  "properties": {
+                                    "code": {
+                                      "type": "string"
+                                    },
+                                    "name": {
+                                      "type": "string"
+                                    }
+                                  }
+                                },
+                                "from": {
+                                  "type": "object",
+                                  "properties": {
+                                    "airport_code": {
+                                      "type": "string"
+                                    },
+                                    "time": {
+                                      "type": "number"
+                                    },
+                                    "offset_days": {
+                                      "type": "integer"
+                                    }
+                                  }
+                                },
+                                "to": {
+                                  "type": "object",
+                                  "properties": {
+                                    "airport_code": {
+                                      "type": "string"
+                                    },
+                                    "time": {
+                                      "type": "number"
+                                    },
+                                    "offset_days": {
+                                      "type": "integer"
+                                    }
+                                  }
+                                },
+                                "detail": {
+                                  "type": "object",
+                                  "properties": {
+                                    "timeline": {
+                                      "type": "object",
+                                      "properties": {
+                                        "type": {
+                                          "type": "string"
+                                        },
+                                        "position": {
+                                          "type": "integer"
+                                        },
+                                        "flight_number": {
+                                          "type": "number"
+                                        },
+                                        "duration": {
+                                          "type": "object",
+                                          "properties": {
+                                            "hours": {
+                                              "type": "number"
+                                            },
+                                            "minutes": {
+                                              "type": "number"
+                                            }
+                                          }
+                                        },
+                                        "marketing_carrier": {
+                                          "type": "object",
+                                          "properties": {
+                                            "code": {
+                                              "type": "string"
+                                            },
+                                            "name": {
+                                              "type": "string"
+                                            }
+                                          }
+                                        },
+                                        "operating_carrier": {
+                                          "type": "object",
+                                          "properties": {
+                                            "code": {
+                                              "type": "string"
+                                            },
+                                            "name": {
+                                              "type": "string"
+                                            }
+                                          }
+                                        },
+                                        "from": {
+                                          "type": "object",
+                                          "properties": {
+                                            "date": {
+                                              "type": "string",
+                                              "format": "date"
+                                            },
+                                            "time": {
+                                              "type": "string",
+                                              "format": "date"
+                                            },
+                                            "airport": {
+                                              "type": "object",
+                                              "properties": {
+                                                "code": {
+                                                  "type": "string"
+                                                },
+                                                "description": {
+                                                  "type": "string"
+                                                }
+                                              }
+                                            },
+                                            "city": {
+                                              "type": "object",
+                                              "properties": {
+                                                "code": {
+                                                  "type": "string"
+                                                },
+                                                "description": {
+                                                  "type": "string"
+                                                }
+                                              }
+                                            }
+                                          }
+                                        },
+                                        "to": {
+                                          "type": "object",
+                                          "properties": {
+                                            "date": {
+                                              "type": "string",
+                                              "format": "date"
+                                            },
+                                            "time": {
+                                              "type": "string",
+                                              "format": "date"
+                                            },
+                                            "airport": {
+                                              "type": "object",
+                                              "properties": {
+                                                "code": {
+                                                  "type": "string"
+                                                },
+                                                "description": {
+                                                  "type": "string"
+                                                }
+                                              }
+                                            },
+                                            "city": {
+                                              "type": "object",
+                                              "properties": {
+                                                "code": {
+                                                  "type": "string"
+                                                },
+                                                "description": {
+                                                  "type": "string"
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                },
+                                "days_to_departure": {
+                                  "type": "number"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "payment_methods": {
+                          "type": "object",
+                          "properties": {
+                            "code": {
+                              "type": "string"
+                            },
+                            "plans": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                },
+                                "card_code": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "message": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "message": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "message": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "message": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "createCheckoutContext"
+      }
+    },
+    "/reservations/changes/{transactionId}/checkouts/contexts/{contextId}": {
+      "get": {
+        "tags": [
+          "Changes"
+        ],
+        "summary": "Prebook Info",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "transactionId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Transaction ID"
+          },
+          {
+            "in": "path",
+            "name": "contextId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Context ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "checkout_context_id": {
+                      "type": "string"
+                    },
+                    "checkout_context": {
+                      "type": "object",
+                      "properties": {
+                        "product": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "number"
+                            },
+                            "type": {
+                              "type": "string"
+                            },
+                            "transaction_id": {
+                              "type": "number"
+                            },
+                            "country_code": {
+                              "type": "number"
+                            },
+                            "customer": {
+                              "type": "object",
+                              "properties": {
+                                "email": {
+                                  "type": "string"
+                                },
+                                "name": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "passengers": {
+                          "type": "object",
+                          "properties": {
+                            "index": {
+                              "type": "integer"
+                            },
+                            "type": {
+                              "type": "string"
+                            },
+                            "display_name": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "price_detail": {
+                          "type": "object",
+                          "properties": {
+                            "currency": {
+                              "type": "object",
+                              "properties": {
+                                "code": {
+                                  "type": "string"
+                                },
+                                "symbol": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "breakdown": {
+                              "type": "object",
+                              "properties": {
+                                "description": {
+                                  "type": "string"
+                                },
+                                "amount": {
+                                  "type": "number"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "itinerary": {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "type": "string"
+                            },
+                            "search_type": {
+                              "type": "string"
+                            },
+                            "source": {
+                              "type": "string"
+                            },
+                            "routes": {
+                              "type": "object",
+                              "properties": {
+                                "position": {
+                                  "type": "integer"
+                                },
+                                "title": {
+                                  "type": "string"
+                                },
+                                "departure_date_time": {
+                                  "type": "string",
+                                  "format": "date"
+                                },
+                                "gmt_departure_date_time": {
+                                  "type": "string",
+                                  "format": "date"
+                                },
+                                "departure_date_time_zone_offset": {
+                                  "type": "string",
+                                  "format": "date"
+                                },
+                                "arrival_date_time": {
+                                  "type": "string",
+                                  "format": "date"
+                                },
+                                "gmt_arrival_date_time": {
+                                  "type": "string",
+                                  "format": "date"
+                                },
+                                "arrival_date_time_zone_offset": {
+                                  "type": "string",
+                                  "format": "date"
+                                },
+                                "layovers_count": {
+                                  "type": "integer"
+                                },
+                                "duration": {
+                                  "type": "object",
+                                  "properties": {
+                                    "hours": {
+                                      "type": "number"
+                                    },
+                                    "minutes": {
+                                      "type": "number"
+                                    }
+                                  }
+                                },
+                                "marketing_carriers": {
+                                  "type": "object",
+                                  "properties": {
+                                    "code": {
+                                      "type": "string"
+                                    },
+                                    "name": {
+                                      "type": "string"
+                                    }
+                                  }
+                                },
+                                "from": {
+                                  "type": "object",
+                                  "properties": {
+                                    "airport_code": {
+                                      "type": "string"
+                                    },
+                                    "time": {
+                                      "type": "number"
+                                    },
+                                    "offset_days": {
+                                      "type": "integer"
+                                    }
+                                  }
+                                },
+                                "to": {
+                                  "type": "object",
+                                  "properties": {
+                                    "airport_code": {
+                                      "type": "string"
+                                    },
+                                    "time": {
+                                      "type": "number"
+                                    },
+                                    "offset_days": {
+                                      "type": "integer"
+                                    }
+                                  }
+                                },
+                                "detail": {
+                                  "type": "object",
+                                  "properties": {
+                                    "timeline": {
+                                      "type": "object",
+                                      "properties": {
+                                        "type": {
+                                          "type": "string"
+                                        },
+                                        "position": {
+                                          "type": "integer"
+                                        },
+                                        "flight_number": {
+                                          "type": "number"
+                                        },
+                                        "duration": {
+                                          "type": "object",
+                                          "properties": {
+                                            "hours": {
+                                              "type": "number"
+                                            },
+                                            "minutes": {
+                                              "type": "number"
+                                            }
+                                          }
+                                        },
+                                        "marketing_carrier": {
+                                          "type": "object",
+                                          "properties": {
+                                            "code": {
+                                              "type": "string"
+                                            },
+                                            "name": {
+                                              "type": "string"
+                                            }
+                                          }
+                                        },
+                                        "operating_carrier": {
+                                          "type": "object",
+                                          "properties": {
+                                            "code": {
+                                              "type": "string"
+                                            },
+                                            "name": {
+                                              "type": "string"
+                                            }
+                                          }
+                                        },
+                                        "from": {
+                                          "type": "object",
+                                          "properties": {
+                                            "date": {
+                                              "type": "string",
+                                              "format": "date"
+                                            },
+                                            "time": {
+                                              "type": "string",
+                                              "format": "date"
+                                            },
+                                            "airport": {
+                                              "type": "object",
+                                              "properties": {
+                                                "code": {
+                                                  "type": "string"
+                                                },
+                                                "description": {
+                                                  "type": "string"
+                                                }
+                                              }
+                                            },
+                                            "city": {
+                                              "type": "object",
+                                              "properties": {
+                                                "code": {
+                                                  "type": "string"
+                                                },
+                                                "description": {
+                                                  "type": "string"
+                                                }
+                                              }
+                                            }
+                                          }
+                                        },
+                                        "to": {
+                                          "type": "object",
+                                          "properties": {
+                                            "date": {
+                                              "type": "string",
+                                              "format": "date"
+                                            },
+                                            "time": {
+                                              "type": "string",
+                                              "format": "date"
+                                            },
+                                            "airport": {
+                                              "type": "object",
+                                              "properties": {
+                                                "code": {
+                                                  "type": "string"
+                                                },
+                                                "description": {
+                                                  "type": "string"
+                                                }
+                                              }
+                                            },
+                                            "city": {
+                                              "type": "object",
+                                              "properties": {
+                                                "code": {
+                                                  "type": "string"
+                                                },
+                                                "description": {
+                                                  "type": "string"
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "payment_methods": {
+                          "type": "object",
+                          "properties": {
+                            "code": {
+                              "type": "string"
+                            },
+                            "plans": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                },
+                                "card_code": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "extended_info": {
+                      "type": "object",
+                      "properties": {
+                        "invoice_hint": {
+                          "type": "object",
+                          "properties": {
+                            "town_registration": {
+                              "type": "object",
+                              "properties": {
+                                "hint_type": {
+                                  "type": "string"
+                                },
+                                "validations": {
+                                  "type": "object",
+                                  "properties": {
+                                    "min": {
+                                      "type": "number"
+                                    },
+                                    "max": {
+                                      "type": "number"
+                                    },
+                                    "type": {
+                                      "type": "string"
+                                    },
+                                    "conditions": {
+                                      "type": "array"
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "address": {
+                              "type": "object",
+                              "properties": {
+                                "number": {
+                                  "type": "object",
+                                  "properties": {
+                                    "hint_type": {
+                                      "type": "string"
+                                    },
+                                    "validations": {
+                                      "type": "object",
+                                      "properties": {
+                                        "regex": {
+                                          "type": "string"
+                                        },
+                                        "type": {
+                                          "type": "string"
+                                        },
+                                        "conditions": {
+                                          "type": "array"
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "message": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "message": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "message": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "message": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "getCheckoutContext"
+      }
+    },
+    "/reservations/changes/{transactionId}/checkouts/contexts/{contextId}/flows": {
+      "post": {
+        "tags": [
+          "Changes"
+        ],
+        "summary": "Alternative Book",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "transactionId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Transaction ID"
+          },
+          {
+            "in": "path",
+            "name": "contextId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "id of the created context in the Alternative Prebook step, found both in its response or in the Prebook Info service under 'checkout_context_id'."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "payment_method": {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string"
+                      },
+                      "selected_plan_id": {
+                        "type": "string"
+                      },
+                      "detail": {
+                        "type": "object",
+                        "properties": {
+                          "dvault_token": {
+                            "type": "string"
+                          },
+                          "cardholder_name": {
+                            "type": "string"
+                          },
+                          "installments": {
+                            "type": "string"
+                          },
+                          "interest": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "invoice": {
+                    "type": "object",
+                    "properties": {
+                      "fiscal_name": {
+                        "type": "string"
+                      },
+                      "fiscal_status": {
+                        "type": "string"
+                      },
+                      "fiscal_identification": {
+                        "type": "object",
+                        "properties": {
+                          "type": {
+                            "type": "string"
+                          },
+                          "number": {
+                            "type": "string"
+                          },
+                          "issue_country": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "town_registration": {
+                        "type": "string"
+                      },
+                      "address": {
+                        "type": "object",
+                        "properties": {
+                          "city_id": {
+                            "type": "number"
+                          },
+                          "number": {
+                            "type": "number"
+                          },
+                          "street": {
+                            "type": "string"
+                          },
+                          "zip_code": {
+                            "type": "number"
+                          },
+                          "apartment": {
+                            "type": "string"
+                          },
+                          "floor": {
+                            "type": "number"
+                          },
+                          "neighbourhood": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "city_id",
+                  "number",
+                  "street",
+                  "zip_code"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "flows": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string"
+                        },
+                        "id": {
+                          "type": "string",
+                          "description": "flow id to identify the operation."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "message": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "message": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "message": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "message": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "createCheckoutFlow"
+      }
+    },
+    "/reschedulings/mock": {
+      "post": {
+        "tags": [
+          "Reschedulings"
+        ],
+        "summary": "Rescheduling trigger",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "MAJOR"
+                  },
+                  "flight_id": {
+                    "type": "number",
+                    "description": "transaction_id"
+                  }
+                },
+                "required": [
+                  "type",
+                  "flight_id"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "response": {
+                      "type": "string",
+                      "example": "OK"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "message": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "message": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "message": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "triggerReschedulingMock"
+      }
+    },
+    "/reschedulings/{id}": {
+      "get": {
+        "tags": [
+          "Reschedulings"
+        ],
+        "summary": "Rescheduling alternative",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Rescheduling ID - RS-XXXX"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "is_protected": {
+                      "type": "boolean",
+                      "description": "It's the alternative that the airline guarantees for an effective and automatic rescheduling."
+                    },
+                    "source": {
+                      "type": "string"
+                    },
+                    "itinerary_type": {
+                      "type": "string"
+                    },
+                    "routes": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "message": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "message": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "message": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "message": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "getReschedulingAlternative"
+      }
+    },
+    "/reschedulings/{id}/alternatives/{alternative_id}": {
+      "patch": {
+        "tags": [
+          "Reschedulings"
+        ],
+        "summary": "Rescheduling accepted",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Comes from the reservation service - RS-XXXX"
+          },
+          {
+            "in": "path",
+            "name": "alternative_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "It comes from the alternative response - ID "
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "response": {
+                      "type": "string",
+                      "example": "ACCEPT"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "message": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "message": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "message": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "message": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "acceptReschedulingAlternative"
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "ApiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "x-apikey"
+      },
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "security": [
+    {
+      "ApiKeyAuth": []
+    }
+  ]
+}

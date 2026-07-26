@@ -1,0 +1,1057 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Activities",
+    "version": "1.0.0",
+    "description": "API for activities: tickets, modalities, availability, prebook, payments, and booking. Authentication via API Key."
+  },
+  "servers": [
+    {
+      "url": "https://api-dev.despegar.com/v3/activities-api",
+      "description": "Sandbox"
+    },
+    {
+      "url": "https://apis-uat.despegar.com/v3/activities-api",
+      "description": "UAT"
+    },
+    {
+      "url": "https://api.despegar.com/v3/activities-api",
+      "description": "Production"
+    }
+  ],
+  "security": [
+    {
+      "ApiKeyAuth": []
+    }
+  ],
+  "paths": {
+    "/discovery": {
+      "get": {
+        "tags": [
+          "Discovery"
+        ],
+        "summary": "Discovery",
+        "parameters": [
+          {
+            "name": "site",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Refers to the country code",
+            "example": "br"
+          },
+          {
+            "name": "destination",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "This field must be populated with the IATA code corresponding to each destination.",
+            "example": "SAO"
+          },
+          {
+            "name": "language",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "pt"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "items": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "tracking_id": {
+                              "type": "string"
+                            },
+                            "type": {
+                              "type": "string",
+                              "enum": [
+                                "TOUR",
+                                "TICKET"
+                              ]
+                            },
+                            "name": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "FORBIDDEN",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/modalities": {
+      "get": {
+        "tags": [
+          "Modalities"
+        ],
+        "summary": "Modalities",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "id",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          },
+          {
+            "in": "query",
+            "name": "site",
+            "schema": {
+              "type": "string",
+              "example": "br"
+            },
+            "required": true,
+            "description": "It refers to the country code and must be filled with two alphabetic characters."
+          },
+          {
+            "in": "query",
+            "name": "language",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "ES",
+                "PT",
+                "EN"
+              ]
+            },
+            "required": true,
+            "description": "This field must be filled with the language in which you want to receive the response."
+          },
+          {
+            "in": "query",
+            "name": "from",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Start date of the search range. This field must be used together with 'to'; providing only one of the two parameters is not supported.",
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "to",
+            "schema": {
+              "type": "string"
+            },
+            "description": "End date of the search range. This field must be used together with 'from'; providing only one of the two parameters is not supported.",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "ticket_id": {
+                      "type": "string",
+                      "description": "ID of the ticket type being searched."
+                    },
+                    "tracking_id": {
+                      "type": "string",
+                      "description": "ID of the ticket type being searched."
+                    },
+                    "id": {
+                      "type": "string",
+                      "description": ""
+                    },
+                    "type": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string",
+                      "description": "Description of the attraction for the ticket."
+                    },
+                    "duration": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string"
+                        },
+                        "value": {
+                          "type": "number"
+                        }
+                      }
+                    },
+                    "modalities": {
+                      "type": "array",
+                      "description": "Lists all available tickets for the searched attraction.",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "example": "ORL_1P1D_EPIC",
+                            "description": "Name of the specific modality. This field will be used for the availability endpoint if this modality is selected."
+                          },
+                          "modality_type": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "available_dates": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "date": {
+                                  "type": "string",
+                                  "format": "date"
+                                },
+                                "hours": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "number"
+                                      },
+                                      "hour": {
+                                        "type": "number"
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "prices": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "currency": {
+                                  "type": "string"
+                                },
+                                "unit_price": {
+                                  "type": "number",
+                                  "description": "This field is used as a reference price."
+                                }
+                              }
+                            }
+                          },
+                          "max_capacity": {
+                            "type": "number"
+                          },
+                          "adult_age_range": {
+                            "type": "object",
+                            "properties": {
+                              "min_age": {
+                                "type": "number"
+                              },
+                              "max_age": {
+                                "type": "number"
+                              }
+                            }
+                          },
+                          "child_age_range": {
+                            "type": "object",
+                            "properties": {
+                              "min_age": {
+                                "type": "number"
+                              },
+                              "max_age": {
+                                "type": "number"
+                              }
+                            }
+                          },
+                          "infant_age_range": {
+                            "type": "object",
+                            "properties": {
+                              "min_age": {
+                                "type": "number"
+                              },
+                              "max_age": {
+                                "type": "number"
+                              }
+                            }
+                          },
+                          "additionals": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                },
+                                "title": {
+                                  "type": "string"
+                                },
+                                "description": {
+                                  "type": "string"
+                                },
+                                "price": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "currency": {
+                                        "type": "string"
+                                      },
+                                      "unit_price": {
+                                        "type": "number",
+                                        "description": "This field is used as a reference price."
+                                      }
+                                    }
+                                  }
+                                },
+                                "inclusions": {
+                                  "type": "array"
+                                },
+                                "exclusions": {
+                                  "type": "array"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "images": {
+                      "type": "array",
+                      "description": "Images related to the searched attraction.",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "url": {
+                            "type": "string"
+                          },
+                          "key": {
+                            "type": "string"
+                          },
+                          "width": {
+                            "type": "number"
+                          },
+                          "height": {
+                            "type": "number"
+                          }
+                        }
+                      }
+                    },
+                    "inclusions": {
+                      "type": "array",
+                      "description": "This field lists the parks included in the modality."
+                    },
+                    "exclusions": {
+                      "type": "array",
+                      "description": "This field lists the parks excluded from the modality."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "title": "INVALID_FIELD",
+                      "type": "object",
+                      "properties": {
+                        "Message": {
+                          "type": "string",
+                          "description": "Modalities request validation error — missing/blank/invalid fields (ticket_id, site, language); ticket_id must be one of [SW_ORL, UN_ORL, DY_ORL]."
+                        },
+                        "Possible_cause": {
+                          "type": "string",
+                          "description": "The Modalities call was sent with incorrect inputs: ticket_id blank or not in the allowed set, site blank/invalid, or language blank/invalid."
+                        }
+                      }
+                    },
+                    {
+                      "title": "MISSING_REQUIRED_PARAMETER",
+                      "type": "object",
+                      "properties": {
+                        "Message": {
+                          "type": "string",
+                          "description": "Missing required parameters in Modalities request"
+                        },
+                        "Possible_cause": {
+                          "type": "string",
+                          "description": "The request was sent without one or more required fields: ticket_id, site, or language."
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/availability": {
+      "get": {
+        "tags": [
+          "Availability"
+        ],
+        "summary": "Availability",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "id",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "This information must be obtained from the response of the 'Modalities' service,"
+          },
+          {
+            "in": "query",
+            "name": "modality",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "Modality chosen by the user; this information must be obtained from the detail service response, in the structure: 'modalities' -> 'id'."
+          },
+          {
+            "in": "query",
+            "name": "date",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            },
+            "required": true,
+            "description": "Date on which the activity will take place; the format to send is YYYY-MM-DD.",
+            "example": "2026-04-04"
+          },
+          {
+            "in": "query",
+            "name": "site",
+            "schema": {
+              "type": "string",
+              "example": "br"
+            },
+            "required": true,
+            "description": "Refers to the country code; it must contain two alphabetic characters"
+          },
+          {
+            "in": "query",
+            "name": "language",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "es",
+                "pt",
+                "en"
+              ]
+            },
+            "required": true,
+            "description": "This field must be filled with the language in which you want to receive the response"
+          },
+          {
+            "in": "query",
+            "name": "additionals",
+            "schema": {
+              "type": "string"
+            },
+            "required": false,
+            "description": "Refers to the ID of the additional attraction; this information must be obtained from the response of the 'Modalities' service, field 'id' within the 'additionals' structure."
+          },
+          {
+            "in": "query",
+            "name": "distribution",
+            "schema": {
+              "type": "string",
+              "example": "2-8-8-4-4",
+              "default": "1"
+            },
+            "required": false,
+            "description": " In this field, send the distribution of people in the activity. The first position always refers to the number of adults; the remaining positions should be the ages of the minors (children or infants).Example: for an activity with 2 adults, two 8-year-olds, and two 4-year-olds "
+          },
+          {
+            "in": "query",
+            "name": "schedule",
+            "schema": {
+              "type": "number",
+              "example": "09:30"
+            },
+            "required": false,
+            "description": " In this field, send the distribution of people in the activity. The first position always refers to the number of adults; the remaining positions should be the ages of the minors (children or infants).Example: for an activity with 2 adults, two 8-year-olds, and two 4-year-olds "
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "choice_id": {
+                      "type": "string",
+                      "description": "ID generated to identify the ticket data and the valid fare to make the reservation."
+                    },
+                    "name": {
+                      "type": "string",
+                      "description": "Attraction name."
+                    },
+                    "modality_choice_name": {
+                      "type": "string",
+                      "description": "Name of the chosen modality."
+                    },
+                    "type": {
+                      "type": "string",
+                      "description": "Refers to the type of activity."
+                    },
+                    "language": {
+                      "type": "string",
+                      "description": "Identifies the language."
+                    },
+                    "site": {
+                      "type": "array",
+                      "description": " identifies the country code."
+                    },
+                    "destination": {
+                      "type": "array",
+                      "description": "IATA code identifying the destination."
+                    },
+                    "from": {
+                      "type": "string",
+                      "format": "date",
+                      "description": "Date on which the search was performed."
+                    },
+                    "to": {
+                      "type": "string",
+                      "format": "date",
+                      "description": "Date on which the search was performed."
+                    },
+                    "distribution": {
+                      "type": "object",
+                      "properties": {
+                        "adults": {
+                          "type": "integer"
+                        },
+                        "adults_ages": {
+                          "type": "array"
+                        },
+                        "children_ages": {
+                          "type": "array"
+                        },
+                        "infants_ages": {
+                          "type": "array"
+                        },
+                        "adult_max_age": {
+                          "type": "number"
+                        },
+                        "child_max_age": {
+                          "type": "number"
+                        },
+                        "infant_max_age": {
+                          "type": "number"
+                        }
+                      }
+                    },
+                    "additions_chosen": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "title": {
+                            "type": "string"
+                          },
+                          "description": {
+                            "type": "string"
+                          },
+                          "prices": {
+                            "type": "object",
+                            "description": "This array contains the reservation prices by currency. USD is always included by default, and an additional local currency may be returned depending on the site."
+                          }
+                        }
+                      }
+                    },
+                    "price_details": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "total": {
+                            "type": "number"
+                          },
+                          "currency": {
+                            "type": "string"
+                          },
+                          "currency_to_usd_change_rate": {
+                            "type": "number"
+                          },
+                          "usd_to_currency_change_rate": {
+                            "type": "number"
+                          },
+                          "net": {
+                            "type": "number"
+                          },
+                          "tax": {
+                            "type": "number"
+                          },
+                          "gross": {
+                            "type": "number"
+                          },
+                          "price_disaggregation": {
+                            "type": "object",
+                            "properties": {
+                              "agency_commission": {
+                                "type": "object",
+                                "properties": {
+                                  "gross": {
+                                    "type": "number"
+                                  },
+                                  "net": {
+                                    "type": "number"
+                                  },
+                                  "tax": {
+                                    "type": "number"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "cancellation_policy": {
+                      "type": "object",
+                      "properties": {
+                        "title": {
+                          "type": "string"
+                        },
+                        "cancellable": {
+                          "type": "boolean"
+                        },
+                        "ranges": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "from": {
+                                "type": "string",
+                                "format": "date"
+                              },
+                              "to": {
+                                "type": "string",
+                                "format": "date"
+                              },
+                              "penalty": {
+                                "type": "object",
+                                "properties": {
+                                  "USD": {
+                                    "type": "number"
+                                  },
+                                  "BRL": {
+                                    "type": "number"
+                                  }
+                                }
+                              },
+                              "percentage": {
+                                "type": "string"
+                              },
+                              "label": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        },
+                        "conditions": {
+                          "type": "array"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "title": "ACTIVITY_PROVIDER_ERROR",
+                      "type": "object",
+                      "properties": {
+                        "Message": {
+                          "type": "string",
+                          "description": "Bad request on activity provider due to invalid field value."
+                        },
+                        "Possible_cause": {
+                          "type": "string",
+                          "description": "'distribution' parameter sent with invalid value"
+                        }
+                      }
+                    },
+                    {
+                      "title": "INVALID_FIELD",
+                      "type": "object",
+                      "properties": {
+                        "Message": {
+                          "type": "string",
+                          "description": "Request validation error — missing, blank, invalid, or out-of-policy values in Availability parameters (ticket_id, modality, date, site, language)."
+                        },
+                        "Possible_cause": {
+                          "type": "string",
+                          "description": "The Availability call was sent with incorrect inputs: ticket_id not provided/blank or not in the allowed set, modality missing/blank, date earlier than today, site blank/invalid, or language blank/invalid."
+                        }
+                      }
+                    },
+                    {
+                      "title": "MISSING_REQUIRED_PARAMETER",
+                      "type": "object",
+                      "properties": {
+                        "Message": {
+                          "type": "string",
+                          "description": "Missing required parameters in Availability request"
+                        },
+                        "Possible_cause": {
+                          "type": "string",
+                          "description": "The request was sent without one or more required fields: ticket_id, modality, date, site, or language."
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "title": "ACTIVITY_PROVIDER_ERROR",
+                      "type": "object",
+                      "properties": {
+                        "Message": {
+                          "type": "string",
+                          "description": "Error with activity provider"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "ApiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "x-apikey"
+      },
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    },
+    "responses": {
+      "BadRequest": {
+        "description": "Bad request",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "Unauthorized": {
+        "description": "Unauthorized",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "Forbidden": {
+        "description": "Forbidden",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "NotFound": {
+        "description": "Not found",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "TooManyRequests": {
+        "description": "Too many requests",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "InternalError": {
+        "description": "Internal server error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "Ticket": {
+        "type": "object",
+        "properties": {
+          "ticket_id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "category": {
+            "type": "string"
+          },
+          "destination": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "ticket_id",
+          "name"
+        ]
+      },
+      "Modality": {
+        "type": "object",
+        "properties": {
+          "modality_id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "inclusions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "exclusions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "uses": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "modality_id",
+          "name"
+        ]
+      },
+      "AvailabilityItem": {
+        "type": "object",
+        "properties": {
+          "time": {
+            "type": "string"
+          },
+          "available": {
+            "type": "boolean"
+          },
+          "price": {
+            "$ref": "#/components/schemas/PriceDetail"
+          }
+        },
+        "required": [
+          "time",
+          "available"
+        ]
+      },
+      "AvailabilityResponse": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "modality_id": {
+            "type": "string"
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AvailabilityItem"
+            }
+          }
+        },
+        "required": [
+          "date",
+          "modality_id"
+        ]
+      },
+      "PriceDetail": {
+        "type": "object",
+        "properties": {
+          "currency": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "number"
+          },
+          "original_amount": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "currency",
+          "amount"
+        ]
+      },
+      "Passenger": {
+        "type": "object",
+        "properties": {
+          "first_name": {
+            "type": "string"
+          },
+          "last_name": {
+            "type": "string"
+          },
+          "age": {
+            "type": "integer"
+          },
+          "document": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string",
+            "format": "email"
+          }
+        },
+        "required": [
+          "first_name",
+          "last_name"
+        ]
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "code",
+          "message"
+        ]
+      }
+    }
+  },
+  "x-readme": {}
+}

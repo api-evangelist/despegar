@@ -1,0 +1,39 @@
+generated: '2026-07-18'
+method: searched
+source: https://api-docs.despegar.com/docs/general-information
+derived_from:
+- openapi/despegar-booking-openapi.json
+- openapi/despegar-hotels-openapi.json
+- openapi/despegar-flights-openapi.json
+authentication:
+  style: api-key
+  header: x-apikey
+  notes: One API key per client, provisioned at onboarding; separate test and production keys. JWT bearer also declared.
+  ref: authentication/despegar-authentication.yml
+versioning:
+  scheme: uri-path
+  current: v3
+  base_path: /v3
+  ref: lifecycle/despegar-lifecycle.yml
+media_type: application/json
+localization:
+  parameter: lang
+  supported: [pt, en, es]
+idempotency:
+  supported: false
+  notes: No idempotency-key header or idempotent-retry contract is documented; booking flows instead use a prebook->book two-step (createPrebook then createBooking) with server-issued choice_id/prebook context tokens to bind a quote before purchase.
+pagination:
+  documented: false
+  notes: Suggestion/geo endpoints accept query filters; no cursor/offset pagination envelope is documented.
+error_envelope:
+  format: json
+  problem_json: false
+  ref: errors/despegar-problem-types.yml
+rate_limiting:
+  signaled: true
+  evidence: HTTP 429 declared on hotels/flights/activities/geo operations
+  ref: errors/despegar-problem-types.yml
+environments:
+  test: [https://api-dev.despegar.com/v3, https://apis-uat.despegar.com/v3]
+  production: https://api.despegar.com/v3
+  ref: sandbox/despegar-sandbox.yml

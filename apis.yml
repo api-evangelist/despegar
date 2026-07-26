@@ -1,7 +1,18 @@
 aid: despegar
 name: Despegar
-description: 'Despegar is a company surfaced as a portfolio company of accel and added to the API Evangelist
-  network as a stub for enrichment. Sector: consumer. This profile is a lead awaiting the enrichment pipeline.'
+description: >-
+  Despegar (Decolar in Brazil) is the leading online travel agency in Latin
+  America, selling flights, hotels, activities, car rentals, insurance and
+  vacation packages across the region. Its Despegar B2B platform exposes a
+  partner API ecosystem so travel agencies and resellers can integrate hotel,
+  flight and activity search, pre-booking, payment, booking and after-sales
+  (cancellations, rescheduling, special requests) directly into their own
+  systems, backed by geo/common-assets reference data and an event/notification
+  channel. APIs are versioned under /v3, authenticated with a per-client API
+  key (x-apikey header) with separate test and production keys, protected with
+  mTLS for B2B transactions, and now also reachable through published Model
+  Context Protocol (MCP) servers for AI agents. This profile was enriched from
+  Despegar's public developer documentation at api-docs.despegar.com.
 url: https://raw.githubusercontent.com/api-evangelist/despegar/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -9,18 +20,288 @@ x-backed-by:
 - accel
 x-tier: stub
 x-tier-reason: portfolio-lead
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-18'
+image: https://github.com/despegar.png
 tags:
 - Company
 - Consumer
-apis: []
+- Travel
+- Hotels
+- Flights
+- Booking
+- Tourism
+- Latin America
+- B2B
+- MCP
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+apis:
+- aid: despegar:despegar-availability-api
+  name: Despegar Availability API
+  description: The Availability API from Despegar — 2 operation(s) for availability.
+  humanURL: https://api-docs.despegar.com/docs/hotels
+  baseURL: https://api.despegar.com/v3
+  tags:
+  - Availability
+  properties:
+  - type: OpenAPI
+    url: openapi/despegar-availability-api-openapi.yml
+- aid: despegar:despegar-booking-api
+  name: Despegar Booking API
+  description: The Booking API from Despegar — 1 operation(s) for booking.
+  humanURL: https://api-docs.despegar.com/docs/hotels
+  baseURL: https://api.despegar.com/v3
+  tags:
+  - Booking
+  properties:
+  - type: OpenAPI
+    url: openapi/despegar-booking-api-openapi.yml
+- aid: despegar:despegar-cancellations-api
+  name: Despegar Cancellations API
+  description: Validation, quotation, and confirmation of cancellations.
+  humanURL: https://api-docs.despegar.com/docs/hotels
+  baseURL: https://api.despegar.com/v3
+  tags:
+  - Cancellations
+  properties:
+  - type: OpenAPI
+    url: openapi/despegar-cancellations-api-openapi.yml
+- aid: despegar:despegar-changes-api
+  name: Despegar Changes API
+  description: Date/itinerary changes and checkout processes.
+  humanURL: https://api-docs.despegar.com/docs/hotels
+  baseURL: https://api.despegar.com/v3
+  tags:
+  - Changes
+  properties:
+  - type: OpenAPI
+    url: openapi/despegar-changes-api-openapi.yml
+- aid: despegar:despegar-commission-update-api
+  name: Despegar Commission Update API
+  description: The Commission Update API from Despegar — 1 operation(s) for commission update.
+  humanURL: https://api-docs.despegar.com/docs/hotels
+  baseURL: https://api.despegar.com/v3
+  tags:
+  - Commission Update
+  properties:
+  - type: OpenAPI
+    url: openapi/despegar-commission-update-api-openapi.yml
+- aid: despegar:despegar-discovery-api
+  name: Despegar Discovery API
+  description: The Discovery API from Despegar — 1 operation(s) for discovery.
+  humanURL: https://api-docs.despegar.com/docs/hotels
+  baseURL: https://api.despegar.com/v3
+  tags:
+  - Discovery
+  properties:
+  - type: OpenAPI
+    url: openapi/despegar-discovery-api-openapi.yml
+- aid: despegar:despegar-flights-api
+  name: Despegar Flights API
+  description: The Flights API from Despegar — 2 operation(s) for flights.
+  humanURL: https://api-docs.despegar.com/docs/hotels
+  baseURL: https://api.despegar.com/v3
+  tags:
+  - Flights
+  properties:
+  - type: OpenAPI
+    url: openapi/despegar-flights-api-openapi.yml
+- aid: despegar:despegar-geography-api
+  name: Despegar Geography API
+  description: The Geography API from Despegar — 12 operation(s) for geography.
+  humanURL: https://api-docs.despegar.com/docs/hotels
+  baseURL: https://api.despegar.com/v3
+  tags:
+  - Geography
+  properties:
+  - type: OpenAPI
+    url: openapi/despegar-geography-api-openapi.yml
+- aid: despegar:despegar-hotel-api
+  name: Despegar hotel API
+  description: The hotel API from Despegar — 1 operation(s) for hotel.
+  humanURL: https://api-docs.despegar.com/docs/hotels
+  baseURL: https://api.despegar.com/v3
+  tags:
+  - hotel
+  properties:
+  - type: OpenAPI
+    url: openapi/despegar-hotel-api-openapi.yml
+- aid: despegar:despegar-hotel-content-api
+  name: Despegar Hotel content API
+  description: The Hotel content API from Despegar — 3 operation(s) for hotel content.
+  humanURL: https://api-docs.despegar.com/docs/hotels
+  baseURL: https://api.despegar.com/v3
+  tags:
+  - Hotel content
+  properties:
+  - type: OpenAPI
+    url: openapi/despegar-hotel-content-api-openapi.yml
+- aid: despegar:despegar-hotelavailability-api
+  name: Despegar HotelAvailability API
+  description: The HotelAvailability API from Despegar — 1 operation(s) for hotelavailability.
+  humanURL: https://api-docs.despegar.com/docs/hotels
+  baseURL: https://api.despegar.com/v3
+  tags:
+  - HotelAvailability
+  properties:
+  - type: OpenAPI
+    url: openapi/despegar-hotelavailability-api-openapi.yml
+- aid: despegar:despegar-hotels-inventory-api
+  name: Despegar Hotels inventory API
+  description: The Hotels inventory API from Despegar — 1 operation(s) for hotels inventory.
+  humanURL: https://api-docs.despegar.com/docs/hotels
+  baseURL: https://api.despegar.com/v3
+  tags:
+  - Hotels inventory
+  properties:
+  - type: OpenAPI
+    url: openapi/despegar-hotels-inventory-api-openapi.yml
+- aid: despegar:despegar-modalities-api
+  name: Despegar Modalities API
+  description: The Modalities API from Despegar — 1 operation(s) for modalities.
+  humanURL: https://api-docs.despegar.com/docs/hotels
+  baseURL: https://api.despegar.com/v3
+  tags:
+  - Modalities
+  properties:
+  - type: OpenAPI
+    url: openapi/despegar-modalities-api-openapi.yml
+- aid: despegar:despegar-payments-api
+  name: Despegar Payments API
+  description: The Payments API from Despegar — 1 operation(s) for payments.
+  humanURL: https://api-docs.despegar.com/docs/hotels
+  baseURL: https://api.despegar.com/v3
+  tags:
+  - Payments
+  properties:
+  - type: OpenAPI
+    url: openapi/despegar-payments-api-openapi.yml
+- aid: despegar:despegar-pre-booking-api
+  name: Despegar Pre-booking API
+  description: The Pre-booking API from Despegar — 1 operation(s) for pre-booking.
+  humanURL: https://api-docs.despegar.com/docs/hotels
+  baseURL: https://api.despegar.com/v3
+  tags:
+  - Pre-booking
+  properties:
+  - type: OpenAPI
+    url: openapi/despegar-pre-booking-api-openapi.yml
+- aid: despegar:despegar-price-jump-api
+  name: Despegar Price Jump API
+  description: The Price Jump API from Despegar — 1 operation(s) for price jump.
+  humanURL: https://api-docs.despegar.com/docs/hotels
+  baseURL: https://api.despegar.com/v3
+  tags:
+  - Price Jump
+  properties:
+  - type: OpenAPI
+    url: openapi/despegar-price-jump-api-openapi.yml
+- aid: despegar:despegar-reschedulings-api
+  name: Despegar Reschedulings API
+  description: Management of major reschedulings.
+  humanURL: https://api-docs.despegar.com/docs/hotels
+  baseURL: https://api.despegar.com/v3
+  tags:
+  - Reschedulings
+  properties:
+  - type: OpenAPI
+    url: openapi/despegar-reschedulings-api-openapi.yml
+- aid: despegar:despegar-reservations-api
+  name: Despegar Reservations API
+  description: Reservation query and management.
+  humanURL: https://api-docs.despegar.com/docs/hotels
+  baseURL: https://api.despegar.com/v3
+  tags:
+  - Reservations
+  properties:
+  - type: OpenAPI
+    url: openapi/despegar-reservations-api-openapi.yml
+- aid: despegar:despegar-special-requests-api
+  name: Despegar Special Requests API
+  description: Special requests associated with a reservation.
+  humanURL: https://api-docs.despegar.com/docs/hotels
+  baseURL: https://api.despegar.com/v3
+  tags:
+  - Special Requests
+  properties:
+  - type: OpenAPI
+    url: openapi/despegar-special-requests-api-openapi.yml
+- aid: despegar:despegar-suggestions-api
+  name: Despegar Suggestions API
+  description: The Suggestions API from Despegar — 16 operation(s) for suggestions.
+  humanURL: https://api-docs.despegar.com/docs/hotels
+  baseURL: https://api.despegar.com/v3
+  tags:
+  - Suggestions
+  properties:
+  - type: OpenAPI
+    url: openapi/despegar-suggestions-api-openapi.yml
 common:
+- type: DeveloperPortal
+  url: https://api-docs.despegar.com
+- type: Documentation
+  url: https://api-docs.despegar.com/docs/ecosystem
+- type: APIReference
+  url: https://api-docs.despegar.com/reference
+- type: GettingStarted
+  url: https://api-docs.despegar.com/docs/general-information
+- type: Support
+  url: https://api-docs.despegar.com/docs/support
+- type: GitHubOrganization
+  url: https://github.com/despegar
+- type: MCPServer
+  url: mcp/despegar-mcp.yml
+- type: LLMsTxt
+  url: llms/despegar-llms.txt
+- type: WellKnown
+  url: well-known/despegar-well-known.yml
+- type: SecurityTxt
+  url: well-known/despegar-security.txt
+- type: Authentication
+  url: authentication/despegar-authentication.yml
+- type: Conventions
+  url: conventions/despegar-conventions.yml
+- type: Lifecycle
+  url: lifecycle/despegar-lifecycle.yml
+- type: Sandbox
+  url: sandbox/despegar-sandbox.yml
+- type: Conformance
+  url: conformance/despegar-conformance.yml
+- type: ErrorCatalog
+  url: errors/despegar-problem-types.yml
+- type: DataModel
+  url: data-model/despegar-data-model.yml
+- type: Packages
+  url: packages/despegar-packages.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: VulnerabilityDisclosure
+  url: security/despegar-vulnerability-disclosure.yml
+- type: Security
+  url: https://www.despegar.com/.well-known/security.txt
+- type: DomainSecurity
+  url: security/despegar-domain-security.yml
 - type: Website
   url: http://www.despegar.com
+x-enrichment:
+  date: '2026-07-19'
+  status: backfilled
+  pass: local-v1
+  note: backfilled from .gitignore signal + verified work evidence

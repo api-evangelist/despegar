@@ -1,0 +1,25 @@
+generated: '2026-07-18'
+method: searched
+source: https://api-docs.despegar.com/docs/general-information
+versioning:
+  scheme: uri-path
+  current: v3
+  docs: https://api-docs.despegar.com/docs/ecosystem
+environments:
+- name: Sandbox
+  base_url: https://api-dev.despegar.com/v3
+- name: UAT
+  base_url: https://apis-uat.despegar.com/v3
+- name: Production
+  base_url: https://api.despegar.com/v3
+certification:
+  required: true
+  notes: Partners must certify each product connection (hotels, flights, activities) by providing evidence of how the data is displayed on their site before production access.
+deprecation:
+  policy_url: null
+  sunset_header: null
+  notes: No formal deprecation/Sunset-header policy is published.
+sla:
+  url: null
+status_page: null
+deprecated_operations: []

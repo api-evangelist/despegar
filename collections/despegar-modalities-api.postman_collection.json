@@ -1,0 +1,240 @@
+{
+  "item": [
+    {
+      "id": "ad153921-3d63-481b-8969-336fd82dc4d0",
+      "name": "Modalities",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "48e2cbbe-271e-4c28-ad24-cae0c524585d",
+          "name": "Modalities",
+          "request": {
+            "name": "Modalities",
+            "description": {},
+            "url": {
+              "path": [
+                "modalities"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "site",
+                  "value": "<string>",
+                  "description": "(Required) It refers to the country code and must be filled with two alphabetic characters."
+                },
+                {
+                  "disabled": false,
+                  "key": "language",
+                  "value": "<string>",
+                  "description": "(Required) This field must be filled with the language in which you want to receive the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "from",
+                  "value": "<string>",
+                  "description": "Start date of the search range. This field must be used together with 'to'; providing only one of the two parameters is not supported."
+                },
+                {
+                  "disabled": false,
+                  "key": "to",
+                  "value": "<string>",
+                  "description": "End date of the search range. This field must be used together with 'from'; providing only one of the two parameters is not supported."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "80178b65-402e-4f37-b0a1-052682575dab",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "modalities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "site",
+                      "value": "br"
+                    },
+                    {
+                      "key": "language",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "from",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ticket_id\": \"string\",\n  \"tracking_id\": \"string\",\n  \"id\": \"string\",\n  \"type\": \"string\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"duration\": {\n    \"type\": \"string\",\n    \"value\": 1176.7387153554032\n  },\n  \"modalities\": [\n    {\n      \"id\": \"ORL_1P1D_EPIC\",\n      \"modality_type\": \"string\",\n      \"name\": \"string\",\n      \"available_dates\": [\n        {\n          \"date\": \"1983-02-07\",\n          \"hours\": [\n            {\n              \"id\": 4444.537519527484,\n              \"hour\": 8878.809754673335\n            },\n            {\n              \"id\": 9640.15746741897,\n              \"hour\": 1458.9792848855686\n            }\n          ]\n        },\n        {\n          \"date\": \"1979-07-15\",\n          \"hours\": [\n            {\n              \"id\": 4254.042701011464,\n              \"hour\": 8423.478764793592\n            },\n            {\n              \"id\": 4285.439533546769,\n              \"hour\": 5969.702289330514\n            }\n          ]\n        }\n      ],\n      \"prices\": [\n        {\n          \"currency\": \"string\",\n          \"unit_price\": 7395.376738275469\n        },\n        {\n          \"currency\": \"string\",\n          \"unit_price\": 5064.1317691402\n        }\n      ],\n      \"max_capacity\": 466.46991855349484,\n      \"adult_age_range\": {\n        \"min_age\": 8700.001402930939,\n        \"max_age\": 280.201182139086\n      },\n      \"child_age_range\": {\n        \"min_age\": 5488.2591801930585,\n        \"max_age\": 3164.662412473774\n      },\n      \"infant_age_range\": {\n        \"min_age\": 91.44410965538418,\n        \"max_age\": 3480.685228249275\n      },\n      \"additionals\": [\n        {\n          \"id\": \"string\",\n          \"title\": \"string\",\n          \"description\": \"string\",\n          \"price\": [\n            {\n              \"currency\": \"string\",\n              \"unit_price\": 2541.4966857758313\n            },\n            {\n              \"currency\": \"string\",\n              \"unit_price\": 146.49067361887867\n            }\n          ]\n        },\n        {\n          \"id\": \"string\",\n          \"title\": \"string\",\n          \"description\": \"string\",\n          \"price\": [\n            {\n              \"currency\": \"string\",\n              \"unit_price\": 1453.8336325620317\n            },\n            {\n              \"currency\": \"string\",\n              \"unit_price\": 7080.277121855244\n            }\n          ]\n        }\n      ]\n    },\n    {\n      \"id\": \"ORL_1P1D_EPIC\",\n      \"modality_type\": \"string\",\n      \"name\": \"string\",\n      \"available_dates\": [\n        {\n          \"date\": \"1958-10-10\",\n          \"hours\": [\n            {\n              \"id\": 8935.019828015078,\n              \"hour\": 2857.3176621106013\n            },\n            {\n              \"id\": 2356.51324480745,\n              \"hour\": 3662.553490605426\n            }\n          ]\n        },\n        {\n          \"date\": \"1981-03-19\",\n          \"hours\": [\n            {\n              \"id\": 8928.293840499362,\n              \"hour\": 154.71523352532768\n            },\n            {\n              \"id\": 1121.744108098418,\n              \"hour\": 4169.255192164638\n            }\n          ]\n        }\n      ],\n      \"prices\": [\n        {\n          \"currency\": \"string\",\n          \"unit_price\": 5216.57802099158\n        },\n        {\n          \"currency\": \"string\",\n          \"unit_price\": 5999.777940338431\n        }\n      ],\n      \"max_capacity\": 2648.5059334677376,\n      \"adult_age_range\": {\n        \"min_age\": 4728.680949384613,\n        \"max_age\": 6317.192400658718\n      },\n      \"child_age_range\": {\n        \"min_age\": 987.2635132375362,\n        \"max_age\": 2525.582156362267\n      },\n      \"infant_age_range\": {\n        \"min_age\": 2663.3560949364996,\n        \"max_age\": 3309.654290121633\n      },\n      \"additionals\": [\n        {\n          \"id\": \"string\",\n          \"title\": \"string\",\n          \"description\": \"string\",\n          \"price\": [\n            {\n              \"currency\": \"string\",\n              \"unit_price\": 1728.3279544512332\n            },\n            {\n              \"currency\": \"string\",\n              \"unit_price\": 7610.012004431727\n            }\n          ]\n        },\n        {\n          \"id\": \"string\",\n          \"title\": \"string\",\n          \"description\": \"string\",\n          \"price\": [\n            {\n              \"currency\": \"string\",\n              \"unit_price\": 6146.440723044977\n            },\n            {\n              \"currency\": \"string\",\n              \"unit_price\": 7441.060244297363\n            }\n          ]\n        }\n      ]\n    }\n  ],\n  \"images\": [\n    {\n      \"url\": \"string\",\n      \"key\": \"string\",\n      \"width\": 8793.674230239421,\n      \"height\": 7603.0556278456415\n    },\n    {\n      \"url\": \"string\",\n      \"key\": \"string\",\n      \"width\": 3803.8902063015735,\n      \"height\": 3732.5723182472693\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8c6f5070-5297-45a5-9fb5-b57383149e29",
+              "name": "Invalid request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "modalities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "site",
+                      "value": "br"
+                    },
+                    {
+                      "key": "language",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "from",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"Possible_cause\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-dev.despegar.com/v3/activities-api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "a8e8879d-33fe-4612-92ef-4c88fb85cfb2",
+    "name": "Activities Availability Modalities API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for activities: tickets, modalities, availability, prebook, payments, and booking. Authentication via API Key.",
+      "type": "text/plain"
+    }
+  }
+}

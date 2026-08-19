@@ -1,0 +1,695 @@
+{
+  "item": [
+    {
+      "id": "b15620b1-9c7a-48e5-9ce8-90de172b881d",
+      "name": "Reservations",
+      "description": {
+        "content": "Reservation query and management.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6e97f253-b1b4-4756-b333-2a48d18d8192",
+          "name": "Status",
+          "request": {
+            "name": "Status",
+            "description": {},
+            "url": {
+              "path": [
+                "reservations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "product_id",
+                  "value": "<integer>",
+                  "description": "This field represents the product identifier within the reservation. In v2, it matches the booking_code field. It must be used in combination with the corresponding product_type value."
+                },
+                {
+                  "disabled": false,
+                  "key": "product_type",
+                  "value": "<string>",
+                  "description": "Indicates the type of product associated with the reservation. Only to be used with the corresponding product_id to identify the product."
+                },
+                {
+                  "disabled": false,
+                  "key": "reservation_id",
+                  "value": "<integer>",
+                  "description": "Refers to the reservation ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "flow_id",
+                  "value": "<string>",
+                  "description": "Refers to the ID of a flow within a reservation, used to check the status of a specific management action"
+                },
+                {
+                  "disabled": false,
+                  "key": "partner_id",
+                  "value": "<string>",
+                  "description": "Refers to the partner ID; when provided, it returns all products associated with it"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "50",
+                  "description": "Limits the number of search results, especially for partner_id/api_key queries that can return thousands of products."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "Pagination for responses that exceed the limit. Add the parameter page= starting at 0 up to the last available page at the end of the request"
+                },
+                {
+                  "disabled": false,
+                  "key": "by_api_key",
+                  "value": "<boolean>",
+                  "description": "Refers to apikey, when sent it searches for all products associated with apikey"
+                },
+                {
+                  "disabled": false,
+                  "key": "external_transaction_id",
+                  "value": "<integer>",
+                  "description": "Obtained via external_reservation_id"
+                },
+                {
+                  "disabled": false,
+                  "key": "from_purchase_date",
+                  "value": "<date>"
+                },
+                {
+                  "disabled": false,
+                  "key": "to_purchase_date",
+                  "value": "<date>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6c3e99ab-01b0-42b5-b952-9b70c1dc5366",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reservations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "product_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "product_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "reservation_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "flow_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "partner_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "by_api_key",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "external_transaction_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "from_purchase_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "to_purchase_date",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"id\": 6916.517815446781,\n      \"product\": {\n        \"product_id\": 4292.760305599417,\n        \"product_type\": \"string\",\n        \"transaction_id\": 4893.6113507468835,\n        \"status\": \"IN_PROCESS\",\n        \"purchase_date_time\": \"1968-08-12\",\n        \"partner_id\": \"string\",\n        \"pnr\": \"string\",\n        \"sale_price\": {\n          \"currency\": \"string\",\n          \"price\": 9247.262871657802,\n          \"conversion_rate\": 6179.14155114118,\n          \"charges\": {\n            \"code\": \"string\",\n            \"charge\": {\n              \"code\": \"string\",\n              \"individual_charges\": {\n                \"code\": \"string\",\n                \"amount\": 2729.4331788697136\n              }\n            }\n          }\n        },\n        \"purchase_customer\": {\n          \"full_name\": \"string\",\n          \"email\": \"string\",\n          \"phone_number\": 8318.505765560045,\n          \"phone_type\": 1205.9340369595905,\n          \"phones\": {\n            \"type\": \"string\",\n            \"number\": 4594.132173790203\n          }\n        },\n        \"external_reservation_id\": 219.99067650778858,\n        \"departure_date_time\": \"2008-03-15\",\n        \"passengers\": {\n          \"gender\": \"string\",\n          \"type\": \"string\",\n          \"birth_date\": \"1988-04-20\",\n          \"first_name\": \"string\",\n          \"last_name\": \"string\",\n          \"nationality\": \"string\",\n          \"identification_type\": \"string\",\n          \"identification_code\": 9213.881178424375,\n          \"tickets\": {\n            \"type\": \"string\",\n            \"number\": 9044.888790488481,\n            \"active\": true\n          },\n          \"passenger_index\": 8334\n        },\n        \"route\": {},\n        \"download_voucher_url\": \"string\"\n      }\n    },\n    {\n      \"id\": 9397.59355881433,\n      \"product\": {\n        \"product_id\": 2776.6372678052053,\n        \"product_type\": \"string\",\n        \"transaction_id\": 2230.4448166358725,\n        \"status\": \"ISSUED\",\n        \"purchase_date_time\": \"1981-03-30\",\n        \"partner_id\": \"string\",\n        \"pnr\": \"string\",\n        \"sale_price\": {\n          \"currency\": \"string\",\n          \"price\": 4400.29841330107,\n          \"conversion_rate\": 984.7605706510509,\n          \"charges\": {\n            \"code\": \"string\",\n            \"charge\": {\n              \"code\": \"string\",\n              \"individual_charges\": {\n                \"code\": \"string\",\n                \"amount\": 9984.717370276932\n              }\n            }\n          }\n        },\n        \"purchase_customer\": {\n          \"full_name\": \"string\",\n          \"email\": \"string\",\n          \"phone_number\": 9818.169339647031,\n          \"phone_type\": 1921.6050328286915,\n          \"phones\": {\n            \"type\": \"string\",\n            \"number\": 6505.545518143349\n          }\n        },\n        \"external_reservation_id\": 6377.424588880064,\n        \"departure_date_time\": \"1970-02-24\",\n        \"passengers\": {\n          \"gender\": \"string\",\n          \"type\": \"string\",\n          \"birth_date\": \"2012-04-05\",\n          \"first_name\": \"string\",\n          \"last_name\": \"string\",\n          \"nationality\": \"string\",\n          \"identification_type\": \"string\",\n          \"identification_code\": 1162.1539238961743,\n          \"tickets\": {\n            \"type\": \"string\",\n            \"number\": 3234.718187782041,\n            \"active\": true\n          },\n          \"passenger_index\": 6003\n        },\n        \"route\": {},\n        \"download_voucher_url\": \"string\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2aa1c9d4-9c0a-42ac-b7ca-54c9b8705b2b",
+              "name": "Invalid request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reservations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "product_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "product_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "reservation_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "flow_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "partner_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "by_api_key",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "external_transaction_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "from_purchase_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "to_purchase_date",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a8e4ee7c-102f-4c0b-8a3b-2d8eb947ff7a",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reservations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "product_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "product_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "reservation_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "flow_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "partner_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "by_api_key",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "external_transaction_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "from_purchase_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "to_purchase_date",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7b118773-1c66-4336-8698-eeb87b074695",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reservations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "product_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "product_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "reservation_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "flow_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "partner_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "by_api_key",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "external_transaction_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "from_purchase_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "to_purchase_date",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a973c70d-b026-4ec3-877c-968c5cdb5910",
+          "name": "Status reservation",
+          "request": {
+            "name": "Status reservation",
+            "description": {},
+            "url": {
+              "path": [
+                "book",
+                ":reservationId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "reservationId",
+                  "description": "(Required) This field must be filled in with the id of an existing reservation or with the 'external_booking_reference' sent when closing the reservation."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "76bad27f-8b7a-439f-bdd2-a74926c99c71",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "book",
+                    ":reservationId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reservationId",
+                      "description": "(Required) This field must be filled in with the id of an existing reservation or with the 'external_booking_reference' sent when closing the reservation."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reservation_id\": \"815222296950\",\n  \"status\": \"SUCCESS\",\n  \"products\": [\n    {\n      \"type\": \"FLIGHT\",\n      \"platform_id\": \"24315872051\",\n      \"pnr\": \"GO8GO@\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c6df4c57-171e-4911-a1fc-45b9554aac41",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "book",
+                    ":reservationId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reservationId",
+                      "description": "(Required) This field must be filled in with the id of an existing reservation or with the 'external_booking_reference' sent when closing the reservation."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"INVALID_FILTER\",\n  \"message\": \"Invalid parameter\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "93e38fb0-af00-4d99-a210-290a52c903bd",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "book",
+                    ":reservationId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reservationId",
+                      "description": "(Required) This field must be filled in with the id of an existing reservation or with the 'external_booking_reference' sent when closing the reservation."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"INVALID_FILTER\",\n  \"message\": \"Invalid parameter\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-dev.despegar.com/v3/activities-api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "ff246166-1b3b-42ee-99f5-7b10ec61579c",
+    "name": "Activities Availability Reservations API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for activities: tickets, modalities, availability, prebook, payments, and booking. Authentication via API Key.",
+      "type": "text/plain"
+    }
+  }
+}

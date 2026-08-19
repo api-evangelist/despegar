@@ -1,0 +1,442 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Activities Availability Suggestions API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-apikey",
+      "value": "{{x-apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Suggestions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "airlines",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-dev.despegar.com/v3/activities-api/airlines"
+          },
+          "docs": "airlines"
+        },
+        {
+          "info": {
+            "name": "countries",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-dev.despegar.com/v3/activities-api/suggestions/countries",
+            "params": [
+              {
+                "name": "locale",
+                "value": "pt_BR",
+                "type": "query",
+                "description": "string which contains language and country, in that order and separated by dash"
+              },
+              {
+                "name": "hint",
+                "value": "MEX",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "countries"
+        },
+        {
+          "info": {
+            "name": "buses",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-dev.despegar.com/v3/activities-api/suggestions/buses",
+            "params": [
+              {
+                "name": "locale",
+                "value": "pt_BR",
+                "type": "query",
+                "description": "string which contains language and country, in that order and separated by dash"
+              },
+              {
+                "name": "hint",
+                "value": "airpor",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "buses"
+        },
+        {
+          "info": {
+            "name": "suggestions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-dev.despegar.com/v3/activities-api/suggestions",
+            "params": [
+              {
+                "name": "locale",
+                "value": "pt_BR",
+                "type": "query",
+                "description": "string which contains language and country, in that order and separated by dash"
+              },
+              {
+                "name": "hint",
+                "value": "Joao Pessoa",
+                "type": "query"
+              },
+              {
+                "name": "profile",
+                "value": "sbox-flights",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "suggestions"
+        },
+        {
+          "info": {
+            "name": "cities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-dev.despegar.com/v3/activities-api/suggestions/cities",
+            "params": [
+              {
+                "name": "locale",
+                "value": "pt_BR",
+                "type": "query",
+                "description": "string which contains language and country, in that order and separated by dash"
+              },
+              {
+                "name": "hint",
+                "value": "Telêmaco Borba",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "cities"
+        },
+        {
+          "info": {
+            "name": "zones",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-dev.despegar.com/v3/activities-api/suggestions/zones",
+            "params": [
+              {
+                "name": "locale",
+                "value": "pt_BR",
+                "type": "query",
+                "description": "string which contains language and country, in that order and separated by dash"
+              },
+              {
+                "name": "hint",
+                "value": "nor",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "zones"
+        },
+        {
+          "info": {
+            "name": "hotels",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-dev.despegar.com/v3/activities-api/suggestions/hotels",
+            "params": [
+              {
+                "name": "locale",
+                "value": "pt_BR",
+                "type": "query",
+                "description": "string which contains language and country, in that order and separated by dash"
+              },
+              {
+                "name": "hint",
+                "value": "airpor",
+                "type": "query"
+              },
+              {
+                "name": "weak",
+                "value": "true",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "hotels"
+        },
+        {
+          "info": {
+            "name": "continents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-dev.despegar.com/v3/activities-api/suggestions/continents",
+            "params": [
+              {
+                "name": "locale",
+                "value": "pt_BR",
+                "type": "query",
+                "description": "string which contains language and country, in that order and separated by dash"
+              },
+              {
+                "name": "hint",
+                "value": "ame",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "continents"
+        },
+        {
+          "info": {
+            "name": "airports",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-dev.despegar.com/v3/activities-api/suggestions/airports",
+            "params": [
+              {
+                "name": "locale",
+                "value": "pt_BR",
+                "type": "query",
+                "description": "string which contains language and country, in that order and separated by dash"
+              },
+              {
+                "name": "hint",
+                "value": "tokyo",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "airports"
+        },
+        {
+          "info": {
+            "name": "regions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-dev.despegar.com/v3/activities-api/suggestions/regions",
+            "params": [
+              {
+                "name": "locale",
+                "value": "pt_BR",
+                "type": "query",
+                "description": "string which contains language and country, in that order and separated by dash"
+              },
+              {
+                "name": "hint",
+                "value": "ara",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "regions"
+        },
+        {
+          "info": {
+            "name": "activities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-dev.despegar.com/v3/activities-api/suggestions/activities",
+            "params": [
+              {
+                "name": "locale",
+                "value": "pt_BR",
+                "type": "query",
+                "description": "string which contains language and country, in that order and separated by dash"
+              },
+              {
+                "name": "hint",
+                "value": "bra",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "activities"
+        },
+        {
+          "info": {
+            "name": "disambiguations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-dev.despegar.com/v3/activities-api/disambiguations/:gid",
+            "params": [
+              {
+                "name": "gid",
+                "value": "CIT_4544",
+                "type": "path",
+                "description": "It is the identifier of the destination location."
+              },
+              {
+                "name": "country",
+                "value": "CO",
+                "type": "query",
+                "description": "Country code where the search is being performed. Used for airport searches."
+              },
+              {
+                "name": "flow_type",
+                "value": "FLIGHT_HOTEL",
+                "type": "query",
+                "description": "Describes the type of product being searched for. It allows applying rules that are exclusive to certain trip types."
+              },
+              {
+                "name": "from_date",
+                "value": "2024-12-12",
+                "type": "query",
+                "description": "They check for temporary closures, day-of-week disambiguations, and that the rule is active on those dates, and it must be sent using to_date."
+              },
+              {
+                "name": "to_date",
+                "value": "2024-12-19",
+                "type": "query",
+                "description": "They check for temporary closures, day-of-week disambiguations, and that the rule is active on those dates, and it must be sent using from_date."
+              },
+              {
+                "name": "origin",
+                "value": "CIY_854",
+                "type": "query",
+                "description": "It is the identifier (gid) of the trip’s origin location. It is used to find special rules that depend on the origin/destination combination."
+              },
+              {
+                "name": "range",
+                "value": "100",
+                "type": "query",
+                "description": "Defines a search radius in kilometers to find airports near the destination."
+              },
+              {
+                "name": "alternative_airport",
+                "value": "",
+                "type": "query",
+                "description": "It’s a flag that, if true, triggers searching for an alternative destination in a different city than the one returned by the main search."
+              }
+            ]
+          },
+          "docs": "disambiguations"
+        },
+        {
+          "info": {
+            "name": "geo-points",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-dev.despegar.com/v3/activities-api/geo-points",
+            "params": [
+              {
+                "name": "latitude",
+                "value": "-22.9064",
+                "type": "query"
+              },
+              {
+                "name": "longitude",
+                "value": "-47.0616",
+                "type": "query"
+              },
+              {
+                "name": "max_distance",
+                "value": "40",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "10",
+                "type": "query"
+              },
+              {
+                "name": "geospatial_operation",
+                "value": "NEAR",
+                "type": "query"
+              },
+              {
+                "name": "types",
+                "value": "AIRPORT",
+                "type": "query"
+              },
+              {
+                "name": "orders",
+                "value": "SALES",
+                "type": "query"
+              },
+              {
+                "name": "language",
+                "value": "pt",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "geo-points"
+        },
+        {
+          "info": {
+            "name": "aircrafts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-dev.despegar.com/v3/activities-api/aircrafts"
+          },
+          "docs": "aircrafts"
+        },
+        {
+          "info": {
+            "name": "airline-logo",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-dev.despegar.com/v3/activities-api/airline-logo/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "IATA associated with the airline"
+              }
+            ]
+          },
+          "docs": "airline-logo"
+        },
+        {
+          "info": {
+            "name": "origin",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-dev.despegar.com/v3/activities-api/origin/suggestions"
+          },
+          "docs": "origin"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

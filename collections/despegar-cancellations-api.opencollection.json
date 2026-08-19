@@ -1,0 +1,137 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Activities Availability Cancellations API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-apikey",
+      "value": "{{x-apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Cancellations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Allowance",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-dev.despegar.com/v3/activities-api/reservations/:productId/cancels/allowance",
+            "params": [
+              {
+                "name": "productId",
+                "value": "",
+                "type": "path",
+                "description": "Product ID associated with the reservation"
+              }
+            ]
+          },
+          "docs": "Allowance"
+        },
+        {
+          "info": {
+            "name": "Quote",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-dev.despegar.com/v3/activities-api/reservations/cancels/quote",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Quote"
+        },
+        {
+          "info": {
+            "name": "FlowInfo",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-dev.despegar.com/v3/activities-api/reservations/:productId/cancels/:FlowId/quote",
+            "params": [
+              {
+                "name": "productId",
+                "value": "",
+                "type": "path",
+                "description": "Refers to the ID of a product within a reservation"
+              },
+              {
+                "name": "FlowId",
+                "value": "",
+                "type": "path",
+                "description": "Refers to the ID of a flow within a booking, used to check the status of a specific process (e.g., Can-1234)"
+              }
+            ]
+          },
+          "docs": "FlowInfo"
+        },
+        {
+          "info": {
+            "name": "Manual prueba",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api-dev.despegar.com/v3/activities-api/reservations/:productId/cancels/:FlowId/quote",
+            "params": [
+              {
+                "name": "productId",
+                "value": "",
+                "type": "path",
+                "description": "Product ID associated with the reservation"
+              },
+              {
+                "name": "FlowId",
+                "value": "",
+                "type": "path",
+                "description": "Refers to the ID of a flow within a booking, used to check the status of a specific process (e.g., Can-1234)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Manual prueba"
+        },
+        {
+          "info": {
+            "name": "Cancel",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-dev.despegar.com/v3/activities-api/reservations/:id/cancels",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Reservation or product identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Cancel"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

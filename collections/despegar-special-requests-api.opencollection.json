@@ -1,0 +1,74 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Activities Availability Special Requests API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-apikey",
+      "value": "{{x-apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Special Requests",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Special Requests",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-dev.despegar.com/v3/activities-api/reservations/:id/specials-requests",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Product ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Special Requests"
+        },
+        {
+          "info": {
+            "name": "Get special requests catalog",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-dev.despegar.com/v3/activities-api/special-requests/catalog",
+            "params": [
+              {
+                "name": "product_type",
+                "value": "",
+                "type": "query",
+                "description": "Type of product for which the special requests catalog is being queried. Currently only 'HOTEL' is supported."
+              },
+              {
+                "name": "product_id",
+                "value": "",
+                "type": "query",
+                "description": "Identifier of the product for which the special requests catalog is being queried."
+              }
+            ]
+          },
+          "docs": "Get special requests catalog"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

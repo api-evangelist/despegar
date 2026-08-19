@@ -1,0 +1,80 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Activities Availability Price Jump API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-apikey",
+      "value": "{{x-apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Price Jump",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Price Jump",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-dev.despegar.com/v3/activities-api/book/:reservationId/recovery",
+            "params": [
+              {
+                "name": "reservationId",
+                "value": "",
+                "type": "path",
+                "description": "This field must be filled in with the id of an existing reservation or with the 'external_booking_reference' sent when closing the reservation."
+              },
+              {
+                "name": "test_case",
+                "value": "",
+                "type": "query",
+                "description": "Optional parameter for testing purposes. Use 'pricejump' to simulate a price jump scenario."
+              }
+            ]
+          },
+          "docs": "This service detects price variations for a product, providing the differences between the original and the updated value."
+        },
+        {
+          "info": {
+            "name": "Price Jump",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api-dev.despegar.com/v3/activities-api/book/:reservationId/recovery",
+            "params": [
+              {
+                "name": "reservationId",
+                "value": "",
+                "type": "path",
+                "description": "This field must be filled in with the id of an existing reservation or with the 'external_booking_reference' sent when closing the reservation."
+              },
+              {
+                "name": "test_case",
+                "value": "",
+                "type": "query",
+                "description": "Optional parameter for testing purposes. Use 'pricejump' to simulate a price jump scenario."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This service allows accepting or rejecting detected price variations for a product, confirming whether to proceed with the updated value."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

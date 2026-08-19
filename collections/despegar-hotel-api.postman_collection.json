@@ -1,0 +1,469 @@
+{
+  "item": [
+    {
+      "id": "1a99ae74-40e8-4fe2-8cdf-9bf237bff82c",
+      "name": "hotel",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "51114c46-11fa-41bb-a151-107d821be2c5",
+          "name": "Hotels Information",
+          "request": {
+            "name": "Hotels Information",
+            "description": {
+              "content": "Returns static information about hotels including photos, rooms, amenities, etc.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "content-api",
+                "hotels"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "ids",
+                  "value": "<string>",
+                  "description": "(Required) Comma-separated list of hotel IDs (max 100)."
+                },
+                {
+                  "disabled": false,
+                  "key": "language",
+                  "value": "EN",
+                  "description": "Language code."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "92d7a44e-2282-4b01-8000-564f6b8f814b",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "content-api",
+                    "hotels"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "language",
+                      "value": "EN"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"property_type\": \"string\",\n    \"product\": \"HOTEL\",\n    \"published\": false,\n    \"name\": \"string\",\n    \"hotel_type\": {\n      \"id\": \"ECO\",\n      \"description\": {},\n      \"name\": {\n        \"singular\": {},\n        \"plural\": {}\n      }\n    },\n    \"stars\": 745,\n    \"location\": {\n      \"city\": {\n        \"id\": 494\n      },\n      \"address\": \"string\",\n      \"zipcode\": 9704,\n      \"latitude\": 4468.885656915035,\n      \"longitude\": 9451.885565323333\n    },\n    \"checkin\": {\n      \"from\": \"string\",\n      \"to\": \"string\"\n    },\n    \"checkout\": {\n      \"to\": \"string\"\n    },\n    \"information\": {\n      \"en\": \"string\"\n    },\n    \"notices\": {\n      \"en\": \"string\"\n    },\n    \"creation_date\": \"2024-02-23\",\n    \"last_modified_date\": \"2011-12-06\",\n    \"main_picture\": {\n      \"url\": \"string\",\n      \"id\": \"string\",\n      \"width\": 4894,\n      \"height\": 6248,\n      \"picture_category\": {\n        \"id\": 9478,\n        \"description\": {\n          \"en\": \"string\"\n        }\n      },\n      \"picture_categories\": {\n        \"id\": 9616,\n        \"description\": {\n          \"en\": \"string\"\n        }\n      }\n    },\n    \"number_of_rooms\": 5396,\n    \"pictures\": [\n      {\n        \"url\": \"string\",\n        \"id\": \"string\",\n        \"width\": 8566,\n        \"height\": 6285,\n        \"picture_category\": {\n          \"id\": 2199,\n          \"description\": \"string\"\n        },\n        \"picture_categories\": {\n          \"id\": 853,\n          \"description\": \"string\"\n        }\n      },\n      {\n        \"url\": \"string\",\n        \"id\": \"string\",\n        \"width\": 2896,\n        \"height\": 6813,\n        \"picture_category\": {\n          \"id\": 2573,\n          \"description\": \"string\"\n        },\n        \"picture_categories\": {\n          \"id\": 4441,\n          \"description\": \"string\"\n        }\n      }\n    ],\n    \"extra_details\": {\n      \"hotel_brand\": {\n        \"id\": 9223.722079043368,\n        \"name\": \"string\",\n        \"hotel_chain\": {\n          \"id\": 1900.1430821508702,\n          \"name\": 1683.5020484580132\n        }\n      },\n      \"completeness\": 6801.071003130016,\n      \"email\": \"string\",\n      \"breakfast_time\": {\n        \"from\": \"04:51:01.380Z\",\n        \"to\": \"00:09:16.503Z\"\n      }\n    },\n    \"rating\": 6765,\n    \"room_types\": [\n      {\n        \"id\": 4012,\n        \"internal_name\": \"string\",\n        \"despegar_names\": {},\n        \"information\": {\n          \"en\": \"string\"\n        },\n        \"room_distribution\": {\n          \"id\": \"string\",\n          \"descriptions\": {}\n        },\n        \"room_category\": {\n          \"id\": \"string\",\n          \"descriptions\": {}\n        },\n        \"amenities\": [\n          {\n            \"id\": \"string\",\n            \"descriptions\": {\n              \"en\": \"string\"\n            },\n            \"amenity_category\": {\n              \"id\": \"string\",\n              \"icon\": \"string\",\n              \"descriptions\": {\n                \"en\": \"string\"\n              }\n            }\n          },\n          {\n            \"id\": \"string\",\n            \"descriptions\": {\n              \"en\": \"string\"\n            },\n            \"amenity_category\": {\n              \"id\": \"string\",\n              \"icon\": \"string\",\n              \"descriptions\": {\n                \"en\": \"string\"\n              }\n            }\n          }\n        ],\n        \"room_view\": {\n          \"id\": \"string\",\n          \"descriptions\": {}\n        },\n        \"smoking_option\": {\n          \"id\": \"string\",\n          \"descriptions\": {\n            \"en\": \"string\"\n          }\n        },\n        \"shared_bathroom\": false,\n        \"room_size\": 8738,\n        \"room_size_unit\": \"string\",\n        \"max_occupancy\": 8350.09825089874,\n        \"pictures\": [\n          {\n            \"url\": \"string\",\n            \"id\": \"string\",\n            \"width\": 9279.857176919473,\n            \"height\": 5411.76170935021,\n            \"picture_category\": {\n              \"id\": 8133.864921780085,\n              \"descriptions\": {\n                \"en\": \"string\"\n              }\n            }\n          },\n          {\n            \"url\": \"string\",\n            \"id\": \"string\",\n            \"width\": 2342.0498738583206,\n            \"height\": 6504.804071140669,\n            \"picture_category\": {\n              \"id\": 8717.340213021325,\n              \"descriptions\": {\n                \"en\": \"string\"\n              }\n            }\n          }\n        ],\n        \"creation_date\": \"1954-09-20\",\n        \"last_modified_date\": \"1986-05-19\"\n      },\n      {\n        \"id\": 8739,\n        \"internal_name\": \"string\",\n        \"despegar_names\": {},\n        \"information\": {\n          \"en\": \"string\"\n        },\n        \"room_distribution\": {\n          \"id\": \"string\",\n          \"descriptions\": {}\n        },\n        \"room_category\": {\n          \"id\": \"string\",\n          \"descriptions\": {}\n        },\n        \"amenities\": [\n          {\n            \"id\": \"string\",\n            \"descriptions\": {\n              \"en\": \"string\"\n            },\n            \"amenity_category\": {\n              \"id\": \"string\",\n              \"icon\": \"string\",\n              \"descriptions\": {\n                \"en\": \"string\"\n              }\n            }\n          },\n          {\n            \"id\": \"string\",\n            \"descriptions\": {\n              \"en\": \"string\"\n            },\n            \"amenity_category\": {\n              \"id\": \"string\",\n              \"icon\": \"string\",\n              \"descriptions\": {\n                \"en\": \"string\"\n              }\n            }\n          }\n        ],\n        \"room_view\": {\n          \"id\": \"string\",\n          \"descriptions\": {}\n        },\n        \"smoking_option\": {\n          \"id\": \"string\",\n          \"descriptions\": {\n            \"en\": \"string\"\n          }\n        },\n        \"shared_bathroom\": true,\n        \"room_size\": 7560,\n        \"room_size_unit\": \"string\",\n        \"max_occupancy\": 7502.130842249983,\n        \"pictures\": [\n          {\n            \"url\": \"string\",\n            \"id\": \"string\",\n            \"width\": 8616.380451047224,\n            \"height\": 8268.280844992478,\n            \"picture_category\": {\n              \"id\": 9508.05349642592,\n              \"descriptions\": {\n                \"en\": \"string\"\n              }\n            }\n          },\n          {\n            \"url\": \"string\",\n            \"id\": \"string\",\n            \"width\": 655.265102632926,\n            \"height\": 5457.543001962537,\n            \"picture_category\": {\n              \"id\": 1269.6012297870263,\n              \"descriptions\": {\n                \"en\": \"string\"\n              }\n            }\n          }\n        ],\n        \"creation_date\": \"1979-06-15\",\n        \"last_modified_date\": \"1963-08-16\"\n      }\n    ],\n    \"categorized_notices\": {\n      \"primary\": {\n        \"title\": {},\n        \"notices\": [\n          {\n            \"title\": {}\n          },\n          {\n            \"title\": {}\n          }\n        ]\n      },\n      \"secondary\": {\n        \"title\": {},\n        \"notices\": [\n          {\n            \"title\": {}\n          },\n          {\n            \"title\": {}\n          }\n        ]\n      }\n    },\n    \"amenities\": [\n      {\n        \"id\": \"string\",\n        \"description\": {},\n        \"amenity_category\": {\n          \"id\": \"string\",\n          \"icon\": \"string\",\n          \"description\": {}\n        }\n      },\n      {\n        \"id\": \"string\",\n        \"description\": {},\n        \"amenity_category\": {\n          \"id\": \"string\",\n          \"icon\": \"string\",\n          \"description\": {}\n        }\n      }\n    ],\n    \"special_requests\": [\n      {\n        \"id\": \"string\",\n        \"description\": {},\n        \"enabled\": true\n      },\n      {\n        \"id\": \"string\",\n        \"description\": {},\n        \"enabled\": true\n      }\n    ],\n    \"fees\": [\n      {\n        \"currency\": \"string\",\n        \"amount\": 5636.870534682921,\n        \"fee_type\": {\n          \"id\": \"string\",\n          \"descriptions\": {}\n        },\n        \"fee_application_scope\": {\n          \"id\": \"string\",\n          \"descriptions\": {},\n          \"fee_amount_type\": {\n            \"id\": \"string\",\n            \"descriptions\": {}\n          }\n        }\n      },\n      {\n        \"currency\": \"string\",\n        \"amount\": 5522.260420936552,\n        \"fee_type\": {\n          \"id\": \"string\",\n          \"descriptions\": {}\n        },\n        \"fee_application_scope\": {\n          \"id\": \"string\",\n          \"descriptions\": {},\n          \"fee_amount_type\": {\n            \"id\": \"string\",\n            \"descriptions\": {}\n          }\n        }\n      }\n    ],\n    \"spoken_languages\": [\n      {\n        \"id\": \"string\",\n        \"description\": {}\n      },\n      {\n        \"id\": \"string\",\n        \"description\": {}\n      }\n    ]\n  },\n  {\n    \"id\": \"string\",\n    \"property_type\": \"string\",\n    \"product\": \"HOTEL\",\n    \"published\": true,\n    \"name\": \"string\",\n    \"hotel_type\": {\n      \"id\": \"ECO\",\n      \"description\": {},\n      \"name\": {\n        \"singular\": {},\n        \"plural\": {}\n      }\n    },\n    \"stars\": 8256,\n    \"location\": {\n      \"city\": {\n        \"id\": 3811\n      },\n      \"address\": \"string\",\n      \"zipcode\": 9912,\n      \"latitude\": 888.5328711485118,\n      \"longitude\": 9476.14715803441\n    },\n    \"checkin\": {\n      \"from\": \"string\",\n      \"to\": \"string\"\n    },\n    \"checkout\": {\n      \"to\": \"string\"\n    },\n    \"information\": {\n      \"en\": \"string\"\n    },\n    \"notices\": {\n      \"en\": \"string\"\n    },\n    \"creation_date\": \"1963-10-12\",\n    \"last_modified_date\": \"2003-12-30\",\n    \"main_picture\": {\n      \"url\": \"string\",\n      \"id\": \"string\",\n      \"width\": 6842,\n      \"height\": 4639,\n      \"picture_category\": {\n        \"id\": 7840,\n        \"description\": {\n          \"en\": \"string\"\n        }\n      },\n      \"picture_categories\": {\n        \"id\": 1782,\n        \"description\": {\n          \"en\": \"string\"\n        }\n      }\n    },\n    \"number_of_rooms\": 9273,\n    \"pictures\": [\n      {\n        \"url\": \"string\",\n        \"id\": \"string\",\n        \"width\": 4029,\n        \"height\": 5005,\n        \"picture_category\": {\n          \"id\": 8585,\n          \"description\": \"string\"\n        },\n        \"picture_categories\": {\n          \"id\": 856,\n          \"description\": \"string\"\n        }\n      },\n      {\n        \"url\": \"string\",\n        \"id\": \"string\",\n        \"width\": 4391,\n        \"height\": 7524,\n        \"picture_category\": {\n          \"id\": 7362,\n          \"description\": \"string\"\n        },\n        \"picture_categories\": {\n          \"id\": 8061,\n          \"description\": \"string\"\n        }\n      }\n    ],\n    \"extra_details\": {\n      \"hotel_brand\": {\n        \"id\": 5366.136845958967,\n        \"name\": \"string\",\n        \"hotel_chain\": {\n          \"id\": 2892.990607927192,\n          \"name\": 620.7651304386841\n        }\n      },\n      \"completeness\": 9099.389015447925,\n      \"email\": \"string\",\n      \"breakfast_time\": {\n        \"from\": \"07:43:58.225Z\",\n        \"to\": \"09:21:42.047Z\"\n      }\n    },\n    \"rating\": 9631,\n    \"room_types\": [\n      {\n        \"id\": 1354,\n        \"internal_name\": \"string\",\n        \"despegar_names\": {},\n        \"information\": {\n          \"en\": \"string\"\n        },\n        \"room_distribution\": {\n          \"id\": \"string\",\n          \"descriptions\": {}\n        },\n        \"room_category\": {\n          \"id\": \"string\",\n          \"descriptions\": {}\n        },\n        \"amenities\": [\n          {\n            \"id\": \"string\",\n            \"descriptions\": {\n              \"en\": \"string\"\n            },\n            \"amenity_category\": {\n              \"id\": \"string\",\n              \"icon\": \"string\",\n              \"descriptions\": {\n                \"en\": \"string\"\n              }\n            }\n          },\n          {\n            \"id\": \"string\",\n            \"descriptions\": {\n              \"en\": \"string\"\n            },\n            \"amenity_category\": {\n              \"id\": \"string\",\n              \"icon\": \"string\",\n              \"descriptions\": {\n                \"en\": \"string\"\n              }\n            }\n          }\n        ],\n        \"room_view\": {\n          \"id\": \"string\",\n          \"descriptions\": {}\n        },\n        \"smoking_option\": {\n          \"id\": \"string\",\n          \"descriptions\": {\n            \"en\": \"string\"\n          }\n        },\n        \"shared_bathroom\": true,\n        \"room_size\": 9819,\n        \"room_size_unit\": \"string\",\n        \"max_occupancy\": 3941.1132980834373,\n        \"pictures\": [\n          {\n            \"url\": \"string\",\n            \"id\": \"string\",\n            \"width\": 3272.142170928181,\n            \"height\": 9471.127242210141,\n            \"picture_category\": {\n              \"id\": 7413.73911818523,\n              \"descriptions\": {\n                \"en\": \"string\"\n              }\n            }\n          },\n          {\n            \"url\": \"string\",\n            \"id\": \"string\",\n            \"width\": 5816.617230978035,\n            \"height\": 9262.654108177057,\n            \"picture_category\": {\n              \"id\": 9540.964337451887,\n              \"descriptions\": {\n                \"en\": \"string\"\n              }\n            }\n          }\n        ],\n        \"creation_date\": \"2026-06-19\",\n        \"last_modified_date\": \"2007-03-14\"\n      },\n      {\n        \"id\": 4554,\n        \"internal_name\": \"string\",\n        \"despegar_names\": {},\n        \"information\": {\n          \"en\": \"string\"\n        },\n        \"room_distribution\": {\n          \"id\": \"string\",\n          \"descriptions\": {}\n        },\n        \"room_category\": {\n          \"id\": \"string\",\n          \"descriptions\": {}\n        },\n        \"amenities\": [\n          {\n            \"id\": \"string\",\n            \"descriptions\": {\n              \"en\": \"string\"\n            },\n            \"amenity_category\": {\n              \"id\": \"string\",\n              \"icon\": \"string\",\n              \"descriptions\": {\n                \"en\": \"string\"\n              }\n            }\n          },\n          {\n            \"id\": \"string\",\n            \"descriptions\": {\n              \"en\": \"string\"\n            },\n            \"amenity_category\": {\n              \"id\": \"string\",\n              \"icon\": \"string\",\n              \"descriptions\": {\n                \"en\": \"string\"\n              }\n            }\n          }\n        ],\n        \"room_view\": {\n          \"id\": \"string\",\n          \"descriptions\": {}\n        },\n        \"smoking_option\": {\n          \"id\": \"string\",\n          \"descriptions\": {\n            \"en\": \"string\"\n          }\n        },\n        \"shared_bathroom\": true,\n        \"room_size\": 3413,\n        \"room_size_unit\": \"string\",\n        \"max_occupancy\": 7019.004131871955,\n        \"pictures\": [\n          {\n            \"url\": \"string\",\n            \"id\": \"string\",\n            \"width\": 4757.825600585964,\n            \"height\": 5541.931973617985,\n            \"picture_category\": {\n              \"id\": 4588.92988838213,\n              \"descriptions\": {\n                \"en\": \"string\"\n              }\n            }\n          },\n          {\n            \"url\": \"string\",\n            \"id\": \"string\",\n            \"width\": 6170.959762884808,\n            \"height\": 3683.5291275668537,\n            \"picture_category\": {\n              \"id\": 8727.260558893202,\n              \"descriptions\": {\n                \"en\": \"string\"\n              }\n            }\n          }\n        ],\n        \"creation_date\": \"2009-12-12\",\n        \"last_modified_date\": \"1971-02-08\"\n      }\n    ],\n    \"categorized_notices\": {\n      \"primary\": {\n        \"title\": {},\n        \"notices\": [\n          {\n            \"title\": {}\n          },\n          {\n            \"title\": {}\n          }\n        ]\n      },\n      \"secondary\": {\n        \"title\": {},\n        \"notices\": [\n          {\n            \"title\": {}\n          },\n          {\n            \"title\": {}\n          }\n        ]\n      }\n    },\n    \"amenities\": [\n      {\n        \"id\": \"string\",\n        \"description\": {},\n        \"amenity_category\": {\n          \"id\": \"string\",\n          \"icon\": \"string\",\n          \"description\": {}\n        }\n      },\n      {\n        \"id\": \"string\",\n        \"description\": {},\n        \"amenity_category\": {\n          \"id\": \"string\",\n          \"icon\": \"string\",\n          \"description\": {}\n        }\n      }\n    ],\n    \"special_requests\": [\n      {\n        \"id\": \"string\",\n        \"description\": {},\n        \"enabled\": true\n      },\n      {\n        \"id\": \"string\",\n        \"description\": {},\n        \"enabled\": false\n      }\n    ],\n    \"fees\": [\n      {\n        \"currency\": \"string\",\n        \"amount\": 7597.578727880271,\n        \"fee_type\": {\n          \"id\": \"string\",\n          \"descriptions\": {}\n        },\n        \"fee_application_scope\": {\n          \"id\": \"string\",\n          \"descriptions\": {},\n          \"fee_amount_type\": {\n            \"id\": \"string\",\n            \"descriptions\": {}\n          }\n        }\n      },\n      {\n        \"currency\": \"string\",\n        \"amount\": 1504.0996545280516,\n        \"fee_type\": {\n          \"id\": \"string\",\n          \"descriptions\": {}\n        },\n        \"fee_application_scope\": {\n          \"id\": \"string\",\n          \"descriptions\": {},\n          \"fee_amount_type\": {\n            \"id\": \"string\",\n            \"descriptions\": {}\n          }\n        }\n      }\n    ],\n    \"spoken_languages\": [\n      {\n        \"id\": \"string\",\n        \"description\": {}\n      },\n      {\n        \"id\": \"string\",\n        \"description\": {}\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4b6728a2-026d-4fc9-8f1a-329be4975103",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "content-api",
+                    "hotels"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "language",
+                      "value": "EN"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"INVALID_FILTER\",\n  \"message\": \"Country, changes retrieve resource id, passenger indexes and lang are required\",\n  \"details\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c73c6f99-3057-4001-a094-0546f3e61ea1",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "content-api",
+                    "hotels"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "language",
+                      "value": "EN"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"INVALID_FILTER\",\n  \"message\": \"Country, changes retrieve resource id, passenger indexes and lang are required\",\n  \"details\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "15619cca-69e0-44fe-bbfe-e20b7642aee6",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "content-api",
+                    "hotels"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "language",
+                      "value": "EN"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"INVALID_FILTER\",\n  \"message\": \"Country, changes retrieve resource id, passenger indexes and lang are required\",\n  \"details\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c70dcde5-f2dd-4f91-b7fa-1a319ca6e2b6",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "content-api",
+                    "hotels"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "language",
+                      "value": "EN"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"INVALID_FILTER\",\n  \"message\": \"Country, changes retrieve resource id, passenger indexes and lang are required\",\n  \"details\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e1dcc8d3-e97c-4eb3-93b4-51ed48885499",
+              "name": "Too Many Requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "content-api",
+                    "hotels"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "language",
+                      "value": "EN"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"INVALID_FILTER\",\n  \"message\": \"Country, changes retrieve resource id, passenger indexes and lang are required\",\n  \"details\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8c8764a5-b25e-4970-8e94-32636b8f8bac",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "content-api",
+                    "hotels"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "language",
+                      "value": "EN"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"INVALID_FILTER\",\n  \"message\": \"Country, changes retrieve resource id, passenger indexes and lang are required\",\n  \"details\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-dev.despegar.com/v3/activities-api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "12b56fe6-2ae7-421f-882d-2d35b4b56d69",
+    "name": "Activities Availability hotel API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for activities: tickets, modalities, availability, prebook, payments, and booking. Authentication via API Key.",
+      "type": "text/plain"
+    }
+  }
+}

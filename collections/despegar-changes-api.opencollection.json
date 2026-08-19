@@ -1,0 +1,179 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Activities Availability Changes API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-apikey",
+      "value": "{{x-apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Changes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Allowance",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-dev.despegar.com/v3/activities-api/reservations/changes/allowance/:transactionId",
+            "params": [
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "operation_id",
+                "value": "",
+                "type": "query",
+                "description": "Type of change to be requested."
+              }
+            ]
+          },
+          "docs": "Allowance"
+        },
+        {
+          "info": {
+            "name": "Alternatives Search",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-dev.despegar.com/v3/activities-api/reservations/changes/alternatives",
+            "params": [
+              {
+                "name": "transaction_id",
+                "value": "",
+                "type": "query",
+                "description": "You must provide the reservation ID for which you want to request a modification."
+              },
+              {
+                "name": "departure_date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "return_date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "locale",
+                "value": "",
+                "type": "query",
+                "description": "Response language."
+              },
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "New flight origin to be requested."
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "New flight destination to be requested."
+              },
+              {
+                "name": "IATA",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Alternatives Search"
+        },
+        {
+          "info": {
+            "name": "alternative Prebook",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-dev.despegar.com/v3/activities-api/reservations/changes/:transactionId/checkouts/contexts",
+            "params": [
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "path",
+                "description": "Transaction ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "alternative Prebook"
+        },
+        {
+          "info": {
+            "name": "Prebook Info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-dev.despegar.com/v3/activities-api/reservations/changes/:transactionId/checkouts/contexts/:contextId",
+            "params": [
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "path",
+                "description": "Transaction ID"
+              },
+              {
+                "name": "contextId",
+                "value": "",
+                "type": "path",
+                "description": "Context ID"
+              }
+            ]
+          },
+          "docs": "Prebook Info"
+        },
+        {
+          "info": {
+            "name": "Alternative Book",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-dev.despegar.com/v3/activities-api/reservations/changes/:transactionId/checkouts/contexts/:contextId/flows",
+            "params": [
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "path",
+                "description": "Transaction ID"
+              },
+              {
+                "name": "contextId",
+                "value": "",
+                "type": "path",
+                "description": "id of the created context in the Alternative Prebook step, found both in its response or in the Prebook Info service under 'checkout_context_id'."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Alternative Book"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

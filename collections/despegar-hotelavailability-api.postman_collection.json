@@ -1,0 +1,707 @@
+{
+  "item": [
+    {
+      "id": "731aca02-7dc7-440c-a2c7-8e392c32b0f7",
+      "name": "HotelAvailability",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ae61517f-4cee-45c0-b00a-ed5ca51257bb",
+          "name": "Search",
+          "request": {
+            "name": "Search",
+            "description": {
+              "content": "Search for available hotels based on input criteria.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "hotels-api",
+                "availability"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "country_code",
+                  "value": "<string>",
+                  "description": "The country code of the traveler's point of sale, in ISO 3166-1 alpha-2 format. This should represent the country where the shopping transaction is taking place."
+                },
+                {
+                  "disabled": false,
+                  "key": "checkin_date",
+                  "value": "<date>",
+                  "description": "(Required) Refers to the hotel check-in date and must be in the format YYYY-MM-DD."
+                },
+                {
+                  "disabled": false,
+                  "key": "checkout_date",
+                  "value": "<date>",
+                  "description": "(Required) Refers to the hotel check-out date and must be in the format YYYY-MM-DD."
+                },
+                {
+                  "disabled": false,
+                  "key": "currency",
+                  "value": "<string>",
+                  "description": "(Required) Refers to the currency, which must be filled with three alphabetical digits. (E.g. \"USD\", \"ARS\")"
+                },
+                {
+                  "disabled": false,
+                  "key": "hotels",
+                  "value": "<string>",
+                  "description": "(Required) List of hotel IDs, separated by commas (max. 100)."
+                },
+                {
+                  "disabled": false,
+                  "key": "distribution",
+                  "value": "<string>",
+                  "description": "(Required) Passenger distribution. Each room’s passengers should be written as number_of_adults-children_ages. Children-age goes up to 17 years old. Rooms should be separated by “!”. E.g.: Means room 1 with 2 adults and room 2 with 2 adults and a 10-year-old child."
+                },
+                {
+                  "disabled": false,
+                  "key": "language",
+                  "value": "<string>",
+                  "description": "Refers to the language, which must be filled with two alphabetical digits."
+                },
+                {
+                  "disabled": false,
+                  "key": "ttl",
+                  "value": "<integer>",
+                  "description": "Maximum time allowed for the connection. Minimum = 3000 ms, Maximum = 6200 ms."
+                },
+                {
+                  "disabled": false,
+                  "key": "refundable_only",
+                  "value": "<boolean>",
+                  "description": "If set to ‘true’, only refundable hotel rates will be quoted."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a2b135da-7b67-4137-894d-4945bee8af46",
+              "name": "Availability response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels-api",
+                    "availability"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "country_code",
+                      "value": "br"
+                    },
+                    {
+                      "key": "checkin_date",
+                      "value": "2026-11-14"
+                    },
+                    {
+                      "key": "checkout_date",
+                      "value": "2026-11-16"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "BRL"
+                    },
+                    {
+                      "key": "hotels",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "distribution",
+                      "value": "2!2-10"
+                    },
+                    {
+                      "key": "language",
+                      "value": "PT"
+                    },
+                    {
+                      "key": "ttl",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "refundable_only",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"id\": 259462,\n      \"hotel_info\": {\n        \"name\": \"Bogotá Plaza Hotel\",\n        \"stars\": 5\n      },\n      \"roompacks\": [\n        {\n          \"id\": \"35809\",\n          \"meal_plan\": {\n            \"id\": \"BRB\"\n          },\n          \"rooms\": [\n            {\n              \"name\": \"Standard Room\",\n              \"max_capacity\": 3,\n              \"bed_options\": [\n                {\n                  \"id\": \"1\",\n                  \"description\": \"1 King Bed\"\n                }\n              ]\n            }\n          ],\n          \"cancellation_policy\": {\n            \"status\": \"fully_refundable\"\n          },\n          \"price_detail\": {\n            \"currency\": \"USD\",\n            \"total\": 300,\n            \"taxes\": 50\n          }\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "80488769-d6af-4c6d-873d-da0baadd1f43",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels-api",
+                    "availability"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "country_code",
+                      "value": "br"
+                    },
+                    {
+                      "key": "checkin_date",
+                      "value": "2026-11-14"
+                    },
+                    {
+                      "key": "checkout_date",
+                      "value": "2026-11-16"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "BRL"
+                    },
+                    {
+                      "key": "hotels",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "distribution",
+                      "value": "2!2-10"
+                    },
+                    {
+                      "key": "language",
+                      "value": "PT"
+                    },
+                    {
+                      "key": "ttl",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "refundable_only",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6b30683e-22f8-4edc-845f-ce9f3540dc64",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels-api",
+                    "availability"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "country_code",
+                      "value": "br"
+                    },
+                    {
+                      "key": "checkin_date",
+                      "value": "2026-11-14"
+                    },
+                    {
+                      "key": "checkout_date",
+                      "value": "2026-11-16"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "BRL"
+                    },
+                    {
+                      "key": "hotels",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "distribution",
+                      "value": "2!2-10"
+                    },
+                    {
+                      "key": "language",
+                      "value": "PT"
+                    },
+                    {
+                      "key": "ttl",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "refundable_only",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2d64562c-d020-455c-9f90-59e672924753",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels-api",
+                    "availability"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "country_code",
+                      "value": "br"
+                    },
+                    {
+                      "key": "checkin_date",
+                      "value": "2026-11-14"
+                    },
+                    {
+                      "key": "checkout_date",
+                      "value": "2026-11-16"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "BRL"
+                    },
+                    {
+                      "key": "hotels",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "distribution",
+                      "value": "2!2-10"
+                    },
+                    {
+                      "key": "language",
+                      "value": "PT"
+                    },
+                    {
+                      "key": "ttl",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "refundable_only",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6da41799-0469-425f-ad30-9f88210acafe",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels-api",
+                    "availability"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "country_code",
+                      "value": "br"
+                    },
+                    {
+                      "key": "checkin_date",
+                      "value": "2026-11-14"
+                    },
+                    {
+                      "key": "checkout_date",
+                      "value": "2026-11-16"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "BRL"
+                    },
+                    {
+                      "key": "hotels",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "distribution",
+                      "value": "2!2-10"
+                    },
+                    {
+                      "key": "language",
+                      "value": "PT"
+                    },
+                    {
+                      "key": "ttl",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "refundable_only",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bbeb340c-7b60-4b73-94fa-4dfd13a7cab4",
+              "name": "Too Many Requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels-api",
+                    "availability"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "country_code",
+                      "value": "br"
+                    },
+                    {
+                      "key": "checkin_date",
+                      "value": "2026-11-14"
+                    },
+                    {
+                      "key": "checkout_date",
+                      "value": "2026-11-16"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "BRL"
+                    },
+                    {
+                      "key": "hotels",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "distribution",
+                      "value": "2!2-10"
+                    },
+                    {
+                      "key": "language",
+                      "value": "PT"
+                    },
+                    {
+                      "key": "ttl",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "refundable_only",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d6069da8-e171-4aa1-9aa8-74d0b362fa3b",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotels-api",
+                    "availability"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "country_code",
+                      "value": "br"
+                    },
+                    {
+                      "key": "checkin_date",
+                      "value": "2026-11-14"
+                    },
+                    {
+                      "key": "checkout_date",
+                      "value": "2026-11-16"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "BRL"
+                    },
+                    {
+                      "key": "hotels",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "distribution",
+                      "value": "2!2-10"
+                    },
+                    {
+                      "key": "language",
+                      "value": "PT"
+                    },
+                    {
+                      "key": "ttl",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "refundable_only",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-dev.despegar.com/v3/activities-api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "5c57fbfc-1890-40d6-a587-b5c899a5f155",
+    "name": "Activities Availability HotelAvailability API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for activities: tickets, modalities, availability, prebook, payments, and booking. Authentication via API Key.",
+      "type": "text/plain"
+    }
+  }
+}

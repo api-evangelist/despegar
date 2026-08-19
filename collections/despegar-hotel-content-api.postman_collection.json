@@ -1,0 +1,655 @@
+{
+  "item": [
+    {
+      "id": "26b98f13-76c8-4862-a523-117ac6e9801b",
+      "name": "Hotel content",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "eb1fcc26-9b99-4619-ae5c-b61298176d18",
+          "name": "Fee-types",
+          "request": {
+            "name": "Fee-types",
+            "description": {},
+            "url": {
+              "path": [
+                "content-api",
+                "hotels",
+                "fee-types"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c0e7d5df-b72c-491c-85ad-62908a67c622",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "content-api",
+                    "hotels",
+                    "fee-types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"description\": {\n      \"es\": \"string\",\n      \"en\": \"string\",\n      \"pt\": \"string\"\n    }\n  },\n  {\n    \"id\": \"string\",\n    \"description\": {\n      \"es\": \"string\",\n      \"en\": \"string\",\n      \"pt\": \"string\"\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a1f34645-28c9-4326-a7a3-a5399aa8f89a",
+              "name": "Invalid request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "content-api",
+                    "hotels",
+                    "fee-types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a0f49dc4-8c6b-4ffa-ad78-3e43403cf092",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "content-api",
+                    "hotels",
+                    "fee-types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c2c5eeb2-8dc9-4f22-a75b-1c93443dde95",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "content-api",
+                    "hotels",
+                    "fee-types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "548cae42-8d03-4674-bcfd-25dfa09ec1d6",
+          "name": "Amenities",
+          "request": {
+            "name": "Amenities",
+            "description": {},
+            "url": {
+              "path": [
+                "content-api",
+                "hotels",
+                "amenities"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9fe57a35-b226-4586-bfa1-19c184b52524",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "content-api",
+                    "hotels",
+                    "amenities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"description\": {\n      \"es\": \"string\",\n      \"en\": \"string\",\n      \"pt\": \"string\"\n    },\n    \"amenity_category\": {\n      \"id\": \"string\",\n      \"icon\": \"string\",\n      \"descriptions\": {\n        \"pt\": \"string\",\n        \"en\": \"string\",\n        \"es\": \"string\"\n      },\n      \"orders\": [\n        {\n          \"type\": \"string\",\n          \"order\": 9155\n        },\n        {\n          \"type\": \"string\",\n          \"order\": 4957\n        }\n      ],\n      \"amenities\": [\n        {\n          \"id\": \"string\",\n          \"description\": {\n            \"pt\": \"string\",\n            \"en\": \"string\",\n            \"es\": \"string\"\n          },\n          \"amenity_order\": [\n            {\n              \"type\": \"string\",\n              \"order\": 179\n            },\n            {\n              \"type\": \"string\",\n              \"order\": 8493\n            }\n          ]\n        },\n        {\n          \"id\": \"string\",\n          \"description\": {\n            \"pt\": \"string\",\n            \"en\": \"string\",\n            \"es\": \"string\"\n          },\n          \"amenity_order\": [\n            {\n              \"type\": \"string\",\n              \"order\": 7869\n            },\n            {\n              \"type\": \"string\",\n              \"order\": 3916\n            }\n          ]\n        }\n      ]\n    }\n  },\n  {\n    \"id\": \"string\",\n    \"description\": {\n      \"es\": \"string\",\n      \"en\": \"string\",\n      \"pt\": \"string\"\n    },\n    \"amenity_category\": {\n      \"id\": \"string\",\n      \"icon\": \"string\",\n      \"descriptions\": {\n        \"pt\": \"string\",\n        \"en\": \"string\",\n        \"es\": \"string\"\n      },\n      \"orders\": [\n        {\n          \"type\": \"string\",\n          \"order\": 7671\n        },\n        {\n          \"type\": \"string\",\n          \"order\": 552\n        }\n      ],\n      \"amenities\": [\n        {\n          \"id\": \"string\",\n          \"description\": {\n            \"pt\": \"string\",\n            \"en\": \"string\",\n            \"es\": \"string\"\n          },\n          \"amenity_order\": [\n            {\n              \"type\": \"string\",\n              \"order\": 376\n            },\n            {\n              \"type\": \"string\",\n              \"order\": 9357\n            }\n          ]\n        },\n        {\n          \"id\": \"string\",\n          \"description\": {\n            \"pt\": \"string\",\n            \"en\": \"string\",\n            \"es\": \"string\"\n          },\n          \"amenity_order\": [\n            {\n              \"type\": \"string\",\n              \"order\": 7045\n            },\n            {\n              \"type\": \"string\",\n              \"order\": 2856\n            }\n          ]\n        }\n      ]\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2d3f70af-8c39-44e8-8e30-9dcaa681e0c7",
+              "name": "Invalid request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "content-api",
+                    "hotels",
+                    "amenities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b6520ecf-57cc-4fed-970d-9623384b6abe",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "content-api",
+                    "hotels",
+                    "amenities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "80e02fb0-a46b-4c26-b378-3e3866fe40b6",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "content-api",
+                    "hotels",
+                    "amenities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "aa309679-7d97-4822-9435-960b64479dc3",
+          "name": "Meal-plans",
+          "request": {
+            "name": "Meal-plans",
+            "description": {},
+            "url": {
+              "path": [
+                "content-api",
+                "hotels",
+                "meal-plans"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7c6fbfec-84de-49b5-a88b-b30242214c27",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "content-api",
+                    "hotels",
+                    "meal-plans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"description\": {\n      \"es\": \"string\",\n      \"en\": \"string\",\n      \"pt\": \"string\"\n    },\n    \"sub_categories\": [\n      {\n        \"id\": \"string\",\n        \"description\": {\n          \"es\": \"string\",\n          \"en\": \"string\",\n          \"pt\": \"string\"\n        }\n      },\n      {\n        \"id\": \"string\",\n        \"description\": {\n          \"es\": \"string\",\n          \"en\": \"string\",\n          \"pt\": \"string\"\n        }\n      }\n    ],\n    \"driver\": \"DNY_DELUXE\",\n    \"breakdowns\": \"DNY_DELUXE\",\n    \"disclaimers\": \"DNY_REGULAR\",\n    \"highlights\": \"DNY_REGULAR\",\n    \"deals\": \"DNY_FAST_FOOD\"\n  },\n  {\n    \"id\": \"string\",\n    \"description\": {\n      \"es\": \"string\",\n      \"en\": \"string\",\n      \"pt\": \"string\"\n    },\n    \"sub_categories\": [\n      {\n        \"id\": \"string\",\n        \"description\": {\n          \"es\": \"string\",\n          \"en\": \"string\",\n          \"pt\": \"string\"\n        }\n      },\n      {\n        \"id\": \"string\",\n        \"description\": {\n          \"es\": \"string\",\n          \"en\": \"string\",\n          \"pt\": \"string\"\n        }\n      }\n    ],\n    \"driver\": \"DNY_FAST_FOOD\",\n    \"breakdowns\": \"DNY_FAST_FOOD\",\n    \"disclaimers\": \"DNY_FAST_FOOD\",\n    \"highlights\": \"DNY_REGULAR\",\n    \"deals\": \"DNY_FAST_FOOD\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "41a20871-9552-47f9-a777-b660ad739aa1",
+              "name": "Invalid request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "content-api",
+                    "hotels",
+                    "meal-plans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "045ef71c-daac-47da-9784-af9fb67cb1eb",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "content-api",
+                    "hotels",
+                    "meal-plans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ebccf102-6a21-4c79-8a7b-bee2e0f9e181",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "content-api",
+                    "hotels",
+                    "meal-plans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-dev.despegar.com/v3/activities-api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "b070bd99-0de5-447e-af62-aaf04b50f352",
+    "name": "Activities Availability Hotel content API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for activities: tickets, modalities, availability, prebook, payments, and booking. Authentication via API Key.",
+      "type": "text/plain"
+    }
+  }
+}

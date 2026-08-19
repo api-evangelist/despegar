@@ -1,0 +1,41 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Activities Availability Commission Update API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-apikey",
+      "value": "{{x-apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Commission Update",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Commission Update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-dev.despegar.com/v3/activities-api/commissions/update",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This service detects price variations for a product, providing the differences between the original and the updated value."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,381 @@
+{
+  "item": [
+    {
+      "id": "9af0e91e-ac16-4cd0-a699-f35f5f05c984",
+      "name": "Booking",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f9ae5ab5-2aa6-4793-bca3-977bd7aeca12",
+          "name": "Book",
+          "request": {
+            "name": "Book",
+            "description": {},
+            "url": {
+              "path": [
+                "book"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "test_case",
+                  "value": "<string>",
+                  "description": "Optional parameter for testing purposes. Use 'pricejump' to simulate a price jump scenario."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"prebook_id\": \"<string>\",\n  \"external_booking_reference\": \"<string>\",\n  \"modality\": \"<string>\",\n  \"contact_data\": {\n    \"email\": \"<string>\",\n    \"phones\": [\n      {\n        \"country_code\": \"<string>\",\n        \"area_code\": \"<string>\",\n        \"number\": \"<string>\",\n        \"type\": \"<string>\"\n      },\n      {\n        \"country_code\": \"<string>\",\n        \"area_code\": \"<string>\",\n        \"number\": \"<string>\",\n        \"type\": \"<string>\"\n      }\n    ]\n  },\n  \"travelers\": [\n    {\n      \"first_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"gender\": \"<string>\",\n      \"nationality\": \"<string>\",\n      \"birth_date\": \"<string>\",\n      \"identification\": {\n        \"type\": \"<string>\",\n        \"number\": \"<string>\"\n      }\n    },\n    {\n      \"first_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"gender\": \"<string>\",\n      \"nationality\": \"<string>\",\n      \"birth_date\": \"<string>\",\n      \"identification\": {\n        \"type\": \"<string>\",\n        \"number\": \"<string>\"\n      }\n    }\n  ],\n  \"payment\": {\n    \"option_type\": \"<string>\",\n    \"payment_units\": [\n      {\n        \"type\": \"<string>\",\n        \"invoice_reference\": \"<number>\",\n        \"plan_id\": \"<string>\",\n        \"secure_token\": \"<string>\",\n        \"card_holder_identification\": {\n          \"type\": \"<string>\",\n          \"number\": \"<string>\"\n        }\n      },\n      {\n        \"type\": \"<string>\",\n        \"invoice_reference\": \"<number>\",\n        \"plan_id\": \"<string>\",\n        \"secure_token\": \"<string>\",\n        \"card_holder_identification\": {\n          \"type\": \"<string>\",\n          \"number\": \"<string>\"\n        }\n      }\n    ],\n    \"invoices\": [\n      {\n        \"fiscal_status\": \"<string>\",\n        \"fiscal_identification\": {\n          \"type\": \"<string>\",\n          \"number\": \"<string>\",\n          \"issue_country\": \"<string>\"\n        },\n        \"reference\": \"<number>\",\n        \"fiscal_name\": \"<string>\",\n        \"first_name\": \"<string>\",\n        \"last_name\": \"<string>\",\n        \"fiscal_address\": {\n          \"city_id\": \"<string>\",\n          \"zip_code\": \"<string>\",\n          \"street\": \"<string>\",\n          \"number\": \"<string>\",\n          \"neighbourhood\": \"<string>\",\n          \"apartment\": \"<string>\",\n          \"floor\": \"<string>\"\n        }\n      },\n      {\n        \"fiscal_status\": \"<string>\",\n        \"fiscal_identification\": {\n          \"type\": \"<string>\",\n          \"number\": \"<string>\",\n          \"issue_country\": \"<string>\"\n        },\n        \"reference\": \"<number>\",\n        \"fiscal_name\": \"<string>\",\n        \"first_name\": \"<string>\",\n        \"last_name\": \"<string>\",\n        \"fiscal_address\": {\n          \"city_id\": \"<string>\",\n          \"zip_code\": \"<string>\",\n          \"street\": \"<string>\",\n          \"number\": \"<string>\",\n          \"neighbourhood\": \"<string>\",\n          \"apartment\": \"<string>\",\n          \"floor\": \"<string>\"\n        }\n      }\n    ]\n  },\n  \"loyalty_data\": {\n    \"redemption_points\": \"<number>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "edc370c9-3c3e-43c9-9711-664ce591b2c8",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "book"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "test_case",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"prebook_id\": \"prebook-id-value\",\n  \"external_booking_reference\": \"REF-001\",\n  \"modality\": \"PAYINADVANCE\",\n  \"contact_data\": {\n    \"email\": \"maria.silva@example.com\",\n    \"phones\": [\n      {\n        \"country_code\": \"55\",\n        \"area_code\": \"11\",\n        \"number\": \"912345678\",\n        \"type\": \"MOBILE\"\n      }\n    ]\n  },\n  \"travelers\": [\n    {\n      \"traveler_reference_id\": \"0\",\n      \"first_name\": \"Maria\",\n      \"last_name\": \"Silva\",\n      \"gender\": \"FEMALE\",\n      \"nationality\": \"BR\",\n      \"birth_date\": \"1990-03-05\",\n      \"identification\": {\n        \"type\": \"PASSPORT\",\n        \"number\": \"AB1234567\",\n        \"issue_country\": \"BR\"\n      }\n    }\n  ],\n  \"payment\": {\n    \"option_type\": \"ONE_CARD\",\n    \"payment_units\": [\n      {\n        \"type\": \"ONE_CARD\",\n        \"plan_id\": \"plan-id-value\",\n        \"secure_token\": \"secure-token-value\",\n        \"invoice_reference\": 1,\n        \"card_holder_identification\": {\n          \"type\": \"LOCAL\",\n          \"number\": \"123.456.789-09\"\n        }\n      }\n    ],\n    \"invoices\": [\n      {\n        \"reference\": 1,\n        \"fiscal_name\": \"Maria Silva\",\n        \"first_name\": \"Maria\",\n        \"last_name\": \"Silva\",\n        \"fiscal_status\": \"PERSONA_FISICA\",\n        \"fiscal_identification\": {\n          \"type\": \"CPF\",\n          \"number\": \"12345678909\"\n        },\n        \"fiscal_address\": {\n          \"street\": \"Rua das Flores\",\n          \"number\": \"42\",\n          \"city_id\": \"7274\",\n          \"zip_code\": \"01310-100\"\n        }\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reservationId\": \"string\",\n  \"status\": \"string\",\n  \"products\": [\n    {\n      \"type\": \"string\",\n      \"plataform_id\": 7571.901259750914,\n      \"pnr\": 3144.9039816248537\n    },\n    {\n      \"type\": \"string\",\n      \"plataform_id\": 754.4215094956719,\n      \"pnr\": 1157.9375077757647\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aedd05c0-55ca-4750-9aa6-3aa5f4a00eae",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "book"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "test_case",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"prebook_id\": \"prebook-id-value\",\n  \"external_booking_reference\": \"REF-001\",\n  \"modality\": \"PAYINADVANCE\",\n  \"contact_data\": {\n    \"email\": \"maria.silva@example.com\",\n    \"phones\": [\n      {\n        \"country_code\": \"55\",\n        \"area_code\": \"11\",\n        \"number\": \"912345678\",\n        \"type\": \"MOBILE\"\n      }\n    ]\n  },\n  \"travelers\": [\n    {\n      \"traveler_reference_id\": \"0\",\n      \"first_name\": \"Maria\",\n      \"last_name\": \"Silva\",\n      \"gender\": \"FEMALE\",\n      \"nationality\": \"BR\",\n      \"birth_date\": \"1990-03-05\",\n      \"identification\": {\n        \"type\": \"PASSPORT\",\n        \"number\": \"AB1234567\",\n        \"issue_country\": \"BR\"\n      }\n    }\n  ],\n  \"payment\": {\n    \"option_type\": \"ONE_CARD\",\n    \"payment_units\": [\n      {\n        \"type\": \"ONE_CARD\",\n        \"plan_id\": \"plan-id-value\",\n        \"secure_token\": \"secure-token-value\",\n        \"invoice_reference\": 1,\n        \"card_holder_identification\": {\n          \"type\": \"LOCAL\",\n          \"number\": \"123.456.789-09\"\n        }\n      }\n    ],\n    \"invoices\": [\n      {\n        \"reference\": 1,\n        \"fiscal_name\": \"Maria Silva\",\n        \"first_name\": \"Maria\",\n        \"last_name\": \"Silva\",\n        \"fiscal_status\": \"PERSONA_FISICA\",\n        \"fiscal_identification\": {\n          \"type\": \"CPF\",\n          \"number\": \"12345678909\"\n        },\n        \"fiscal_address\": {\n          \"street\": \"Rua das Flores\",\n          \"number\": \"42\",\n          \"city_id\": \"7274\",\n          \"zip_code\": \"01310-100\"\n        }\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"option1\": {\n    \"code\": \"string\",\n    \"message\": \"string\"\n  },\n  \"option2\": {\n    \"code\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9214ee0e-9073-401b-ac36-d2ce7fd297bc",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "book"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "test_case",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"prebook_id\": \"prebook-id-value\",\n  \"external_booking_reference\": \"REF-001\",\n  \"modality\": \"PAYINADVANCE\",\n  \"contact_data\": {\n    \"email\": \"maria.silva@example.com\",\n    \"phones\": [\n      {\n        \"country_code\": \"55\",\n        \"area_code\": \"11\",\n        \"number\": \"912345678\",\n        \"type\": \"MOBILE\"\n      }\n    ]\n  },\n  \"travelers\": [\n    {\n      \"traveler_reference_id\": \"0\",\n      \"first_name\": \"Maria\",\n      \"last_name\": \"Silva\",\n      \"gender\": \"FEMALE\",\n      \"nationality\": \"BR\",\n      \"birth_date\": \"1990-03-05\",\n      \"identification\": {\n        \"type\": \"PASSPORT\",\n        \"number\": \"AB1234567\",\n        \"issue_country\": \"BR\"\n      }\n    }\n  ],\n  \"payment\": {\n    \"option_type\": \"ONE_CARD\",\n    \"payment_units\": [\n      {\n        \"type\": \"ONE_CARD\",\n        \"plan_id\": \"plan-id-value\",\n        \"secure_token\": \"secure-token-value\",\n        \"invoice_reference\": 1,\n        \"card_holder_identification\": {\n          \"type\": \"LOCAL\",\n          \"number\": \"123.456.789-09\"\n        }\n      }\n    ],\n    \"invoices\": [\n      {\n        \"reference\": 1,\n        \"fiscal_name\": \"Maria Silva\",\n        \"first_name\": \"Maria\",\n        \"last_name\": \"Silva\",\n        \"fiscal_status\": \"PERSONA_FISICA\",\n        \"fiscal_identification\": {\n          \"type\": \"CPF\",\n          \"number\": \"12345678909\"\n        },\n        \"fiscal_address\": {\n          \"street\": \"Rua das Flores\",\n          \"number\": \"42\",\n          \"city_id\": \"7274\",\n          \"zip_code\": \"01310-100\"\n        }\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"INVALID_FILTER\",\n  \"message\": \"Invalid parameter\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6dd87bf8-150f-40de-a5be-57b7628ca401",
+              "name": "Conflict",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "book"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "test_case",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"prebook_id\": \"prebook-id-value\",\n  \"external_booking_reference\": \"REF-001\",\n  \"modality\": \"PAYINADVANCE\",\n  \"contact_data\": {\n    \"email\": \"maria.silva@example.com\",\n    \"phones\": [\n      {\n        \"country_code\": \"55\",\n        \"area_code\": \"11\",\n        \"number\": \"912345678\",\n        \"type\": \"MOBILE\"\n      }\n    ]\n  },\n  \"travelers\": [\n    {\n      \"traveler_reference_id\": \"0\",\n      \"first_name\": \"Maria\",\n      \"last_name\": \"Silva\",\n      \"gender\": \"FEMALE\",\n      \"nationality\": \"BR\",\n      \"birth_date\": \"1990-03-05\",\n      \"identification\": {\n        \"type\": \"PASSPORT\",\n        \"number\": \"AB1234567\",\n        \"issue_country\": \"BR\"\n      }\n    }\n  ],\n  \"payment\": {\n    \"option_type\": \"ONE_CARD\",\n    \"payment_units\": [\n      {\n        \"type\": \"ONE_CARD\",\n        \"plan_id\": \"plan-id-value\",\n        \"secure_token\": \"secure-token-value\",\n        \"invoice_reference\": 1,\n        \"card_holder_identification\": {\n          \"type\": \"LOCAL\",\n          \"number\": \"123.456.789-09\"\n        }\n      }\n    ],\n    \"invoices\": [\n      {\n        \"reference\": 1,\n        \"fiscal_name\": \"Maria Silva\",\n        \"first_name\": \"Maria\",\n        \"last_name\": \"Silva\",\n        \"fiscal_status\": \"PERSONA_FISICA\",\n        \"fiscal_identification\": {\n          \"type\": \"CPF\",\n          \"number\": \"12345678909\"\n        },\n        \"fiscal_address\": {\n          \"street\": \"Rua das Flores\",\n          \"number\": \"42\",\n          \"city_id\": \"7274\",\n          \"zip_code\": \"01310-100\"\n        }\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"INVALID_FILTER\",\n  \"message\": \"Invalid parameter\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cb462f80-5719-46f6-abc8-64ef425796ef",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "book"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "test_case",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"prebook_id\": \"prebook-id-value\",\n  \"external_booking_reference\": \"REF-001\",\n  \"modality\": \"PAYINADVANCE\",\n  \"contact_data\": {\n    \"email\": \"maria.silva@example.com\",\n    \"phones\": [\n      {\n        \"country_code\": \"55\",\n        \"area_code\": \"11\",\n        \"number\": \"912345678\",\n        \"type\": \"MOBILE\"\n      }\n    ]\n  },\n  \"travelers\": [\n    {\n      \"traveler_reference_id\": \"0\",\n      \"first_name\": \"Maria\",\n      \"last_name\": \"Silva\",\n      \"gender\": \"FEMALE\",\n      \"nationality\": \"BR\",\n      \"birth_date\": \"1990-03-05\",\n      \"identification\": {\n        \"type\": \"PASSPORT\",\n        \"number\": \"AB1234567\",\n        \"issue_country\": \"BR\"\n      }\n    }\n  ],\n  \"payment\": {\n    \"option_type\": \"ONE_CARD\",\n    \"payment_units\": [\n      {\n        \"type\": \"ONE_CARD\",\n        \"plan_id\": \"plan-id-value\",\n        \"secure_token\": \"secure-token-value\",\n        \"invoice_reference\": 1,\n        \"card_holder_identification\": {\n          \"type\": \"LOCAL\",\n          \"number\": \"123.456.789-09\"\n        }\n      }\n    ],\n    \"invoices\": [\n      {\n        \"reference\": 1,\n        \"fiscal_name\": \"Maria Silva\",\n        \"first_name\": \"Maria\",\n        \"last_name\": \"Silva\",\n        \"fiscal_status\": \"PERSONA_FISICA\",\n        \"fiscal_identification\": {\n          \"type\": \"CPF\",\n          \"number\": \"12345678909\"\n        },\n        \"fiscal_address\": {\n          \"street\": \"Rua das Flores\",\n          \"number\": \"42\",\n          \"city_id\": \"7274\",\n          \"zip_code\": \"01310-100\"\n        }\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-dev.despegar.com/v3/activities-api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "300f71d4-c367-45dd-b24a-ff9540903c4f",
+    "name": "Activities Availability Booking API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for activities: tickets, modalities, availability, prebook, payments, and booking. Authentication via API Key.",
+      "type": "text/plain"
+    }
+  }
+}

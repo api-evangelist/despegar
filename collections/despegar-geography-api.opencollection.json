@@ -1,0 +1,442 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Activities Availability Geography API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-apikey",
+      "value": "{{x-apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Geography",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "countries_id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-dev.despegar.com/v3/activities-api/countries/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "HOTELS",
+                "type": "path",
+                "description": "Unique identifier for this item"
+              },
+              {
+                "name": "country",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "product",
+                "value": "HOTELS",
+                "type": "query"
+              },
+              {
+                "name": "language",
+                "value": "ES%2CPT%2CEN",
+                "type": "query"
+              },
+              {
+                "name": "tags",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "ratio",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "options",
+                "value": "",
+                "type": "query",
+                "description": "Optional fields for the response"
+              },
+              {
+                "name": "include",
+                "value": "",
+                "type": "query",
+                "description": "Option to include filtered entities, additional country information, or author and copyright information when requesting pictures"
+              }
+            ]
+          },
+          "docs": "Returns detailed information for a specific country."
+        },
+        {
+          "info": {
+            "name": "countries",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-dev.despegar.com/v3/activities-api/countries",
+            "params": [
+              {
+                "name": "country",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "product",
+                "value": "HOTELS",
+                "type": "query"
+              },
+              {
+                "name": "language",
+                "value": "ES%2CPT%2CEN",
+                "type": "query",
+                "description": "A list of ISO codes representing the requested languages"
+              },
+              {
+                "name": "continent_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset to start returning countries"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum quantity of entities. If setted to 0 it returns everything"
+              },
+              {
+                "name": "snapshot",
+                "value": "",
+                "type": "query",
+                "description": "Whether to return a snapshot or paginated results"
+              },
+              {
+                "name": "codes",
+                "value": "",
+                "type": "query",
+                "description": "A list of codes to return the cities that has the same ones"
+              },
+              {
+                "name": "options",
+                "value": "",
+                "type": "query",
+                "description": "Optional fields for the response"
+              },
+              {
+                "name": "include",
+                "value": "",
+                "type": "query",
+                "description": "Option to include filtered entities, additional country information or author and copyright information when requesting pictures"
+              }
+            ]
+          },
+          "docs": "Returns the list of available countries matching the provided search criteria."
+        },
+        {
+          "info": {
+            "name": "continents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-dev.despegar.com/v3/activities-api/continents",
+            "params": [
+              {
+                "name": "product",
+                "value": "HOTELS",
+                "type": "query"
+              },
+              {
+                "name": "language",
+                "value": "ES%2CPT%2CEN",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns the list of available continents."
+        },
+        {
+          "info": {
+            "name": "continents_id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-dev.despegar.com/v3/activities-api/continents/:id",
+            "params": [
+              {
+                "name": "product",
+                "value": "HOTELS",
+                "type": "query"
+              },
+              {
+                "name": "language",
+                "value": "ES%2CPT%2CEN",
+                "type": "query"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns detailed information for a specific continent."
+        },
+        {
+          "info": {
+            "name": "regions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-dev.despegar.com/v3/activities-api/regions",
+            "params": [
+              {
+                "name": "product",
+                "value": "HOTELS",
+                "type": "query"
+              },
+              {
+                "name": "language",
+                "value": "ES%2CPT%2CEN",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns the list of available regions matching the provided search criteria."
+        },
+        {
+          "info": {
+            "name": "administrative-divisions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-dev.despegar.com/v3/activities-api/administrative-divisions",
+            "params": [
+              {
+                "name": "country_id",
+                "value": "20010",
+                "type": "query"
+              },
+              {
+                "name": "product",
+                "value": "HOTELS",
+                "type": "query"
+              },
+              {
+                "name": "language",
+                "value": "ES%2CPT%2CEN",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns the list of available administrative divisions matching the provided search criteria."
+        },
+        {
+          "info": {
+            "name": "administrative-divisions_id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-dev.despegar.com/v3/activities-api/administrative-divisions/:id",
+            "params": [
+              {
+                "name": "product",
+                "value": "HOTELS",
+                "type": "query"
+              },
+              {
+                "name": "language",
+                "value": "ES%2CPT%2CEN",
+                "type": "query"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns detailed information for a specific administrative division."
+        },
+        {
+          "info": {
+            "name": "zones",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-dev.despegar.com/v3/activities-api/zones",
+            "params": [
+              {
+                "name": "country_id",
+                "value": "20010",
+                "type": "query"
+              },
+              {
+                "name": "product",
+                "value": "HOTELS",
+                "type": "query"
+              },
+              {
+                "name": "language",
+                "value": "ES%2CPT%2CEN",
+                "type": "query"
+              },
+              {
+                "name": "min_distance",
+                "value": "1",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns the list of available zones matching the provided search criteria."
+        },
+        {
+          "info": {
+            "name": "zones_id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-dev.despegar.com/v3/activities-api/zones/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "183179",
+                "type": "path"
+              },
+              {
+                "name": "product",
+                "value": "HOTELS",
+                "type": "query"
+              },
+              {
+                "name": "ratio",
+                "value": "4%3A3",
+                "type": "query"
+              },
+              {
+                "name": "language",
+                "value": "ES%2CPT%2CEN",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns detailed information for a specific zone."
+        },
+        {
+          "info": {
+            "name": "cities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-dev.despegar.com/v3/activities-api/cities",
+            "params": [
+              {
+                "name": "country_id",
+                "value": "20010",
+                "type": "query"
+              },
+              {
+                "name": "product",
+                "value": "HOTELS",
+                "type": "query"
+              },
+              {
+                "name": "language",
+                "value": "ES%2CPT%2CEN",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns detailed information for a specific city."
+        },
+        {
+          "info": {
+            "name": "cities_id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-dev.despegar.com/v3/activities-api/cities/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "982",
+                "type": "path"
+              },
+              {
+                "name": "product",
+                "value": "HOTELS",
+                "type": "query"
+              },
+              {
+                "name": "ratio",
+                "value": "4%3A3",
+                "type": "query"
+              },
+              {
+                "name": "language",
+                "value": "ES",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns detailed information for a specific city."
+        },
+        {
+          "info": {
+            "name": "geo_points_id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-dev.despegar.com/v3/activities-api/geo-points/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "192635",
+                "type": "path"
+              },
+              {
+                "name": "product",
+                "value": "HOTELS",
+                "type": "query"
+              },
+              {
+                "name": "ratio",
+                "value": "4%3A3",
+                "type": "query"
+              },
+              {
+                "name": "language",
+                "value": "ES%2CPT%2CEN",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns detailed information for a specific geographic point."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

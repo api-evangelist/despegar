@@ -1,0 +1,160 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Activities Availability API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-apikey",
+      "value": "{{x-apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Availability",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Availability",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-dev.despegar.com/v3/activities-api/availability",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "This information must be obtained from the response of the 'Modalities' service,"
+              },
+              {
+                "name": "modality",
+                "value": "",
+                "type": "query",
+                "description": "Modality chosen by the user; this information must be obtained from the detail service response, in the structure: 'modalities' -> 'id'."
+              },
+              {
+                "name": "date",
+                "value": "2026-04-04",
+                "type": "query",
+                "description": "Date on which the activity will take place; the format to send is YYYY-MM-DD."
+              },
+              {
+                "name": "site",
+                "value": "",
+                "type": "query",
+                "description": "Refers to the country code; it must contain two alphabetic characters"
+              },
+              {
+                "name": "language",
+                "value": "",
+                "type": "query",
+                "description": "This field must be filled with the language in which you want to receive the response"
+              },
+              {
+                "name": "additionals",
+                "value": "",
+                "type": "query",
+                "description": "Refers to the ID of the additional attraction; this information must be obtained from the response of the 'Modalities' service, field 'id' within the 'additionals' structure."
+              },
+              {
+                "name": "distribution",
+                "value": "",
+                "type": "query",
+                "description": " In this field, send the distribution of people in the activity. The first position always refers to the number of adults; the remaining positions should be the ages of the minors (children or infants).Example: for an activity with 2 adults, two 8-year-olds, and two 4-year-olds "
+              },
+              {
+                "name": "schedule",
+                "value": "",
+                "type": "query",
+                "description": " In this field, send the distribution of people in the activity. The first position always refers to the number of adults; the remaining positions should be the ages of the minors (children or infants).Example: for an activity with 2 adults, two 8-year-olds, and two 4-year-olds "
+              }
+            ]
+          },
+          "docs": "Availability"
+        },
+        {
+          "info": {
+            "name": "Detail",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-dev.despegar.com/v3/activities-api/hotels-api/availability/:hotel_id",
+            "params": [
+              {
+                "name": "hotel_id",
+                "value": "",
+                "type": "path",
+                "description": " Refers to the id of the hotel."
+              },
+              {
+                "name": "country_code",
+                "value": "br",
+                "type": "query",
+                "description": " Refers to the country code, which must be filled with two alphabetical digits."
+              },
+              {
+                "name": "checkin_date",
+                "value": "2026-11-14",
+                "type": "query",
+                "description": "Refers to the hotel check-in date and must be in the format YYYY-MM-DD."
+              },
+              {
+                "name": "checkout_date",
+                "value": "2026-11-16",
+                "type": "query",
+                "description": "Refers to the hotel check-out date and must be in the format YYYY-MM-DD."
+              },
+              {
+                "name": "currency",
+                "value": "BRL",
+                "type": "query",
+                "description": "Refers to the currency, which must be filled with three alphabetical digits. (E.g. \"USD\", \"ARS\")"
+              },
+              {
+                "name": "distribution",
+                "value": "2!2-10",
+                "type": "query",
+                "description": "Passenger distribution. Each room’s passengers should be written as number_of_adults-children_ages. Children-age goes up to 17 years old. Rooms should be separated by “!”. E.g.: Means room 1 with 2 adults and room 2 with 2 adults and a 10-year-old child."
+              },
+              {
+                "name": "roompack_id",
+                "value": "",
+                "type": "query",
+                "description": "specific roompack_id (obtained in previous step)."
+              },
+              {
+                "name": "language",
+                "value": "PT",
+                "type": "query",
+                "description": "Refers to the language, which must be filled with two alphabetical digits."
+              },
+              {
+                "name": "ttl",
+                "value": "",
+                "type": "query",
+                "description": "Maximum time allowed for the connection. Minimum = 3000 ms, Maximum = 6200 ms."
+              },
+              {
+                "name": "refundable_only",
+                "value": "",
+                "type": "query",
+                "description": "If set to ‘true’, only refundable hotel rates will be quoted."
+              }
+            ]
+          },
+          "docs": "Returns live availability for a specific hotel."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

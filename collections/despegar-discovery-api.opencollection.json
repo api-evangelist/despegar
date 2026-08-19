@@ -1,0 +1,56 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Activities Availability Discovery API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-apikey",
+      "value": "{{x-apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Discovery",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Discovery",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-dev.despegar.com/v3/activities-api/discovery",
+            "params": [
+              {
+                "name": "site",
+                "value": "br",
+                "type": "query",
+                "description": "Refers to the country code"
+              },
+              {
+                "name": "destination",
+                "value": "SAO",
+                "type": "query",
+                "description": "This field must be populated with the IATA code corresponding to each destination."
+              },
+              {
+                "name": "language",
+                "value": "pt",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Discovery"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

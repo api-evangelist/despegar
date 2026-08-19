@@ -28,3 +28,10 @@ servers:
     description: Check availability for hotels.
   - name: hotels_create_cart
     description: Create a hotel cart.
+deployment:
+  mode: remote
+  endpoint: https://apis.despegar.com/api-b2b-flights-mcp/mcp
+  verified: probed
+  probe: gated
+  checked: '2026-08-12'
+  source: catalog MCP census

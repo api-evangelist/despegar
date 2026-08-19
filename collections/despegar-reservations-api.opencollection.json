@@ -1,0 +1,122 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Activities Availability Reservations API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-apikey",
+      "value": "{{x-apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Reservations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-dev.despegar.com/v3/activities-api/reservations",
+            "params": [
+              {
+                "name": "product_id",
+                "value": "",
+                "type": "query",
+                "description": "This field represents the product identifier within the reservation. In v2, it matches the booking_code field. It must be used in combination with the corresponding product_type value."
+              },
+              {
+                "name": "product_type",
+                "value": "",
+                "type": "query",
+                "description": "Indicates the type of product associated with the reservation. Only to be used with the corresponding product_id to identify the product."
+              },
+              {
+                "name": "reservation_id",
+                "value": "",
+                "type": "query",
+                "description": "Refers to the reservation ID"
+              },
+              {
+                "name": "flow_id",
+                "value": "",
+                "type": "query",
+                "description": "Refers to the ID of a flow within a reservation, used to check the status of a specific management action"
+              },
+              {
+                "name": "partner_id",
+                "value": "",
+                "type": "query",
+                "description": "Refers to the partner ID; when provided, it returns all products associated with it"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Limits the number of search results, especially for partner_id/api_key queries that can return thousands of products."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pagination for responses that exceed the limit. Add the parameter page= starting at 0 up to the last available page at the end of the request"
+              },
+              {
+                "name": "by_api_key",
+                "value": "",
+                "type": "query",
+                "description": "Refers to apikey, when sent it searches for all products associated with apikey"
+              },
+              {
+                "name": "external_transaction_id",
+                "value": "",
+                "type": "query",
+                "description": "Obtained via external_reservation_id"
+              },
+              {
+                "name": "from_purchase_date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "to_purchase_date",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Status"
+        },
+        {
+          "info": {
+            "name": "Status reservation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-dev.despegar.com/v3/activities-api/book/:reservationId",
+            "params": [
+              {
+                "name": "reservationId",
+                "value": "",
+                "type": "path",
+                "description": "This field must be filled in with the id of an existing reservation or with the 'external_booking_reference' sent when closing the reservation."
+              }
+            ]
+          },
+          "docs": "Status reservation"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

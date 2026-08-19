@@ -1,0 +1,1591 @@
+{
+  "item": [
+    {
+      "id": "b087e535-8175-468b-bc96-4afdbe122641",
+      "name": "Flights",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e7559f64-6fc6-4780-99df-df5c004b2114",
+          "name": "Search",
+          "request": {
+            "name": "Search",
+            "description": {},
+            "url": {
+              "path": [
+                "flights-api",
+                "availability"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "site",
+                  "value": "<string>",
+                  "description": "(Required) Refers to the country code and must be filled in with two alphabetical characters. The value must correspond to the POS associated with the API credentials."
+                },
+                {
+                  "disabled": false,
+                  "key": "from",
+                  "value": "<string>",
+                  "description": "(Required) Refers to the origin of the flight and must be filled in with the IATA code of the airport or city, containing three alphabetical digits."
+                },
+                {
+                  "disabled": false,
+                  "key": "to",
+                  "value": "<string>",
+                  "description": "(Required) Refers to the flight destination and must be filled in with the IATA code of the airport or city, containing three alphabetical digits."
+                },
+                {
+                  "disabled": false,
+                  "key": "departure_date",
+                  "value": "<date>",
+                  "description": "(Required) Refers to the flight departure date and must be filled in the format YYYY-MM-DD."
+                },
+                {
+                  "disabled": false,
+                  "key": "return_date",
+                  "value": "<date>",
+                  "description": "Refers to the flight's return date and must be filled in the format YYYY-MM-DD. This parameter is only valid for round-trip flights."
+                },
+                {
+                  "disabled": false,
+                  "key": "adults",
+                  "value": "<integer>",
+                  "description": "(Required) Refers to the number of adults on the flight and must be filled with a maximum of 9 adults, provided there are no other passengers. If there are children and infants on the flight, the total number of passengers must be 9, including adults, children, and infants."
+                },
+                {
+                  "disabled": false,
+                  "key": "children",
+                  "value": "0",
+                  "description": "Refers to the number of children on the flight, aged between 2 and 11 years old, and must be filled in with a total of 9 passengers including adults, children and infants."
+                },
+                {
+                  "disabled": false,
+                  "key": "infants",
+                  "value": "0",
+                  "description": "This field refers to the number of infants on the flight, aged between 0 and 23 months, and must be filled in with a number equal to or less than the number of adults, totaling 9 passengers including adults, children and infants."
+                },
+                {
+                  "disabled": false,
+                  "key": "currency",
+                  "value": "<string>",
+                  "description": "This field determines in which currency the flight fare values ​​will be returned in the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "cabin_type",
+                  "value": "<string>",
+                  "description": "Allows filtering results by flight cabin type."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "This field refers to the number of records that are ignored before starting to return results, that is, if a certain result displays 200 flights and I want to access from the 10th result, I send this parameter with 10 and thus the 11th record becomes the first of the displayed result, that is, it can be used for pagination of the result."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Limits the number of flights returned, when not sent, 20 results are returned by default."
+                },
+                {
+                  "disabled": false,
+                  "key": "group_by",
+                  "value": "<string>",
+                  "description": "Refers to grouping the received result. Can be filled with: No sending or 'none': no ​​grouping. 'flexible_penalty': groups by final price, validating carrier, and baggage conditions."
+                },
+                {
+                  "disabled": false,
+                  "key": "order_by",
+                  "value": "<string>",
+                  "description": "This field determines the criteria used to sort the search results. When left blank by default, the ordering is from lowest to highest. The following are the possible values; all can be followed by '_ascending' or '_descending', with a few exceptions:  - suitable ('_ascending' only, recommended order) - total_price - stopscount - price (base price) - duration - airline - departure - arrival - fare_minus_discount - cross_selling_price - cross_selling_total_price - cabin_purity ('_descending' only)."
+                },
+                {
+                  "disabled": false,
+                  "key": "price",
+                  "value": "<string>",
+                  "description": "When sending this field with the value 'raw', the returned values ​​will not be rounded."
+                },
+                {
+                  "disabled": false,
+                  "key": "total_price_range",
+                  "value": "<string>",
+                  "description": "Delimits the total price returned in the response, example: 1000-2500."
+                },
+                {
+                  "disabled": false,
+                  "key": "stops",
+                  "value": "<string>",
+                  "description": "Refers to the number of stops on the flight. You can submit more than one option by separating them with commas. The allowed values ​​are:  - 'NONE' (direct flights) - 'ONE' (flights with one stop) - 'MORE_THAN_ONE' (flights with more than one stop)."
+                },
+                {
+                  "disabled": false,
+                  "key": "airlines",
+                  "value": "<string>",
+                  "description": "Delimits the airlines that will be returned in the search results, must be filled in with the airline's IATA code."
+                },
+                {
+                  "disabled": false,
+                  "key": "alliances",
+                  "value": "<string>",
+                  "description": "This field allows you to search by airline alliance. An airline alliance is when two or more airlines cooperate so that travelers can make codeshare connections within their countries. Multiple options are allowed, separated by commas. The allowed values ​​are:  - 'OW': One World - 'SA': Star Alliance - 'ST': Sky Team."
+                },
+                {
+                  "disabled": false,
+                  "key": "outbound_time_range",
+                  "value": "<string>",
+                  "description": "Defines the times of outbound flights within a given range. Example: 7:00-8:00."
+                },
+                {
+                  "disabled": false,
+                  "key": "inbound_time_range",
+                  "value": "<string>",
+                  "description": "Defines the return flight times within a specific range. Parameter valid only for roundtrip flights."
+                },
+                {
+                  "disabled": false,
+                  "key": "unique_airline",
+                  "value": "<string>",
+                  "description": "Specifies that the roundtrip flight will be the same airline when set to 'true'. When set to 'false' or not set, different airlines may be used. This parameter is only valid for roundtrip flights."
+                },
+                {
+                  "disabled": false,
+                  "key": "unique_outbound_airport",
+                  "value": "<string>",
+                  "description": "When set to 'true', both the first departure and last arrival must be at the same airport. This parameter is valid only for roundtrip flights."
+                },
+                {
+                  "disabled": false,
+                  "key": "outbound_duration_range",
+                  "value": "<string>",
+                  "description": "Refers to the duration interval in minutes of the outbound flight, the format is %d-%d. Ex.: 0-540."
+                },
+                {
+                  "disabled": false,
+                  "key": "inbound_duration_range",
+                  "value": "<string>",
+                  "description": "Refers to the duration interval in minutes of the return flight, the format is %d-%d. Ex.: 0-540. Parameter valid only for round-trip flights."
+                },
+                {
+                  "disabled": false,
+                  "key": "outbound_airports",
+                  "value": "<string>",
+                  "description": "This field delimits the search result to a specific airport on the way."
+                },
+                {
+                  "disabled": false,
+                  "key": "inbound_airports",
+                  "value": "<string>",
+                  "description": "This field limits the search results to a specific airport on the return journey. This parameter is valid only for roundtrip flights."
+                },
+                {
+                  "disabled": false,
+                  "key": "outbound_arrival_time_range",
+                  "value": "<string>",
+                  "description": "This field delimits the search results by filtering by the arrival time of flights on the outbound leg. Ex.: 16:00-16:30."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4f8f20df-2d15-493a-bdef-3231ebb9720e",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "flights-api",
+                    "availability"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "site",
+                      "value": "br"
+                    },
+                    {
+                      "key": "from",
+                      "value": "BUE"
+                    },
+                    {
+                      "key": "to",
+                      "value": "SAO"
+                    },
+                    {
+                      "key": "departure_date",
+                      "value": "2026-11-14"
+                    },
+                    {
+                      "key": "return_date",
+                      "value": "2026-11-16"
+                    },
+                    {
+                      "key": "adults",
+                      "value": "2"
+                    },
+                    {
+                      "key": "children",
+                      "value": "0"
+                    },
+                    {
+                      "key": "infants",
+                      "value": "0"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "BRL"
+                    },
+                    {
+                      "key": "cabin_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "group_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "price",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "total_price_range",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "stops",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "airlines",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "alliances",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "outbound_time_range",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "inbound_time_range",
+                      "value": "15:00-16:00"
+                    },
+                    {
+                      "key": "unique_airline",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "unique_outbound_airport",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "outbound_duration_range",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "inbound_duration_range",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "outbound_airports",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "inbound_airports",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "outbound_arrival_time_range",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"id\": \"string\",\n      \"outbound_choices\": [\n        {\n          \"choice\": 1361,\n          \"duration\": \"20:19:55.520Z\",\n          \"segments\": [\n            {\n              \"from\": \"string\",\n              \"to\": \"string\",\n              \"departure_datetime\": \"1981-04-28T17:49:15.356Z\",\n              \"arrival_datetime\": \"1958-09-23T20:34:51.110Z\",\n              \"duration\": \"16:38:31.142Z\",\n              \"airline\": \"string\",\n              \"operated_by\": \"string\",\n              \"flight_id\": \"string\",\n              \"cabin_type\": \"string\",\n              \"seats_remaining\": 9949,\n              \"equipment_code\": 8487,\n              \"ancillary\": {\n                \"baggages_info\": {\n                  \"baggages\": [\n                    {\n                      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                    },\n                    {\n                      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                    }\n                  ]\n                }\n              },\n              \"booking_class\": \"string\"\n            },\n            {\n              \"from\": \"string\",\n              \"to\": \"string\",\n              \"departure_datetime\": \"1997-06-26T11:25:23.412Z\",\n              \"arrival_datetime\": \"1989-11-16T07:15:57.970Z\",\n              \"duration\": \"13:32:47.372Z\",\n              \"airline\": \"string\",\n              \"operated_by\": \"string\",\n              \"flight_id\": \"string\",\n              \"cabin_type\": \"string\",\n              \"seats_remaining\": 6166,\n              \"equipment_code\": 2548,\n              \"ancillary\": {\n                \"baggages_info\": {\n                  \"baggages\": [\n                    {\n                      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                    },\n                    {\n                      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                    }\n                  ]\n                }\n              },\n              \"booking_class\": \"string\"\n            }\n          ],\n          \"baggage\": {\n            \"adult\": {\n              \"quantity\": 6660,\n              \"carry_on\": true,\n              \"personal_item\": false\n            }\n          }\n        },\n        {\n          \"choice\": 8031,\n          \"duration\": \"23:36:33.722Z\",\n          \"segments\": [\n            {\n              \"from\": \"string\",\n              \"to\": \"string\",\n              \"departure_datetime\": \"1947-03-22T07:30:46.773Z\",\n              \"arrival_datetime\": \"1963-02-15T14:13:07.092Z\",\n              \"duration\": \"19:33:32.652Z\",\n              \"airline\": \"string\",\n              \"operated_by\": \"string\",\n              \"flight_id\": \"string\",\n              \"cabin_type\": \"string\",\n              \"seats_remaining\": 4016,\n              \"equipment_code\": 405,\n              \"ancillary\": {\n                \"baggages_info\": {\n                  \"baggages\": [\n                    {\n                      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                    },\n                    {\n                      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                    }\n                  ]\n                }\n              },\n              \"booking_class\": \"string\"\n            },\n            {\n              \"from\": \"string\",\n              \"to\": \"string\",\n              \"departure_datetime\": \"1969-05-19T23:25:06.121Z\",\n              \"arrival_datetime\": \"1988-09-05T19:31:21.641Z\",\n              \"duration\": \"08:12:18.011Z\",\n              \"airline\": \"string\",\n              \"operated_by\": \"string\",\n              \"flight_id\": \"string\",\n              \"cabin_type\": \"string\",\n              \"seats_remaining\": 5604,\n              \"equipment_code\": 805,\n              \"ancillary\": {\n                \"baggages_info\": {\n                  \"baggages\": [\n                    {\n                      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                    },\n                    {\n                      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                    }\n                  ]\n                }\n              },\n              \"booking_class\": \"string\"\n            }\n          ],\n          \"baggage\": {\n            \"adult\": {\n              \"quantity\": 5031,\n              \"carry_on\": false,\n              \"personal_item\": false\n            }\n          }\n        }\n      ],\n      \"price_detail\": {\n        \"currency\": \"string\",\n        \"total\": 9458,\n        \"base\": 4164,\n        \"adult_base\": 8625,\n        \"adult_total\": 1011,\n        \"adults_subtotal\": 8079,\n        \"charges\": 5817,\n        \"net_fare\": {\n          \"applied\": true,\n          \"reference_price\": 2771.7456572349674\n        }\n      },\n      \"validating_carrier\": \"string\",\n      \"booking_info\": [\n        {\n          \"outbound_choice\": 737,\n          \"itinerary_id\": \"string\",\n          \"choice_id\": \"string\",\n          \"upselling_available\": false,\n          \"fare_family\": \"string\",\n          \"search_reason\": \"string\",\n          \"country\": \"string\",\n          \"fare_restricted_to\": \"string\",\n          \"booking_reservation\": [\n            {\n              \"available\": false\n            },\n            {\n              \"available\": false\n            }\n          ],\n          \"alternatives_key\": \"string\",\n          \"public_parity_applied\": false\n        },\n        {\n          \"outbound_choice\": 6114,\n          \"itinerary_id\": \"string\",\n          \"choice_id\": \"string\",\n          \"upselling_available\": false,\n          \"fare_family\": \"string\",\n          \"search_reason\": \"string\",\n          \"country\": \"string\",\n          \"fare_restricted_to\": \"string\",\n          \"booking_reservation\": [\n            {\n              \"available\": false\n            },\n            {\n              \"available\": false\n            }\n          ],\n          \"alternatives_key\": \"string\",\n          \"public_parity_applied\": false\n        }\n      ],\n      \"passenger_distribution\": {\n        \"adults\": 6366,\n        \"children\": 4552,\n        \"infants\": 212\n      },\n      \"last_minute\": false,\n      \"route_type\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"outbound_choices\": [\n        {\n          \"choice\": 1632,\n          \"duration\": \"20:05:49.768Z\",\n          \"segments\": [\n            {\n              \"from\": \"string\",\n              \"to\": \"string\",\n              \"departure_datetime\": \"1990-10-27T12:46:17.335Z\",\n              \"arrival_datetime\": \"1997-05-15T08:36:35.416Z\",\n              \"duration\": \"17:47:07.875Z\",\n              \"airline\": \"string\",\n              \"operated_by\": \"string\",\n              \"flight_id\": \"string\",\n              \"cabin_type\": \"string\",\n              \"seats_remaining\": 7395,\n              \"equipment_code\": 5955,\n              \"ancillary\": {\n                \"baggages_info\": {\n                  \"baggages\": [\n                    {\n                      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                    },\n                    {\n                      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                    }\n                  ]\n                }\n              },\n              \"booking_class\": \"string\"\n            },\n            {\n              \"from\": \"string\",\n              \"to\": \"string\",\n              \"departure_datetime\": \"2020-08-10T14:44:52.119Z\",\n              \"arrival_datetime\": \"1986-09-04T00:56:40.374Z\",\n              \"duration\": \"02:20:58.926Z\",\n              \"airline\": \"string\",\n              \"operated_by\": \"string\",\n              \"flight_id\": \"string\",\n              \"cabin_type\": \"string\",\n              \"seats_remaining\": 2104,\n              \"equipment_code\": 6617,\n              \"ancillary\": {\n                \"baggages_info\": {\n                  \"baggages\": [\n                    {\n                      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                    },\n                    {\n                      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                    }\n                  ]\n                }\n              },\n              \"booking_class\": \"string\"\n            }\n          ],\n          \"baggage\": {\n            \"adult\": {\n              \"quantity\": 4094,\n              \"carry_on\": true,\n              \"personal_item\": false\n            }\n          }\n        },\n        {\n          \"choice\": 6539,\n          \"duration\": \"09:27:18.121Z\",\n          \"segments\": [\n            {\n              \"from\": \"string\",\n              \"to\": \"string\",\n              \"departure_datetime\": \"1949-10-23T06:24:43.991Z\",\n              \"arrival_datetime\": \"2020-03-20T14:53:20.738Z\",\n              \"duration\": \"22:03:41.368Z\",\n              \"airline\": \"string\",\n              \"operated_by\": \"string\",\n              \"flight_id\": \"string\",\n              \"cabin_type\": \"string\",\n              \"seats_remaining\": 9801,\n              \"equipment_code\": 2008,\n              \"ancillary\": {\n                \"baggages_info\": {\n                  \"baggages\": [\n                    {\n                      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                    },\n                    {\n                      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                    }\n                  ]\n                }\n              },\n              \"booking_class\": \"string\"\n            },\n            {\n              \"from\": \"string\",\n              \"to\": \"string\",\n              \"departure_datetime\": \"2024-10-08T21:07:26.836Z\",\n              \"arrival_datetime\": \"1975-08-15T00:48:58.163Z\",\n              \"duration\": \"00:42:17.449Z\",\n              \"airline\": \"string\",\n              \"operated_by\": \"string\",\n              \"flight_id\": \"string\",\n              \"cabin_type\": \"string\",\n              \"seats_remaining\": 2665,\n              \"equipment_code\": 7336,\n              \"ancillary\": {\n                \"baggages_info\": {\n                  \"baggages\": [\n                    {\n                      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                    },\n                    {\n                      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                    }\n                  ]\n                }\n              },\n              \"booking_class\": \"string\"\n            }\n          ],\n          \"baggage\": {\n            \"adult\": {\n              \"quantity\": 3751,\n              \"carry_on\": true,\n              \"personal_item\": true\n            }\n          }\n        }\n      ],\n      \"price_detail\": {\n        \"currency\": \"string\",\n        \"total\": 8954,\n        \"base\": 5820,\n        \"adult_base\": 4692,\n        \"adult_total\": 9287,\n        \"adults_subtotal\": 1925,\n        \"charges\": 2412,\n        \"net_fare\": {\n          \"applied\": true,\n          \"reference_price\": 1078.904941707639\n        }\n      },\n      \"validating_carrier\": \"string\",\n      \"booking_info\": [\n        {\n          \"outbound_choice\": 5004,\n          \"itinerary_id\": \"string\",\n          \"choice_id\": \"string\",\n          \"upselling_available\": true,\n          \"fare_family\": \"string\",\n          \"search_reason\": \"string\",\n          \"country\": \"string\",\n          \"fare_restricted_to\": \"string\",\n          \"booking_reservation\": [\n            {\n              \"available\": true\n            },\n            {\n              \"available\": true\n            }\n          ],\n          \"alternatives_key\": \"string\",\n          \"public_parity_applied\": true\n        },\n        {\n          \"outbound_choice\": 5116,\n          \"itinerary_id\": \"string\",\n          \"choice_id\": \"string\",\n          \"upselling_available\": false,\n          \"fare_family\": \"string\",\n          \"search_reason\": \"string\",\n          \"country\": \"string\",\n          \"fare_restricted_to\": \"string\",\n          \"booking_reservation\": [\n            {\n              \"available\": true\n            },\n            {\n              \"available\": true\n            }\n          ],\n          \"alternatives_key\": \"string\",\n          \"public_parity_applied\": false\n        }\n      ],\n      \"passenger_distribution\": {\n        \"adults\": 5643,\n        \"children\": 5663,\n        \"infants\": 66\n      },\n      \"last_minute\": false,\n      \"route_type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8429189d-37fc-41aa-b656-3d7700986f0f",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "flights-api",
+                    "availability"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "site",
+                      "value": "br"
+                    },
+                    {
+                      "key": "from",
+                      "value": "BUE"
+                    },
+                    {
+                      "key": "to",
+                      "value": "SAO"
+                    },
+                    {
+                      "key": "departure_date",
+                      "value": "2026-11-14"
+                    },
+                    {
+                      "key": "return_date",
+                      "value": "2026-11-16"
+                    },
+                    {
+                      "key": "adults",
+                      "value": "2"
+                    },
+                    {
+                      "key": "children",
+                      "value": "0"
+                    },
+                    {
+                      "key": "infants",
+                      "value": "0"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "BRL"
+                    },
+                    {
+                      "key": "cabin_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "group_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "price",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "total_price_range",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "stops",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "airlines",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "alliances",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "outbound_time_range",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "inbound_time_range",
+                      "value": "15:00-16:00"
+                    },
+                    {
+                      "key": "unique_airline",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "unique_outbound_airport",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "outbound_duration_range",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "inbound_duration_range",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "outbound_airports",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "inbound_airports",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "outbound_arrival_time_range",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9b7821b0-361a-470c-940c-633fb14a496e",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "flights-api",
+                    "availability"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "site",
+                      "value": "br"
+                    },
+                    {
+                      "key": "from",
+                      "value": "BUE"
+                    },
+                    {
+                      "key": "to",
+                      "value": "SAO"
+                    },
+                    {
+                      "key": "departure_date",
+                      "value": "2026-11-14"
+                    },
+                    {
+                      "key": "return_date",
+                      "value": "2026-11-16"
+                    },
+                    {
+                      "key": "adults",
+                      "value": "2"
+                    },
+                    {
+                      "key": "children",
+                      "value": "0"
+                    },
+                    {
+                      "key": "infants",
+                      "value": "0"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "BRL"
+                    },
+                    {
+                      "key": "cabin_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "group_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "price",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "total_price_range",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "stops",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "airlines",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "alliances",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "outbound_time_range",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "inbound_time_range",
+                      "value": "15:00-16:00"
+                    },
+                    {
+                      "key": "unique_airline",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "unique_outbound_airport",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "outbound_duration_range",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "inbound_duration_range",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "outbound_airports",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "inbound_airports",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "outbound_arrival_time_range",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "db594f9a-918d-4564-bb8b-777ef37340cd",
+              "name": "FORBIDDEN",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "flights-api",
+                    "availability"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "site",
+                      "value": "br"
+                    },
+                    {
+                      "key": "from",
+                      "value": "BUE"
+                    },
+                    {
+                      "key": "to",
+                      "value": "SAO"
+                    },
+                    {
+                      "key": "departure_date",
+                      "value": "2026-11-14"
+                    },
+                    {
+                      "key": "return_date",
+                      "value": "2026-11-16"
+                    },
+                    {
+                      "key": "adults",
+                      "value": "2"
+                    },
+                    {
+                      "key": "children",
+                      "value": "0"
+                    },
+                    {
+                      "key": "infants",
+                      "value": "0"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "BRL"
+                    },
+                    {
+                      "key": "cabin_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "group_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "price",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "total_price_range",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "stops",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "airlines",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "alliances",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "outbound_time_range",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "inbound_time_range",
+                      "value": "15:00-16:00"
+                    },
+                    {
+                      "key": "unique_airline",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "unique_outbound_airport",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "outbound_duration_range",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "inbound_duration_range",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "outbound_airports",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "inbound_airports",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "outbound_arrival_time_range",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "87bd316c-d9d6-4b54-a85c-e3343c7ec707",
+              "name": "RATE_LIMIT_EXCEEDED",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "flights-api",
+                    "availability"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "site",
+                      "value": "br"
+                    },
+                    {
+                      "key": "from",
+                      "value": "BUE"
+                    },
+                    {
+                      "key": "to",
+                      "value": "SAO"
+                    },
+                    {
+                      "key": "departure_date",
+                      "value": "2026-11-14"
+                    },
+                    {
+                      "key": "return_date",
+                      "value": "2026-11-16"
+                    },
+                    {
+                      "key": "adults",
+                      "value": "2"
+                    },
+                    {
+                      "key": "children",
+                      "value": "0"
+                    },
+                    {
+                      "key": "infants",
+                      "value": "0"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "BRL"
+                    },
+                    {
+                      "key": "cabin_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "group_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "price",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "total_price_range",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "stops",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "airlines",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "alliances",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "outbound_time_range",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "inbound_time_range",
+                      "value": "15:00-16:00"
+                    },
+                    {
+                      "key": "unique_airline",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "unique_outbound_airport",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "outbound_duration_range",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "inbound_duration_range",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "outbound_airports",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "inbound_airports",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "outbound_arrival_time_range",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ecc5f868-0cc2-47f0-9d03-bf1b39ea3fcf",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "flights-api",
+                    "availability"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "site",
+                      "value": "br"
+                    },
+                    {
+                      "key": "from",
+                      "value": "BUE"
+                    },
+                    {
+                      "key": "to",
+                      "value": "SAO"
+                    },
+                    {
+                      "key": "departure_date",
+                      "value": "2026-11-14"
+                    },
+                    {
+                      "key": "return_date",
+                      "value": "2026-11-16"
+                    },
+                    {
+                      "key": "adults",
+                      "value": "2"
+                    },
+                    {
+                      "key": "children",
+                      "value": "0"
+                    },
+                    {
+                      "key": "infants",
+                      "value": "0"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "BRL"
+                    },
+                    {
+                      "key": "cabin_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "group_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "price",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "total_price_range",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "stops",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "airlines",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "alliances",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "outbound_time_range",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "inbound_time_range",
+                      "value": "15:00-16:00"
+                    },
+                    {
+                      "key": "unique_airline",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "unique_outbound_airport",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "outbound_duration_range",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "inbound_duration_range",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "outbound_airports",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "inbound_airports",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "outbound_arrival_time_range",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"INVALID_FILTER\",\n  \"message\": \"Invalid parameter\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ca3201ff-860c-4596-84c4-5fb03bbc067f",
+              "name": "FLIGHT_PROVIDER_ERROR",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "flights-api",
+                    "availability"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "site",
+                      "value": "br"
+                    },
+                    {
+                      "key": "from",
+                      "value": "BUE"
+                    },
+                    {
+                      "key": "to",
+                      "value": "SAO"
+                    },
+                    {
+                      "key": "departure_date",
+                      "value": "2026-11-14"
+                    },
+                    {
+                      "key": "return_date",
+                      "value": "2026-11-16"
+                    },
+                    {
+                      "key": "adults",
+                      "value": "2"
+                    },
+                    {
+                      "key": "children",
+                      "value": "0"
+                    },
+                    {
+                      "key": "infants",
+                      "value": "0"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "BRL"
+                    },
+                    {
+                      "key": "cabin_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "group_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "price",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "total_price_range",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "stops",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "airlines",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "alliances",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "outbound_time_range",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "inbound_time_range",
+                      "value": "15:00-16:00"
+                    },
+                    {
+                      "key": "unique_airline",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "unique_outbound_airport",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "outbound_duration_range",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "inbound_duration_range",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "outbound_airports",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "inbound_airports",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "outbound_arrival_time_range",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8e2bc09f-9271-4854-904b-858655798ecc",
+          "name": "Upselling",
+          "request": {
+            "name": "Upselling",
+            "description": {},
+            "url": {
+              "path": [
+                "flights-api",
+                "upselling",
+                ":choice_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "site",
+                  "value": "BR",
+                  "description": "(Required) site"
+                },
+                {
+                  "disabled": false,
+                  "key": "language",
+                  "value": "<string>",
+                  "description": "If omitted, the message is sent in English (EN) by default. If a value other than the supported ones listed below is provided, the message will not be sent."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "choice_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ea81d4af-1796-4e4a-ae16-90426ee55ed2",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "flights-api",
+                    "upselling",
+                    ":choice_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "site",
+                      "value": "BR"
+                    },
+                    {
+                      "key": "language",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "choice_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"choice_id\": \"string\",\n      \"title\": \"string\",\n      \"fare_items\": [\n        {\n          \"type\": \"CARRY_ON\",\n          \"include\": false,\n          \"inclusion_status\": \"NOT_INCLUDED\"\n        },\n        {\n          \"type\": \"SEAT_UPGRADE\",\n          \"include\": true,\n          \"inclusion_status\": \"NOT_INCLUDED\"\n        }\n      ],\n      \"price_detail\": {\n        \"total\": 8169.775122129519,\n        \"currency\": 6691.568536492207\n      }\n    },\n    {\n      \"choice_id\": \"string\",\n      \"title\": \"string\",\n      \"fare_items\": [\n        {\n          \"type\": \"SEAT_UPGRADE\",\n          \"include\": true,\n          \"inclusion_status\": \"INCLUDED\"\n        },\n        {\n          \"type\": \"PERSONAL_ITEMS\",\n          \"include\": false,\n          \"inclusion_status\": \"INCLUDED\"\n        }\n      ],\n      \"price_detail\": {\n        \"total\": 6555.855836864214,\n        \"currency\": 1122.3123527507373\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "97d44bd8-e00b-4f64-acc4-f3a393abc31a",
+              "name": "BAD_REQUEST",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "flights-api",
+                    "upselling",
+                    ":choice_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "site",
+                      "value": "BR"
+                    },
+                    {
+                      "key": "language",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "choice_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a9b56465-82ca-4c54-b8c0-ed69ef5d414d",
+              "name": "UPSELLING_UNAVAILABLE",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "flights-api",
+                    "upselling",
+                    ":choice_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "site",
+                      "value": "BR"
+                    },
+                    {
+                      "key": "language",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "choice_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Gone",
+              "code": 410,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-dev.despegar.com/v3/activities-api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "1b2c75d6-dba9-4069-80d7-81b906ae209c",
+    "name": "Activities Availability Flights API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for activities: tickets, modalities, availability, prebook, payments, and booking. Authentication via API Key.",
+      "type": "text/plain"
+    }
+  }
+}

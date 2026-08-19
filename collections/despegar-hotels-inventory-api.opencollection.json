@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Activities Availability Hotels inventory API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-apikey",
+      "value": "{{x-apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Hotels inventory",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Hotels-inventory",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-dev.despegar.com/v3/activities-api/content-api/hotels-inventory"
+          },
+          "docs": "Hotels-inventory"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

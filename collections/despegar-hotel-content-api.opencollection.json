@@ -1,0 +1,59 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Activities Availability Hotel content API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-apikey",
+      "value": "{{x-apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Hotel content",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Fee-types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-dev.despegar.com/v3/activities-api/content-api/hotels/fee-types"
+          },
+          "docs": "Fee-types"
+        },
+        {
+          "info": {
+            "name": "Amenities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-dev.despegar.com/v3/activities-api/content-api/hotels/amenities"
+          },
+          "docs": "Amenities"
+        },
+        {
+          "info": {
+            "name": "Meal-plans",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-dev.despegar.com/v3/activities-api/content-api/hotels/meal-plans"
+          },
+          "docs": "Meal-plans"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

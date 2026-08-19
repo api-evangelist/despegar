@@ -1,0 +1,534 @@
+{
+  "item": [
+    {
+      "id": "1681e523-fab7-4210-9399-bf081cba9038",
+      "name": "Price Jump",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "75921b3d-a703-4ef6-9863-ae18e946d82a",
+          "name": "Price Jump",
+          "request": {
+            "name": "Price Jump",
+            "description": {
+              "content": "This service detects price variations for a product, providing the differences between the original and the updated value.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "book",
+                ":reservationId",
+                "recovery"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "test_case",
+                  "value": "<string>",
+                  "description": "(Required) Optional parameter for testing purposes. Use 'pricejump' to simulate a price jump scenario."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "reservationId",
+                  "description": "(Required) This field must be filled in with the id of an existing reservation or with the 'external_booking_reference' sent when closing the reservation."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4dc2dbef-27df-40a9-a2d2-94ed252b82ca",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "book",
+                    ":reservationId",
+                    "recovery"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "test_case",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reservationId",
+                      "description": "(Required) This field must be filled in with the id of an existing reservation or with the 'external_booking_reference' sent when closing the reservation."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reservation_id\": \"string\",\n  \"status\": \"SUCCESS\",\n  \"sub_status\": \"string\",\n  \"price_jump\": {\n    \"difference\": 8653.527484145974,\n    \"price_before_price_jump\": 885.1051485314687,\n    \"price_after_price_jump\": 5646.206985794197,\n    \"currency\": \"string\",\n    \"timeout\": \"1957-06-11T18:58:45.071Z\",\n    \"message\": {\n      \"message_type\": \"string\",\n      \"price_jump_confirmations\": [\n        {\n          \"flavor_id\": \"F0\",\n          \"confirm\": true\n        },\n        {\n          \"flavor_id\": \"F0\",\n          \"confirm\": false\n        }\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fed397a9-a8a8-4bec-b13f-628723c74f82",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "book",
+                    ":reservationId",
+                    "recovery"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "test_case",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reservationId",
+                      "description": "(Required) This field must be filled in with the id of an existing reservation or with the 'external_booking_reference' sent when closing the reservation."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"INVALID_FILTER\",\n  \"message\": \"Invalid parameter\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3493ba3d-cd25-4092-9a62-cfb3f9789f34",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "book",
+                    ":reservationId",
+                    "recovery"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "test_case",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reservationId",
+                      "description": "(Required) This field must be filled in with the id of an existing reservation or with the 'external_booking_reference' sent when closing the reservation."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"INVALID_FILTER\",\n  \"message\": \"Invalid parameter\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d0a7d83f-be4c-49e1-a157-fb8e1f06b9e1",
+          "name": "Price Jump",
+          "request": {
+            "name": "Price Jump",
+            "description": {
+              "content": "This service allows accepting or rejecting detected price variations for a product, confirming whether to proceed with the updated value.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "book",
+                ":reservationId",
+                "recovery"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "test_case",
+                  "value": "<string>",
+                  "description": "(Required) Optional parameter for testing purposes. Use 'pricejump' to simulate a price jump scenario."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "reservationId",
+                  "description": "(Required) This field must be filled in with the id of an existing reservation or with the 'external_booking_reference' sent when closing the reservation."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message_type\": \"<string>\",\n  \"price_jump_confirmations\": [\n    {\n      \"flavor_id\": \"<string>\",\n      \"confirm\": \"<boolean>\"\n    },\n    {\n      \"flavor_id\": \"<string>\",\n      \"confirm\": \"<boolean>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1f50055b-1974-45eb-ab10-d9e9bdcd7db4",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "book",
+                    ":reservationId",
+                    "recovery"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "test_case",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reservationId",
+                      "description": "(Required) This field must be filled in with the id of an existing reservation or with the 'external_booking_reference' sent when closing the reservation."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"message_type\": \"<string>\",\n  \"price_jump_confirmations\": [\n    {\n      \"flavor_id\": \"F0\",\n      \"confirm\": \"<boolean>\"\n    },\n    {\n      \"flavor_id\": \"F0\",\n      \"confirm\": \"<boolean>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4b2db19b-8e74-47c2-9af0-70013574f387",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "book",
+                    ":reservationId",
+                    "recovery"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "test_case",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reservationId",
+                      "description": "(Required) This field must be filled in with the id of an existing reservation or with the 'external_booking_reference' sent when closing the reservation."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"message_type\": \"<string>\",\n  \"price_jump_confirmations\": [\n    {\n      \"flavor_id\": \"F0\",\n      \"confirm\": \"<boolean>\"\n    },\n    {\n      \"flavor_id\": \"F0\",\n      \"confirm\": \"<boolean>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"INVALID_FILTER\",\n  \"message\": \"Invalid parameter\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "be3d06db-64b1-4717-81f4-4b66d30fc7b6",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "book",
+                    ":reservationId",
+                    "recovery"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "test_case",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reservationId",
+                      "description": "(Required) This field must be filled in with the id of an existing reservation or with the 'external_booking_reference' sent when closing the reservation."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"message_type\": \"<string>\",\n  \"price_jump_confirmations\": [\n    {\n      \"flavor_id\": \"F0\",\n      \"confirm\": \"<boolean>\"\n    },\n    {\n      \"flavor_id\": \"F0\",\n      \"confirm\": \"<boolean>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"INVALID_FILTER\",\n  \"message\": \"Invalid parameter\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-dev.despegar.com/v3/activities-api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "0ec0c4af-8870-4b0a-b5d6-b64f782e4da8",
+    "name": "Activities Availability Price Jump API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for activities: tickets, modalities, availability, prebook, payments, and booking. Authentication via API Key.",
+      "type": "text/plain"
+    }
+  }
+}

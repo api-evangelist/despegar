@@ -1,0 +1,57 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Activities Availability Payments API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-apikey",
+      "value": "{{x-apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Payments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-dev.despegar.com/v3/activities-api/payments",
+            "params": [
+              {
+                "name": "prebook_id",
+                "value": "pre_book",
+                "type": "query",
+                "description": "Prebook identifier obtained from Prebook."
+              },
+              {
+                "name": "input_points",
+                "value": "",
+                "type": "query",
+                "description": "Loyalty points to apply."
+              },
+              {
+                "name": "include_hints",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include UI hints."
+              }
+            ]
+          },
+          "docs": "Payment"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

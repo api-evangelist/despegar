@@ -1,0 +1,68 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Activities Availability Modalities API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-apikey",
+      "value": "{{x-apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Modalities",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Modalities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-dev.despegar.com/v3/activities-api/modalities",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "site",
+                "value": "",
+                "type": "query",
+                "description": "It refers to the country code and must be filled with two alphabetic characters."
+              },
+              {
+                "name": "language",
+                "value": "",
+                "type": "query",
+                "description": "This field must be filled with the language in which you want to receive the response."
+              },
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "Start date of the search range. This field must be used together with 'to'; providing only one of the two parameters is not supported."
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "End date of the search range. This field must be used together with 'from'; providing only one of the two parameters is not supported."
+              }
+            ]
+          },
+          "docs": "Modalities"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

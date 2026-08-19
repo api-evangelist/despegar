@@ -1,0 +1,85 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Activities Availability Reschedulings API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-apikey",
+      "value": "{{x-apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Reschedulings",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Rescheduling trigger",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-dev.despegar.com/v3/activities-api/reschedulings/mock",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Rescheduling trigger"
+        },
+        {
+          "info": {
+            "name": "Rescheduling alternative",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-dev.despegar.com/v3/activities-api/reschedulings/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Rescheduling ID - RS-XXXX"
+              }
+            ]
+          },
+          "docs": "Rescheduling alternative"
+        },
+        {
+          "info": {
+            "name": "Rescheduling accepted",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api-dev.despegar.com/v3/activities-api/reschedulings/:id/alternatives/:alternative_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Comes from the reservation service - RS-XXXX"
+              },
+              {
+                "name": "alternative_id",
+                "value": "",
+                "type": "path",
+                "description": "It comes from the alternative response - ID "
+              }
+            ]
+          },
+          "docs": "Rescheduling accepted"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,1870 @@
+{
+  "item": [
+    {
+      "id": "349b42ce-96a2-4102-ab06-9acb16a29763",
+      "name": "Changes",
+      "description": {
+        "content": "Date/itinerary changes and checkout processes.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f49eadac-3426-4dad-b3b9-66171d09e97a",
+          "name": "Allowance",
+          "request": {
+            "name": "Allowance",
+            "description": {},
+            "url": {
+              "path": [
+                "reservations",
+                "changes",
+                "allowance",
+                ":transactionId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "operation_id",
+                  "value": "<string>",
+                  "description": "Type of change to be requested."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "transactionId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5a812f33-9f90-4e5f-92eb-dfcd83127d0c",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reservations",
+                    "changes",
+                    "allowance",
+                    ":transactionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "operation_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"allowed\": true,\n  \"operation_id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "78eb187a-38ed-406d-88eb-4280dde61c93",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reservations",
+                    "changes",
+                    "allowance",
+                    ":transactionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "operation_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ab38919c-f927-41c7-b405-be803d7eba62",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reservations",
+                    "changes",
+                    "allowance",
+                    ":transactionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "operation_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c75673bb-1ba5-46f0-8bbb-7971a2a99299",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reservations",
+                    "changes",
+                    "allowance",
+                    ":transactionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "operation_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d63246ba-7bb4-4c80-bc25-c4a4748649cf",
+          "name": "Alternatives Search",
+          "request": {
+            "name": "Alternatives Search",
+            "description": {},
+            "url": {
+              "path": [
+                "reservations",
+                "changes",
+                "alternatives"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "transaction_id",
+                  "value": "<string>",
+                  "description": "(Required) You must provide the reservation ID for which you want to request a modification."
+                },
+                {
+                  "disabled": false,
+                  "key": "departure_date",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "return_date",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "locale",
+                  "value": "es_ar",
+                  "description": "Response language."
+                },
+                {
+                  "disabled": false,
+                  "key": "from",
+                  "value": "<string>",
+                  "description": "New flight origin to be requested."
+                },
+                {
+                  "disabled": false,
+                  "key": "to",
+                  "value": "<string>",
+                  "description": "New flight destination to be requested."
+                },
+                {
+                  "disabled": false,
+                  "key": "IATA",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "93d9cd3a-864b-4811-8f47-deb603b475f0",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reservations",
+                    "changes",
+                    "alternatives"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "transaction_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "departure_date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "return_date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "locale",
+                      "value": "es_ar"
+                    },
+                    {
+                      "key": "from",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "IATA",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"alternatives\": [\n    {\n      \"id\": \"string\",\n      \"outbound_choices\": [\n        {\n          \"duration_time\": {\n            \"hours\": 7970,\n            \"minutes\": 1491\n          },\n          \"from_location\": {\n            \"airport\": {\n              \"code\": \"string\",\n              \"name\": \"string\"\n            },\n            \"city\": {\n              \"code\": \"string\",\n              \"name\": \"string\"\n            },\n            \"country\": {\n              \"code\": \"string\",\n              \"name\": \"string\"\n            }\n          },\n          \"to_location\": {\n            \"airport\": {\n              \"code\": \"string\",\n              \"name\": \"string\"\n            },\n            \"city\": {\n              \"code\": \"string\",\n              \"name\": \"string\"\n            },\n            \"country\": {\n              \"code\": \"string\",\n              \"name\": \"string\"\n            }\n          },\n          \"segments\": [\n            {\n              \"duration_time\": {\n                \"hours\": 2062,\n                \"minutes\": 990\n              },\n              \"from_location\": {\n                \"airport\": {\n                  \"code\": \"string\",\n                  \"name\": \"string\"\n                },\n                \"city\": {\n                  \"code\": \"string\",\n                  \"name\": \"string\"\n                },\n                \"country\": {\n                  \"code\": \"string\",\n                  \"name\": \"string\"\n                }\n              },\n              \"to_location\": {\n                \"airport\": {\n                  \"code\": \"string\",\n                  \"name\": \"string\"\n                },\n                \"city\": {\n                  \"code\": \"string\",\n                  \"name\": \"string\"\n                },\n                \"country\": {\n                  \"code\": \"string\",\n                  \"name\": \"string\"\n                }\n              },\n              \"departure_moment\": \"1974-07-03\",\n              \"arrival_moment\": \"1966-03-04\",\n              \"flight_number\": 5572,\n              \"marketing_carrier\": {\n                \"code\": \"string\",\n                \"name\": \"string\"\n              },\n              \"operating_carrier\": {\n                \"code\": \"string\",\n                \"name\": \"string\"\n              }\n            },\n            {\n              \"duration_time\": {\n                \"hours\": 8914,\n                \"minutes\": 4042\n              },\n              \"from_location\": {\n                \"airport\": {\n                  \"code\": \"string\",\n                  \"name\": \"string\"\n                },\n                \"city\": {\n                  \"code\": \"string\",\n                  \"name\": \"string\"\n                },\n                \"country\": {\n                  \"code\": \"string\",\n                  \"name\": \"string\"\n                }\n              },\n              \"to_location\": {\n                \"airport\": {\n                  \"code\": \"string\",\n                  \"name\": \"string\"\n                },\n                \"city\": {\n                  \"code\": \"string\",\n                  \"name\": \"string\"\n                },\n                \"country\": {\n                  \"code\": \"string\",\n                  \"name\": \"string\"\n                }\n              },\n              \"departure_moment\": \"1992-12-15\",\n              \"arrival_moment\": \"2000-07-07\",\n              \"flight_number\": 5137,\n              \"marketing_carrier\": {\n                \"code\": \"string\",\n                \"name\": \"string\"\n              },\n              \"operating_carrier\": {\n                \"code\": \"string\",\n                \"name\": \"string\"\n              }\n            }\n          ]\n        },\n        {\n          \"duration_time\": {\n            \"hours\": 99,\n            \"minutes\": 6674\n          },\n          \"from_location\": {\n            \"airport\": {\n              \"code\": \"string\",\n              \"name\": \"string\"\n            },\n            \"city\": {\n              \"code\": \"string\",\n              \"name\": \"string\"\n            },\n            \"country\": {\n              \"code\": \"string\",\n              \"name\": \"string\"\n            }\n          },\n          \"to_location\": {\n            \"airport\": {\n              \"code\": \"string\",\n              \"name\": \"string\"\n            },\n            \"city\": {\n              \"code\": \"string\",\n              \"name\": \"string\"\n            },\n            \"country\": {\n              \"code\": \"string\",\n              \"name\": \"string\"\n            }\n          },\n          \"segments\": [\n            {\n              \"duration_time\": {\n                \"hours\": 8169,\n                \"minutes\": 1824\n              },\n              \"from_location\": {\n                \"airport\": {\n                  \"code\": \"string\",\n                  \"name\": \"string\"\n                },\n                \"city\": {\n                  \"code\": \"string\",\n                  \"name\": \"string\"\n                },\n                \"country\": {\n                  \"code\": \"string\",\n                  \"name\": \"string\"\n                }\n              },\n              \"to_location\": {\n                \"airport\": {\n                  \"code\": \"string\",\n                  \"name\": \"string\"\n                },\n                \"city\": {\n                  \"code\": \"string\",\n                  \"name\": \"string\"\n                },\n                \"country\": {\n                  \"code\": \"string\",\n                  \"name\": \"string\"\n                }\n              },\n              \"departure_moment\": \"1998-06-11\",\n              \"arrival_moment\": \"1962-02-13\",\n              \"flight_number\": 2359,\n              \"marketing_carrier\": {\n                \"code\": \"string\",\n                \"name\": \"string\"\n              },\n              \"operating_carrier\": {\n                \"code\": \"string\",\n                \"name\": \"string\"\n              }\n            },\n            {\n              \"duration_time\": {\n                \"hours\": 6800,\n                \"minutes\": 6588\n              },\n              \"from_location\": {\n                \"airport\": {\n                  \"code\": \"string\",\n                  \"name\": \"string\"\n                },\n                \"city\": {\n                  \"code\": \"string\",\n                  \"name\": \"string\"\n                },\n                \"country\": {\n                  \"code\": \"string\",\n                  \"name\": \"string\"\n                }\n              },\n              \"to_location\": {\n                \"airport\": {\n                  \"code\": \"string\",\n                  \"name\": \"string\"\n                },\n                \"city\": {\n                  \"code\": \"string\",\n                  \"name\": \"string\"\n                },\n                \"country\": {\n                  \"code\": \"string\",\n                  \"name\": \"string\"\n                }\n              },\n              \"departure_moment\": \"2022-03-31\",\n              \"arrival_moment\": \"2004-08-10\",\n              \"flight_number\": 8356,\n              \"marketing_carrier\": {\n                \"code\": \"string\",\n                \"name\": \"string\"\n              },\n              \"operating_carrier\": {\n                \"code\": \"string\",\n                \"name\": \"string\"\n              }\n            }\n          ]\n        }\n      ],\n      \"itinerary_type\": \"string\",\n      \"price_detail\": {\n        \"currency\": \"string\",\n        \"total\": 5110,\n        \"base\": 1793,\n        \"adult_base\": 3424,\n        \"adult_total\": 4266,\n        \"adults_subtotal\": 7607,\n        \"taxes\": 1340,\n        \"taxes_detail\": [\n          {\n            \"code\": \"string\",\n            \"amount\": 6915\n          },\n          {\n            \"code\": \"string\",\n            \"amount\": 7422\n          }\n        ],\n        \"fees\": 4750,\n        \"penalty\": 7645\n      },\n      \"validating_carrier\": {\n        \"code\": \"string\",\n        \"name\": \"string\"\n      },\n      \"passenger_distribution\": {\n        \"adults\": 2319,\n        \"children\": 1537,\n        \"infants\": 2709\n      },\n      \"booking_info\": [\n        {\n          \"outbound_choice\": 52,\n          \"changes_retrieve_resource_id\": \"string\",\n          \"search_id\": \"string\",\n          \"exchange_id\": \"string\"\n        },\n        {\n          \"outbound_choice\": 6367,\n          \"changes_retrieve_resource_id\": \"string\",\n          \"search_id\": \"string\",\n          \"exchange_id\": \"string\"\n        }\n      ]\n    },\n    {\n      \"id\": \"string\",\n      \"outbound_choices\": [\n        {\n          \"duration_time\": {\n            \"hours\": 2477,\n            \"minutes\": 4239\n          },\n          \"from_location\": {\n            \"airport\": {\n              \"code\": \"string\",\n              \"name\": \"string\"\n            },\n            \"city\": {\n              \"code\": \"string\",\n              \"name\": \"string\"\n            },\n            \"country\": {\n              \"code\": \"string\",\n              \"name\": \"string\"\n            }\n          },\n          \"to_location\": {\n            \"airport\": {\n              \"code\": \"string\",\n              \"name\": \"string\"\n            },\n            \"city\": {\n              \"code\": \"string\",\n              \"name\": \"string\"\n            },\n            \"country\": {\n              \"code\": \"string\",\n              \"name\": \"string\"\n            }\n          },\n          \"segments\": [\n            {\n              \"duration_time\": {\n                \"hours\": 8411,\n                \"minutes\": 803\n              },\n              \"from_location\": {\n                \"airport\": {\n                  \"code\": \"string\",\n                  \"name\": \"string\"\n                },\n                \"city\": {\n                  \"code\": \"string\",\n                  \"name\": \"string\"\n                },\n                \"country\": {\n                  \"code\": \"string\",\n                  \"name\": \"string\"\n                }\n              },\n              \"to_location\": {\n                \"airport\": {\n                  \"code\": \"string\",\n                  \"name\": \"string\"\n                },\n                \"city\": {\n                  \"code\": \"string\",\n                  \"name\": \"string\"\n                },\n                \"country\": {\n                  \"code\": \"string\",\n                  \"name\": \"string\"\n                }\n              },\n              \"departure_moment\": \"1986-10-29\",\n              \"arrival_moment\": \"1982-11-19\",\n              \"flight_number\": 4587,\n              \"marketing_carrier\": {\n                \"code\": \"string\",\n                \"name\": \"string\"\n              },\n              \"operating_carrier\": {\n                \"code\": \"string\",\n                \"name\": \"string\"\n              }\n            },\n            {\n              \"duration_time\": {\n                \"hours\": 8209,\n                \"minutes\": 8509\n              },\n              \"from_location\": {\n                \"airport\": {\n                  \"code\": \"string\",\n                  \"name\": \"string\"\n                },\n                \"city\": {\n                  \"code\": \"string\",\n                  \"name\": \"string\"\n                },\n                \"country\": {\n                  \"code\": \"string\",\n                  \"name\": \"string\"\n                }\n              },\n              \"to_location\": {\n                \"airport\": {\n                  \"code\": \"string\",\n                  \"name\": \"string\"\n                },\n                \"city\": {\n                  \"code\": \"string\",\n                  \"name\": \"string\"\n                },\n                \"country\": {\n                  \"code\": \"string\",\n                  \"name\": \"string\"\n                }\n              },\n              \"departure_moment\": \"1995-02-02\",\n              \"arrival_moment\": \"1997-10-14\",\n              \"flight_number\": 3440,\n              \"marketing_carrier\": {\n                \"code\": \"string\",\n                \"name\": \"string\"\n              },\n              \"operating_carrier\": {\n                \"code\": \"string\",\n                \"name\": \"string\"\n              }\n            }\n          ]\n        },\n        {\n          \"duration_time\": {\n            \"hours\": 1665,\n            \"minutes\": 5506\n          },\n          \"from_location\": {\n            \"airport\": {\n              \"code\": \"string\",\n              \"name\": \"string\"\n            },\n            \"city\": {\n              \"code\": \"string\",\n              \"name\": \"string\"\n            },\n            \"country\": {\n              \"code\": \"string\",\n              \"name\": \"string\"\n            }\n          },\n          \"to_location\": {\n            \"airport\": {\n              \"code\": \"string\",\n              \"name\": \"string\"\n            },\n            \"city\": {\n              \"code\": \"string\",\n              \"name\": \"string\"\n            },\n            \"country\": {\n              \"code\": \"string\",\n              \"name\": \"string\"\n            }\n          },\n          \"segments\": [\n            {\n              \"duration_time\": {\n                \"hours\": 7921,\n                \"minutes\": 6250\n              },\n              \"from_location\": {\n                \"airport\": {\n                  \"code\": \"string\",\n                  \"name\": \"string\"\n                },\n                \"city\": {\n                  \"code\": \"string\",\n                  \"name\": \"string\"\n                },\n                \"country\": {\n                  \"code\": \"string\",\n                  \"name\": \"string\"\n                }\n              },\n              \"to_location\": {\n                \"airport\": {\n                  \"code\": \"string\",\n                  \"name\": \"string\"\n                },\n                \"city\": {\n                  \"code\": \"string\",\n                  \"name\": \"string\"\n                },\n                \"country\": {\n                  \"code\": \"string\",\n                  \"name\": \"string\"\n                }\n              },\n              \"departure_moment\": \"1952-04-08\",\n              \"arrival_moment\": \"1981-02-20\",\n              \"flight_number\": 1946,\n              \"marketing_carrier\": {\n                \"code\": \"string\",\n                \"name\": \"string\"\n              },\n              \"operating_carrier\": {\n                \"code\": \"string\",\n                \"name\": \"string\"\n              }\n            },\n            {\n              \"duration_time\": {\n                \"hours\": 4359,\n                \"minutes\": 1611\n              },\n              \"from_location\": {\n                \"airport\": {\n                  \"code\": \"string\",\n                  \"name\": \"string\"\n                },\n                \"city\": {\n                  \"code\": \"string\",\n                  \"name\": \"string\"\n                },\n                \"country\": {\n                  \"code\": \"string\",\n                  \"name\": \"string\"\n                }\n              },\n              \"to_location\": {\n                \"airport\": {\n                  \"code\": \"string\",\n                  \"name\": \"string\"\n                },\n                \"city\": {\n                  \"code\": \"string\",\n                  \"name\": \"string\"\n                },\n                \"country\": {\n                  \"code\": \"string\",\n                  \"name\": \"string\"\n                }\n              },\n              \"departure_moment\": \"1975-02-14\",\n              \"arrival_moment\": \"1999-12-04\",\n              \"flight_number\": 6505,\n              \"marketing_carrier\": {\n                \"code\": \"string\",\n                \"name\": \"string\"\n              },\n              \"operating_carrier\": {\n                \"code\": \"string\",\n                \"name\": \"string\"\n              }\n            }\n          ]\n        }\n      ],\n      \"itinerary_type\": \"string\",\n      \"price_detail\": {\n        \"currency\": \"string\",\n        \"total\": 6276,\n        \"base\": 5853,\n        \"adult_base\": 1637,\n        \"adult_total\": 8838,\n        \"adults_subtotal\": 827,\n        \"taxes\": 4745,\n        \"taxes_detail\": [\n          {\n            \"code\": \"string\",\n            \"amount\": 8139\n          },\n          {\n            \"code\": \"string\",\n            \"amount\": 1223\n          }\n        ],\n        \"fees\": 3147,\n        \"penalty\": 3111\n      },\n      \"validating_carrier\": {\n        \"code\": \"string\",\n        \"name\": \"string\"\n      },\n      \"passenger_distribution\": {\n        \"adults\": 5138,\n        \"children\": 8656,\n        \"infants\": 26\n      },\n      \"booking_info\": [\n        {\n          \"outbound_choice\": 3994,\n          \"changes_retrieve_resource_id\": \"string\",\n          \"search_id\": \"string\",\n          \"exchange_id\": \"string\"\n        },\n        {\n          \"outbound_choice\": 5334,\n          \"changes_retrieve_resource_id\": \"string\",\n          \"search_id\": \"string\",\n          \"exchange_id\": \"string\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "68e2dd1c-101d-41a8-8f01-17cc128893d5",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reservations",
+                    "changes",
+                    "alternatives"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "transaction_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "departure_date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "return_date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "locale",
+                      "value": "es_ar"
+                    },
+                    {
+                      "key": "from",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "IATA",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0b2551e8-364e-45f1-a428-7990ba0e0163",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reservations",
+                    "changes",
+                    "alternatives"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "transaction_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "departure_date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "return_date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "locale",
+                      "value": "es_ar"
+                    },
+                    {
+                      "key": "from",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "IATA",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e8157a4c-3a29-452a-98ae-d5cd23d2e797",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reservations",
+                    "changes",
+                    "alternatives"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "transaction_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "departure_date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "return_date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "locale",
+                      "value": "es_ar"
+                    },
+                    {
+                      "key": "from",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "IATA",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9176d7cd-86b0-49cd-b410-42fa0dc7837e",
+          "name": "alternative Prebook",
+          "request": {
+            "name": "alternative Prebook",
+            "description": {},
+            "url": {
+              "path": [
+                "reservations",
+                "changes",
+                ":transactionId",
+                "checkouts",
+                "contexts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "transactionId",
+                  "description": "(Required) Transaction ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"country\": \"<string>\",\n  \"lang\": \"<string>\",\n  \"itinerary_search_type\": \"<string>\",\n  \"passenger_indexes\": \"<string>\",\n  \"changes_retrieve_resource_id\": \"<string>\",\n  \"include\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"itinerary_id\": \"string\",\n  \"extended_info\": 3942.6886743575205\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4242d4be-0480-468b-a4e0-0886c1e58f92",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reservations",
+                    "changes",
+                    ":transactionId",
+                    "checkouts",
+                    "contexts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionId",
+                      "description": "(Required) Transaction ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"country\": \"<string>\",\n  \"lang\": \"<string>\",\n  \"itinerary_search_type\": \"<string>\",\n  \"passenger_indexes\": \"<string>\",\n  \"changes_retrieve_resource_id\": \"<string>\",\n  \"include\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"itinerary_id\": \"string\",\n  \"extended_info\": 1600\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"checkout_context_id\": \"string\",\n  \"checkout_context\": {\n    \"product\": {\n      \"id\": 6080.388692686947,\n      \"type\": \"string\",\n      \"transaction_id\": 7925.491996433636,\n      \"country_code\": 1348.9924626201632,\n      \"customer\": {\n        \"email\": \"string\",\n        \"name\": \"string\"\n      }\n    },\n    \"passengers\": {\n      \"index\": 3105,\n      \"type\": \"string\",\n      \"display_name\": \"string\"\n    },\n    \"price_detail\": {\n      \"currency\": {\n        \"code\": \"string\",\n        \"symbol\": \"string\"\n      },\n      \"breakdown\": {\n        \"description\": \"string\",\n        \"amount\": 3908.2632623953627\n      }\n    },\n    \"itinerary\": {\n      \"type\": \"string\",\n      \"search_type\": \"string\",\n      \"source\": \"string\",\n      \"routes\": {\n        \"position\": 7905,\n        \"title\": \"string\",\n        \"departure_date_time\": \"2003-02-03\",\n        \"gmt_departure_date_time\": \"2008-05-17\",\n        \"departure_date_time_zone_offset\": \"2010-12-29\",\n        \"arrival_date_time\": \"1977-04-12\",\n        \"gmt_arrival_date_time\": \"1947-05-17\",\n        \"arrival_date_time_zone_offset\": \"1987-08-20\",\n        \"layovers_count\": 4510,\n        \"duration\": {\n          \"hours\": 5089.26704054881,\n          \"minutes\": 3089.7611870870323\n        },\n        \"marketing_carriers\": {\n          \"code\": \"string\",\n          \"name\": \"string\"\n        },\n        \"from\": {\n          \"airport_code\": \"string\",\n          \"time\": 9291.753162826597,\n          \"offset_days\": 6743\n        },\n        \"to\": {\n          \"airport_code\": \"string\",\n          \"time\": 2999.9869651348076,\n          \"offset_days\": 2771\n        },\n        \"detail\": {\n          \"timeline\": {\n            \"type\": \"string\",\n            \"position\": 1632,\n            \"flight_number\": 1613.4963744404984,\n            \"duration\": {\n              \"hours\": 5031.443212419678,\n              \"minutes\": 2409.654772726505\n            },\n            \"marketing_carrier\": {\n              \"code\": \"string\",\n              \"name\": \"string\"\n            },\n            \"operating_carrier\": {\n              \"code\": \"string\",\n              \"name\": \"string\"\n            },\n            \"from\": {\n              \"date\": \"1986-03-31\",\n              \"time\": \"1957-03-23\",\n              \"airport\": {\n                \"code\": \"string\",\n                \"description\": \"string\"\n              },\n              \"city\": {\n                \"code\": \"string\",\n                \"description\": \"string\"\n              }\n            },\n            \"to\": {\n              \"date\": \"1952-11-29\",\n              \"time\": \"2021-09-07\",\n              \"airport\": {\n                \"code\": \"string\",\n                \"description\": \"string\"\n              },\n              \"city\": {\n                \"code\": \"string\",\n                \"description\": \"string\"\n              }\n            }\n          }\n        },\n        \"days_to_departure\": 9027.661671425421\n      }\n    },\n    \"payment_methods\": {\n      \"code\": \"string\",\n      \"plans\": {\n        \"id\": \"string\",\n        \"card_code\": \"string\"\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8b414d2f-5a1c-44af-adbe-f84ba0dd6802",
+              "name": "Invalid request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reservations",
+                    "changes",
+                    ":transactionId",
+                    "checkouts",
+                    "contexts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionId",
+                      "description": "(Required) Transaction ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"country\": \"<string>\",\n  \"lang\": \"<string>\",\n  \"itinerary_search_type\": \"<string>\",\n  \"passenger_indexes\": \"<string>\",\n  \"changes_retrieve_resource_id\": \"<string>\",\n  \"include\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"itinerary_id\": \"string\",\n  \"extended_info\": 1600\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "319e2e69-e535-48dc-a9cc-ca4976dab65d",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reservations",
+                    "changes",
+                    ":transactionId",
+                    "checkouts",
+                    "contexts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionId",
+                      "description": "(Required) Transaction ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"country\": \"<string>\",\n  \"lang\": \"<string>\",\n  \"itinerary_search_type\": \"<string>\",\n  \"passenger_indexes\": \"<string>\",\n  \"changes_retrieve_resource_id\": \"<string>\",\n  \"include\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"itinerary_id\": \"string\",\n  \"extended_info\": 1600\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9116a7ae-a0a2-4f33-89e4-42bd9a551f76",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reservations",
+                    "changes",
+                    ":transactionId",
+                    "checkouts",
+                    "contexts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionId",
+                      "description": "(Required) Transaction ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"country\": \"<string>\",\n  \"lang\": \"<string>\",\n  \"itinerary_search_type\": \"<string>\",\n  \"passenger_indexes\": \"<string>\",\n  \"changes_retrieve_resource_id\": \"<string>\",\n  \"include\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"itinerary_id\": \"string\",\n  \"extended_info\": 1600\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ff24b762-4c8f-41d2-a715-7c49f4f09233",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reservations",
+                    "changes",
+                    ":transactionId",
+                    "checkouts",
+                    "contexts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionId",
+                      "description": "(Required) Transaction ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"country\": \"<string>\",\n  \"lang\": \"<string>\",\n  \"itinerary_search_type\": \"<string>\",\n  \"passenger_indexes\": \"<string>\",\n  \"changes_retrieve_resource_id\": \"<string>\",\n  \"include\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"itinerary_id\": \"string\",\n  \"extended_info\": 1600\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "750ed794-77e6-4b7c-a3fe-b9b837123931",
+          "name": "Prebook Info",
+          "request": {
+            "name": "Prebook Info",
+            "description": {},
+            "url": {
+              "path": [
+                "reservations",
+                "changes",
+                ":transactionId",
+                "checkouts",
+                "contexts",
+                ":contextId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "transactionId",
+                  "description": "(Required) Transaction ID"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "contextId",
+                  "description": "(Required) Context ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5686ce5f-ef57-4bda-8cc7-dc0970f04807",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reservations",
+                    "changes",
+                    ":transactionId",
+                    "checkouts",
+                    "contexts",
+                    ":contextId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionId",
+                      "description": "(Required) Transaction ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "contextId",
+                      "description": "(Required) Context ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"checkout_context_id\": \"string\",\n  \"checkout_context\": {\n    \"product\": {\n      \"id\": 6238.758846693604,\n      \"type\": \"string\",\n      \"transaction_id\": 6349.403210641244,\n      \"country_code\": 6310.519776586577,\n      \"customer\": {\n        \"email\": \"string\",\n        \"name\": \"string\"\n      }\n    },\n    \"passengers\": {\n      \"index\": 4650,\n      \"type\": \"string\",\n      \"display_name\": \"string\"\n    },\n    \"price_detail\": {\n      \"currency\": {\n        \"code\": \"string\",\n        \"symbol\": \"string\"\n      },\n      \"breakdown\": {\n        \"description\": \"string\",\n        \"amount\": 6098.61752451898\n      }\n    },\n    \"itinerary\": {\n      \"type\": \"string\",\n      \"search_type\": \"string\",\n      \"source\": \"string\",\n      \"routes\": {\n        \"position\": 7846,\n        \"title\": \"string\",\n        \"departure_date_time\": \"2001-05-22\",\n        \"gmt_departure_date_time\": \"1962-08-01\",\n        \"departure_date_time_zone_offset\": \"2000-09-07\",\n        \"arrival_date_time\": \"1965-08-31\",\n        \"gmt_arrival_date_time\": \"1994-10-24\",\n        \"arrival_date_time_zone_offset\": \"1971-05-13\",\n        \"layovers_count\": 11,\n        \"duration\": {\n          \"hours\": 6686.443417832536,\n          \"minutes\": 2856.5467508816887\n        },\n        \"marketing_carriers\": {\n          \"code\": \"string\",\n          \"name\": \"string\"\n        },\n        \"from\": {\n          \"airport_code\": \"string\",\n          \"time\": 3199.971623855957,\n          \"offset_days\": 3742\n        },\n        \"to\": {\n          \"airport_code\": \"string\",\n          \"time\": 2740.864552502781,\n          \"offset_days\": 2437\n        },\n        \"detail\": {\n          \"timeline\": {\n            \"type\": \"string\",\n            \"position\": 5458,\n            \"flight_number\": 7715.914349535792,\n            \"duration\": {\n              \"hours\": 9415.038291018864,\n              \"minutes\": 3802.4633627698236\n            },\n            \"marketing_carrier\": {\n              \"code\": \"string\",\n              \"name\": \"string\"\n            },\n            \"operating_carrier\": {\n              \"code\": \"string\",\n              \"name\": \"string\"\n            },\n            \"from\": {\n              \"date\": \"2021-05-18\",\n              \"time\": \"2009-01-24\",\n              \"airport\": {\n                \"code\": \"string\",\n                \"description\": \"string\"\n              },\n              \"city\": {\n                \"code\": \"string\",\n                \"description\": \"string\"\n              }\n            },\n            \"to\": {\n              \"date\": \"1949-04-26\",\n              \"time\": \"1969-04-23\",\n              \"airport\": {\n                \"code\": \"string\",\n                \"description\": \"string\"\n              },\n              \"city\": {\n                \"code\": \"string\",\n                \"description\": \"string\"\n              }\n            }\n          }\n        }\n      }\n    },\n    \"payment_methods\": {\n      \"code\": \"string\",\n      \"plans\": {\n        \"id\": \"string\",\n        \"card_code\": \"string\"\n      }\n    }\n  },\n  \"extended_info\": {\n    \"invoice_hint\": {\n      \"town_registration\": {\n        \"hint_type\": \"string\",\n        \"validations\": {\n          \"min\": 3038.8715138574717,\n          \"max\": 9847.726844349589,\n          \"type\": \"string\"\n        }\n      },\n      \"address\": {\n        \"number\": {\n          \"hint_type\": \"string\",\n          \"validations\": {\n            \"regex\": \"string\",\n            \"type\": \"string\"\n          }\n        }\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7565edde-1de2-4312-8827-e16911bbbdbc",
+              "name": "Invalid request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reservations",
+                    "changes",
+                    ":transactionId",
+                    "checkouts",
+                    "contexts",
+                    ":contextId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionId",
+                      "description": "(Required) Transaction ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "contextId",
+                      "description": "(Required) Context ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "79b7db86-1220-4540-977c-85ce5a813479",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reservations",
+                    "changes",
+                    ":transactionId",
+                    "checkouts",
+                    "contexts",
+                    ":contextId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionId",
+                      "description": "(Required) Transaction ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "contextId",
+                      "description": "(Required) Context ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b04b9de5-4d9e-4878-88d2-846ed39ea9c8",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reservations",
+                    "changes",
+                    ":transactionId",
+                    "checkouts",
+                    "contexts",
+                    ":contextId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionId",
+                      "description": "(Required) Transaction ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "contextId",
+                      "description": "(Required) Context ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6fd06fdc-3693-4b28-b4ff-ed85e7bbeb52",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reservations",
+                    "changes",
+                    ":transactionId",
+                    "checkouts",
+                    "contexts",
+                    ":contextId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionId",
+                      "description": "(Required) Transaction ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "contextId",
+                      "description": "(Required) Context ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d5a96983-d7ed-41cb-8a8c-a450926ba780",
+          "name": "Alternative Book",
+          "request": {
+            "name": "Alternative Book",
+            "description": {},
+            "url": {
+              "path": [
+                "reservations",
+                "changes",
+                ":transactionId",
+                "checkouts",
+                "contexts",
+                ":contextId",
+                "flows"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "transactionId",
+                  "description": "(Required) Transaction ID"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "contextId",
+                  "description": "(Required) id of the created context in the Alternative Prebook step, found both in its response or in the Prebook Info service under 'checkout_context_id'."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"payment_method\": {\n    \"type\": \"<string>\",\n    \"selected_plan_id\": \"<string>\",\n    \"detail\": {\n      \"dvault_token\": \"<string>\",\n      \"cardholder_name\": \"<string>\",\n      \"installments\": \"<string>\",\n      \"interest\": \"<string>\"\n    }\n  },\n  \"invoice\": {\n    \"fiscal_name\": \"<string>\",\n    \"fiscal_status\": \"<string>\",\n    \"fiscal_identification\": {\n      \"type\": \"<string>\",\n      \"number\": \"<string>\",\n      \"issue_country\": \"<string>\"\n    },\n    \"town_registration\": \"<string>\",\n    \"address\": {\n      \"city_id\": \"<number>\",\n      \"number\": \"<number>\",\n      \"street\": \"<string>\",\n      \"zip_code\": \"<number>\",\n      \"apartment\": \"<string>\",\n      \"floor\": \"<number>\",\n      \"neighbourhood\": \"<string>\"\n    }\n  },\n  \"city_id\": false,\n  \"number\": \"string\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8fa97962-c7b5-4c2d-8fe6-ecbf1e1a5ff2",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reservations",
+                    "changes",
+                    ":transactionId",
+                    "checkouts",
+                    "contexts",
+                    ":contextId",
+                    "flows"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionId",
+                      "description": "(Required) Transaction ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "contextId",
+                      "description": "(Required) id of the created context in the Alternative Prebook step, found both in its response or in the Prebook Info service under 'checkout_context_id'."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"payment_method\": {\n    \"type\": \"<string>\",\n    \"selected_plan_id\": \"<string>\",\n    \"detail\": {\n      \"dvault_token\": \"<string>\",\n      \"cardholder_name\": \"<string>\",\n      \"installments\": \"<string>\",\n      \"interest\": \"<string>\"\n    }\n  },\n  \"invoice\": {\n    \"fiscal_name\": \"<string>\",\n    \"fiscal_status\": \"<string>\",\n    \"fiscal_identification\": {\n      \"type\": \"<string>\",\n      \"number\": \"<string>\",\n      \"issue_country\": \"<string>\"\n    },\n    \"town_registration\": \"<string>\",\n    \"address\": {\n      \"city_id\": \"<number>\",\n      \"number\": \"<number>\",\n      \"street\": \"<string>\",\n      \"zip_code\": \"<number>\",\n      \"apartment\": \"<string>\",\n      \"floor\": \"<number>\",\n      \"neighbourhood\": \"<string>\"\n    }\n  },\n  \"city_id\": 9342.275695899976,\n  \"number\": 2751\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"flows\": {\n    \"type\": \"string\",\n    \"id\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1b1a8bad-08f7-4bac-bc95-0bcc08dfe450",
+              "name": "Invalid request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reservations",
+                    "changes",
+                    ":transactionId",
+                    "checkouts",
+                    "contexts",
+                    ":contextId",
+                    "flows"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionId",
+                      "description": "(Required) Transaction ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "contextId",
+                      "description": "(Required) id of the created context in the Alternative Prebook step, found both in its response or in the Prebook Info service under 'checkout_context_id'."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"payment_method\": {\n    \"type\": \"<string>\",\n    \"selected_plan_id\": \"<string>\",\n    \"detail\": {\n      \"dvault_token\": \"<string>\",\n      \"cardholder_name\": \"<string>\",\n      \"installments\": \"<string>\",\n      \"interest\": \"<string>\"\n    }\n  },\n  \"invoice\": {\n    \"fiscal_name\": \"<string>\",\n    \"fiscal_status\": \"<string>\",\n    \"fiscal_identification\": {\n      \"type\": \"<string>\",\n      \"number\": \"<string>\",\n      \"issue_country\": \"<string>\"\n    },\n    \"town_registration\": \"<string>\",\n    \"address\": {\n      \"city_id\": \"<number>\",\n      \"number\": \"<number>\",\n      \"street\": \"<string>\",\n      \"zip_code\": \"<number>\",\n      \"apartment\": \"<string>\",\n      \"floor\": \"<number>\",\n      \"neighbourhood\": \"<string>\"\n    }\n  },\n  \"city_id\": 9342.275695899976,\n  \"number\": 2751\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "93c96182-f348-453a-9c51-c540b08cb79a",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reservations",
+                    "changes",
+                    ":transactionId",
+                    "checkouts",
+                    "contexts",
+                    ":contextId",
+                    "flows"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionId",
+                      "description": "(Required) Transaction ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "contextId",
+                      "description": "(Required) id of the created context in the Alternative Prebook step, found both in its response or in the Prebook Info service under 'checkout_context_id'."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"payment_method\": {\n    \"type\": \"<string>\",\n    \"selected_plan_id\": \"<string>\",\n    \"detail\": {\n      \"dvault_token\": \"<string>\",\n      \"cardholder_name\": \"<string>\",\n      \"installments\": \"<string>\",\n      \"interest\": \"<string>\"\n    }\n  },\n  \"invoice\": {\n    \"fiscal_name\": \"<string>\",\n    \"fiscal_status\": \"<string>\",\n    \"fiscal_identification\": {\n      \"type\": \"<string>\",\n      \"number\": \"<string>\",\n      \"issue_country\": \"<string>\"\n    },\n    \"town_registration\": \"<string>\",\n    \"address\": {\n      \"city_id\": \"<number>\",\n      \"number\": \"<number>\",\n      \"street\": \"<string>\",\n      \"zip_code\": \"<number>\",\n      \"apartment\": \"<string>\",\n      \"floor\": \"<number>\",\n      \"neighbourhood\": \"<string>\"\n    }\n  },\n  \"city_id\": 9342.275695899976,\n  \"number\": 2751\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0dbed3b8-70c3-49de-99a2-a5ecc31df7bd",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reservations",
+                    "changes",
+                    ":transactionId",
+                    "checkouts",
+                    "contexts",
+                    ":contextId",
+                    "flows"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionId",
+                      "description": "(Required) Transaction ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "contextId",
+                      "description": "(Required) id of the created context in the Alternative Prebook step, found both in its response or in the Prebook Info service under 'checkout_context_id'."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"payment_method\": {\n    \"type\": \"<string>\",\n    \"selected_plan_id\": \"<string>\",\n    \"detail\": {\n      \"dvault_token\": \"<string>\",\n      \"cardholder_name\": \"<string>\",\n      \"installments\": \"<string>\",\n      \"interest\": \"<string>\"\n    }\n  },\n  \"invoice\": {\n    \"fiscal_name\": \"<string>\",\n    \"fiscal_status\": \"<string>\",\n    \"fiscal_identification\": {\n      \"type\": \"<string>\",\n      \"number\": \"<string>\",\n      \"issue_country\": \"<string>\"\n    },\n    \"town_registration\": \"<string>\",\n    \"address\": {\n      \"city_id\": \"<number>\",\n      \"number\": \"<number>\",\n      \"street\": \"<string>\",\n      \"zip_code\": \"<number>\",\n      \"apartment\": \"<string>\",\n      \"floor\": \"<number>\",\n      \"neighbourhood\": \"<string>\"\n    }\n  },\n  \"city_id\": 9342.275695899976,\n  \"number\": 2751\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3ed1521c-8d9b-42cc-b693-57510d95dd64",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reservations",
+                    "changes",
+                    ":transactionId",
+                    "checkouts",
+                    "contexts",
+                    ":contextId",
+                    "flows"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionId",
+                      "description": "(Required) Transaction ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "contextId",
+                      "description": "(Required) id of the created context in the Alternative Prebook step, found both in its response or in the Prebook Info service under 'checkout_context_id'."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"payment_method\": {\n    \"type\": \"<string>\",\n    \"selected_plan_id\": \"<string>\",\n    \"detail\": {\n      \"dvault_token\": \"<string>\",\n      \"cardholder_name\": \"<string>\",\n      \"installments\": \"<string>\",\n      \"interest\": \"<string>\"\n    }\n  },\n  \"invoice\": {\n    \"fiscal_name\": \"<string>\",\n    \"fiscal_status\": \"<string>\",\n    \"fiscal_identification\": {\n      \"type\": \"<string>\",\n      \"number\": \"<string>\",\n      \"issue_country\": \"<string>\"\n    },\n    \"town_registration\": \"<string>\",\n    \"address\": {\n      \"city_id\": \"<number>\",\n      \"number\": \"<number>\",\n      \"street\": \"<string>\",\n      \"zip_code\": \"<number>\",\n      \"apartment\": \"<string>\",\n      \"floor\": \"<number>\",\n      \"neighbourhood\": \"<string>\"\n    }\n  },\n  \"city_id\": 9342.275695899976,\n  \"number\": 2751\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-dev.despegar.com/v3/activities-api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "6073ec3d-90c7-4f69-ab90-b6b1f70de67d",
+    "name": "Activities Availability Changes API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for activities: tickets, modalities, availability, prebook, payments, and booking. Authentication via API Key.",
+      "type": "text/plain"
+    }
+  }
+}

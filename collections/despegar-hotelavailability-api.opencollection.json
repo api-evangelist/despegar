@@ -1,0 +1,93 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Activities Availability HotelAvailability API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-apikey",
+      "value": "{{x-apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "HotelAvailability",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-dev.despegar.com/v3/activities-api/hotels-api/availability",
+            "params": [
+              {
+                "name": "country_code",
+                "value": "br",
+                "type": "query",
+                "description": "The country code of the traveler's point of sale, in ISO 3166-1 alpha-2 format. This should represent the country where the shopping transaction is taking place."
+              },
+              {
+                "name": "checkin_date",
+                "value": "2026-11-14",
+                "type": "query",
+                "description": "Refers to the hotel check-in date and must be in the format YYYY-MM-DD."
+              },
+              {
+                "name": "checkout_date",
+                "value": "2026-11-16",
+                "type": "query",
+                "description": "Refers to the hotel check-out date and must be in the format YYYY-MM-DD."
+              },
+              {
+                "name": "currency",
+                "value": "BRL",
+                "type": "query",
+                "description": "Refers to the currency, which must be filled with three alphabetical digits. (E.g. \"USD\", \"ARS\")"
+              },
+              {
+                "name": "hotels",
+                "value": "",
+                "type": "query",
+                "description": "List of hotel IDs, separated by commas (max. 100)."
+              },
+              {
+                "name": "distribution",
+                "value": "",
+                "type": "query",
+                "description": "Passenger distribution. Each room’s passengers should be written as number_of_adults-children_ages. Children-age goes up to 17 years old. Rooms should be separated by “!”. E.g.: Means room 1 with 2 adults and room 2 with 2 adults and a 10-year-old child."
+              },
+              {
+                "name": "language",
+                "value": "PT",
+                "type": "query",
+                "description": "Refers to the language, which must be filled with two alphabetical digits."
+              },
+              {
+                "name": "ttl",
+                "value": "",
+                "type": "query",
+                "description": "Maximum time allowed for the connection. Minimum = 3000 ms, Maximum = 6200 ms."
+              },
+              {
+                "name": "refundable_only",
+                "value": "",
+                "type": "query",
+                "description": "If set to ‘true’, only refundable hotel rates will be quoted."
+              }
+            ]
+          },
+          "docs": "Search for available hotels based on input criteria."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,126 @@
+{
+  "item": [
+    {
+      "id": "561b8d8e-e5be-4a92-bad2-7b6b73b0e452",
+      "name": "Hotels inventory",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "157dee05-f3bb-4b72-9bb9-9aee7ea3c886",
+          "name": "Hotels-inventory",
+          "request": {
+            "name": "Hotels-inventory",
+            "description": {},
+            "url": {
+              "path": [
+                "content-api",
+                "hotels-inventory"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1b269077-a27c-4480-a9cb-b46a0676bb91",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "content-api",
+                    "hotels-inventory"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"property_type\": \"string\",\n    \"product\": \"string\",\n    \"published\": false,\n    \"hotel_name\": \"string\",\n    \"hotel_type\": {\n      \"id\": \"string\"\n    },\n    \"stars\": 5120.22166928391,\n    \"location\": {\n      \"city\": {\n        \"id\": 626.7106821106638\n      },\n      \"address\": \"string\",\n      \"zipcode\": \"string\",\n      \"latitude\": 569.7249520757075,\n      \"longitude\": 6495.344630159952\n    }\n  },\n  {\n    \"id\": \"string\",\n    \"property_type\": \"string\",\n    \"product\": \"string\",\n    \"published\": true,\n    \"hotel_name\": \"string\",\n    \"hotel_type\": {\n      \"id\": \"string\"\n    },\n    \"stars\": 7274.830886639025,\n    \"location\": {\n      \"city\": {\n        \"id\": 3570.995884311643\n      },\n      \"address\": \"string\",\n      \"zipcode\": \"string\",\n      \"latitude\": 5681.4517238791905,\n      \"longitude\": 398.371349965555\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-dev.despegar.com/v3/activities-api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "5a26c04d-6e58-41e1-986f-fdf78b089200",
+    "name": "Activities Availability Hotels inventory API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for activities: tickets, modalities, availability, prebook, payments, and booking. Authentication via API Key.",
+      "type": "text/plain"
+    }
+  }
+}

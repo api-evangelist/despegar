@@ -139,6 +139,8 @@ apis:
   humanURL: https://api-docs.despegar.com/docs/hotels
   baseURL: https://api.despegar.com/v3
   tags:
+  - Hotel
+  tags_raw:
   - hotel
   properties:
   - type: OpenAPI
@@ -149,6 +151,8 @@ apis:
   humanURL: https://api-docs.despegar.com/docs/hotels
   baseURL: https://api.despegar.com/v3
   tags:
+  - Hotel Content
+  tags_raw:
   - Hotel content
   properties:
   - type: OpenAPI
@@ -199,6 +203,8 @@ apis:
   humanURL: https://api-docs.despegar.com/docs/hotels
   baseURL: https://api.despegar.com/v3
   tags:
+  - Pre-Booking
+  tags_raw:
   - Pre-booking
   properties:
   - type: OpenAPI

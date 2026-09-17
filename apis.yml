@@ -168,18 +168,6 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/despegar-hotel-content-api-openapi.yml
-- aid: despegar:despegar-hotelavailability-api
-  name: Despegar HotelAvailability API
-  description: The HotelAvailability API from Despegar — 1 operation(s) for hotelavailability.
-  humanURL: https://api-docs.despegar.com/docs/hotels
-  baseURL: https://api.despegar.com/v3
-  tags:
-  - Hotel Availability
-  tags_raw:
-  - HotelAvailability
-  properties:
-  - type: OpenAPI
-    url: openapi/despegar-hotelavailability-api-openapi.yml
 - aid: despegar:despegar-hotels-inventory-api
   name: Despegar Hotels inventory API
   description: The Hotels inventory API from Despegar — 1 operation(s) for hotels inventory.
@@ -272,6 +260,16 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/despegar-suggestions-api-openapi.yml
+- aid: despegar:despegar-hotel-availability-api
+  name: Despegar Hotel Availability API
+  description: The Hotel Availability API from Despegar — 1 operation(s) for hotel availability.
+  humanURL: https://api-docs.despegar.com/docs/hotels
+  baseURL: https://api.despegar.com/v3
+  tags:
+  - Hotel Availability
+  properties:
+  - type: OpenAPI
+    url: openapi/despegar-hotel-availability-api-openapi.yml
 common:
 - type: DeveloperPortal
   url: https://api-docs.despegar.com

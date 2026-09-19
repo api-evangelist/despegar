@@ -90,6 +90,8 @@ apis:
   humanURL: https://api-docs.despegar.com/docs/hotels
   baseURL: https://api.despegar.com/v3
   tags:
+  - Cancellation
+  tags_raw:
   - Cancellations
   properties:
   - type: OpenAPI
@@ -150,7 +152,7 @@ apis:
   humanURL: https://api-docs.despegar.com/docs/hotels
   baseURL: https://api.despegar.com/v3
   tags:
-  - Hotel
+  - Hotels
   tags_raw:
   - hotel
   properties:

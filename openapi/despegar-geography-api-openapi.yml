@@ -1,14 +1,14 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Activities Availability Geography API
+  title: Suggestions Geography API
   version: 1.0.0
-  description: 'API for activities: tickets, modalities, availability, prebook, payments, and booking. Authentication via API Key.'
+  description: OpenAPI generated from Postman collections, aligned to hotelapi structure.
 servers:
-- url: https://api-dev.despegar.com/v3/activities-api
+- url: https://api-dev.despegar.com/v3
   description: Sandbox
-- url: https://apis-uat.despegar.com/v3/activities-api
+- url: https://apis-uat.despegar.com/v3
   description: UAT
-- url: https://api.despegar.com/v3/activities-api
+- url: https://api.despegar.com/v3
   description: Production
 security:
 - ApiKeyAuth: []
@@ -106,6 +106,8 @@ paths:
           description: Unauthorized
         '500':
           description: Internal server error
+      operationId: getCountriesById
+      x-operation-id-source: derived
   /countries:
     get:
       tags:
@@ -263,6 +265,8 @@ paths:
           description: Unauthorized
         '500':
           description: Internal server error
+      operationId: getCountries
+      x-operation-id-source: derived
   /continents:
     get:
       tags:
@@ -342,6 +346,8 @@ paths:
           description: Unauthorized
         '500':
           description: Internal server error
+      operationId: getContinents
+      x-operation-id-source: derived
   /continents/{id}:
     get:
       tags:
@@ -426,6 +432,8 @@ paths:
           description: Unauthorized
         '500':
           description: Internal server error
+      operationId: getContinentsById
+      x-operation-id-source: derived
   /regions:
     get:
       tags:
@@ -489,6 +497,8 @@ paths:
           description: Unauthorized
         '500':
           description: Internal server error
+      operationId: getRegions
+      x-operation-id-source: derived
   /administrative-divisions:
     get:
       tags:
@@ -527,6 +537,8 @@ paths:
           description: Unauthorized
         '500':
           description: Internal server error
+      operationId: getAdministrativeDivisions
+      x-operation-id-source: derived
   /administrative-divisions/{id}:
     get:
       tags:
@@ -598,6 +610,8 @@ paths:
           description: Unauthorized
         '500':
           description: Internal server error
+      operationId: getAdministrativeDivisionsById
+      x-operation-id-source: derived
   /zones:
     get:
       tags:
@@ -642,6 +656,8 @@ paths:
           description: Unauthorized
         '500':
           description: Internal server error
+      operationId: getZones
+      x-operation-id-source: derived
   /zones/{id}:
     get:
       tags:
@@ -686,6 +702,8 @@ paths:
           description: Unauthorized
         '500':
           description: Internal server error
+      operationId: getZonesById
+      x-operation-id-source: derived
   /cities:
     get:
       tags:
@@ -773,6 +791,8 @@ paths:
           description: Unauthorized
         '500':
           description: Internal server error
+      operationId: getCities
+      x-operation-id-source: derived
   /cities/{id}:
     get:
       tags:
@@ -898,6 +918,8 @@ paths:
           description: Unauthorized
         '500':
           description: Internal server error
+      operationId: getCitiesById
+      x-operation-id-source: derived
   /geo-points/{id}:
     get:
       tags:
@@ -995,6 +1017,8 @@ paths:
           description: Unauthorized
         '500':
           description: Internal server error
+      operationId: getGeoPointsById
+      x-operation-id-source: derived
 components:
   securitySchemes:
     ApiKeyAuth:
@@ -1004,4 +1028,4 @@ components:
     BearerAuth:
       type: http
       scheme: bearer
-x-readme: {}
+      bearerFormat: JWT

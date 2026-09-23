@@ -1,14 +1,14 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Activities Availability Hotels inventory API
+  title: Geography & Suggestions Hotels inventory API
   version: 1.0.0
-  description: 'API for activities: tickets, modalities, availability, prebook, payments, and booking. Authentication via API Key.'
+  description: OpenAPI generated from Postman collections, aligned to hotelapi structure.
 servers:
-- url: https://api-dev.despegar.com/v3/activities-api
+- url: https://api-dev.despegar.com/v3
   description: Sandbox
-- url: https://apis-uat.despegar.com/v3/activities-api
+- url: https://apis-uat.despegar.com/v3
   description: UAT
-- url: https://api.despegar.com/v3/activities-api
+- url: https://api.despegar.com/v3
   description: Production
 security:
 - ApiKeyAuth: []
@@ -67,6 +67,8 @@ paths:
                           type: array
                     merged_ids:
                       type: array
+      operationId: getContentApiHotelsInventory
+      x-operation-id-source: derived
 components:
   securitySchemes:
     ApiKeyAuth:
@@ -76,4 +78,4 @@ components:
     BearerAuth:
       type: http
       scheme: bearer
-x-readme: {}
+      bearerFormat: JWT

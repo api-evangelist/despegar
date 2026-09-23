@@ -1,14 +1,14 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Activities Availability Reservations API
-  version: 1.0.0
-  description: 'API for activities: tickets, modalities, availability, prebook, payments, and booking. Authentication via API Key.'
+  title: Despegar Reservations API
+  version: '1.0'
+  description: 'Operations tagged Reservations across 2 of this provider''s published API definitions: despegar-aftersales-openapi.json, despegar-booking-openapi.json. Each path carries the servers of the definition it was published in.'
 servers:
-- url: https://api-dev.despegar.com/v3/activities-api
+- url: https://api-dev.despegar.com/v3
   description: Sandbox
-- url: https://apis-uat.despegar.com/v3/activities-api
+- url: https://apis-uat.despegar.com/v3
   description: UAT
-- url: https://api.despegar.com/v3/activities-api
+- url: https://api.despegar.com/v3
   description: Production
 security:
 - ApiKeyAuth: []
@@ -284,6 +284,13 @@ paths:
                         message:
                           type: string
       operationId: getReservationStatus
+    servers:
+    - url: https://api-dev.despegar.com/v3
+      description: Sandbox
+    - url: https://apis-uat.despegar.com/v3
+      description: UAT
+    - url: https://api.despegar.com/v3
+      description: Production
   /book/{reservationId}:
     get:
       tags:
@@ -362,6 +369,13 @@ paths:
                   message:
                     type: string
                     example: Invalid parameter
+    servers:
+    - url: https://api-dev.despegar.com/v3
+      description: Sandbox
+    - url: https://apis-uat.despegar.com/v3
+      description: UAT
+    - url: https://api.despegar.com/v3
+      description: Production
 components:
   securitySchemes:
     ApiKeyAuth:
@@ -371,4 +385,7 @@ components:
     BearerAuth:
       type: http
       scheme: bearer
+x-refined-from:
+- despegar-aftersales-openapi.json
+- despegar-booking-openapi.json
 x-readme: {}

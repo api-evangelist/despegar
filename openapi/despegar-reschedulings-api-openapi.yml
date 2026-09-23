@@ -1,14 +1,14 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Activities Availability Reschedulings API
-  version: 1.0.0
-  description: 'API for activities: tickets, modalities, availability, prebook, payments, and booking. Authentication via API Key.'
+  title: Aftersale Reschedulings API
+  version: 0.0.5
+  description: Aftersale API for managing reservations, cancellations, changes, and reschedulings. Specification generated from the reference document and aligned with the provided template style.
 servers:
-- url: https://api-dev.despegar.com/v3/activities-api
+- url: https://api-dev.despegar.com/v3
   description: Sandbox
-- url: https://apis-uat.despegar.com/v3/activities-api
+- url: https://apis-uat.despegar.com/v3
   description: UAT
-- url: https://api.despegar.com/v3/activities-api
+- url: https://api.despegar.com/v3
   description: Production
 security:
 - ApiKeyAuth: []
@@ -340,4 +340,3 @@ components:
     BearerAuth:
       type: http
       scheme: bearer
-x-readme: {}

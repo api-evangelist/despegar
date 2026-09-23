@@ -1,19 +1,22 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Activities Availability HotelAvailability API
-  version: 1.0.0
-  description: 'API for activities: tickets, modalities, availability, prebook, payments, and booking. Authentication via API Key.'
+  title: Hotels Hotel Availability API
+  description: HotelDo Hotels API provides static content and real-time availability for hotels, including endpoints to retrieve hotel details and search availability.\n\nThis specification documents the available endpoints, parameters, response schemas, and error handling.
+  version: 0.0.1
+  contact:
+    name: API Support
+    email: teste@teste.com.us
 servers:
-- url: https://api-dev.despegar.com/v3/activities-api
+- url: https://api-dev.despegar.com/v3
   description: Sandbox
-- url: https://apis-uat.despegar.com/v3/activities-api
+- url: https://apis-uat.despegar.com/v3
   description: UAT
-- url: https://api.despegar.com/v3/activities-api
+- url: https://api.despegar.com/v3
   description: Production
 security:
 - ApiKeyAuth: []
 tags:
-- name: HotelAvailability
+- name: Hotel Availability
 paths:
   /hotels-api/availability:
     get:
@@ -363,7 +366,7 @@ paths:
                   message:
                     type: string
       tags:
-      - HotelAvailability
+      - Hotel Availability
       operationId: searchAvailability
 components:
   securitySchemes:
@@ -374,4 +377,5 @@ components:
     BearerAuth:
       type: http
       scheme: bearer
+      bearerFormat: JWT
 x-readme: {}

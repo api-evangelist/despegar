@@ -1,14 +1,17 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Activities Availability Commission Update API
-  version: 1.0.0
-  description: 'API for activities: tickets, modalities, availability, prebook, payments, and booking. Authentication via API Key.'
+  title: Decolar Booking Commission Update API
+  version: 1.0.1
+  description: API for flight booking process. Includes pre-booking, payment methods, booking confirmation, and reservation management.
+  contact:
+    name: API Support
+    email: teste@teste.com.us
 servers:
-- url: https://api-dev.despegar.com/v3/activities-api
+- url: https://api-dev.despegar.com/v3
   description: Sandbox
-- url: https://apis-uat.despegar.com/v3/activities-api
+- url: https://apis-uat.despegar.com/v3
   description: UAT
-- url: https://api.despegar.com/v3/activities-api
+- url: https://api.despegar.com/v3
   description: Production
 security:
 - ApiKeyAuth: []
@@ -82,6 +85,8 @@ paths:
                   message:
                     type: string
                     example: Invalid parameter
+      operationId: putCommissionsUpdate
+      x-operation-id-source: derived
 components:
   securitySchemes:
     ApiKeyAuth:
@@ -91,4 +96,4 @@ components:
     BearerAuth:
       type: http
       scheme: bearer
-x-readme: {}
+      bearerFormat: JWT

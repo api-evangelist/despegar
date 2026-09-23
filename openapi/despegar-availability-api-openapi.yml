@@ -1,14 +1,20 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Activities Availability API
-  version: 1.0.0
-  description: 'API for activities: tickets, modalities, availability, prebook, payments, and booking. Authentication via API Key.'
+  title: Despegar Availability API
+  version: '1.0'
+  description: 'Operations tagged Availability across 2 of this provider''s published API definitions: despegar-activities-openapi.json, despegar-hotels-openapi.json. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api-dev.despegar.com/v3/activities-api
   description: Sandbox
 - url: https://apis-uat.despegar.com/v3/activities-api
   description: UAT
 - url: https://api.despegar.com/v3/activities-api
+  description: Production
+- url: https://api-dev.despegar.com/v3
+  description: Sandbox
+- url: https://apis-uat.despegar.com/v3
+  description: UAT
+- url: https://api.despegar.com/v3
   description: Production
 security:
 - ApiKeyAuth: []
@@ -252,6 +258,15 @@ paths:
                     Message:
                       type: string
                       description: Error with activity provider
+      operationId: getAvailability
+      x-operation-id-source: derived
+    servers:
+    - url: https://api-dev.despegar.com/v3/activities-api
+      description: Sandbox
+    - url: https://apis-uat.despegar.com/v3/activities-api
+      description: UAT
+    - url: https://api.despegar.com/v3/activities-api
+      description: Production
   /hotels-api/availability/{hotel_id}:
     get:
       summary: Detail
@@ -619,6 +634,13 @@ paths:
       tags:
       - Availability
       operationId: getHotelAvailability
+    servers:
+    - url: https://api-dev.despegar.com/v3
+      description: Sandbox
+    - url: https://apis-uat.despegar.com/v3
+      description: UAT
+    - url: https://api.despegar.com/v3
+      description: Production
 components:
   securitySchemes:
     ApiKeyAuth:
@@ -628,4 +650,7 @@ components:
     BearerAuth:
       type: http
       scheme: bearer
+x-refined-from:
+- despegar-activities-openapi.json
+- despegar-hotels-openapi.json
 x-readme: {}

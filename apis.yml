@@ -47,6 +47,9 @@ specificationVersion: '0.23'
 created: '2026-07-17'
 modified: '2026-07-18'
 image: https://github.com/despegar.png
+x-docs-platform: readme
+x-docs-platform-confidence: high
+x-docs-platform-checked: 2026-09-25
 tags:
 - Company
 - Consumer
@@ -147,7 +150,7 @@ apis:
   - type: OpenAPI
     url: openapi/despegar-geography-api-openapi.yml
 - aid: despegar:despegar-hotel-api
-  name: Despegar hotel API
+  name: Despegar Hotel API
   description: The hotel API from Despegar — 1 operation(s) for hotel.
   humanURL: https://api-docs.despegar.com/docs/hotels
   baseURL: https://api.despegar.com/v3

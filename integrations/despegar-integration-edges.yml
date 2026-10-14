@@ -1,0 +1,19 @@
+generated: '2026-10-14'
+method: searched
+checked:
+- https://integrations-api.siteminder.com/public/partners/all?lang=en
+source: https://integrations-api.siteminder.com/public/partners/all?lang=en
+edges:
+- partner_name: SiteMinder
+  partner: siteminder
+  partner_match: aggregator
+  type: coverage
+  channel: partner-built
+  relationship: connector-coverage
+  direction: partner-built
+  evidence: https://integrations-api.siteminder.com/public/partners/all?lang=en
+  listed_as: Despegar
+  detected_by: sweep-hospitality.py
+  detected: '2026-10-14'
+  categories:
+  - ota

@@ -64,6 +64,143 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Despegar is a company surfaced as a portfolio company of accel and added to the API Evangelist network as a stub for enrichment. Sector: consumer. This profile is a lead awaiting the enrichment pipeline.
+Despegar (Decolar in Brazil) is the leading online travel agency in Latin America, selling flights, hotels, activities, car rentals, insurance and vacation packages across the region. Its Despegar B2B platform exposes a partner API ecosystem so travel agencies and resellers can integrate hotel, flight and activity search, pre-booking, payment, booking and after-sales (cancellations, rescheduling, special requests) directly into their own systems, backed by geo/common-assets reference data and an event/notification channel. APIs are versioned under /v3, authenticated with a per-client API key (x-apikey header) with separate test and production keys, protected with mTLS for B2B transactions, and now also reachable through published Model Context Protocol (MCP) servers for AI agents. This profile was enriched from Despegar's public developer documentation at api-docs.despegar.com.
 
-Backed by: accel — http://www.despegar.com
+**Areas:** Company · Consumer · Travel · Hotels · Flights · Booking · Tourism · Latin America · B2B · MCP
+
+## Despegar on APIs.io
+
+Everything profiled for Despegar is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/despegar/](https://apis.io/providers/despegar/)** — or go straight to one of the APIs or properties below.
+
+### APIs (20)
+
+- [Despegar Availability API](https://apis.io/apis/despegar/despegar-availability-api/) — The Availability API from Despegar — 2 operation(s) for availability.
+- [Despegar Booking API](https://apis.io/apis/despegar/despegar-booking-api/) — The Booking API from Despegar — 1 operation(s) for booking.
+- [Despegar Cancellations API](https://apis.io/apis/despegar/despegar-cancellations-api/) — Validation, quotation, and confirmation of cancellations.
+- [Despegar Changes API](https://apis.io/apis/despegar/despegar-changes-api/) — Date/itinerary changes and checkout processes.
+- [Despegar Commission Update API](https://apis.io/apis/despegar/despegar-commission-update-api/) — The Commission Update API from Despegar — 1 operation(s) for commission update.
+- [Despegar Discovery API](https://apis.io/apis/despegar/despegar-discovery-api/) — The Discovery API from Despegar — 1 operation(s) for discovery.
+- [Despegar Flights API](https://apis.io/apis/despegar/despegar-flights-api/) — The Flights API from Despegar — 2 operation(s) for flights.
+- [Despegar Geography API](https://apis.io/apis/despegar/despegar-geography-api/) — The Geography API from Despegar — 12 operation(s) for geography.
+- [Despegar Hotel API](https://apis.io/apis/despegar/despegar-hotel-api/) — The hotel API from Despegar — 1 operation(s) for hotel.
+- [Despegar Hotel content API](https://apis.io/apis/despegar/despegar-hotel-content-api/) — The Hotel content API from Despegar — 3 operation(s) for hotel content.
+- [Despegar Hotels inventory API](https://apis.io/apis/despegar/despegar-hotels-inventory-api/) — The Hotels inventory API from Despegar — 1 operation(s) for hotels inventory.
+- [Despegar Modalities API](https://apis.io/apis/despegar/despegar-modalities-api/) — The Modalities API from Despegar — 1 operation(s) for modalities.
+- [Despegar Payments API](https://apis.io/apis/despegar/despegar-payments-api/) — The Payments API from Despegar — 1 operation(s) for payments.
+- [Despegar Pre-booking API](https://apis.io/apis/despegar/despegar-pre-booking-api/) — The Pre-booking API from Despegar — 1 operation(s) for pre-booking.
+- [Despegar Price Jump API](https://apis.io/apis/despegar/despegar-price-jump-api/) — The Price Jump API from Despegar — 1 operation(s) for price jump.
+- [Despegar Reschedulings API](https://apis.io/apis/despegar/despegar-reschedulings-api/) — Management of major reschedulings.
+- [Despegar Reservations API](https://apis.io/apis/despegar/despegar-reservations-api/) — Reservation query and management.
+- [Despegar Special Requests API](https://apis.io/apis/despegar/despegar-special-requests-api/) — Special requests associated with a reservation.
+- [Despegar Suggestions API](https://apis.io/apis/despegar/despegar-suggestions-api/) — The Suggestions API from Despegar — 16 operation(s) for suggestions.
+- [Despegar Hotel Availability API](https://apis.io/apis/despegar/despegar-hotel-availability-api/) — The Hotel Availability API from Despegar — 1 operation(s) for hotel availability.
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [despegar-mcp.yml](https://apis.io/servers/despegar/despegar-mcp-yml/)
+
+#### Collections (20)
+
+Postman and Open Collection request collections.
+
+- [Activities Availability API](https://apis.io/collections/despegar/open-despegar-availability-api/)
+- [Activities Availability Booking API](https://apis.io/collections/despegar/open-despegar-booking-api/)
+- [Activities Availability Cancellations API](https://apis.io/collections/despegar/open-despegar-cancellations-api/)
+- [Activities Availability Changes API](https://apis.io/collections/despegar/open-despegar-changes-api/)
+- [Activities Availability Commission Update API](https://apis.io/collections/despegar/open-despegar-commission-update-api/)
+- [Activities Availability Discovery API](https://apis.io/collections/despegar/open-despegar-discovery-api/)
+- [Activities Availability Flights API](https://apis.io/collections/despegar/open-despegar-flights-api/)
+- [Activities Availability Geography API](https://apis.io/collections/despegar/open-despegar-geography-api/)
+- [Activities Availability hotel API](https://apis.io/collections/despegar/open-despegar-hotel-api/)
+- [Activities Availability Hotel content API](https://apis.io/collections/despegar/open-despegar-hotel-content-api/)
+- [Activities Availability HotelAvailability API](https://apis.io/collections/despegar/open-despegar-hotelavailability-api/)
+- [Activities Availability Hotels inventory API](https://apis.io/collections/despegar/open-despegar-hotels-inventory-api/)
+- [Activities Availability Modalities API](https://apis.io/collections/despegar/open-despegar-modalities-api/)
+- [Activities Availability Payments API](https://apis.io/collections/despegar/open-despegar-payments-api/)
+- [Activities Availability Pre-booking API](https://apis.io/collections/despegar/open-despegar-pre-booking-api/)
+- [Activities Availability Price Jump API](https://apis.io/collections/despegar/open-despegar-price-jump-api/)
+- [Activities Availability Reschedulings API](https://apis.io/collections/despegar/open-despegar-reschedulings-api/)
+- [Activities Availability Reservations API](https://apis.io/collections/despegar/open-despegar-reservations-api/)
+- [Activities Availability Special Requests API](https://apis.io/collections/despegar/open-despegar-special-requests-api/)
+- [Activities Availability Suggestions API](https://apis.io/collections/despegar/open-despegar-suggestions-api/)
+
+#### Security (3)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Despegar Authentication](https://apis.io/security/despegar/despegar-authentication/)
+- [Despegar Domain Security](https://apis.io/security/despegar/despegar-domain-security/)
+- [Despegar Vulnerability Disclosure](https://apis.io/security/despegar/despegar-vulnerability-disclosure/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](http://www.despegar.com)
+- [Documentation](https://api-docs.despegar.com/docs/ecosystem)
+- [Getting started](https://api-docs.despegar.com/docs/general-information)
+- [API reference](https://api-docs.despegar.com/reference)
+- [Support](https://api-docs.despegar.com/docs/support)
+- [Security](https://www.despegar.com/.well-known/security.txt)
+- [GitHub](https://github.com/despegar)
+
+## API Evangelist rating
+
+**Kin Score 30.8** — thin · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 80.0 |
+| Contract quality | 47.5 |
+| Contract governance | 4.5 |
+| Operational transparency | 7.9 |
+| Developer ergonomics | 44.6 |
+| Access clarity | 0.0 |
+
+**Agent readiness 31.7** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | — |
+| Reversibility Documented | documented (partial credit) |
+| MCP Server | verified |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | derived (partial credit) |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | — |
+| Event Surface Described | — |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | — |
+| Operation Distinctiveness | mostly |
+
+**Regulatory alignment 22.5** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/despegar/](https://apis.io/providers/despegar/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Despegar: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/despegar/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
